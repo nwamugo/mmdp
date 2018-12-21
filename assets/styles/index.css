@@ -647,7 +647,7 @@ span.event-previous-arrow {
   width: 28px;
   height: 25px;
   position: absolute;
-  left: -40px;
+  left: -50px;
 }
 
 .governors-message__governors-img {
@@ -691,6 +691,9 @@ span.event-previous-arrow {
     display: none;
   }
 
+    .governors-message__quote-img-closing {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 1057px) {
