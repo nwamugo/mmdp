@@ -1,0 +1,155 @@
+main.contact-us {
+  height: 700px;
+  display: flex;
+  background-color: #f3f2f263;
+}
+
+main.contact-us div.side__photo {
+  width: 400px;
+  position: relative;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+div.side__photo img.photo {
+  position: absolute;
+  top: -4.5rem;
+  margin: 0;
+  width: 100%;
+  object-fit: cover;
+  object-position: top left;
+  z-index: 0;
+}
+
+main.contact-us div.form__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+div.form__wrapper form.contact__form {
+  width: 500px;
+}
+
+form.contact__form span.form__heading,
+form.contact__form span.form__info {
+  display: block;
+  text-align: center;
+}
+
+form.contact__form span.form__heading {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+
+form.contact__form span.form__info {
+  font-size: 1rem;
+  margin-bottom: 3rem;
+}
+
+form.contact__form span.form__info.mobile {
+  display: none;
+}
+
+form.contact__form div.inputs__wrapper {
+  width: 92%;
+  margin: auto;
+}
+
+div.inputs__wrapper span.input__field {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+div.inputs__wrapper span.input__field:nth-child(3) {
+  margin-bottom: 1.3rem;
+}
+
+span.input__field .input {
+  border: 1px solid #cae7f0;
+  font-size: 0.8rem;
+  padding: 0.1rem 0.6rem;
+  height: 2.5rem;
+  letter-spacing: 0.4px;
+  border-radius: 3px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: 0.4s;
+}
+
+span.input__field .input::-webkit-input-placeholder{
+  color: #000;
+}
+
+span.input__field .input::-moz-placeholder{
+  color: #000;
+}
+
+span.input__field .input:-ms-input-placeholder{
+  color: #000;
+}
+
+span.input__field .input:-moz-input-placeholder{
+  color: #000;
+}
+
+span.input__field .input:focus {
+  background: #fff;
+}
+
+span.input__field textarea.input {
+  height: 12rem;
+  padding: 0.8rem 0.6rem;
+  outline: none;
+  resize: none;
+}
+
+span.input__field input.input:not(.browser-default):focus:not([readonly]) {
+  border: 1px solid #cae7f0;
+  box-shadow: none;
+}
+
+span.input__field button.submit__btn {
+  width: 100%;
+  border: none;
+  background: #6fc6e0;
+  color: #fff;
+  padding: 0.8rem;
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: 0.4s;
+  font-size: 0.9em;
+}
+
+span.input__field button.submit__btn:active {
+  background: #499cb5;
+}
+
+@media (max-width: 872px) {
+  main.contact-us {
+    height: 550px;
+  }
+
+  main.contact-us div.side__photo,
+  form.contact__form span.form__info.desktop {
+    display: none;
+  }
+
+  form.contact__form span.form__info.mobile {
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  form.contact__form span.form__info.mobile {
+    font-size: 0.8rem;
+  }
+
+  div.form__wrapper form.contact__form {
+    width: 300px;
+  }
+}
+
