@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:400,700,700i,800');
+
+body, img {
+    margin: 0;
+    padding: 0;
+    font-family: 'Muli', sans-serif;
+}
+
+.governors-image {
+    object-fit: contain;
+    padding-right: 1em;
+    padding-top: 0.4em;
+
+}
+
+.governors-image img{
+    width: 93%;
+    height: auto;
+}
+.hr-divider {
+    float: left;
+    height: 0.3em;
+    width: 83%;
+    background-color: #DCEAEE;
+    border-style: none;
+    border-width: 5px;
+    margin-top: -0.2em;
+}
+
+/*.sidenav {*/
+    /*height: 82em;*/
+/*}*/
+.main__content-section {
+    padding-left: 3em;
+    padding-top: 1em;
+}
+.sidenav li>a {
+    font-weight: bold;
+}
+
+#dropdown-me{
+    margin-top: -0.8em !important;
+}
+
+.dropdown2 {
+    position: absolute;
+}
+
+.btn-menu-content {
+    background-color: transparent;
+}
+
+@media screen and (max-width: 992px){
+    #dropdown-me2{
+        display: block;
+        margin-top: -0.8em;
+    }
+}
+
+.sidenav.sidenav-fixed {
+    height: 100%;
+}
+
+.active-content-sidebar {
+    color: #3faaca !important;
+}
+.governors-name {
+    font-weight: bold;
+}
+p{
+    text-align: justify;
+    width: 90%;
+    width: 90%;
+    line-height: 2em;
+    font-size: 16px;
+    margin-top: 0;
+}
+.menu-item {
+    display: none;
+}
+.menu-item.active{
+    display:flex;
+    flex-direction: row;
+}
+.main-content__sidebar{
+    height: 100%;
+}
+.about-mmdp__h5 {
+    font-size: 25px;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.4;
+    letter-spacing: -0.8px;
+    margin-top: 0px;
+}
+.about-mmdp__img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+ }
+.about-mmdp__p{
+    width: 90%;
+    line-height: 2em;
+    font-size: 16px;
+}
+.img-section{
+    margin-left: -0.8em;
+    margin-right: 2em;
+}
