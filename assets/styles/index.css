@@ -557,6 +557,7 @@ span.event-previous-arrow {
   border-radius: 0 0 6px 6px;
   height: 2em;
   background-image: linear-gradient(to right, #6fb4d6, #03825e);
+  margin: 0em -.8em;
 }
 
 .governors-message__read-more {

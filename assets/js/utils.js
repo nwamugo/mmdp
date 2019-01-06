@@ -32,7 +32,7 @@ function loadCurrentPageContent() {
 
     // get the first link to item to select respective page when no page hash is specified
     var item = $('ul[data-main-link="'+window.location.pathname+'"] .side-links a').first();
-    if (item) {
+    if (item.length) {
       loadMenuItemContent(item);
     }
   }
@@ -56,14 +56,19 @@ Activate link for currently loaded sidebar item.
 function activateMenuItemLink(item, linkTag) {
   // remove active class from list item .side-links
   $('.side-links').removeClass('active');
+
   //add active class to the selected item's parent list item .side-links
   var selectedLinkLi = $(item).parent('li.side-links');
   selectedLinkLi.addClass('active');
 
+  // submenu
+  // remove active class from submenu items
+  $('.collapsible-body .active').removeClass('active');
+  // add active class to selected submenu item
+  $(item).parent().closest('li').addClass('active');
+
   /* enable active link on mobile slide-out menu also */
-
   $('#slide-out li.side-links a[href$="' + linkTag + '"]').parent().addClass('active');
-
 }
 
 /*

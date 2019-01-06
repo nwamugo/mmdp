@@ -1,0 +1,308 @@
+.main__content-section {
+  overflow-x: hidden;
+  width: 100%;
+  min-width: 320px;
+}
+
+.sidenav {
+  height: 100%;
+}
+
+input.input.research-content__form-input {
+  width: 80%;
+  border-style: solid;
+  border-color: #ECF5F8;
+  border-width: 1px 1px 1px 1px;
+  padding-left: 1em;
+  border-radius: 3px;
+  margin-left: .6em;
+}
+
+input.input.research-content__form-input::placeholder {
+  color: black;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: 1px #ECF5F8;
+  box-shadow: 0px 1px 0px 0px #ECF5F8;
+  border-radius: 3px;
+}
+
+button.btn-large.btn-search {
+  background-color: #3faaca;
+  color: white;
+  border-color: #cae7f0;
+  height: 45px;
+  margin-left: .5em;
+  margin-top: -.3em;
+  line-height: normal;
+}
+
+.research-content__card {
+  height: 104px;
+  background-color: rgba(255, 255, 255, 0);
+  margin-right: 1em;
+}
+
+.research-content__date-published {
+  font-family: Muli;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.07;
+  letter-spacing: -0.3px;
+  color: #767677;
+}
+
+.research-content__essentials {
+  font-family: Muli;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.81;
+  letter-spacing: -0.3px;
+}
+
+.research-content__download {
+  width: 94px;
+  height: 26px;
+  border-style: solid;
+  border-color: #6CA8C8;
+  border-width: 1.3px 1.3px 1.3px 1.3px;
+  border-radius: 3px;
+  padding: 0.3em;
+  color: #75ADCB;
+}
+
+.research-content__downloading {
+  text-align: right;
+  margin-top: -4em;
+}
+
+.row.research-content__devider {
+  padding-top: 2em;
+}
+
+hr.content-devider {
+  border-color: #DDE9EE;
+  border-top: #DDE9EE;
+  border-left: #DDE9EE;
+  background: #DDE9EE;
+  height: 3px;
+}
+
+@media screen and (max-width: 720px) {
+  input.input.research-content__form-input::placeholder {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 813px) {
+  button.btn-large.btn-search {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 514px) {
+  .research-content__downloading {
+    text-align: left;
+    margin-top: 0;
+  }
+
+  .row.research-content__devider {
+    padding-top: 0em;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .research-content__card {
+    margin-top: 3em;
+  }
+}
+
+
+/* Reports */
+.row.research-content__devider.quarterly-reports {
+  padding-top: 0;
+}
+
+.research-content__card.reports-header {
+  height: auto;
+}
+
+hr.content-devider.reports-devider {
+  height: auto;
+}
+
+.research-content__dropdown {
+  text-align: right;
+  margin-top: -3em;
+}
+
+.research-content__pagination {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.current-page {
+  padding: 0px 1em;
+}
+
+.previous-button, .next-button {
+  padding: 0em .4em;
+}
+
+.square-shape {
+  background: #ebf5f9;
+  margin: 0em .4em;
+  border: 1px solid #476D7F;
+  color: #476D7F;
+  margin-top: -.3em;
+}
+
+.previous-button.square-shape.very-pale {
+  background: #FFFFFF;
+  border: 1px solid #DEE5E9;
+  color: #DEE5E9;
+}
+
+@media screen and (max-width: 514px) {
+  .research-content__pagination {
+    margin-top: 4.0em;
+  }
+}
+
+/* stakeholder */
+span.local-government {
+  width: 148px;
+  height: 29px;
+  font-family: Muli;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.07;
+  letter-spacing: -0.3px;
+}
+
+.gov-area {
+  display: flex;
+}
+
+.stakeholder-dropdown {
+  padding-left: 2em;
+}
+
+.gov-area__devider {
+  width: 221px;
+  height: 2px;
+  margin-top: -1.7em;
+  margin-left: 0;
+  background: #DDE9EE;
+  border: 0;
+}
+
+.edo-governments {
+  margin-bottom: 3em;
+  font-size: 11px;
+}
+
+.gov-area, .gov-area__devider {
+  margin-left: 1em;
+}
+
+.state-government.stakeholders-info.col.m3.col.s12 {
+  background: #fafeff;
+  margin-left: 0.5em;
+}
+
+p.stakeholder-address, p.stakeholder-title, p.stakeholder-address__details {
+  font-family: Muli;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.81;
+  letter-spacing: -0.3px;
+}
+
+p.stakeholder-address__details {
+  font-size: 14px;
+}
+
+p.stakeholder-title {
+  font-weight: bold;
+}
+
+.research-content__pagination.stakeholder {
+  margin-right: 7em;
+}
+
+@media screen and (max-width: 601px) {
+  .edo-governments {
+    margin-bottom: 1em;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .row.edo-governments {
+    margin-right: -19em;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  button.btn-large.btn-search {
+    margin-left: .7em;
+  }
+}
+
+/*
+Photos and videos
+ */
+.photos-videos {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.photos-videos__selection-form {
+  margin-top: .5em;
+  margin-bottom: 1.5em;
+  /*margin-left: 0.4em !important;*/
+}
+
+[type="checkbox"]+span:not(.lever):before, [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
+  border: 1px solid #84c8dd;
+  border-radius: 2px;
+}
+
+[type="checkbox"]:checked+span:not(.lever):before {
+  border-right: 2px solid #3faaca;
+  border-bottom: 2px solid #3faaca;
+}
+
+.photos-videos__selection-form label {
+  color: #1a1f37;
+}
+
+.photos-videos__media {
+  width: 100%;
+  margin-bottom: 1em;
+  background-color: #d8d8d8;
+}
+
+.photos-videos__pagination {
+  margin-top: 2em;
+}
+
+.state-government.col.m2.col.s6> img {
+    margin-bottom: -.3em;
+    margin-right: .3em;
+}
+
+.state-government.col.m2.col.s6 label {
+  color: black;
+  font-size: 14px;
+}

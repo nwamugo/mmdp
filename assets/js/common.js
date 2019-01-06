@@ -5,13 +5,6 @@ $(document).ready(function(){
     $('.collapsible').collapsible();
     enableMenuItemContentLoad();
     changeLinkState();
-  });
-  $( "#footer-section" ).load( "/partials/footer.html", function () {
-    enableMenuItemContentLoad();
   } );
+  $( "#footer-section" ).load( "/partials/footer.html" );
 });
-
-
-
-
-
