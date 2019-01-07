@@ -1,3 +1,8 @@
+@import url("../styles/index.css");
+@import url("../styles/common.css");
+
+@import url("../styles/sidebar.css");
+
 .events-bg {
   background-image: linear-gradient(to bottom, #ebf2f4, #ffffff);
 }
@@ -31,7 +36,7 @@
 }
 
 .up-events-card__img {
-  background-image: url("../images/lead-7.png");
+  background-image: url("../images/events/lead-7.png");
   height: 100%;
   width: calc(100% - 521px);
 }
@@ -63,7 +68,6 @@
 
 .justified {
   text-align: justify;
-  /* max-width: 1144px; */
 }
 
 .up-events-card__button {
@@ -91,11 +95,11 @@
   padding-left: 49px;
 }
 
-.right {
+.up-right {
   width: 745px;
 }
 
-.left {
+.up-left {
   width: calc(100% - 745px);
 }
 
@@ -124,7 +128,6 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  margin-bottom: 32px;
 }
 
 .past-events-card {
@@ -135,6 +138,7 @@
   flex-flow: column;
   align-items: center;
   padding: 0 34px;
+  margin-bottom: 32px;
 }
 
 .past-events-card:hover {
@@ -148,7 +152,7 @@
 .past-events-card__header {
   width: 363px;
   height: 240px;
-  background-image: url("../images/about-small-image-2-copy.png");
+  background-image: url("../images/events/about-small-image-2-copy.png");
   margin-top: 32px;
 }
 
@@ -166,7 +170,7 @@
 }
 
 .event-image-1 {
-  background-image: url("../images/lead-7\ 2.png");
+  background-image: url("../images/events/lead-7\ 2.png");
   width: 1233px;
   height: 572px;
 }
@@ -174,13 +178,15 @@
 .event-image-2 {
   height: 531px;
   width: 1143px;
-  background-image: url("../images/lead-7-copy-2.png");
+  background-image: url("../images/events/lead-7-copy-2.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .event-image-3 {
-  background-image: url("../images/lead-7-copy-2.png");
+  background-image: url("../images/events/lead-7-copy-2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 514px;
   height: 370px;
 }
@@ -198,6 +204,126 @@
   visibility: hidden;
 }
 
-.past-events-card:hover .past-event-link{
+.past-events-card:hover .past-event-link {
   visibility: visible;
+}
+
+.event-pagination {
+  height: 400px;
+}
+
+@media screen and (max-width: 1210px) {
+  .row {
+    width: 90%;
+  }
+
+  .col {
+    width: 100%;
+  }
+
+  .events-hr {
+    width: 100%;
+  }
+
+  .up-events-card__desc {
+    width: 50%;
+  }
+
+  .up-events-card__desc-text {
+    padding-left: 20px;
+  }
+
+  .up-events-card__img {
+    width: 50%;
+  }
+
+  .up-events-card__desc-text, .right {
+    text-align: justify;
+  }
+
+  .past-events {
+    width: 100%;
+  }
+
+  .past-events-card {
+    margin: 15px;
+    width: 45%;
+  }
+
+  .past-events-card__header {
+    width: 100%;
+  }
+
+  .event-title {
+    font-size: 25px;
+  }
+
+  .past-event-title {
+    font-size: 25px;
+  }
+
+  .event-text {
+    margin-left: 0;
+  }
+
+  .up-event, .up-events {
+    padding-left: 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .up-events-card__desc {
+    width: 100%;
+  }
+
+  .up-events-card__img {
+    height: 0;
+    width: 0;
+  }
+
+  .up-events-card__button {
+    width: 100%;
+  }
+
+  .up-event, .up-events {
+    padding-left: 0;
+  }
+
+  .up-events-card {
+    padding: 20px 10px;
+    height: 400px;
+  }
+
+  .up-events-card__desc-text {
+    padding-top: 0;
+  }
+
+  .event-title {
+    font-size: 20px;
+  }
+
+  .event-title {
+    font-size: 25px;
+  }
+
+  .event-image-1, .event-image-2, .event-image-3 {
+    height: 320px;
+  }
+
+  .event-pagination {
+    height: 30px;
+  }
+
+  .up-events-card__desc-text {
+    padding-left: 0px;
+  }
+
+  .past-events-card {
+    margin: 9px;
+    width: 100%;
+  }
+
+  .past-events {
+    width: 90%;
+  }
 }
