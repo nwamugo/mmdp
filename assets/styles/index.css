@@ -121,39 +121,32 @@ body, img {
   padding: 30px 15px;
   background-image: linear-gradient(to bottom, #ebf2f4, #ffffff);
 }
-
 .section__pillars .thematic-pillars .thematic-pillars__heading {
   width: 100%;
   text-align: center;
   font-weight: bold;
 }
-
 .section__pillars .thematic-pillars__title {
   font-size: 25px;
   line-height: 1.43;
   margin-bottom: 16px;
 }
-
 .section__pillars .thematic-pillars__desc {
   color: #1a1f37;
   font-size: 14px;
   line-height: 1.81;
 }
-
 .section__pillars .thematic-pillars__content {
   width: 100%;
   margin-top: 64px;
 }
-
 .row.thematic-pillars__row {
   margin-bottom: 0;
 }
-
 .section__pillars .thematic-pillars__column {
   /* added to add margin to cards, to be removed on desktop */
   margin-bottom: 25px;
 }
-
 .section__pillars .thematic-pillars__card {
   background-color: #ffffff;
   padding: 25px 30px;
@@ -162,32 +155,27 @@ body, img {
   cursor: pointer;
   transition: transform ease-out 0.5s, box-shadow ease-out 0.5s;
 }
-
 .section__pillars .thematic-pillars__card:hover {
   box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.06);
   transform: translateY(-10px);
 }
-
 .section__pillars .thematic-pillars__card:hover .thematic-pillars__card-title {
   color: #296d81;
 }
-
 .section__pillars .thematic-pillars__left {
   /* don't display image on the left on mobile */
   display: none;
 }
-
 .section__pillars .thematic-pillars__card-title {
   font-size: 16px;
   font-weight: 800;
   line-height: 1.6;
 }
-
 .section__pillars .thematic-pillars__card-desc {
   font-size: 14px;
   margin: 16px 0 0 0;
   line-height: 1.60;
-  /* trim out content to reduces chances of cards with different heights */
+  /* trim out content to reduce chances of cards with different heights */
   overflow: hidden;
   max-height: 90px;
   display: -webkit-box;
@@ -195,14 +183,12 @@ body, img {
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 }
-
 .section__pillars .thematic-pillars__card-link {
   font-size: 14px;
   font-weight: bold;
   line-height: 2.07;
   margin: 16px 0 0 0;
 }
-
 .section__pillars .thematic-pillars__card-link a {
   text-decoration: none;
   color: #3faaca;
@@ -212,23 +198,19 @@ body, img {
   .section__pillars .thematic-pillars .thematic-pillars__heading {
     width: 60%;
   }
-
   .section__pillars .thematic-pillars__column {
     width: 45%;
     margin-bottom: 0;
   }
-
   /* adds top margin to rows except the first row */
   .section__pillars .thematic-pillars__row:not(:first-child) {
     margin-top: 35px;
   }
 }
-
 @media (min-width: 1024px) {
   .section.section__pillars {
     padding: 50px;
   }
-
   .section__pillars .thematic-pillars__title {
     font-size: 30px;
   }
@@ -236,27 +218,22 @@ body, img {
   .section__pillars .thematic-pillars__desc {
     font-size: 16px;
   }
-
   /* adds top margin to rows except the first row */
   .section__pillars .thematic-pillars__row:not(:first-child) {
     margin-top: 50px;
   }
-
   .section__pillars .thematic-pillars__card {
     display: flex;
     flex-direction: row;
   }
-
   .section__pillars .thematic-pillars__card:hover .thematic-pillars__card-image {
     visibility: visible;
     width: 100%;
   }
-
   .section__pillars .thematic-pillars__left {
     display: flex;
     align-items: center;
   }
-
   .section__pillars .thematic-pillars__card-image {
     margin-right: 15px;
     visibility: hidden;
@@ -277,31 +254,25 @@ body, img {
   .section__pillars .thematic-pillars .thematic-pillars__heading {
     width: 40%;
   }
-
   .section__pillars .thematic-pillars__content {
     /* reduce content width on larger screen */
     width: 90%;
   }
-
   .section__pillars .thematic-pillars__card-title {
     min-height: 66px;
   }
-
   .section__pillars .thematic-pillars__card-desc {
     min-height: 90px;
   }
 }
-
 @media (min-width: 2000px) {
   .thematic-pillars {
     width: 80%;
     margin: 0 auto;
   }
-
   .section__pillars .thematic-pillars__column {
     width: 40%;
   }
-
   .section__pillars .thematic-pillars__card-desc {
     line-height: 2.07;
   }
@@ -422,7 +393,7 @@ span.event-previous-arrow {
 
 /* mobile responsive */
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 720px){
   .event-description-left__continue-reading {
     height: auto !important;
   }
@@ -648,11 +619,9 @@ span.event-previous-arrow {
   .event-description-right {
     margin-left: 7em !important;
   }
-
   .event-previous-arrow__image {
     margin-left: -47em;
   }
-
   .event-next-arrow__image {
     margin-right: -30em;
   }
@@ -769,7 +738,6 @@ span.event-previous-arrow {
     display: none;
   }
 }
-
 /* Styles for banner */
 .banner {
   background-color: #f8f8f8;
