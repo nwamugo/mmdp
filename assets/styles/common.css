@@ -13,44 +13,44 @@ body, img {
 
 /* Header section and header sub section styles */
 .header {
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    border-bottom: 1px solid #eee;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  border-bottom: 1px solid #eee;
 }
 
 .row.header {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .header a {
-    color: #1a1f37;
-    /* text-align: center; */
-    letter-spacing: -0.3px;
+  color: #1a1f37;
+  /* text-align: center; */
+  letter-spacing: -0.3px;
 }
 
 .header a:hover {
-    color: #296d81;
+  color: #296d81;
 }
 
 .header__logo-img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
 .header h6, img {
-    display: inline-block;
-    font-weight: bold;
-    line-height: 1.36;
-    letter-spacing: -0.3px;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.36;
+  letter-spacing: -0.3px;
 }
 
 /* added */
 .brand__name {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 
@@ -58,130 +58,130 @@ body, img {
 /* Devices with screen size of 420 pixels or less */
 @media screen and (max-width: 420px) {
 
-    .brand__name {
-        font-size: 0.9em;
-    }
+  .brand__name {
+    font-size: 0.9em;
+  }
 
-    .header__logo-img {
-        width: 25px;
-        height: 25px;
-    }
+  .header__logo-img {
+    width: 25px;
+    height: 25px;
+  }
 
 }
 
 /* Footer section styles */
 footer.footer {
-    width: 100%;
-    min-height: 460px;
-    background-color: #296d81;
-    font-family: 'Muli', sans-serif;
-    color: #fff;
+  width: 100%;
+  min-height: 460px;
+  background-color: #296d81;
+  font-family: 'Muli', sans-serif;
+  color: #fff;
 }
 
 footer.footer div.footer__wrapper {
-    padding-top: 5%;
+  padding-top: 5%;
 }
 
 div.footer__wrapper div.footer__links {
-    padding: 0 5%;
+  padding: 0 5%;
 }
 
 div.footer__links ul.links {
-    width: 18%;
-    list-style: none;
-    min-width: 230px;
-    min-height: 209px;
-    margin: 10px auto;
+  width: 18%;
+  list-style: none;
+  min-width: 230px;
+  min-height: 209px;
+  margin: 10px auto;
 }
 
 div.footer__links ul.links:last-child {
-    width: 26%;
+  width: 26%;
 }
 
 div.footer__links ul.links li {
-    padding: 10px 0px;
-    font-size: 14px;
+  padding: 10px 0px;
+  font-size: 14px;
 }
 
 div.footer__links ul.links li:first-child {
-    font-size: 15px;
-    font-weight: 700;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 div.footer__links ul.links li a {
-    color: #fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
 div.footer__wrapper div.footer__contact {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    padding: 0 5%;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding: 0 5%;
 }
 
 div.footer__wrapper div.footer__contact .col.s6 {
-    margin: 5px auto;
-    min-width: 250px;
+  margin: 5px auto;
+  min-width: 250px;
 }
 
 div.footer__contact a.footer__logo__detail {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
-div.footer__contact > * {
-    margin: 5px 0;
+div.footer__contact>* {
+  margin: 5px 0;
 }
 
 a.footer__logo__detail span.footer__logo {
-    display: block;
-    margin-right: 10px;
+  display: block;
+  margin-right: 10px;
 }
 
 a.footer__logo__detail span.footer__detail {
-    display: block;
-    color: #fff;
-    max-width: 300px;
+  display: block;
+  color: #fff;
+  max-width: 300px;
 }
 
 div.footer__contact span.footer__email {
-    color: #fff;
-    text-align: right;
-    display: block;
+  color: #fff;
+  text-align: right;
+  display: block;
 }
 
 span.footer__email a {
-    color: #fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
 
 div.footer__wrapper div.footer__social {
-    text-align: right;
-    padding: 15px 5%;
-    padding-bottom: 40px;
-    border-top: 1px solid #fff;
+  text-align: right;
+  padding: 15px 5%;
+  padding-bottom: 40px;
+  border-top: 1px solid #fff;
 }
 
 div.footer__social ul.social__icons {
-    list-style: none;
-    width: 140px;
-    float: right;
-    margin: 0px;
+  list-style: none;
+  width: 140px;
+  float: right;
+  margin: 0px;
 }
 
 div.footer__social ul.social__icons li {
-    display: inline-block;
-    width: 30px;
+  display: inline-block;
+  width: 30px;
 }
 
 ul.social__icons li a {
-    color: #fff;
+  color: #fff;
 }
 
 @media (max-width: 555px) {
-    div.footer__contact span.footer__email {
-        text-align: left;
-    }
+  div.footer__contact span.footer__email {
+    text-align: left;
+  }
 }

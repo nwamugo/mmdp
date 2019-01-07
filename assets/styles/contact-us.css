@@ -79,19 +79,19 @@ span.input__field .input {
   transition: 0.4s;
 }
 
-span.input__field .input::-webkit-input-placeholder{
+span.input__field .input::-webkit-input-placeholder {
   color: #000;
 }
 
-span.input__field .input::-moz-placeholder{
+span.input__field .input::-moz-placeholder {
   color: #000;
 }
 
-span.input__field .input:-ms-input-placeholder{
+span.input__field .input:-ms-input-placeholder {
   color: #000;
 }
 
-span.input__field .input:-moz-input-placeholder{
+span.input__field .input:-moz-input-placeholder {
   color: #000;
 }
 
@@ -152,4 +152,3 @@ span.input__field button.submit__btn:active {
     width: 300px;
   }
 }
-
