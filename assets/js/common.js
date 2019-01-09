@@ -4,6 +4,12 @@ $(document).ready(function(){
     $('.sidenav').sidenav();
     $('.collapsible').collapsible();
     enableMenuItemContentLoad();
-  } );
+    changeLinkState();
+  });
   $( "#footer-section" ).load( "/partials/footer.html" );
 });
+
+
+
+
+

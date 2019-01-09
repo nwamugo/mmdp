@@ -58,3 +58,17 @@ function activateMenuItemLink(item) {
   }
 
 }
+
+/*
+Change header link active state dynamically
+ */
+
+function changeLinkState () {
+  $(".nav-wrapper ul li a").each(function (index, el){
+    var pathName = el.pathname;
+
+    if( window.location.pathname.includes(pathName)){
+      $(el).addClass('active');
+    }
+  });
+}
