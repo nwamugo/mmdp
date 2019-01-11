@@ -58,6 +58,12 @@ form.contact__form div.inputs__wrapper {
   margin: auto;
 }
 
+form.contact__form div.inputs__wrapper.thankyou_message {
+  text-align: center;
+  color: green;
+  display: none;
+}
+
 div.inputs__wrapper span.input__field {
   display: block;
   margin-bottom: 0.5rem;
