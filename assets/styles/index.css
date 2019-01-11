@@ -39,7 +39,13 @@
 .section__pillars .thematic-pillars__card:hover {
   box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.06);
   transform: translateY(-10px);
+  
 }
+
+.thematic-pillars__card {
+  width:95%;
+}
+
 .section__pillars .thematic-pillars__card:hover .thematic-pillars__card-title {
   color: #296d81;
 }
@@ -60,10 +66,18 @@
   overflow: hidden;
   max-height: 90px;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 }
+.thematic-pillars__card:hover{
+  text-align: justify;
+  margin-bottom: 10px;
+}
+
+.thematic-pillars__card {
+  text-align: justify;
+}
+
 .section__pillars .thematic-pillars__card-link {
   font-size: 14px;
   font-weight: bold;
