@@ -6,7 +6,9 @@ $(document).ready(function(){
     enableMenuItemContentLoad();
     changeLinkState();
   });
-  $( "#footer-section" ).load( "/partials/footer.html" );
+  $( "#footer-section" ).load( "/partials/footer.html", function () {
+    enableMenuItemContentLoad();
+  } );
 });
 
 

@@ -24,38 +24,45 @@ function loadCurrentPageContent() {
 
     loadMenuItemContent(item);
   }
+  else {
+    /*
+      ul for the sidebar on each pages include a data-main-link attribute
+      with a value equal to the window.location.pathname
+    */
+
+    // get the first link to item to select respective page when no page hash is specified
+    var item = $('ul[data-main-link="'+window.location.pathname+'"] .side-links a').first();
+    if (item) {
+      loadMenuItemContent(item);
+    }
+  }
 }
 
 /*
 Load content for the current sidebar menu item.
  */
 function loadMenuItemContent(item) {
-  var target = $(item).attr('href').split('#')[1] + '.html';
+  var linkTag = $(item).attr('href').split('#')[1];
+  var target = linkTag + '.html';
 
   $('.menu-item-content').html('').load(target);
 
-  activateMenuItemLink(item);
+  activateMenuItemLink(item, linkTag);
 }
 
 /*
 Activate link for currently loaded sidebar item.
  */
-function activateMenuItemLink(item) {
+function activateMenuItemLink(item, linkTag) {
   // remove active class from list item .side-links
   $('.side-links').removeClass('active');
   //add active class to the selected item's parent list item .side-links
   var selectedLinkLi = $(item).parent('li.side-links');
   selectedLinkLi.addClass('active');
 
-  /* in the case of first page load
-  enable active link on mobile slide-out menu also
-  use the currently active link position on the sidebar
-  to determine which link on the mobile slide-out */
+  /* enable active link on mobile slide-out menu also */
 
-  var liIndex = $('.left-sidebar__navigation li').index(selectedLinkLi);
-  if (liIndex > -1) {
-    $(`#slide-out li.side-links:eq(${liIndex})`).addClass('active');
-  }
+  $('#slide-out li.side-links a[href$="' + linkTag + '"]').parent().addClass('active');
 
 }
 

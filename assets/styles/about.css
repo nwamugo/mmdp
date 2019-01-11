@@ -101,6 +101,11 @@ p{
 .coordination-p{
   font-weight: bold;
   font-size: 16px;
+  text-align: center;
+}
+p.coordination-p {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 .coord-section{
   background-color: white;
@@ -140,5 +145,5 @@ margin: .5em;
   padding-right: 2em;
   padding-left: 2em;
   width: 100%;
-
+  margin-bottom:150px
 }
