@@ -1,0 +1,55 @@
+.coordination-login__top {
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.coordination-login__top img {
+  margin-bottom: 1em;
+}
+
+.coordination-login__form {
+  border: 1px solid #d9eaef;
+  border-radius: 3px;
+  box-shadow: 0 11px 20px 0 rgba(41, 109, 129, 0.06);
+  background-color: #fafeff;
+}
+
+.coordination-login__form input[type="submit"] {
+  width: 100%;
+  background-color: #3faaca;
+  margin-top: 1.5em;
+  text-transform: none;
+}
+
+.coordination-login__form input[type="email"], .coordination-login__form input[type="password"] {
+  width: 95%;
+  border-style: solid;
+  border-color: #ECF5F8;
+  border-width: 1px 1px 1px 1px;
+  padding-left: 1em;
+  border-radius: 3px;
+  background-color: #FFFFFF;
+  margin-top: 0.5em;
+}
+
+input[type=email]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]) {
+  box-shadow: 0 1px 0 0 #ECF5F8;
+  border-radius: 3px;
+  border-style: solid;
+  border-color: #20c4fb;
+  border-width: 1px 1px 1px 1px;
+}
+
+.coordination-login__form label {
+  color: #1a1f37;
+  font-size: 16px;
+  margin-left: 0.5em;
+}
+
+.coordination-login__form__group {
+  margin-top: 1em;
+}
+
+.coordination-login__form__content {
+  margin: 4em 0.5em 4em 0.5em;
+}
