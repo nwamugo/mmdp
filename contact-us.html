@@ -29,7 +29,11 @@
           />
       </div>
       <div class="form__wrapper">
-        <form class="contact__form" action="">
+        <form 
+          id="contact-form" 
+          method="POST" 
+          class="contact__form gform" 
+          action="https://script.google.com/macros/s/AKfycbz7q3-s2auLZL7pcrwihsuJiu8XRsBPJCdxKuPEgwO8FjgelHo/exec">
           <span class="form__heading">
             Contact the MMDP
           </span>
@@ -41,6 +45,11 @@
             Have any questions or comments for the MMDP team?  <br />
             Please fill out the form below and our team would get back to you as quickly as possible.
           </span>
+          <div class="inputs__wrapper thankyou_message">
+            <!-- You can customize the thankyou message by editing the code below -->
+            <p><em>Thanks</em> for contacting us! We will get back to you soon!
+            </p>
+          </div>
           <div class="inputs__wrapper">
             <span class="input__field">
               <input 
@@ -75,10 +84,10 @@
               </button>
             </span>
           </div>
-        </form>
+        </form>      
       </div>
     </main>
-    
+
     <!-- footer section -->
     <footer id ="footer-section" class="footer">
       <!-- content will be loaded dynamically here -->
@@ -87,5 +96,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="assets/js/utils.js"></script>
     <script type="text/javascript" src="assets/js/common.js"></script>
+    <script type="text/javascript" src="assets/js/form-submission-handler.js"></script>
   </body>
 </html>
