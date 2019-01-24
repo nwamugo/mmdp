@@ -40,6 +40,7 @@ body, img {
   width: 40px;
   height: 40px;
   object-fit: contain;
+  transform: translateY(10%);
 }
 
 .header h6, img {
@@ -52,6 +53,7 @@ body, img {
 /* added */
 .brand__name {
   margin-left: 10px;
+  font-size: 14px;
 }
 
 
@@ -64,8 +66,9 @@ body, img {
   }
 
   .header__logo-img {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
+    transform: translateY(5%);
   }
 
 }
