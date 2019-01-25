@@ -69,21 +69,18 @@ p{
     line-height: 2em;
     font-size: 16px;
 }
-/*.img-section{*/
-    /*margin-left: -0.8em;*/
-    /*margin-right: 2em;*/
-/*}*/
 .aproach-links > a {
     font-weight: bold;
     font-size: 14px;
     display: block;
     color: #296d81;
-    padding-bottom: 1.5em;
+    padding-bottom: 3.0em;
 }
 
 .aproach-links {
   flex-wrap: wrap;
     flex: 1;
+    margin-top: 1.5em;
 }
 .approach-padding{
   margin-bottom: 2em !important;
@@ -112,7 +109,8 @@ p.coordination-p {
   border-radius: 6px;
   box-shadow: 0 10px 9px 0 rgba(0, 0, 0, 0.06);
   flex: 1;
-   margin: 0.5em;
+  margin: 0.5em;
+  margin-bottom: 1.5em;
   min-width: 250px;
 }
 .coord-padding {
@@ -141,9 +139,16 @@ margin: .5em;
      padding: 0 !important;
 }
 
-.main__content-section-wrapper{
+.main__content-section-wrapper {
   padding-right: 2em;
   padding-left: 2em;
   width: 100%;
-  margin-bottom:150px
+}
+
+.padding-bottom--medium {
+    padding-bottom: 15em;
+}
+
+.padding-bottom--small {
+    padding-bottom: 5em;
 }
