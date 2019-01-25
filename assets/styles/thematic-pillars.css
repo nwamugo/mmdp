@@ -98,7 +98,7 @@ li.thematic-pillar__small-list-item::before {
 .thematic-pillar__image-area {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
 }
 .thematic-pillar__image {
@@ -107,6 +107,12 @@ li.thematic-pillar__small-list-item::before {
 
 .slate-grey-text {
   color: #616163;
+}
+
+@media (max-width: 500px) {
+  .thematic-pillar__image-area {
+    flex-wrap: wrap
+  }
 }
 
 @media (max-width: 768px) {
