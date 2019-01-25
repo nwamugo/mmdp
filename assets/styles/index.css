@@ -2,6 +2,9 @@
   padding: 30px 15px;
   background-image: linear-gradient(to bottom, #ebf2f4, #ffffff);
 }
+.section.section__governor {
+  padding: 30px 30px;
+}
 .section__pillars .thematic-pillars .thematic-pillars__heading {
   width: 100%;
   text-align: center;
@@ -44,6 +47,11 @@
 
 .thematic-pillars__card {
   width:95%;
+  margin: 0 auto;
+}
+.governors-message-section {
+  /* width:95%; */
+  margin: 0 auto;
 }
 
 .section__pillars .thematic-pillars__card:hover .thematic-pillars__card-title {
@@ -56,26 +64,29 @@
 .section__pillars .thematic-pillars__card-title {
   font-size: 16px;
   font-weight: 800;
-  line-height: 1.6;
+  line-height: 1.6em;
+  /* height is 2 times of line-height to allow perfect
+  cutting off of overflow content */
+  height: 3.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .section__pillars .thematic-pillars__card-desc {
   font-size: 14px;
   margin: 16px 0 0 0;
   line-height: 1.60;
+  text-align: justify;
   /* trim out content to reduce chances of cards with different heights */
   overflow: hidden;
   max-height: 90px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
-}
-.thematic-pillars__card:hover{
-  text-align: justify;
-  margin-bottom: 10px;
-}
-
-.thematic-pillars__card {
-  text-align: justify;
+  -webkit-line-clamp: 4;
 }
 
 .section__pillars .thematic-pillars__card-link {
@@ -105,6 +116,13 @@
 @media (min-width: 1024px) {
   .section.section__pillars {
     padding: 50px;
+  }
+  .section.section__governor {
+    padding: 50px;
+  }
+  .governors-message {
+    width: 95%;
+    margin: 0 auto;
   }
   .section__pillars .thematic-pillars__title {
     font-size: 30px;
@@ -146,15 +164,14 @@
 }
 
 @media (min-width: 1084px) {
-  .section__pillars .thematic-pillars .thematic-pillars__heading {
-    width: 40%;
-  }
   .section__pillars .thematic-pillars__content {
     /* reduce content width on larger screen */
     width: 90%;
   }
-  .section__pillars .thematic-pillars__card-title {
-    min-height: 66px;
+  .governors-message {
+    /* width: 90%; */
+    width: 87%;
+    margin: 0 auto;
   }
   .section__pillars .thematic-pillars__card-desc {
     min-height: 90px;
@@ -163,6 +180,10 @@
 @media (min-width: 2000px) {
   .thematic-pillars {
     width: 80%;
+    margin: 0 auto;
+  }
+  .governors-message {
+    width: 70%;
     margin: 0 auto;
   }
   .section__pillars .thematic-pillars__column {
@@ -537,6 +558,7 @@ span.event-previous-arrow {
 }
 
 .card.governors-message-section {
+  margin: 0;
   padding: 0;
   border-radius: 6px !important;
 }
@@ -549,7 +571,8 @@ span.event-previous-arrow {
   color: #1a1f37;
 }
 
-.governors-message {
+/* renamed from .governors-message */
+.governors-message__content {
   position: relative;
   padding-top: 1em;
   padding-bottom: 1em;
@@ -571,7 +594,7 @@ span.event-previous-arrow {
   border-radius: 0 0 6px 6px;
   height: 2em;
   background-image: linear-gradient(to right, #6fb4d6, #03825e);
-  margin: 0em -.8em;
+  margin: 0em -.12em;
 }
 
 .governors-message__read-more {
@@ -679,7 +702,10 @@ span.event-previous-arrow {
   line-height: 1.81;
   letter-spacing: -0.3px;
 }
-
+.banner__button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
 .banner__image {
   height: 460px;
   border-radius: 9px;
@@ -731,5 +757,12 @@ span.event-previous-arrow {
     width: 100%;
     margin: 20px 0;
     font-size: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+
+  #banner__images {
+    margin-left: -4%;
   }
 }
