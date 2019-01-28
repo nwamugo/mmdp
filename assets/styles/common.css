@@ -56,7 +56,9 @@ body, img {
   font-size: 14px;
 }
 
-
+#dropdown__icon{
+  margin-left: 8.5rem;
+}
 
 /* Devices with screen size of 420 pixels or less */
 @media screen and (max-width: 420px) {
