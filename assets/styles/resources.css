@@ -11,7 +11,7 @@
 input.input.research-content__form-input {
   width: 80%;
   border-style: solid;
-  border-color: #ECF5F8;
+  border-color: #9cd2e3 !important;
   border-width: 1px 1px 1px 1px;
   padding-left: 1em;
   border-radius: 3px;
@@ -19,12 +19,11 @@ input.input.research-content__form-input {
 }
 
 input.input.research-content__form-input::placeholder {
-  color: black;
+  color: #b3b3b3;
 }
 
-input[type=text]:not(.browser-default):focus:not([readonly]) {
-  border-bottom: 1px #ECF5F8;
-  box-shadow: 0px 1px 0px 0px #ECF5F8;
+input[type="text"]:not(.browser-default):focus:not([readonly]) {
+  box-shadow: 0px 0px 0px 0px #74c0d8;
   border-radius: 3px;
 }
 
@@ -121,7 +120,6 @@ hr.content-devider {
     margin-top: 3em;
   }
 }
-
 
 /* Reports */
 .row.research-content__devider.quarterly-reports {
@@ -247,7 +245,6 @@ p.stakeholder-title {
 }
 
 @media screen and (min-width: 768px) {
-
   .row.edo-governments {
     margin-right: -19em;
   }
