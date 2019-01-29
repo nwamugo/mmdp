@@ -57,7 +57,8 @@ body, img {
 }
 
 #dropdown__icon{
-  margin-left: 8.5rem;
+  margin-left: 8.1rem;
+  font-size: 1.0rem;
 }
 
 /* Devices with screen size of 420 pixels or less */
