@@ -399,6 +399,10 @@ span.event-previous-arrow {
   margin-top: -50em;
 }
 
+button, input, optgroup, select, textarea {
+  font-family: 'Muli', sans-serif !important;
+}
+
 @media screen and (max-width: 1069px) {
   .event-description-right {
     margin-left: 3.3em !important;
