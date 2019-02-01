@@ -1,0 +1,21 @@
+@keyframes flashing {
+    from,
+    50%,
+    to {
+      background-color: #3faaca;
+    }
+  
+    25%,
+    75% {
+      background-color: #73cde8;
+    }
+  }
+  
+  .flash {
+    -webkit-animation-name: flash;
+    animation-name: flash;
+  }
+
+.animated.flashing {
+    animation-name: flashing;
+}
