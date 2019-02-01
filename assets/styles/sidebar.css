@@ -61,10 +61,6 @@ a.left-sidebar__navigation-link.active {
   visibility: visible;
 }
 
-.left-sidebar__navigation-item:hover .left-sidebar__navigation-icon {
-  visibility: visible;
-}
-
 .left-sidebar__navigation-item:hover a.left-sidebar__navigation-link {
   color: #3faaca
 }
