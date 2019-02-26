@@ -1,85 +1,11 @@
 <div class="main__content-section">
   <div id="research-content" class="row">
-    <input type="text" placeholder="Search Document" class="input research-content__form-input">
-    <button class="btn-large btn-search">Search</button>
-    <div class="research-content__card">
-      <div class="research-content__details">
-        <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-        <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-      </div>
-      <div class="research-content__downloading">
-        <span class="research-content__download">Download</span>
-      </div>
-      <div class="row research-content__devider">
-        <hr class="content-devider">
-      </div>
-    </div>
-
-    <!-- card 2  -->
-    <div class="research-content__card">
-      <div class="research-content__details">
-        <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-        <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-      </div>
-      <div class="research-content__downloading">
-        <span class="research-content__download">Download</span>
-      </div>
-      <div class="row research-content__devider">
-        <hr class="content-devider">
-      </div>
-    </div>
-
-    <!-- card 3 -->
-    <div class="research-content__card">
-      <div class="research-content__details">
-        <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-        <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-      </div>
-      <div class="research-content__downloading">
-        <span class="research-content__download">Download</span>
-      </div>
-      <div class="row research-content__devider">
-        <hr class="content-devider">
-      </div>
-    </div>
-
-    <!-- card 4 -->
-    <div class="research-content__card">
-      <div class="research-content__details">
-        <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-        <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-      </div>
-      <div class="research-content__downloading">
-        <span class="research-content__download">Download</span>
-      </div>
-      <div class="row research-content__devider">
-        <hr class="content-devider">
-      </div>
-    </div>
-
-    <!-- card 5 -->
-    <div class="research-content__card">
-      <div class="research-content__details">
-        <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-        <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-      </div>
-      <div class="research-content__downloading">
-        <span class="research-content__download">Download</span>
-      </div>
-      <div class="row research-content__devider">
-        <hr class="content-devider">
-      </div>
-    </div>
-
-    <!-- pagination -->
-    <div class="research-content__pagination">
-      <div>Page</div>
-      <div class="current-page square-shape">1</div>
-      <div class="">
-        of 23
-      </div>
-      <div class="previous-button square-shape very-pale"><i class="material-icons">navigate_before</i></div>
-      <div class="next-button square-shape"><i class="material-icons">navigate_next</i></div>
-    </div>
+    <form id="docs_search_form">
+      <input type="text" placeholder="Search Document" class="input research-content__form-input" id="docs_input">
+      <button class="btn-large btn-search" id="docs_search_btn" type="submit">Search</button>
+    </form>
+    <div id="docs_docs"></div>
+    <div id="docs_pagination"></div>
   </div>
+  <script type="text/javascript" src="../assets/js/cms/resources/documents.js"></script>
 </div>
