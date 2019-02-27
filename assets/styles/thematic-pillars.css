@@ -47,12 +47,25 @@ p.thematic-pillar__content-text--2 {
 ul.thematic-pillar__list {
   margin-left: 9px;
   max-width: 700px;
+  
 }
+
+
+ul.thematic-pillar__list li::before {
+  list-style-type: circle;
+  margin-right: 20px;
+}
+.thematic-pillar__list li::before {
+  list-style-type: circle;
+  color:#c6c6c6;
+  margin-right: 20px;
+}
+
 li.thematic-pillar__list-item {
   padding-left: 9px; /* same as width and margin-left of sudo before element */
   position: relative;
   font-size: 16px;
-  line-height: 1.81;
+  line-height: 70px;
   letter-spacing: -0.3px;
   margin-top: 16px;
   margin-bottom: 16px;
