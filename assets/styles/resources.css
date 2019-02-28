@@ -1,3 +1,13 @@
+li{
+  list-style-type: none; 
+}
+
+
+#research-content-reports{
+  border-bottom-color:whitesmoke;
+  border-bottom-style:none;
+}
+
 .main__content-section {
   overflow-x: hidden;
   width: 100%;
@@ -40,6 +50,8 @@ button.btn-large.btn-search {
 .research-content__card {
   height: 104px;
   background-color: rgba(255, 255, 255, 0);
+  border-color: whitesmoke;
+  box-shadow: none;
   margin-right: 1em;
 }
 

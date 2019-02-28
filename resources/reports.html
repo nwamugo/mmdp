@@ -1,192 +1,47 @@
 <div class="main__content-section">
     <div id="research-content" class="row">
-        <input type="text" placeholder="Search reports" class="input research-content__form-input">
-        <button class="btn-large btn-search">Search</button>
+        <form id="reports-search-form">
+            <input type="text" placeholder="Search reports" class="input research-content__form-input"
+                id="reports-search-input">
+            <button class="btn-large btn-search" id="reports-search-btn">Search</button>
+        </form>
         <!-- Quarterly card -->
-        <div class="research-content__card reports-header">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Quarterly Reports</p>
-            </div>
-            <div class="research-content__dropdown">
-                <i class="material-icons">arrow_drop_down</i>
-            </div>
-            <div class="row research-content__devider quarterly-reports">
-                <hr class="content-devider quarterly-reports__devider">
-            </div>
-        </div>
-        <!-- Card 1 -->
-        <div class="research-content__card">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-                <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-            </div>
-            <div class="research-content__downloading">
-                <span class="research-content__download">Download</span>
-            </div>
-            <div class="row research-content__devider">
-                <hr class="content-devider reports-devider">
-            </div>
+        <div class="research-content__card reports-header collapsible" id="quarterly-reports-holder">
+            <li>
+                <div class="research-content__details">
+                    <p class="research-content__essentials  collapsible-header">Quarterly Reports</p>
+                </div>
+                <div class="research-content__dropdown">
+                    <i class="fas fa-angle-right" id="quarterly_dropdown__icon"></i>
+                </div>
+                <div class="row research-content__devider quarterly-reports">
+                    <hr class="content-devider quarterly-reports__devider">
+                </div>
+                <!-- Card 1 -->
+                <div id="#quarterlyReports" class=" collapsible-body">
+                </div>
+            </li>
         </div>
 
-        <!-- card 2  -->
-        <div class="research-content__card">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-                <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-            </div>
-            <div class="research-content__downloading">
-                <span class="research-content__download">Download</span>
-            </div>
-            <div class="row research-content__devider">
-                <hr class="content-devider reports-devider">
-            </div>
-        </div>
-
-        <!-- card 3 -->
-        <div class="research-content__card">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-                <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-            </div>
-            <div class="research-content__downloading">
-                <span class="research-content__download">Download</span>
-            </div>
-            <div class="row research-content__devider">
-                <hr class="content-devider reports-devider">
-            </div>
-        </div>
-
-        <!-- card 4 -->
-        <div class="research-content__card">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-                <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-            </div>
-            <div class="research-content__downloading">
-                <span class="research-content__download">Download</span>
-            </div>
-            <div class="row research-content__devider">
-                <hr class="content-devider reports-devider">
-            </div>
-        </div>
-
-        <!-- card 5 -->
-        <div class="research-content__card">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-                <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-            </div>
-            <div class="research-content__downloading">
-                <span class="research-content__download">Download</span>
-            </div>
-            <div class="row research-content__devider">
-                <hr class="content-devider reports-devider">
-            </div>
-        </div>
-
-        <!-- pagination -->
-        <div class="research-content__pagination">
-            <div>Page</div>
-            <div class="current-page square-shape">1</div>
-            <div class="">
-                of 23
-            </div>
-            <div class="previous-button square-shape very-pale"><i class="material-icons">navigate_before</i></div>
-            <div class="next-button square-shape"><i class="material-icons">navigate_next</i></div>
-        </div>
 
         <!-- Yearly Reports -->
-        <div class="research-content__card reports-header">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Yearly Reports</p>
-            </div>
-            <div class="research-content__dropdown">
-                <i class="material-icons">arrow_drop_down</i>
-            </div>
-            <div class="row research-content__devider quarterly-reports">
-                <hr class="content-devider quarterly-reports__devider">
-            </div>
-        </div>
-        <!-- Card 1 -->
-        <div class="research-content__card">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-                <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-            </div>
-            <div class="research-content__downloading">
-                <span class="research-content__download">Download</span>
-            </div>
-            <div class="row research-content__devider">
-                <hr class="content-devider reports-devider">
-            </div>
-        </div>
-
-        <!-- card 2  -->
-        <div class="research-content__card">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-                <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-            </div>
-            <div class="research-content__downloading">
-                <span class="research-content__download">Download</span>
-            </div>
-            <div class="row research-content__devider">
-                <hr class="content-devider reports-devider">
-            </div>
-        </div>
-
-        <!-- card 3 -->
-        <div class="research-content__card">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-                <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-            </div>
-            <div class="research-content__downloading">
-                <span class="research-content__download">Download</span>
-            </div>
-            <div class="row research-content__devider">
-                <hr class="content-devider reports-devider">
-            </div>
-        </div>
-
-        <!-- card 4 -->
-        <div class="research-content__card">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-                <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-            </div>
-            <div class="research-content__downloading">
-                <span class="research-content__download">Download</span>
-            </div>
-            <div class="row research-content__devider">
-                <hr class="content-devider reports-devider">
-            </div>
-        </div>
-
-        <!-- card 5 -->
-        <div class="research-content__card">
-            <div class="research-content__details">
-                <p class="research-content__essentials">Essentials of the MMDP: From the stakeholders</p>
-                <p class="research-content__date-published">Published: Saturday 6, December 2018</p>
-            </div>
-            <div class="research-content__downloading">
-                <span class="research-content__download">Download</span>
-            </div>
-            <div class="row research-content__devider">
-                <hr class="content-devider reports-devider">
-            </div>
-        </div>
-
-        <!-- pagination -->
-        <div class="research-content__pagination">
-            <div>Page</div>
-            <div class="current-page square-shape">1</div>
-            <div class="">
-                of 23
-            </div>
-            <div class="previous-button square-shape very-pale"><i class="material-icons">navigate_before</i></div>
-            <div class="next-button square-shape"><i class="material-icons">navigate_next</i></div>
+        <div class="research-content__card reports-header collapsible" id="yearly-reports-holder">
+            <li>
+                <div class="research-content__details">
+                    <p class="research-content__essentials  collapsible-header">Yearly Reports</p>
+                </div>
+                <div class="research-content__dropdown">
+                    <i class="fas fa-angle-right" id="yearly_dropdown__icon"></i>
+                </div>
+                <div class="row research-content__devider quarterly-reports">
+                    <hr class="content-devider quarterly-reports__devider">
+                </div>
+                <!-- Card 1 -->
+                <div id="#yearlyReports" class=" collapsible-body">
+                </div>
+            </li>
         </div>
 
     </div>
 </div>
+<script src="../assets/js/cms/resources/reports.js"></script>

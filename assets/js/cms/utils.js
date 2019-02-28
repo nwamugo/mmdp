@@ -13,7 +13,6 @@ function client(url) {
     }
   });
 }
-
 /**
  * Format date to natch mock up format.
  *
