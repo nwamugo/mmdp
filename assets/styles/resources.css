@@ -143,10 +143,12 @@ hr.content-devider.reports-devider {
   display: flex;
   justify-content: flex-end;
   margin-right: .6em;
+  padding-top: 80px;
 }
 
 .current-page {
   padding: 0px 1em;
+  padding-top: .4em;
 }
 
 .previous-button, .next-button {
@@ -489,7 +491,7 @@ input[type=range]::-moz-range-thumb {
   color: #276f86;
   box-shadow: 0 0 0 1px #a9d5de inset, 0 0 0 0 transparent;
   width: 95%;
-  margin-left: -.1em;
+  margin-left: .1em;
 }
 
 div#docs_docs {
