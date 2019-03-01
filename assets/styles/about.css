@@ -36,8 +36,6 @@ body, img {
 }
 p{
     text-align: justify;
-    width: 90%;
-    width: 90%;
     line-height: 2em;
     font-size: 16px;
     margin-top: 0;
@@ -61,6 +59,7 @@ p{
 }
 .about-mmdp__img {
     width: 100%;
+    max-width: 500px;
     height: auto;
     object-fit: contain;
  }
@@ -95,14 +94,16 @@ p{
   background-color: #f2f8fa;
   height: 100%;
 }
-.coordination-p{
+.coordination-p p{
   font-weight: bold;
   font-size: 16px;
   text-align: center;
 }
-p.coordination-p {
+p.coordination-p p {
   padding-top: 50px;
   padding-bottom: 50px;
+  padding-right: 12px;
+  padding-left: 12px;
 }
 .coord-section{
   background-color: white;
@@ -129,6 +130,7 @@ p.coordination-p {
 font-size: 55px;
 font-weight: 800;
 margin: .5em;
+padding-top: 28px;
 }
 
 .menu-item-content.col.s12.l9 {
@@ -143,6 +145,7 @@ margin: .5em;
   padding-right: 2em;
   padding-left: 2em;
   width: 100%;
+  padding-bottom: 29px;
 }
 
 .padding-bottom--medium {
@@ -151,4 +154,12 @@ margin: .5em;
 
 .padding-bottom--small {
     padding-bottom: 5em;
+}
+
+.muted {
+  color: #b5c8ce;
+}
+
+.hidden {
+  display: none;
 }
