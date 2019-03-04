@@ -512,3 +512,46 @@ div#docs_docs {
   }
 }
 
+
+li.left-sidebar__navigation-item--collapsible.repository-list {
+  margin: 0 -6em;
+  padding-left: 6em;
+  padding-right: 2em;
+}
+
+.collapsible-body.resources-repository {
+  width: 100% !important;
+}
+
+ul.repository-media {
+  width: 159%;
+  margin-left: -5.58em;
+  padding-left: 5.58em;
+}
+ul.repository-media > li{
+  width: 133%;
+  margin-left: -5.71em;
+  padding-left: 5.58em;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  margin-top: 0;
+}
+
+ul.repository-media > li.active{
+  background: #296d81;
+}
+
+ul.repository-media > li.active > a {
+  color: white;
+}
+
+@media screen and (min-width: 1920px) {
+  ul.repository-media > li {
+    width: 176.3%;
+    margin-left: -7.1em;
+    padding-left: 5.58em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+    margin-top: 0;
+  }
+}
