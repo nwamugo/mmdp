@@ -1,5 +1,4 @@
-const baseUrl = "http://0.0.0.0:3000/api/v1";
-
+const baseUrl = 'http://54.202.70.86:3000/api/v1';
 /**
  * Client wrapper to make CMS calls.
  *
@@ -45,4 +44,11 @@ function formatObjectToParams(params) {
 
 function scrollToTop() {
   window.scrollTo(0, 0);
+}
+
+function chunk (arr, chunkSize) {
+  var chunkArr = []
+  var arrCopy = arr.slice(0);
+  while (arrCopy.length) chunkArr.push(arrCopy.splice(0, chunkSize));
+  return chunkArr;
 }

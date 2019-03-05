@@ -5,96 +5,50 @@
         <form>
           <b>Media type:</b> &nbsp;
           <label>
-            <input type="checkbox"/>
+            <input id="photos-checkbox" type="checkbox"/>
             <span>Photos</span>
           </label>
           &nbsp;
           <label>
-            <input type="checkbox"/>
+            <input id="videos-checkbox" type="checkbox"/>
             <span>Videos</span>
           </label>
         </form>
       </div>
     </div>
-    <div>
-      <div class="col s12 m4 photos-videos__media-area">
-        <img alt="image"
-             class="photos-videos__media"
-             src="../assets/images/resources/about-small-image-2-copy.png"
-             srcset="../assets/images/resources/about-small-image-2-copy@2x.png,
-           ../assets/images/resources/about-small-image-2-copy@3x.png">
-      </div>
-      <div class="col s12 m4 photos-videos__media-area">
-        <img alt="image"
-             class="photos-videos__media"
-             src="../assets/images/resources/about-small-image-2-copy.png"
-             srcset="../assets/images/resources/about-small-image-2-copy@2x.png,
-           ../assets/images/resources/about-small-image-2-copy@3x.png">
-      </div>
-      <div class="col s12 m4 photos-videos__media-area">
-        <img alt="image"
-             class="photos-videos__media"
-             src="../assets/images/resources/about-small-image-2-copy.png"
-             srcset="../assets/images/resources/about-small-image-2-copy@2x.png,
-           ../assets/images/resources/about-small-image-2-copy@3x.png">
-      </div>
-      <div class="col s12 m4 photos-videos__media-area">
-        <img alt="image"
-             class="photos-videos__media"
-             src="../assets/images/resources/about-small-image-2-copy.png"
-             srcset="../assets/images/resources/about-small-image-2-copy@2x.png,
-           ../assets/images/resources/about-small-image-2-copy@3x.png">
-      </div>
-      <div class="col s12 m4 photos-videos__media-area">
-        <img alt="image"
-             class="photos-videos__media"
-             src="../assets/images/resources/about-small-image-2-copy.png"
-             srcset="../assets/images/resources/about-small-image-2-copy@2x.png,
-           ../assets/images/resources/about-small-image-2-copy@3x.png">
-      </div>
-      <div class="col s12 m4 photos-videos__media-area">
-        <img alt="image"
-             class="photos-videos__media"
-             src="../assets/images/resources/about-small-image-2-copy.png"
-             srcset="../assets/images/resources/about-small-image-2-copy@2x.png,
-           ../assets/images/resources/about-small-image-2-copy@3x.png">
-      </div>
-      <div class="col s12 m4 photos-videos__media-area">
-        <img alt="image"
-             class="photos-videos__media"
-             src="../assets/images/resources/about-small-image-2-copy.png"
-             srcset="../assets/images/resources/about-small-image-2-copy@2x.png,
-           ../assets/images/resources/about-small-image-2-copy@3x.png">
-      </div>
-      <div class="col s12 m4 photos-videos__media-area">
-        <img alt="image"
-             class="photos-videos__media"
-             src="../assets/images/resources/about-small-image-2-copy.png"
-             srcset="../assets/images/resources/about-small-image-2-copy@2x.png,
-           ../assets/images/resources/about-small-image-2-copy@3x.png">
-      </div>
-      <div class="col s12 m4 photos-videos__media-area">
-        <img alt="image"
-             class="photos-videos__media"
-             src="../assets/images/resources/about-small-image-2-copy.png"
-             srcset="../assets/images/resources/about-small-image-2-copy@2x.png,
-           ../assets/images/resources/about-small-image-2-copy@3x.png">
-      </div>
+    <div class="col s12" id="media-container">
+      
     </div>
 
     <div class="row">
-      <div class="col m12">
+      <div id="media-pagination" class="col m12">
         <!-- pagination -->
-        <div class="research-content__pagination photos-videos__pagination">
-          <div>Page</div>
-          <div class="current-page square-shape">1</div>
-          <div class="">
-            of 23
+      </div>
+    </div>
+  </div>
+  <div id="photos-videos__modal" class="modal">
+    <div class="modal-header">
+      <div class="modal-close-icon">
+          <span id="close-media-player" class="modal-close" aria-label="Close" aria-hidden="true">&times;</span>
+      </div>
+    </div>
+    <div class="modal-content">
+      <div id="modal-video" class="media-player">
+        <video class='media-player__video viewer' src='' >
+          To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
+        </video>
+        <div class="media-player__controls">
+          <div class="media-player-progress">
+            <div class="media-player-progress__filled"></div>
           </div>
-          <div class="previous-button square-shape very-pale"><i class="material-icons">navigate_before</i></div>
-          <div class="next-button square-shape"><i class="material-icons">navigate_next</i></div>
+          <button class="media-player__button toggle" title="Toggle Play">►</button>
+          <input type="range" name="volume" class="media-player__slider" min="0" max="1" step="0.05" value="1">
+          <input type="range" name="playbackRate" class="media-player__slider" min="0.5" max="2" step="0.1" value="1">
+          <button data-skip="-10" class="media-player__button">« 10s</button>
+          <button data-skip="25" class="media-player__button">25s »</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript" src="../assets/js/cms/resources/photos-videos.js"></script>
