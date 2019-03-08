@@ -72,22 +72,22 @@
 
     let markup = !total || totalPages === 1 ? '' :
       `<div class="research-content__pagination">
-      <div class="pagination__page">Page</div>
-      <div class="current-page square-shape">${currentPage}</div>
-      <div class="pagination__total-items">
-        of <span class="available_pages">${totalPages}</span>
-      </div>
-      <a href="#documents">
-        <div class="previous-button square-shape ${previous ? '' : 'very-pale'}">
-        <i class="material-icons">navigate_before</i>
+        <div class="pagination__page">Page</div>
+        <div class="current-page square-shape">${currentPage}</div>
+        <div class="pagination__total-items">
+          of <span class="available_pages">${totalPages}</span>
         </div>
-      </a>
-      <a href="#documents">
-        <div class="next-button square-shape ${next ? '' : 'very-pale'}">
-        <i class="material-icons">navigate_next</i>
-        </div>
-      </a>
-  </div>`;
+        <a href="#documents">
+          <div class="previous-button square-shape ${previous ? '' : 'very-pale'}">
+            <i class="material-icons">navigate_before</i>
+          </div>
+        </a>
+        <a href="#documents">
+          <div class="next-button square-shape ${next ? '' : 'very-pale'}">
+            <i class="material-icons">navigate_next</i>
+          </div>
+        </a>
+      </div>`;
 
     $('#docs_pagination').html(markup);
 

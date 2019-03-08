@@ -72,19 +72,23 @@
     if (pagination) {
       paginationHtml =
         `<div class="research-content__pagination">
-				<div>Page</div>
-				<div class="current-page square-shape">${currentPage}</div>
-				<div class="">
-					of <span class="available_pages">${totalPages}</span>
-		          </div>
-				<div class="previous-button square-shape ${previous ? '' : 'very-pale'}">
-						<i class="material-icons">navigate_before</i>
-				</div>
-				<div class="previous-button square-shape next-report ${next ? '' : 'very-pale'}">
-						<i class="material-icons">navigate_next</i>
-				</div>
-			</div>
-		`
+				  <div>Page</div>
+				    <div class="current-page square-shape">${currentPage}
+				  </div>
+				  <div class="">
+					  of <span class="available_pages">${totalPages}</span>
+		      </div>
+		      <a href="#reports">
+				    <div class="previous-button square-shape ${previous ? '' : 'very-pale'}">
+					    <i class="material-icons">navigate_before</i>
+				    </div>
+				  </a>
+				  <a href="#reports">
+				    <div class="previous-button square-shape next-report ${next ? '' : 'very-pale'}">
+						  <i class="material-icons">navigate_next</i>
+				    </div>
+			    </a>
+			</div>`;
     }
     return paginationHtml;
   }
@@ -129,7 +133,8 @@
 				There are no results to display.
        		 </div>`
     }
-    document.getElementById(reportTypeId).innerHTML = Reports;
+
+    $(reportTypeId).html(Reports);
 
     function paginateClickHandler() {
       $('.research-content__pagination').click((e) => {

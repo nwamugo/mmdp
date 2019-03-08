@@ -8,7 +8,8 @@ function loadPillarThree() {
   client(`pillars/pillar-number/3`)
     .then(res => res.json())
     .then(data => {
-      let pillarThree = data.pillar[0];
+      const pillar = data.pillar;
+      let pillarThree = pillar[pillar.length - 1];
 
       let pillarOutput = `
             <div class="thematic-pillar__heading-area">
