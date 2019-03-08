@@ -12,6 +12,8 @@
         = `<div class="governors-image animated fadeIn">
         <img src={{url}} />
         <h6 class="governors-name animated fadeIn delay-1s">{{governorName}}</h6>
+        <p>Executive Governor, Edo State</p>
+        <hr class="hr-divider">
 		</div> `;
 
 		this.noContentTemplate
