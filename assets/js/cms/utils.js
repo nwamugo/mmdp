@@ -1,5 +1,5 @@
-// const baseUrl = 'http://54.202.70.86:3000/api/v1';
-const baseUrl = 'http://0.0.0.0:3000/api/v1';
+const baseUrl = 'http://54.202.70.86:3000/api/v1';
+// const baseUrl = 'http://0.0.0.0:3000/api/v1';
 
 /**
  * Client wrapper to make CMS calls.
