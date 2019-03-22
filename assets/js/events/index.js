@@ -57,8 +57,8 @@
 
     // When an Event id Delete
     socket.on('deleteEvent', (data) => {
-      let index = mainList.findIndex(x => x._id === data._id);
-      mainList.splice([index], 1)
+      let index = mainList.findIndex(x => x._id === data);
+      mainList.splice(index, 1)
       const newList = createEventLists(mainList, mainEventList, commingList, pastList);
 
       $('#main-event').html(RenderAllEvents(newList[0], 1, true, mainEventsHtml));
@@ -94,6 +94,8 @@ const createEventLists = (arr, mainEventList, commingList, pastList) => {
 const RenderAllEvents = (arr, chunk_size, sort, html) => {
   if (sort === true) {
     arr.sort((a, b) => (a.eventDate > b.eventDate) ? 1 : ((b.eventDate > a.eventDate) ? -1 : 0));
+  } else {
+    arr.sort((a, b) => (a.eventDate < b.eventDate) ? 1 : ((b.eventDate < a.eventDate) ? -1 : 0));
   }
   let HtmlData = '';
   arr.slice(0, chunk_size).map((item) => {

@@ -66,37 +66,39 @@
   color: #616163;
 }
 
-.up-events-card__desc-body {
-  font-size: 16px;
-  line-height: 1.81;
-  letter-spacing: -0.3px;
+.up-events-card__desc-body * {
+  font-size: 16px !important;
+  line-height: 1.81 !important;
+  letter-spacing: -0.3px !important;
   color: #1a1f37;
 }
 
-.up-events-card__desc-body img{
-
+img.up-events-card__desc-body{
   width: 100%
 }
-.up-events-card__desc-body-past h1, h2, h3, h4, h5, h6, p{
+.up-events-card__desc-body-past * {
   font-size: 16px !important;
   line-height: 1.81 !important;
   letter-spacing: -0.3px !important;
 }
 .up-events-card__desc-body-past {
   color: #1a1f37;
-  max-height: 120px;
+  max-height: 120px !important;
   overflow : hidden;
  text-overflow: ellipsis;
    display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }
+
+.up-events-card__desc-body-coming *{
+  font-size: 16px !important;
+  line-height: 1.81 !important;
+  letter-spacing: -0.3px !important;
+}
 .up-events-card__desc-body-coming {
-  font-size: 16px;
-  line-height: 1.81;
-  letter-spacing: -0.3px;
   color: #1a1f37;
-  max-height: 70px;
+  max-height: 70px !important;
   overflow : hidden;
   text-overflow: ellipsis;
     display: -webkit-box;
