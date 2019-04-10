@@ -2,9 +2,9 @@
 function cmsLoad() {
   loadPillarOne();
 }
-
+const url = 'api/v1/pillars/pillar-number/1'
 function loadPillarOne() {
-  client(`${baseUrl}/api/v1/pillars/pillar-number/1`)
+  client(`pillars/pillar-number/1`)
     .then(res => res.json())
     .then(data => {
       const pillar = data.pillar;

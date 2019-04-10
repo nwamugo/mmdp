@@ -5,7 +5,7 @@ function cmsLoad() {
 }
 
 function loadPillarFour() {
-  client(`${baseUrl}/api/v1/pillars/pillar-number/4`)
+  client(`pillars/pillar-number/4`)
     .then(res => res.json())
     .then(data => {
       const pillar = data.pillar;
