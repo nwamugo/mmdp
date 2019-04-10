@@ -1,11 +1,11 @@
-// Retrieve pillar one
+ /*global app, $on, baseUrl */
 
 function cmsLoad() {
   loadPillarThree();
 }
 
 function loadPillarThree() {
-  client(`pillars/pillar-number/3`)
+  client(`${baseUrl}/api/v1/pillars/pillar-number/3`)
     .then(res => res.json())
     .then(data => {
       const pillar = data.pillar;
