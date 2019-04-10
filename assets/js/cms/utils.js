@@ -1,7 +1,7 @@
 // const baseUrl = 'http://54.202.70.86:3000/api/v1';
 // const SocketUrl = 'http://54.202.70.86:3000';
-const baseUrl = 'http://0.0.0.0:3000/api/v1';
-const SocketUrl = 'http://0.0.0.0:3000';
+const baseUrl = 'http://cms-staging.mmdp.ng:3000/api/v1';
+const SocketUrl = 'http://cms-staging.mmdp.ng:3000';
 /**
  * Client wrapper to make CMS calls.
  *
