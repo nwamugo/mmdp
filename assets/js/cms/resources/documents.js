@@ -48,7 +48,7 @@
         docs += `<div class="research-content__card">
            <div class="research-content__details">
              <p class="research-content__essentials">${doc.title}</p>
-             <p class="research-content__date-published">Published: ${formatDate(new Date(doc.created_at))}</p>
+             <p class="research-content__date-published">Published: ${formatDate(new Date(doc.createdAt))}</p>
            </div>
            <div class="research-content__downloading">
              <a href='${doc.document.url}' target="_blank" download><span class="research-content__download">Download</span></a>
