@@ -24,13 +24,13 @@
           <img src="/assets/images/stakeholder-dir/cloud-computing.svg"/>Export CSV
         </button>
         <span class="footer__right_content">
-          <select>
-            <option selected>10</option>
+          <select id="entries-per-page">
+            <!-- optios will be loaded dynamically-->
           </select>
           <span>Entries per page</span>
-          <span>Page <span>1</span> of 23</span>
-          <span class="go-back">&#60;</span>
-          <span class="go-forward active__nav">&#62;</span>
+          <span>Page <span id="current-page">1</span> of <span id="total-page">23</span></span>
+          <button id="previous-page" class="go-back">&#60;</button>
+          <button id="next-page" class="go-forward">&#62;</button>
         </span>
       </td>
     </tr>

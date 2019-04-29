@@ -22,6 +22,8 @@
   color: #1a1f37;
   height: 104px;
   border: solid 1px #d9eaef;
+  cursor: pointer;
+  z-index: 7;
 }
 
 .stakeholder__dir__table thead tr {
@@ -77,10 +79,9 @@
   height: 50px;
   border-radius: 3px;
   border: solid 1px #cae7f0;
-  
 }
 
-.search__activities__section input::placeholder{
+.search__activities__section input::placeholder {
   color: #1a1f37;
 }
 
@@ -132,7 +133,7 @@
   margin: 0 26px 0 51px;
 }
 
-.footer__right_content :nth-child(3) span {
+.footer__right_content :nth-child(3) span#current-page {
   display: inline-block;
   width: 40px;
   height: 31px;
@@ -142,7 +143,8 @@
   margin: 0 8px;
 }
 
-.footer__right_content .go-back, .footer__right_content .go-forward {
+.footer__right_content .go-back,
+.footer__right_content .go-forward {
   display: inline-block;
   width: 32px;
   height: 31px;
@@ -155,7 +157,7 @@
   margin-left: 6px;
 }
 
-.footer__right_content span.active__nav {
+.footer__right_content button.active__nav {
   opacity: 1;
   color: #296d81;
 }
@@ -164,4 +166,76 @@
   font-size: 16px;
   max-width: 600px;
   margin: 0px auto;
+}
+
+.modal-overlay {
+  opacity: 0.85 !important;
+}
+
+#modal1.modal {
+  width: 85%;
+  border-radius: 5px;
+  height: 95%;
+  max-height: 97%;
+  top: 3% !important;
+}
+
+table.stakeholder__details__table {
+  border: none;
+}
+
+table.stakeholder__details__table tr {
+  border: none;
+  height: 6rem;
+}
+
+table.stakeholder__details__table td {
+  width: 33.33%;
+  padding: 10px 20px;
+  vertical-align: top;
+}
+
+table.stakeholder__details__table .row__title {
+  font-weight: bold;
+  font-size: 16px;
+}
+table.stakeholder__details__table .row__value {
+  font-size: 14px;
+  margin-top: 0.5rem;
+}
+
+
+
+.modal .modal-close {
+  float: right;
+  font-size: 2rem;
+  color: #296d81;
+  font-weight: lighter;
+}
+
+.modal-content h5 {
+  padding: 0 20px;
+  font-weight: 900;
+}
+.modal-content .sh-hr {
+  width: 560px;
+  height: 6px;
+  border: 0;
+  margin-top: 9px;
+  float: left;
+  background-image: linear-gradient(to right, #73d5e7, #f58634);
+}
+
+.modal__body{
+  position: relative;
+}
+
+.mmdp__bg__img {
+  position: absolute;
+  position: absolute;
+  right: 55px;
+  bottom: 69px;
+  width: 32%;
+  object-fit: contain;
+  opacity: 0.04;
 }

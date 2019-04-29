@@ -70,7 +70,6 @@ if (
       }
     );
     } catch (error) {
-      console.log(error)
       window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
     }
     
