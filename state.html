@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="assets/styles/common.css" />
     <link rel="stylesheet" href="assets/styles/sidebar.css" />
     <link rel="stylesheet" href="assets/styles/animations.css?version=1" />
+    <link rel="stylesheet" href="assets/styles/state-map.css" />
     <link rel="stylesheet" href="assets/styles/stakeholder-dir-table.css" />
     <link
       rel="stylesheet"
@@ -32,8 +33,50 @@
   </head>
 
   <body>
+    <header id="header-section" class="row header">
+      <!-- Header content will be loaded dynamically here -->
+    </header>
     <main>
-      <!--Map section here-->
+      <div class="banner valign-wrapper state__map relative__position">
+        <div class="row banner__row">
+          <!-- Left hand side -->
+          <div class="col l5 banner__desc animated fadeInLeft delay-1s">
+            <div class="banner__desc__heading">
+              Welcome to The <span id="state-name"></span> State Cordination
+              Matrix
+            </div>
+            <div class="matrix-welcome-msg">
+              Click on any Local Government Area on the map to view the activities
+              of organisations within that area.
+            </div>
+            <!-- Legend -->
+            <div class="map__legend__container">
+              <span class="map__legend one">&gt; 35 Services </span>
+              <span class="map__legend two">23 - 25 Services</span>
+              <span class="map__legend three">6 - 22 Services</span>
+              <span class="map__legend four">&lt; 5 Services</span>
+            </div>
+            <!-- Report Button-->
+            <a href="#">
+              <button class="banner__button animated flashing slow delay-2s">
+                Report
+              </button>
+            </a>
+          </div>
+          <!-- Right hand side - Map -->
+          <div
+            id="svg-container"
+            class="col l7 banner__images right-align"
+          >
+            <!-- SVG content will be loaded dynamically here -->
+          </div>
+        </div>
+        <!-- Footer links -->
+        <div class="row absolute__position links__container">
+          <a class="nav__links left__align" href="/index-cordination-matrix.html">Back to Nigeria</a>
+          <a class="nav__links right__align" href="#">Show pillar activities</a>
+        </div>
+      </div>
 
       <!-- Stakeholder directory section -->
       <div class="section section__pillars">
@@ -68,13 +111,18 @@
         </section>
       </div>
     </main>
-
+    <footer id="footer-section" class="footer">
+      <!-- content will be loaded dynamically here -->
+    </footer>
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="assets/js/auth/utils.js"></script>
+    <script type="text/javascript" src="assets/js/state-matrix-header.js"></script>
+    <script type="text/javascript" src="assets/js/statemap.js"></script>
     <script
       type="text/javascript"
       src="assets/js/stakeholder-dir-table.js"

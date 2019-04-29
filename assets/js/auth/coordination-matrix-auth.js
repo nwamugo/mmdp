@@ -15,7 +15,7 @@
       if (response.status === 'success') {
         const { token } = response.data.user;
         setToken(token);
-        redirectTo('/resources/#coordination-matrix')
+        redirectTo('/index-cordination-matrix.html');
       } else {
         toastr.error(response.message || 'Operation not successful!');
       }
@@ -40,7 +40,7 @@
     const forms = document.querySelectorAll('form.coordination-login__form');
     forms[0].addEventListener('submit', handleSubmit, false);
     if (localStorage.getItem('userToken')) {
-      redirectTo('/resources/#coordination-matrix');
+      redirectTo('/index-cordination-matrix.html');
     }
   }
   document.addEventListener('DOMContentLoaded', loaded, false);

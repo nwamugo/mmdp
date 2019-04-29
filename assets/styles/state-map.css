@@ -1,0 +1,132 @@
+.state__map.relative__position {
+  position: relative;
+}
+
+.state__map .absolute__position {
+  position: absolute;
+}
+
+.state__map .links__container {
+  bottom: 50px;
+  right: 0;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 4%;
+  margin-bottom: -10px;
+}
+
+.state__map .links__container .left__align {
+  float: left;
+}
+
+.state__map .links__container .right__align {
+  float: right;
+}
+
+.state__map .banner__button {
+  width: 136px;
+  height: 40px;
+}
+
+.state__map .map__legend__container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 135px;
+  justify-content: space-between;
+  justify-items: center;
+  margin-top: 40px;
+}
+
+.state__map .map__legend__container .map__legend {
+  height: 29px;
+  font-family: Muli;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.81;
+  letter-spacing: -0.3px;
+  color: var(--dark);
+  position: relative;
+  margin-left: 3rem;
+}
+
+.map__legend:before {
+  content: '';
+  height: 34px;
+  width: 34px;
+  display: inline-block;
+  margin-right: 1rem;
+  border-radius: 3px;
+  border: solid 1px #cae7f0;
+  position: absolute;
+  left: -3rem;
+  top: -3px;
+}
+
+.one:before {
+  background-color: #296d81;
+}
+
+.two:before {
+  background-color: #83c4d8;
+}
+
+.three:before {
+  background-color: #bad9e3;
+}
+
+.four:before {
+  background-color: #eaf9fe;
+}
+
+.banner__button.logout__button {
+  margin: 0;
+  width: 150px;
+  height: 35px;
+}
+
+.banner__image.state-map__svg {
+  width: 100%;
+}
+
+.matrix-welcome-msg {
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 1.81;
+  letter-spacing: -0.3px;
+  margin-top: 24px;
+  color: #1a1f37;
+  font-family: Muli;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+#svg-container svg path:hover {
+  cursor: pointer;
+  stroke: black;
+  stroke-width: 0.003;
+}
+
+@media (max-width: 995px) {
+  .state__map div.banner__desc {
+    order: 1;
+  }
+}
+
+.state__map .banner__row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.state__map .banner__row .banner__desc {
+  width: 40%;
+  margin-left: 0;
+}
+
+.state__map .banner__row .right__align{
+  width: 60%;
+}
