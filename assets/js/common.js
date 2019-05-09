@@ -11,4 +11,11 @@ $(document).ready(function () {
     $("#dropdown__icon").toggleClass("fas fa-angle-down");
   });
   $("#footer-section").load("/partials/footer.html");
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92982297-1');  
+
 });
