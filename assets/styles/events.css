@@ -148,6 +148,7 @@ img.up-events-card__desc-body{
 }
 
 .events-info {
+  cursor: pointer;
   color: #3faaca;
   font-size: 14px;
   font-weight: bold;

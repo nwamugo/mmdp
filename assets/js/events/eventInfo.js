@@ -27,7 +27,7 @@
       <span class="events-date sm"> ${new Date(eventDate).toDateString()} </span>
     </div>
     <div class="row event-image-1">
-      <img src="${headerImage.url}" width="100%" height="572px"/>
+      <img src="${headerImage.url}" width="100%" height="100%"/>
     </div>
     <div class="row up-event">
       <div class="event up-events-card__desc-body justified">
