@@ -1,0 +1,16 @@
+.svg{
+    border:1px solid;
+    overflow:visible;
+}
+
+.path{
+    stroke:black;
+    vector-effect:non-scaling-stroke;
+    fill:#bad9e3;
+    stroke: none;
+    stroke-width: 0.01;
+}
+
+.circle{
+    fill:red;
+}

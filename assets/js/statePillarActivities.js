@@ -61,7 +61,7 @@ function appendDefs(id, number, pillarType) {
     .append("defs")
     .append("symbol")
     .attr("id", "def" + id)
-    .attr("class", pillarType)
+    .attr("class", pillarType.replace(/ +/g, ""))
     .attr("viewBox", "-10 -34 22 36")
     .append("g")
     .attr("fill", "none")

@@ -1,0 +1,174 @@
+.state__map.relative__position {
+  position: relative;
+}
+
+.state__map .absolute__position {
+  position: absolute;
+}
+
+.state__map .links__container {
+  bottom: 0;
+  right: 0;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 4%;
+}
+
+.state__map .links__container .left__align {
+  float: left;
+}
+
+.state__map .links__container .right__align {
+  float: right;
+}
+
+.state__map .banner__button {
+  width: 136px;
+  height: 40px;
+}
+
+.state__map .map__legend__container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 70px;
+  justify-content: space-between;
+  justify-items: center;
+  margin-top: 40px;
+}
+
+.state__map .map__legend__container .map__legend {
+  height: 29px;
+  font-family: Muli;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: -0.3px;
+  color: var(--dark);
+  position: relative;
+  margin-left: 3rem;
+}
+
+.map__legend:before {
+  content: '';
+  height: 34px;
+  width: 34px;
+  display: inline-block;
+  margin-right: 1rem;
+  border-radius: 3px;
+  border: solid 1px #cae7f0;
+  position: absolute;
+  left: -3rem;
+  top: -3px;
+}
+
+.lga__position {
+  margin-top: 196px;
+}
+
+.one:before {
+  background-color: #e16464;
+}
+
+.two:before {
+  background-color: #4caa39;
+}
+
+.banner__button.logout__button {
+  margin: 0;
+  width: 150px;
+  height: 35px;
+}
+
+.banner__image.state-map__svg {
+  width: 100%;
+}
+
+.matrix-welcome-msg {
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 1.81;
+  letter-spacing: -0.3px;
+  margin-top: 24px;
+  color: #1a1f37;
+  font-family: Muli;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
+.banner__lga__heading {
+  width: 420px;
+  height: 43px;
+  font-family: Muli;
+  font-size: 30px;
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: -0.7px;
+  color: #1a1f37;
+}
+
+.matrix-lga-msg {
+  width: 512px;
+  height: 70px;
+  font-family: Muli;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.81;
+  letter-spacing: -0.3px;
+  color: #1a1f37;
+}
+
+#svg-container svg path:hover {
+  cursor: pointer;
+  box-shadow: 50px 50px cyan;
+  stroke: none;
+  stroke-width: 0.03;
+}
+
+#svg-container {
+  width: 677px;
+  height: 584px;
+}
+
+.info_panel {
+  height: 900px;
+  width: auto !important;
+  background-color: #ffffff;
+  padding: 10px;
+  font-size: 2.9em;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 10.29;
+  letter-spacing: 2px;
+  position: absolute;
+  border-radius: 5px;
+}
+
+.counts {
+  font-family: Muli;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.29;
+  letter-spacing: -0.3px;
+  color: #1a1f37;
+}
+
+.community {
+  font-family: Muli;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.29;
+  letter-spacing: -0.3px;
+  color: #1a1f37;
+}

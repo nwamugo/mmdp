@@ -1,43 +1,61 @@
 $(document).ready(async function() {
   const keys = [
-    "organisationName",
-    "thematicPillars",
-    "subThemes",
-    "partnership",
-    "location",
-    "beneficiaryCount",
-    "amountInvested"
+    'organisationName',
+    'thematicPillars',
+    'subThemes',
+    'partnership',
+    'location',
+    'beneficiaryCount',
+    'amountInvested',
   ];
   const filter = new Filter();
 
   const queryNameFromUrl = window.location.search.substring(1).split("=")[1];
   const queryParam = queryNameFromUrl
     ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
-    : "Nigeria";
+    : 'Nigeria';
   let query, param;
+
+
   switch (window.location.pathname) {
-    case "/country.html":
-      param = 'country'
+    case '/country.html':
+      param = 'country';
       query = `country=${queryParam}`;
       break;
-    case "/state.html":
+    case '/state.html':
       query = `state=${queryParam}`;
       break;
-    case "/lga.html":
-      param = 'lga'
+    case '/lga.html':
+      param = 'lga';
+      query = `lga=${queryParam}`;
+      break;
+    case '/active-communities.html':
       query = `lga=${queryParam}`;
       break;
     case '/state-pillars.html':
       query = `state=${queryParam}`;
       break;
     default:
-      param = 'country'
+      param = 'country';
       query = `country=${queryParam}`;
       break;
   }
+
+  let MMDP_BASE_URL;
+
+  if (
+    window.location.host.includes('127.0.0.1') ||
+    window.location.host.includes('localhost')
+  ) {
+    MMDP_BASE_URL = 'http://localhost:3000';
+  } else {
+    MMDP_BASE_URL = 'http://cms-staging.mmdp.ng:3000';
+  }
+
   const stakeholderData = await fetch(
-    `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`,
+    `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName=${''}`,
   );
+
   const data = await stakeholderData.json();
 
   // neededData
@@ -56,8 +74,37 @@ $(document).ready(async function() {
   keys[4] = param === "country" ? "stateLocation" : keys[4];
   const paginator = new Paginator(tableData, keys);
 
-  $("#stakeholder-directory-table").load(
-    "/partials/stakeholder-directory-table.html",
+  const handleChange = () => {
+    var x = document.getElementById('search__activities').value;
+    if (x === '' || x === null) {
+      paginator.empData = false;
+      paginator.setTableTempData();
+    }
+  };
+
+  const handleSearch = async () => {
+    var searchQuery = document.getElementById('search__activities').value;
+    if (searchQuery) {
+      const stakeholderData = await fetch(
+        `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName=${searchQuery ||
+          ''}`,
+      );
+      const data = await stakeholderData.json();
+      // neededData
+      const tableData = handleStakeholdersData(data.filteredStakeholders);
+      paginator.setTableTempData(tableData);
+      paginator.empData = true;
+    } else {
+      paginator.empData = false;
+      paginator.setTableTempData();
+    }
+  };
+
+  $('#search__activities').keyup(handleChange);
+  $('#btn_search').click(handleSearch);
+
+  $('#stakeholder-directory-table').load(
+    '/partials/stakeholder-directory-table.html',
     function() {
       fetchLocations();
       filter.displayDataInDropdown(beneficiaryCount, "#beneficiary_count_data");
@@ -80,7 +127,7 @@ $(document).ready(async function() {
         paginator.entriesPerPage = this.value;
         paginator.refreshTableBody();
       });
-      $("#next-page").click(function() {
+      $('#next-page').click(function() {
         paginator.nextPage();
       });
       $("#previous-page").click(function() {

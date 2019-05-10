@@ -1,27 +1,27 @@
 class Paginator {
   constructor(data, columnKeys) {
     this.data = data;
-    this.tempData = []
+    this.tempData = [];
+    this.empData = false;
     this.currentPage = 1;
     this.entriesPerPage = 10;
     this.totalPage = this.getTotalPage();
     this.columnKeys = columnKeys;
   }
-
   getData = () => {
+    if (this.empData) {
+      return this.tempData;
+    }
     const data = this.tempData.length ? this.tempData : this.data;
-    return data
-  }
-
-  setTempData = (data=[]) => {
+    return data;
+  };
+  setTempData = (data = []) => {
     this.tempData = data;
-  }
-
-  setTableTempData = (data=[]) => {
-    this.setTempData(data)
-    this.refreshTableBody()
-  }
-
+  };
+  setTableTempData = (data = []) => {
+    this.setTempData(data);
+    this.refreshTableBody();
+  };
   getTotalPage = () => {
     const data = this.getData();
     const tp =
@@ -30,7 +30,6 @@ class Paginator {
         : data.length / this.entriesPerPage;
     return Math.floor(tp);
   };
-
   nextPage = () => {
     const data = this.getData();
     const currentIndex = this.entriesPerPage * this.currentPage;
@@ -44,7 +43,6 @@ class Paginator {
       return rows;
     }
   };
-
   initialPage = () => {
     const data = this.getData();
     const paginatedData = data.slice(0, 10);
@@ -53,19 +51,16 @@ class Paginator {
     this.updatePageOf();
     return rows;
   };
-
   currentPageData = () => {
     const data = this.getData();
     const endIndex = this.currentPage * this.entriesPerPage;
     const startIndex = endIndex - this.entriesPerPage;
     return data.slice(startIndex, endIndex);
   };
-
   refreshTableBody = () => {
     this.createTableBody(this.createTableRows(this.currentPageData()));
     this.updatePageOf();
   };
-
   previousPage = () => {
     const data = this.getData();
     const currentIndex = this.entriesPerPage * this.currentPage;
@@ -80,16 +75,15 @@ class Paginator {
       return rows;
     }
   };
-
   createTableRow = data => {
     const keys = this.columnKeys;
     return `
           <tr>
               <td class="organisation__name">
                   <input id=${data[keys[0]]} data-org=${data[keys[0]].replace(
-      / /g,
-      "-"
-    )} name="aaaaa" value="aaaaa" type="checkbox" />
+                    / /g,
+                    "-"
+                  )} name="aaaaa" value="aaaaa" type="checkbox" />
                   <div class="stakeholder__name">${data[keys[0]]}</div>
               </td>
               <td data-target="modal1" class="modal-trigger"  onClick="getSHDetails('${
@@ -113,19 +107,16 @@ class Paginator {
       </tr>
           `;
   };
-
   createTableRows = paginatedData => {
     const rows = paginatedData.map(stakeholder =>
-      this.createTableRow(stakeholder)
+      this.createTableRow(stakeholder),
     );
     return rows;
   };
-
   createTableBody = rows => {
     $('tbody.table__body').html(rows);
     bindJQuery();
   };
-
   updatePageOf = () => {
     const currentPage = this.currentPage;
     const totalPage = this.getTotalPage();
