@@ -1,0 +1,15 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "shemogumbe/mmdp_site",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "80"
+    }
+  ],
+  "Logging": "/var/log/nginx",
+  "Entrypoint": "/app/bin/mmdp_site",
+  "Command": "--argument"
+}
