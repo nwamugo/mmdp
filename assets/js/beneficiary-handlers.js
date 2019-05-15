@@ -138,6 +138,9 @@ function handleStakeholdersData(data) {
         tempStore.location.push(
           ...beneficiary.communities.map(community => community.lgaId.lgaName)
         );
+        tempStore.stateLocation.push(
+          ...beneficiary.communities.map(community => community.stateId.stateName)
+        );
         return tempStore;
       },
       {
@@ -149,7 +152,8 @@ function handleStakeholdersData(data) {
         fundingSources: new Set(),
         beneficiaryService: new Set(),
         duration: new Set(),
-        location: []
+        location: [],
+        stateLocation: []
       }
     );
 
@@ -166,7 +170,8 @@ function handleStakeholdersData(data) {
       fundingSources: [...otherDetails.fundingSources].join(', '),
       beneficiaryService: [...otherDetails.beneficiaryService].join(', '),
       duration: [...otherDetails.duration].join(', '),
-      location: [...new Set(otherDetails.location)].join(', ')
+      location: [...new Set(otherDetails.location)].join(', '),
+      stateLocation: [...new Set(otherDetails.stateLocation)].join(', ')
     };
     return {
       id: index + 1,

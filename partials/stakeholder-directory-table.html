@@ -5,14 +5,41 @@
     <thead>
       <tr>
         <th class="organisation__name">
-          <input name="aaaaa" value="aaaaa" type="checkbox" /><div>Organisation Name</div>
+          <input name="aaaaa" value="aaaaa" type="checkbox" />
+          <div>
+            Organisation Name
+            <i class="fas fa-angle-down fa-xs"></i>
+          </div>
         </th>
-        <th>Thematic Pillars</th>
-        <th>Sub-Themes</th>
-        <th>Partnership</th>
-        <th>Location</th>
-        <th>Beneficiary Count</th>
-        <th>Amount Invested</th>
+        <th>Thematic Pillars<i class="fas fa-angle-down fa-xs"></i></th>
+        <th>Sub-Themes<i class="fas fa-angle-down fa-xs"></i></th>
+        <th>Partnership<i class="fas fa-angle-down fa-xs"></i></th>
+        <th class="location__dropdown">
+          Location<i
+            class="fas fa-angle-down fa-xs"
+            id="location_dropdown__icon"
+          ></i>
+          <div class="container">
+            <div class="subnav">
+              <div class="location_filters">
+                <p>
+                  Location Filters
+                  <button class="clear_filter__button" id="clearFilter" >Clear Filter</button>
+                  <button class="apply_filter__button" id="applyFilter" >Apply Filter</button>
+                </p>
+              </div>
+              <div class="location_filter_data">
+                <table id="data">
+                  <tbody>
+                    <!--Table rows will be loaded dynamically here-->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </th>
+        <th>Beneficiary Count<i class="fas fa-angle-down fa-xs"></i></th>
+        <th>Amount Invested <i class="fas fa-angle-down fa-xs"></i></th>
       </tr>
     </thead>
     <tbody id="activities__table__body" class="table__body">

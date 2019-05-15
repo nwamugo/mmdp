@@ -11,22 +11,24 @@ $(document).ready(async function() {
   const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
   const queryParam = queryNameFromUrl ?
     queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1) : 'Nigeria';
-  let query;
+  let query, param;
   switch (window.location.pathname) {
-    case '/country.html':
+    case "/country.html":
+      param = 'country'
       query = `country=${queryParam}`;
       break;
-    case '/state.html':
+    case "/state.html":
       query = `state=${queryParam}`;
       break;
-    case '/lga.html':
+    case "/lga.html":
+      param = 'lga'
       query = `lga=${queryParam}`;
       break;
     default:
+      param = 'country'
       query = `country=${queryParam}`;
       break;
   }
-
   const stakeholderData = await fetch(
     `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`
   );
@@ -34,14 +36,16 @@ $(document).ready(async function() {
   // neededData
   const tableData = handleStakeholdersData(data.filteredStakeholders);
   window.tableData = tableData
+  keys[4] = param === 'country' ? 'stateLocation' : keys[4]
   const paginator = new Paginator(tableData, keys);
 
   $("#stakeholder-directory-table").load(
     "/partials/stakeholder-directory-table.html",
     function() {
+      fetchLgas();
       paginator.initialPage();
       let n = 5;
-      let options = '';
+      let options = "";
       while (n < 51) {
         if (n === 10) {
           options += `<option selected>${n}</option>\n`;
@@ -50,24 +54,24 @@ $(document).ready(async function() {
         }
         n += 5;
       }
-      $('select#entries-per-page').html(options);
-      $('select#entries-per-page').change(function() {
+      $("select#entries-per-page").html(options);
+      $("select#entries-per-page").change(function() {
         paginator.entriesPerPage = this.value;
         paginator.refreshTableBody();
       });
-      $('#next-page').click(function() {
+      $("#next-page").click(function() {
         paginator.nextPage();
       });
-      $('#previous-page').click(function() {
+      $("#previous-page").click(function() {
         paginator.previousPage();
       });
-      $('.modal').modal();
+      $(".modal").modal();
 
       async function getSHDetails(stakeholderName) {
         const response = await fetch(
           `${MMDP_BASE_URL}/api/v1/stakeholders-directory?organisationName=${stakeholderName}`
         );
-        $('.modal h5')
+        $(".modal h5")
           .html(`<div>${stakeholderName} <a href="#!" class="modal-close waves-effect waves-green btn-flat"
         >X</a></div><hr class="sh-hr">`);
         const stakeholderDataJson = await response.json();
@@ -76,40 +80,41 @@ $(document).ready(async function() {
           stakeholderData.beneficiaries
         );
         const requiredDetails = {
-          'Year of Registration': stakeholderData.yearOfCacREG,
-          'RC Number': stakeholderData.cacRcNumber,
+          "Year of Registration": stakeholderData.yearOfCacREG,
+          "RC Number": stakeholderData.cacRcNumber,
           Category: stakeholderData.organisationTypeId.typeName,
-          'Founder Name': stakeholderData.founder,
+          "Founder Name": stakeholderData.founder,
           "Founder's Phone Number": stakeholderData.phoneNumber,
-          Location: stakeholderData.adresses[0].address,
-          'Thematic Pillar (s)': beneficiaryData.thematicPillars,
-          'Sub Theme (s)': beneficiaryData.subThemes,
-          'Focus Area (s)': beneficiaryData.focusArea,
-          'Service (s)': beneficiaryData.beneficiaryService,
-          'Source (s) of Funding': beneficiaryData.fundingSources,
-          'Amount Invested till date': beneficiaryData.amountInvested,
-          'Local Communities': beneficiaryData.localCommunities,
-          'LGA of Operation': beneficiaryData.lgas,
-          'Partners (Local and International)': [
+          Location:
+            stakeholderData.beneficiaries[0].communities[0].lgaId.lgaName,
+          "Thematic Pillar (s)": beneficiaryData.thematicPillars,
+          "Sub Theme (s)": beneficiaryData.subThemes,
+          "Focus Area (s)": beneficiaryData.focusArea,
+          "Service (s)": beneficiaryData.beneficiaryService,
+          "Source (s) of Funding": beneficiaryData.fundingSources,
+          "Amount Invested till date": beneficiaryData.amountInvested,
+          "Local Communities": beneficiaryData.localCommunities,
+          "LGA of Operation": beneficiaryData.lgas,
+          "Partners (Local and International)": [
             ...new Set(
               stakeholderData.partnerships.map(
                 partner => partner.stakeholder2Id.organisationName
               )
             )
-          ].join(', '),
-          'Gender distribution of beneficiaries (in percentage) Male % Female%': `male: ${
+          ].join(", "),
+          "Gender distribution of beneficiaries (in percentage) Male % Female%": `male: ${
             beneficiaryData.malePercent
           }%, female: ${beneficiaryData.femalePercent}%`,
-          'Total Number of Beneficiary':
+          "Total Number of Beneficiary":
             beneficiaryData.totalNumberOfBeneficiaries,
-          'Beneficiary Type': beneficiaryData.beneficiaryTypes,
-          'Target Audience (s)': beneficiaryData.targetAudience,
-          'Number of Staff': stakeholderData.staffStrengthRangeId
+          "Beneficiary Type": beneficiaryData.beneficiaryTypes,
+          "Target Audience (s)": beneficiaryData.targetAudience,
+          "Number of Staff": stakeholderData.staffStrengthRangeId
             ? stakeholderData.staffStrengthRangeId.staffStrength
-            : '',
-          'Number of Volunteers': stakeholderData.volunteersCount
+            : "",
+          "Number of Volunteers": stakeholderData.volunteersCount
         };
-        let shDetailsTableData = '';
+        let shDetailsTableData = "";
         const keys = Object.keys(requiredDetails);
         while (keys.length > 0) {
           const rowKeys = keys.splice(0, 3);
@@ -118,25 +123,117 @@ $(document).ready(async function() {
               <td>
                 <div class="row__title">${rowKeys[0]}</div>
                 <div class="row__value">${requiredDetails[rowKeys[0]] ||
-                  '-'}</div>
+                  "-"}</div>
               </td>
               <td>
                 <div class="row__title">${rowKeys[1]}</div>
                 <div class="row__value">${requiredDetails[rowKeys[1]] ||
-                  '-'}</div>
+                  "-"}</div>
               </td>
               <td>
                 <div class="row__title">${rowKeys[2]}</div>
                 <div class="row__value">${requiredDetails[rowKeys[2]] ||
-                  '-'}</div>
+                  "-"}</div>
               </td>
           </tr>
           `;
           shDetailsTableData += newRow;
         }
-        $('.stakeholder__details__table tbody').html(shDetailsTableData);
+        $(".stakeholder__details__table tbody").html(shDetailsTableData);
       }
       window.getSHDetails = getSHDetails;
     }
   );
+
+  function uncheckCheckboxes() {
+    if ($("table tr .checkBox").is(":checked")) {
+      locationValues = [];
+    }
+    $("table tr .checkBox").prop("checked", false);
+    paginator.refreshTableBody();
+  }
+
+  function closeLocationDropdown() {
+    return $("table tr #location_dropdown__icon", function() {
+      $("table tr #location_dropdown__icon")
+        .next(".container")
+        .find(".subnav")
+        .slideToggle();
+    });
+  }
+
+  // display location header dropdown
+  $("div").on("click", "table tr #location_dropdown__icon", function() {
+    $(this)
+      .next(".container")
+      .find(".subnav")
+      .slideToggle();
+  });
+
+  // fetch states
+  function fetchLgas() {
+    lgasArray = window.variable;
+    if(!lgasArray){
+      return
+    }
+    let newArray = [];
+    let i,
+      j,
+      tempArray = [],
+      chunk = 5;
+    // split result array into 5 row cells to be displayed on table
+    for (i = 0, j = lgasArray.length; i < j; i += chunk) {
+      tempArray = lgasArray.slice(i, i + chunk);
+      newArray.push(tempArray);
+    }
+
+    newArray.map(itemArray => {
+      let arrayValue = "";
+      let checkBox = "";
+      let tableRow = `
+          <tr> `;
+      for (let i = 0; i < itemArray.length; i++) {
+        arrayValue = itemArray[i];
+        checkBox = `<input name="${arrayValue}" value="${arrayValue}" class="checkBox" type="checkbox"/> `;
+        tableRow += `<td>${
+          itemArray[i] ? checkBox + `&nbsp;` + itemArray[i] : ""
+        }</td>`;
+      }
+      tableRow += `</tr>`;
+      $("#data tbody").append(tableRow);
+    });
+  }
+
+  // get location checkbox values
+  let locationValues = [];
+  $("div").on("change", "table tr .checkBox", function() {
+    if ($(this).is(":checked")) {
+      locationValues.push($(this).val());
+    } else {
+      locationValues = locationValues.filter(loc => loc != $(this).val());
+    }
+  });
+
+  // clear filter button
+  $("div").on("click", "table tr #clearFilter", function() {
+    uncheckCheckboxes();
+    closeLocationDropdown();
+  });
+
+  // apply location filters
+  $("div").on("click", "table tr #applyFilter", function() {
+    for (let i = 0; i < tableData.length; i++) {
+      const lgaaName = tableData[i].location;
+      if ($.inArray(lgaaName, locationValues) === -1) {
+        $(`#stakeholder td#${tableData[i].id}`)
+          .parent()
+          .hide();
+      } else {
+        $(`#stakeholder td#${tableData[i].id}`)
+          .parent()
+          .show();
+      }
+    }
+    closeLocationDropdown();
+  });
 });

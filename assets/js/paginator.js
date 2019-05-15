@@ -83,7 +83,7 @@ class Paginator {
               }')">${data[keys[3]]}</td>
               <td data-target="modal1" class="modal-trigger" onClick="getSHDetails('${
                 data[keys[0]]
-              }')">${data[keys[4]]}</td>
+              }')" id=${data.id}>${data[keys[4]]}</td>
               <td data-target="modal1" class="modal-trigger" onClick="getSHDetails('${
                 data[keys[0]]
               }')">${data[keys[5]]}</td>
