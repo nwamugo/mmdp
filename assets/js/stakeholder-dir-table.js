@@ -17,32 +17,26 @@ $(document).ready(async function() {
   let query, param;
   switch (window.location.pathname) {
     case "/country.html":
-      param = "country";
+      param = 'country'
       query = `country=${queryParam}`;
       break;
     case "/state.html":
       query = `state=${queryParam}`;
       break;
-    case "/state-pillars.html":
-      query = `state=${queryParam}`;
-      break;
     case "/lga.html":
-      param = "lga";
+      param = 'lga'
       query = `lga=${queryParam}`;
       break;
-    case "/active-communities.html":
-      query = `lga=${queryParam}`;
-      break;
-    case "/state-pillars.html":
+    case '/state-pillars.html':
       query = `state=${queryParam}`;
       break;
     default:
-      param = "country";
+      param = 'country'
       query = `country=${queryParam}`;
       break;
   }
   const stakeholderData = await fetch(
-    `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`
+    `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`,
   );
   const data = await stakeholderData.json();
 
@@ -104,7 +98,7 @@ $(document).ready(async function() {
         const stakeholderDataJson = await response.json();
         const stakeholderData = stakeholderDataJson.data[0];
         const beneficiaryData = handleBeneficiaries(
-          stakeholderData.beneficiaries
+          stakeholderData.beneficiaries,
         );
 
         const requiredDetails = {
@@ -142,7 +136,6 @@ $(document).ready(async function() {
             : "",
           "Number of Volunteers": stakeholderData.volunteersCount
         };
-
         let shDetailsTableData = "";
         const keys = Object.keys(requiredDetails);
         while (keys.length > 0) {
