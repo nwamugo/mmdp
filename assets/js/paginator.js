@@ -69,7 +69,7 @@ class Paginator {
                   <input id=${data[keys[0]]} data-org=${data[keys[0]].replace(
                     / /g,
                     "-"
-                  )} name="aaaaa" value="aaaaa" type="checkbox" /> 
+                  )} name="aaaaa" value="aaaaa" type="checkbox" />
                   <div class="stakeholder__name">${data[keys[0]]}</div>
               </td>
               <td data-target="modal1" class="modal-trigger"  onClick="getSHDetails('${

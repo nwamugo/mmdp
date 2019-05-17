@@ -83,16 +83,16 @@ function handleBeneficiaries(beneficiaries) {
     : 0);
   const femalePercent = benefitTotal ? 100 - malePercent : 0;
   return {
-    thematicPillars: [...extractedData.thematicPillars].join(', '),
-    subThemes: [...extractedData.subThemes].join(', '),
-    focusArea: [...extractedData.focusArea].join(', '),
-    beneficiaryService: [...extractedData.beneficiaryService].join(', '),
-    fundingSources: [...new Set(extractedData.fundingSources)].join(', '),
-    amountInvested: extractedData.amountInvested.join(', '),
-    localCommunities: [...new Set(extractedData.localCommunities)].join(', '),
-    lgas: [...new Set(extractedData.lgas)].join(', '),
-    beneficiaryTypes: [...new Set(extractedData.beneficiaryTypes)].join(', '),
-    targetAudience: [...new Set(extractedData.targetAudience)].join(', '),
+    thematicPillars: [...extractedData.thematicPillars].join(", "),
+    subThemes: [...extractedData.subThemes].join(", "),
+    focusArea: [...extractedData.focusArea].join(", "),
+    beneficiaryService: [...extractedData.beneficiaryService].join(", "),
+    fundingSources: [...new Set(extractedData.fundingSources)].join(", "),
+    amountInvested: extractedData.amountInvested.join(", "),
+    localCommunities: [...new Set(extractedData.localCommunities)].join(", "),
+    lgas: [...new Set(extractedData.lgas)].join(", "),
+    beneficiaryTypes: [...new Set(extractedData.beneficiaryTypes)].join(", "),
+    targetAudience: [...new Set(extractedData.targetAudience)].join(", "),
     totalNumberOfBeneficiaries: benefitTotal,
     malePercent,
     femalePercent
