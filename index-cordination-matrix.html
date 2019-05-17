@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="assets/styles/sidebar.css">
   <link rel="stylesheet" href="assets/styles/animations.css?version=1">
   <link rel="stylesheet" href="assets/styles/coordination-matrix.css">
+  <link rel="stylesheet" href="assets/styles/stakeholder-dir-table.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
   <title>MMDP | Home</title>
 </head>
@@ -41,7 +42,7 @@
         </a>
      </div>
      <div class="text animated fadeInLeft slow">
-            click anywhere on map
+            Click anywhere on the map
             <div id="tap"></div>
         </div>
      <div class="map-dispaly">
@@ -50,6 +51,59 @@
         </div>
      </div>    
   </div>
+  <!-- <div id="stakeholder-directory"> -->
+    <!-- stakeholder will be loaded dynamically here -->
+  <!-- </div> -->
+
+    </div>
+    <!-- Stakeholder directory section -->
+    <div class="section section__pillars">
+      <div class="thematic-pillars">
+        <div class="row thematic-pillars__heading">
+          <div class="thematic-pillars__title">
+            Stakeholder Directory Listing
+          </div>
+          <div class="thematic-pillars__desc">
+            Search through our stakeholders directory listing to quickly get
+            information about the various stakeholders / organisations and
+            their activities with respect to curbing irregular migration and
+            human trafficking
+          </div>
+        </div>
+      </div>
+      <!-- Search Stakeholders Activities -->
+      <section class="section search__activities__section">
+        <input
+          id="search__activities"
+          placeholder="Search Stakeholder activities"
+        />
+        <button class="banner__button animated flashing slow delay-2s">
+          Search
+        </button>
+      </section>
+      <section
+        id="stakeholder-directory-table"
+        class="stakeholder__dir__table"
+      >
+        <!-- Stakeholder directory table will be loaded dynamically here-->
+      </section>
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h5>
+          <!-- Content will be loaded dynamically here -->
+        </h5>
+        <div id="modal__body">
+          <table id="stakeholder__details__table" class="stakeholder__details__table">
+            <tbody
+            >
+              <!--Table rows will be loaded dynamically here-->
+            </tbody>
+          </table>
+          <img class="mmdp__bg__img" src="./assets/images/common/group-2@3x.png"/>
+        </div>
+      </div>
     </div>
   </main>
   
@@ -61,8 +115,15 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script type="text/javascript" src="assets/js/utils.js"></script>
+  <script type="text/javascript" src="assets/js/auth/utils.js"></script>
   <script type="text/javascript" src="assets/js/matrix-header.js"></script>
   <script type="text/javascript" src="assets/js/cms/utils.js"></script>
   <script type="text/javascript" src="assets/js/map.js" charset="utf-8"></script>
+  <script type="text/javascript" src="assets/js/paginator.js"></script>
+  <script type="text/javascript" src="assets/js/beneficiary-handlers.js"></script>
+  <script
+      type="text/javascript"
+      src="assets/js/stakeholder-dir-table.js"
+    ></script>
 </body>
 </html>

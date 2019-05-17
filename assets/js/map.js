@@ -26,7 +26,7 @@ function loaded() {
           var capital = $(this).attr("fme:statecapital");
           if (state === undefined) {
             $(
-              '<div class="info_panel">' +
+              '<div class="map_box">' +
                 "State Name:" +
                 state +
                 "<br>" +
@@ -37,7 +37,7 @@ function loaded() {
             ).style.display = "none";
           }
           $(
-            '<div class="info_panel">' +
+            '<div class="map_box">' +
               "State Name:" +
               state +
               "<br>" +
@@ -48,15 +48,15 @@ function loaded() {
           ).appendTo("body");
         })
         .mouseleave(function() {
-          $(".info_panel").remove();
+          $(".map_box").remove();
         })
         .mousemove(function(e) {
           var mouseX = e.pageX,
             mouseY = e.pageY;
 
-          $(".info_panel").css({
+          $(".map_box").css({
             top: mouseY - 50,
-            left: mouseX - $(".info_panel").width() / 2
+            left: mouseX - $(".map_box").width() / 2
           });
         })
         .click(function() {
@@ -78,9 +78,3 @@ $("#tap").load("../assets/svg/tap.svg", function(statusText) {
     });
   }
 });
-
-$('#stakeholder-directory').load(
-  '/state.html',
-  function() {
-  }
-);

@@ -80,6 +80,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
   letter-spacing: -0.7px;
   color: #1a1f37;
   margin-top: 40px;
+  margin-left: -20px;
 }
 
 .matrix-welcome-msg {
@@ -93,6 +94,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
+  margin-left: -20px;
 }
 
 #map {
@@ -120,6 +122,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
   font-stretch: normal;
   line-height: 1.81;
   letter-spacing: -0.3px;
+  margin-left: -20px;
 }
 
 #map svg g path r {
@@ -127,15 +130,62 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
   color: #04071a !important;
 }
 
-
-.info_panel {
+.map_box {
   background-color: #43a0a5;
   padding: 0.3em;
   font-size: 0.9em;
-  font-family: "Times New Roman", Times, serif;;
+  font-family: Muli;
   position: absolute;
   border-radius: 5px;
   font-weight: bolder;
+  pointer-events:none;
+}
+
+
+.info_panel {
+  font-size: 1em;
+  font-family: Muli;
+  position: absolute;
+  width: 350px;
+  overflow: hidden;
+  height: auto;
+  font-style: normal;
+  font-stretch: normal;
+  color: #1a1f37;
+  line-height: 0.6;
+  border-radius: 1px;
+  background-color: white;
+  pointer-events:none;
+  box-shadow: 0 10px 9px 0 rgba(0, 0, 0, 0.06);
+}
+
+.info_panel .info-panel-item{ 
+  text-align: left !important;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+.info_panel .info-panel-item-data {
+  margin-top: 7px !important; 
+}
+
+.info_panel .info-panel-item, .info_panel .info-panel-item-data {
+  margin-right: 129px;
+  margin-left: 16px;
+  margin-bottom: 23px;
+}
+
+.info_panel:hover{
+  cursor: pointer;
+}
+
+.info_panel h1 {
+  font-size: 1.2em;
+  font-weight: bolder;
+}
+
+.focusTable:hover{
+  cursor: pointer;
 }
 
 #map path:hover {
@@ -146,6 +196,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 
 .text {
   margin-top: 630px;
+  font-family: Muli;
   width: 180px;
   height: 60px;
   border-radius: 3px;
@@ -165,6 +216,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 #tap {
   margin-left: 160px;
   margin-top: -60px;
+  font-family: Muli;
 }
 
 #tap path {
@@ -174,3 +226,4 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 #tap path:hover{
   cursor: progress;
 }
+

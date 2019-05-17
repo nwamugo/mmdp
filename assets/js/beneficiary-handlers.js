@@ -37,10 +37,11 @@ function handleBeneficiaries(beneficiaries) {
       accum.targetAudience.push(beneficiary.targetAudienceId.audienceType);
 
       //
-      values = beneficiary.beneficiaryTypes.map(
-        beneficiaryType => beneficiaryType.totalNumberOfBeneficiaries
-      );
-      accum.totalNumberOfBeneficiaries = accum.totalNumberOfBeneficiaries.concat(
+      values = beneficiary.beneficiaryTypes.map(beneficiaryType => {
+        return beneficiaryType.noOfFemaleBeneficiaries;
+      });
+
+      accum.totalNumberOfFemaleBeneficiaries = accum.totalNumberOfFemaleBeneficiaries.concat(
         values
       );
       //
@@ -63,11 +64,11 @@ function handleBeneficiaries(beneficiaries) {
       lgas: [],
       beneficiaryTypes: [],
       targetAudience: [],
-      totalNumberOfBeneficiaries: [],
+      totalNumberOfFemaleBeneficiaries: [],
       totalNumberOfMaleBeneficiaries: []
     }
   );
-  const benefitTotal = extractedData.totalNumberOfBeneficiaries.reduce(
+  const benefitFemale = extractedData.totalNumberOfFemaleBeneficiaries.reduce(
     (sum, val) => sum + val,
     0
   );
@@ -75,10 +76,12 @@ function handleBeneficiaries(beneficiaries) {
     (sum, val) => sum + val,
     0
   );
-  const malePercent = benefitTotal
+
+  const benefitTotal = benefitMale + benefitFemale;
+  const malePercent = Math.round(benefitTotal
     ? (parseInt(benefitMale) / parseInt(benefitTotal)) * 100
-    : 0;
-  const femalePercent = malePercent ? 100 - malePercent : 0;
+    : 0);
+  const femalePercent = benefitTotal ? 100 - malePercent : 0;
   return {
     thematicPillars: [...extractedData.thematicPillars].join(', '),
     subThemes: [...extractedData.subThemes].join(', '),
@@ -108,10 +111,9 @@ function handleStakeholdersData(data) {
     const organisationName = stakeholder.organisationName;
     const partners = getParnerships(stakeholder.partnerships);
     const partnership = partners.length ? partners.join(', ') : 'None';
-    const location = stakeholder.adresses[1].address;
     const founder = stakeholder.founder;
     const organisationType = stakeholder.organisationTypeId.typeName; // needs modification from the backend
-    const notes = stakeholder.notes;
+    const notes = stakeholder.notes || '';
     const otherDetails = stakeholder.beneficiaries.reduce(
       (tempStore, beneficiary) => {
         tempStore.duration.add(beneficiary.duration);
@@ -133,6 +135,9 @@ function handleStakeholdersData(data) {
           )
         ); // incomplete implementation
         tempStore.beneficiaryService.add(beneficiary.serviceName);
+        tempStore.location.push(
+          ...beneficiary.communities.map(community => community.lgaId.lgaName)
+        );
         return tempStore;
       },
       {
@@ -143,7 +148,8 @@ function handleStakeholdersData(data) {
         focusArea: new Set(),
         fundingSources: new Set(),
         beneficiaryService: new Set(),
-        duration: new Set()
+        duration: new Set(),
+        location: []
       }
     );
 
@@ -159,14 +165,14 @@ function handleStakeholdersData(data) {
       focusArea: [...otherDetails.focusArea].join(', '),
       fundingSources: [...otherDetails.fundingSources].join(', '),
       beneficiaryService: [...otherDetails.beneficiaryService].join(', '),
-      duration: [...otherDetails.duration].join(', ')
+      duration: [...otherDetails.duration].join(', '),
+      location: [...new Set(otherDetails.location)].join(', ')
     };
     return {
       id: index + 1,
       organisationName,
       organisationType,
       partnership,
-      location,
       founder,
       notes,
       ...stringifiedDetails

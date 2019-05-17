@@ -1,18 +1,17 @@
 $(document).ready(async function() {
   const keys = [
-    'organisationName',
-    'thematicPillars',
-    'subThemes',
-    'partnership',
-    'location',
-    'beneficiaryCount',
-    'amountInvested'
+    "organisationName",
+    "thematicPillars",
+    "subThemes",
+    "partnership",
+    "location",
+    "beneficiaryCount",
+    "amountInvested"
   ];
-
   const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
   const queryParam = queryNameFromUrl ?
     queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1) : 'Nigeria';
-  let queryURL;
+  let query;
   switch (window.location.pathname) {
     case '/country.html':
       query = `country=${queryParam}`;
@@ -29,16 +28,16 @@ $(document).ready(async function() {
   }
 
   const stakeholderData = await fetch(
-    `http://0.0.0.0:3000/api/v1/location?${query}`
+    `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`
   );
   const data = await stakeholderData.json();
   // neededData
-  const tableData = handleStakeholdersData(data.data);
-
+  const tableData = handleStakeholdersData(data.filteredStakeholders);
+  window.tableData = tableData
   const paginator = new Paginator(tableData, keys);
 
-  $('#stakeholder-directory-table').load(
-    '/partials/stakeholder-directory-table.html',
+  $("#stakeholder-directory-table").load(
+    "/partials/stakeholder-directory-table.html",
     function() {
       paginator.initialPage();
       let n = 5;
@@ -66,7 +65,7 @@ $(document).ready(async function() {
 
       async function getSHDetails(stakeholderName) {
         const response = await fetch(
-          `http://0.0.0.0:3000/api/v1/stakeholders-directory?organisationName=${stakeholderName}`
+          `${MMDP_BASE_URL}/api/v1/stakeholders-directory?organisationName=${stakeholderName}`
         );
         $('.modal h5')
           .html(`<div>${stakeholderName} <a href="#!" class="modal-close waves-effect waves-green btn-flat"

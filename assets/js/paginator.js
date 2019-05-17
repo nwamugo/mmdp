@@ -64,19 +64,32 @@ class Paginator {
   createTableRow = data => {
     const keys = this.columnKeys;
     return `
-          <tr data-target="modal1" onClick="getSHDetails('${
-            data[keys[0]]
-          }')" class="modal-trigger">
+          <tr>
               <td class="organisation__name">
-                  <input name="aaaaa" value="aaaaa" type="checkbox" /> 
+                  <input id=${data[keys[0]]} data-org=${data[keys[0]].replace(
+                    / /g,
+                    "-"
+                  )} name="aaaaa" value="aaaaa" type="checkbox" /> 
                   <div class="stakeholder__name">${data[keys[0]]}</div>
               </td>
-              <td>${data[keys[1]]}</td>
-              <td>${data[keys[2]]}</td>
-              <td>${data[keys[3]]}</td>
-              <td>${data[keys[4]]}</td>
-              <td>${data[keys[5]]}</td>
-              <td>${data[keys[6]]}</td>
+              <td data-target="modal1" class="modal-trigger"  onClick="getSHDetails('${
+                data[keys[0]]
+              }')">${data[keys[1]]}</td>
+              <td data-target="modal1" class="modal-trigger focusTable" onClick="getSHDetails('${
+                data[keys[0]]
+              }')">${data[keys[2]]}</td>
+              <td data-target="modal1" class="modal-trigger" onClick="getSHDetails('${
+                data[keys[0]]
+              }')">${data[keys[3]]}</td>
+              <td data-target="modal1" class="modal-trigger" onClick="getSHDetails('${
+                data[keys[0]]
+              }')">${data[keys[4]]}</td>
+              <td data-target="modal1" class="modal-trigger" onClick="getSHDetails('${
+                data[keys[0]]
+              }')">${data[keys[5]]}</td>
+              <td data-target="modal1" class="modal-trigger" onClick="getSHDetails('${
+                data[keys[0]]
+              }')">${data[keys[6]]}</td>
       </tr>
           `;
   };
