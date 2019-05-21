@@ -24,6 +24,17 @@
     "fas fa-angle-down"
   );
 
+  $("#quarterly_dropdown__icon").click(function () {
+    $("#quarterlyReports").slideToggle();
+  });
+
+  $("#yearly_dropdown__icon").click(function () {
+    $("#yearlyReports").slideToggle();
+  });
+
+
+
+
   $(document).ready(function () {
     $('.collapsible').collapsible();
   });
@@ -55,10 +66,10 @@
   }
 
   function fetchReports(url, elementId, page = 1, search = '') {
-    client(`${url}?${formatObjectToParams({page: page, title: search})}`)
+    client(`${url}?${formatObjectToParams({ page: page, title: search })}`)
       .then((res) => {
         res.json().then((res) => {
-          const {pagination, reports} = res.data
+          const { pagination, reports } = res.data
           render(reports, elementId, url, pagination);
           scrollToTop();
         }).catch((err) => console.log(err));
@@ -66,7 +77,7 @@
   }
 
   function renderPagination(pagination) {
-    const {currentPage, totalPages, previous, next} = pagination;
+    const { currentPage, totalPages, previous, next } = pagination;
 
     let paginationHtml = '';
     if (pagination) {
@@ -98,10 +109,10 @@
     let Reports = '';
     if (data && data.length) {
       data.forEach(data => {
-          const {title, createdAt, reportFile} = data
-          const publishedDate = createdAt
-          const downloadLink = reportFile.url
-          Reports += `
+        const { title, createdAt, reportFile } = data
+        const publishedDate = createdAt
+        const downloadLink = reportFile.url
+        Reports += `
 		<div class="research-content__details">
 			<p class="research-content__essentials">${title}</p>
 			<p class="research-content__date-published">Published:${formatDate(new Date(publishedDate))}</p>
@@ -113,7 +124,7 @@
 			<hr class="content-devider reports-devider">
 		</div>
 		</div>`
-        }
+      }
       );
 
       if (reportTypeId === "#quarterlyReports") {

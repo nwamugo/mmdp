@@ -151,6 +151,10 @@ hr.content-devider.reports-devider {
   margin-top: -3em;
 }
 
+.fas {
+  cursor: pointer;
+}
+
 .research-content__pagination {
   display: flex;
   justify-content: flex-end;
