@@ -13,9 +13,8 @@ main.contact-us div.side__photo {
 
 div.side__photo img.photo {
   position: absolute;
-  top: -4.5rem;
   margin: 0;
-  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: top left;
   z-index: 0;

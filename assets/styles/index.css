@@ -1,3 +1,7 @@
+.banner__desc {
+  margin-top: 3%;
+}
+
 .section.section__pillars {
   padding: 30px 15px;
   background-image: linear-gradient(to bottom, #ebf2f4, #ffffff);
@@ -42,11 +46,10 @@
 .section__pillars .thematic-pillars__card:hover {
   box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.06);
   transform: translateY(-10px);
-  
 }
 
 .thematic-pillars__card {
-  width:95%;
+  width: 95%;
   margin: 0 auto;
 }
 .governors-message-section {
@@ -78,7 +81,7 @@
 .section__pillars .thematic-pillars__card-desc {
   font-size: 14px;
   margin: 16px 0 0 0;
-  line-height: 1.60;
+  line-height: 1.6;
   text-align: justify;
   /* trim out content to reduce chances of cards with different heights */
   overflow: hidden;
@@ -99,7 +102,6 @@
   text-decoration: none;
   color: #3faaca;
 }
-
 @media (min-width: 768px) {
   .section__pillars .thematic-pillars .thematic-pillars__heading {
     width: 60%;
@@ -139,7 +141,9 @@
     display: flex;
     flex-direction: row;
   }
-  .section__pillars .thematic-pillars__card:hover .thematic-pillars__card-image {
+  .section__pillars
+    .thematic-pillars__card:hover
+    .thematic-pillars__card-image {
     visibility: visible;
     width: 100%;
   }
@@ -249,13 +253,12 @@
 
 .event-description__rectangle_blue {
   height: 21px;
-  background-color: #3FAACA;
+  background-color: #3faaca;
 }
 .event-description__rectangle_green {
   height: 21px;
   background-color: #068203;
 }
-
 
 .event-description-left {
   position: relative;
@@ -315,7 +318,6 @@ span.event-previous-arrow {
 /* mobile responsive */
 
 @media screen and (max-width: 720px) {
-
   .content-wrapper {
     width: 100%;
   }
@@ -346,10 +348,9 @@ span.event-previous-arrow {
   }
 
   .brief-description {
-    margin-top: .1em;
-    padding-left: .7em;
+    margin-top: 0.1em;
+    padding-left: 0.7em;
   }
-
 }
 
 .event-description-left__continue-reading {
@@ -361,19 +362,23 @@ span.event-previous-arrow {
   font-stretch: normal;
   line-height: 2.07;
   letter-spacing: -0.3px;
-  color: #388AD7;
+  color: #388ad7;
 }
 
 .event-description-left__continue-reading a {
-  color: #3faaca
+  color: #3faaca;
 }
 
 .arrows {
   margin-top: -50em;
 }
 
-button, input, optgroup, select, textarea {
-  font-family: 'Muli', sans-serif !important;
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: "Muli", sans-serif !important;
 }
 
 @media screen and (max-width: 1069px) {
@@ -436,7 +441,6 @@ button, input, optgroup, select, textarea {
   .row.event-description {
     margin-left: auto;
   }
-
 }
 
 @media screen and (max-width: 411px) {
@@ -570,7 +574,7 @@ button, input, optgroup, select, textarea {
   border-radius: 0 0 6px 6px;
   height: 2em;
   background-image: linear-gradient(to right, #6fb4d6, #03825e);
-  margin: 0em -.12em;
+  margin: 0em -0.12em;
 }
 
 .governors-message__read-more {
@@ -609,7 +613,6 @@ button, input, optgroup, select, textarea {
 }
 
 @media only screen and (min-width: 1057px) {
-
   .read-more--desktop {
     display: block;
   }
@@ -620,7 +623,6 @@ button, input, optgroup, select, textarea {
 }
 
 @media only screen and (max-width: 1057px) {
-
   .governors-message__read-more {
     float: left !important;
   }
@@ -686,25 +688,37 @@ button, input, optgroup, select, textarea {
   height: 460px;
   border-radius: 9px;
   width: 200px;
-  margin-left: 16px;
+  margin-left: -5px;
 }
 
 .banner__image--wide {
   width: 202px;
   margin-right: 0;
 }
-
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 680px) {
+  main{
+    background-image: linear-gradient(to bottom, #ebf2f4, #ffffff);
+  }
+.banner__images{
+  display: none;
+}
   .banner {
-    padding: 5px;
+    background:url(../../assets/images/index/lead-mobile-version.svg);
+    background-size: cover;
+    text-align: center;
+    padding:0;
+  }
+  .banner__desc {
+    margin-top: 50%;
   }
 
   .banner__desc__heading {
-    margin: 0;
+    color: #fff;
   }
 
   .banner__desc__text {
     font-size: 14px;
+    color: #fff;
   }
 
   .banner__image--big {
@@ -712,19 +726,57 @@ button, input, optgroup, select, textarea {
     height: 300px;
     margin: 0;
   }
-}
 
-@media screen and (max-width: 990px) {
-  .banner__row {
-    display: flex;
-    flex-flow: column-reverse;
+  .section.section__pillars{
+    margin-top:-10%;
+    background: none;
   }
 
-  .banner__image {
-    width: 30%;
-    padding-top: 30px;
+  .thematic-pillars__title{
+    margin-top:10%;
+  }
+  .thematic-pillars__title{
+    margin-top:10%;
+  }
+  .thematic-pillars__content {
+    display: none;
+  }
+  .events-section-desktop {
+    display: none;
+  }
+  .section__governor__desktop {
+    display: none;
+  }
+  .section__governor__mobile {
+    text-align: center;
+  }
+  .section__governor__mobile .governors-message__footer__image {
+    text-align: center;
+    margin-top: -18%;
+  }
+  .governors-message__bottom-gradient {
+    display: none;
+  }
+  .card.governors-message-section {
+    box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.06);
+    margin-bottom:-10%;
+  }
+  .section__governor__mobile .governors-message__title {
+    margin-bottom: 10%;
+  }
+  .section__governor__mobile .governors-message {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .event_slide_card_description {
+    height: 303px !important;
+  }
+  .prev, .next{
+    padding: 0px 5px !important;
+  }
   }
 
+@media (min-width: 990px) {
   .banner__desc__heading {
     font-size: 24px;
   }
@@ -734,32 +786,44 @@ button, input, optgroup, select, textarea {
     margin: 20px 0;
     font-size: 14px;
   }
-}
-
-@media (min-width: 1024px) {
-
-  #banner__images {
-    margin-left: -4%;
+  .section__pillars__mobile{
+    display: none;
   }
+  .pillar__slides{
+    display: none;
+  }
+  .section__governor__mobile{
+    display: none; 
+  }
+  .events-section-mobile-view{
+    display: none; 
+  }
+
 }
+
 
 /* Hide the images by default */
 .mySlides {
   display: none;
 }
 /* The dots/bullets/indicators */
-.dot {
+.dot,
+.pillar_dot,
+.event_dot {
   cursor: pointer;
   height: 15px;
   width: 15px;
   margin: 0 2px;
-  background-color:   #cae7f0;
+  background-color: #cae7f0;
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.6s ease;
 }
 
-.active1, .dot:hover{
+.active1,
+.dot:hover,
+.pillar_dot:hover,
+.event_dot:hover {
   background-color: #3faaca;
 }
 
@@ -775,18 +839,26 @@ button, input, optgroup, select, textarea {
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.event_slide_card img{
-  height:423px;
-  width: 100% ;
+.event_slide_card img {
+  height: 443px;
+  width: 100%;
   padding: 20px;
 }
 
@@ -797,7 +869,6 @@ button, input, optgroup, select, textarea {
   margin-top: -40%;
   position: relative;
   background-color: #ffffff !important;
-  
 }
 
 .slide {
@@ -805,9 +876,8 @@ button, input, optgroup, select, textarea {
 }
 .card-content {
   padding: 1em;
- 
 }
-.allSlides{
+.allSlides {
   display: flex;
   justify-content: center;
 }
@@ -816,10 +886,11 @@ button, input, optgroup, select, textarea {
   padding-bottom: 5%;
 }
 
-.prev{
+.prev {
   margin-right: -2%;
 }
-.prev, .next {
+.prev,
+.next {
   margin-top: 450px;
   font-weight: bold;
   font-size: 18px;
@@ -838,9 +909,9 @@ button, input, optgroup, select, textarea {
 .events-card__desc-body {
   color: #1a1f37;
   max-height: 120px;
-  overflow : hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
-   display: -webkit-box;
+  display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }

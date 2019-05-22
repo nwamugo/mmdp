@@ -79,14 +79,14 @@ body, img {
 /* Footer section styles */
 footer.footer {
   width: 100%;
-  min-height: 460px;
+  min-height: 430px;
   background-color: #296d81;
   font-family: 'Muli', sans-serif;
   color: #fff;
 }
 
 footer.footer div.footer__wrapper {
-  padding-top: 5%;
+  padding-top: 1.8%;
 }
 
 div.footer__wrapper div.footer__links {
@@ -187,8 +187,8 @@ ul.social__icons li a {
   color: #fff;
 }
 
-@media (max-width: 555px) {
-  div.footer__contact span.footer__email {
-    text-align: left;
+@media screen and (max-width: 680px) {
+  footer.footer {
+    display: none;
   }
 }
