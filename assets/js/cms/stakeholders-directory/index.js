@@ -1,6 +1,4 @@
-
-(function () {
-
+(function() {
   var STAKEHOLDERS = [];
   var PAGINATION_INFO = {};
   var SEARCH_INPUT_VALUE = "";
@@ -10,15 +8,12 @@
   cmsLoad = function() {
     refreshFilters();
     fetchData();
-  }
+  };
 
-  function fetchData(page=1, search="") {
-
-    var params = formatObjectToParams({page: page, stakeholderName: search, perPage: 9});
-
-    client(`stakeholders-directory/search?${params}`)
+  function fetchData(page = 1, search = "", perPage=9) {
+    client(`stakeholders-directory?page=${page}&organisationName=${search}&perPage=${perPage}`)
       .then(res => res.json())
-      .then((data) => {
+      .then(data => {
         STAKEHOLDERS = data.data;
         PAGINATION_INFO = data.pagination;
         displayData(STAKEHOLDERS);
@@ -29,7 +24,7 @@
   }
 
   function selectState(e) {
-    SELECTED_LG = '';
+    SELECTED_LG = "";
     SELECTED_STATE = e.target.value;
     populateLG(SELECTED_STATE);
     displayData(STAKEHOLDERS);
@@ -40,16 +35,17 @@
     displayData(STAKEHOLDERS);
   }
 
-  function populateLG(state='') {
-    var options = '<option selected disabled value="">Local Government</option>';
-    if(state) {
+  function populateLG(state = "") {
+    var options =
+      '<option selected disabled value="">Local Government</option>';
+    if (state) {
       NigerianStates.find(({ state: foundState }) => {
         return foundState.name === state;
       }).state.locals.forEach(lg => {
         options += `<option value="${lg.name}">${lg.name}</option>`;
       });
     }
-    $('select#lg-dropdown').html(options);
+    $("select#lg-dropdown").html(options);
   }
 
   function populateStates() {
@@ -57,23 +53,23 @@
     NigerianStates.forEach(({ state }) => {
       options += `<option value="${state.name}">${state.name}</option>`;
     });
-    $('select#state-dropdown').html(options);
+    $("select#state-dropdown").html(options);
   }
 
   function nextPage() {
-    if(!PAGINATION_INFO.next) return;
+    if (!PAGINATION_INFO.next) return;
     fetchData(PAGINATION_INFO.next, SEARCH_INPUT_VALUE);
   }
 
   function prevPage() {
-    if(!PAGINATION_INFO.previous) return;
+    if (!PAGINATION_INFO.previous) return;
     fetchData(PAGINATION_INFO.previous, SEARCH_INPUT_VALUE);
   }
 
   function findMatch(beneficiaryService) {
     var found = false;
     beneficiaryService.forEach(({ state, localGovernment }) => {
-      if(state === SELECTED_STATE || localGovernment === SELECTED_LG){
+      if (state === SELECTED_STATE || localGovernment === SELECTED_LG) {
         found = true;
       }
     });
@@ -81,16 +77,15 @@
   }
 
   function getContent(data) {
-
     var stakeholders = Array.isArray(data) ? data.slice(0) : [];
 
-    if(SELECTED_STATE && SELECTED_LG){
+    if (SELECTED_STATE && SELECTED_LG) {
       stakeholders = data.filter(filterData => {
         return findMatch(filterData[0].beneficiaryService);
       });
     }
 
-    var size = Math.ceil(stakeholders.length/3);
+    var size = Math.ceil(stakeholders.length / 3);
     return new Array(size).fill([]).map(_ => {
       var newData = stakeholders.splice(3);
       var splicedData = stakeholders;
@@ -100,33 +95,36 @@
   }
 
   function displayData(data) {
-
     var content = getContent(data);
 
-    var noContent =
-      `<div class="card-panel red lighten-5 pagination__no-results">
+    var noContent = `<div class="card-panel red lighten-5 pagination__no-results">
           There are no results to display.
         </div>`;
 
-    if(!content.length) {
-      $('div#stakeholders').html(noContent);
+    if (!content.length) {
+      $("div#stakeholders").html(noContent);
       return;
     }
 
-    var stakeholdersHtml = '';
-    var stakeholderHtml = '';
+    var stakeholdersHtml = "";
+    var stakeholderHtml = "";
 
     content.forEach(stakeholders => {
-      stakeholders.forEach(([ stakeholder ])=> {
-        var basicInformation = stakeholder.basicInformation;
+      stakeholders.forEach((stakeholder) => {
+        var add = ""
+      stakeholder.adresses.forEach((address) => {
+        add = address.address
+        addType = address.addressType
+      });
         stakeholderHtml += `
         <div class="state-government stakeholders-info col m3 col s12">
-          <p class="stakeholder-title">${basicInformation.stakeholderName}</p>
-          <p class="stakeholder-address">${basicInformation.headOfficeAddress}</p>
+          <p class="stakeholder-title">${stakeholder.organisationName}</p>
+          <p class="stakeholder-address">${
+            add}<br/>
+            ${addType}
+            </p>
           <p class="stakeholder-address__details">
-            ${basicInformation.email} <br/>
-            ${basicInformation.phoneNumberOne} <br/>
-           ${basicInformation.phoneNumberTwo} 
+            ${stakeholder.phoneNumber} <br/>
           </p>
         </div>
       `;
@@ -136,9 +134,9 @@
         ${stakeholderHtml}
       </div>
     `;
-      stakeholderHtml = '';
+      stakeholderHtml = "";
     });
-    $('div#stakeholders').html(stakeholdersHtml)
+    $("div#stakeholders").html(stakeholdersHtml);
   }
 
   function displayPaginationBtn(data) {
@@ -151,43 +149,43 @@
       of ${data.totalPages} 
     </div>
     <div 
-      class="previous-button square-shape ${!data.previous ? 'very-pale' : ''}">
+      class="previous-button square-shape ${!data.previous ? "very-pale" : ""}">
       <i class="material-icons">navigate_before</i>
     </div>
     <div 
-      class="next-button square-shape ${!data.next ? 'very-pale' : ''}">
+      class="next-button square-shape ${!data.next ? "very-pale" : ""}">
       <i class="material-icons">navigate_next</i>
     </div>
   `;
-    $('div#pagination-control').html(controlBtn);
+    $("div#pagination-control").html(controlBtn);
   }
 
-
   function refreshFilters() {
-    SELECTED_LG = '';
-    SELECTED_STATE = '';
+    SELECTED_LG = "";
+    SELECTED_STATE = "";
     populateStates();
     populateLG();
   }
 
   function search() {
-    SEARCH_INPUT_VALUE = ($("input#stakeholder-search").val()).trim();
+    SEARCH_INPUT_VALUE = $("input#stakeholder-search")
+      .val()
+      .trim();
     refreshFilters();
     fetchData(1, SEARCH_INPUT_VALUE);
   }
 
   function registerEventHandlers() {
-    $('.previous-button').click(function () {
+    $(".previous-button").click(function() {
       prevPage();
     });
 
-    $('.next-button').click(function () {
+    $(".next-button").click(function() {
       nextPage();
     });
 
-    $('#btn-search').click(function () {
+    $("#btn-search").click(function() {
       search();
     });
   }
-
 })();
