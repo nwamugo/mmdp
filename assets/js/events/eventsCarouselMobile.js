@@ -11,12 +11,12 @@
       .then(res => res.json())
       .then(response => {
         let slidesmobile  = '';
-        const chunk_size = 1;
+        const chunk_size = 2;
         const slide_groups = response.data.map(function (e, i) {
-          return response.data.slice(i, i + chunk_size);
+        return i % chunk_size === 0 ? response.data.slice(i, i + chunk_size) : null;
         }).filter(function (e) { return e; });
   
-        slide_groups.slice(0, 2).map((item) => {
+        slide_groups.slice(0, 3).map((item) => {
           slidesmobile += `
                   <div class="events_slides_show_mobile">
                   <div class="allSlides">
@@ -52,8 +52,7 @@
                   </div>
                 </div>
                   `;
-  
-        });
+                });
   
         $('#slidesmobile').html(slidesmobile);
         let slideIndex = 1;

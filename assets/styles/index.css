@@ -7,7 +7,7 @@
   background-image: linear-gradient(to bottom, #ebf2f4, #ffffff);
 }
 .section.section__governor {
-  padding: 30px 30px;
+  padding: 0 30px;
 }
 .section__pillars .thematic-pillars .thematic-pillars__heading {
   width: 100%;
@@ -695,7 +695,7 @@ textarea {
   width: 202px;
   margin-right: 0;
 }
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 768px) {
   main{
     background-image: linear-gradient(to bottom, #ebf2f4, #ffffff);
   }
@@ -776,7 +776,7 @@ textarea {
   }
   }
 
-@media (min-width: 990px) {
+@media (min-width: 769px) {
   .banner__desc__heading {
     font-size: 24px;
   }
@@ -836,6 +836,8 @@ textarea {
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
   animation-duration: 1.5s;
+  max-width: 450px;
+  margin: 0 10px;
 }
 
 @-webkit-keyframes fade {
@@ -858,7 +860,7 @@ textarea {
 
 .event_slide_card img {
   height: 443px;
-  width: 100%;
+  width: 450px;
   padding: 20px;
 }
 
@@ -879,16 +881,19 @@ textarea {
 }
 .allSlides {
   display: flex;
+  margin-bottom: 30px;
   justify-content: center;
 }
 .content_slides {
-  background-color: #f4f5f7;
+  background-color: #fafafa;
   padding-bottom: 5%;
+  margin-bottom: -20px;
 }
 
 .prev {
-  margin-right: -2%;
+  margin-left: 15px;
 }
+
 .prev,
 .next {
   margin-top: 450px;
@@ -898,7 +903,7 @@ textarea {
 }
 
 .next {
-  margin-left: -2%;
+  margin-right: 15px;
 }
 
 .events-card__desc-body * {

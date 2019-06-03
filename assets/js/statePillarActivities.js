@@ -129,7 +129,6 @@ function filteredLga (target, array = []) {
               lgaMap.setAttribute('fill', '#fcffff');
               lgaMap.innerHTML = `<title>${lgaId}</title>`;
               const lgaData = filteredLga(lgaId, thematicPillarCountPerLGA);
-              console.log(lgaData);
               if (lgaId && lgaData) {
                 lgaMap.setAttribute('id', lgaId.replace(/ +/g, ''));
                 lgaMap.setAttribute('class', 'path');

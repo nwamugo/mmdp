@@ -1,7 +1,15 @@
-// const baseUrl = 'http://54.202.70.86:3000/api/v1';
-// const SocketUrl = 'http://54.202.70.86:3000';
-const baseUrl = 'http://cms-staging.mmdp.ng:3000/api/v1';
-const SocketUrl = 'http://cms-staging.mmdp.ng:3000';
+let baseUrl;
+let SocketUrl;
+if (
+  window.location.host.includes('127.0.0.1') ||
+  window.location.host.includes('localhost')
+) {
+  baseUrl = 'http://localhost:3000/api/v1';
+  SocketUrl = 'http://127.0.0.1:3000';
+} else {
+  baseUrl = 'http://cms-staging.mmdp.ng:3000/api/v1';
+  SocketUrl = 'http://cms-staging.mmdp.ng:3000';
+}
 
 /**
  * Client wrapper to make CMS calls.
