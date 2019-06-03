@@ -908,8 +908,8 @@ textarea {
 }
 .events-card__desc-body {
   color: #1a1f37;
-  max-height: 120px;
-  overflow: hidden;
+  max-height: 140px;
+  overflow : hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
@@ -917,5 +917,5 @@ textarea {
 }
 
 .Slides_show {
-  display: none;
+  display: 'inline-block';
 }
