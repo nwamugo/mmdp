@@ -71,13 +71,15 @@ if (
             lgasArray.push(lgaName)
             window.variable = lgasArray
           });
+          const link = document.getElementById('show-pillars');
+          link.addEventListener('click', () => window.location.href = `http://${baseURL}/state-pillars.html?state=${stateName}`)
         }
       }
     );
     } catch (error) {
       window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
     }
-    
+
   }
   document.addEventListener('DOMContentLoaded', loaded, false);
 })();

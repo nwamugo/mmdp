@@ -20,6 +20,9 @@ $(document).ready(async function() {
     case "/state.html":
       query = `state=${queryParam}`;
       break;
+    case "/state-pillars.html":
+      query = `state=${queryParam}`;
+      break;
     case "/lga.html":
       param = 'lga'
       query = `lga=${queryParam}`;
