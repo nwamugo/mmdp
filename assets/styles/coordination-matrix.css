@@ -56,10 +56,6 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
     margin: 4em 0.5em 4em 0.5em;
 }
 
-#map {
-    width: 500px;
-}
-
 
 .map__image {
     height: 600px;
@@ -155,7 +151,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 
 .matrix-logout {
     width: 150px;
-    height: 50px;
+    height: 40px;
     background-color: #3faaca;
     border-radius: 3px;
     border: 0;
@@ -196,7 +192,8 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 }
 
 #map {
-    width: 900px;
+    width: 850px;
+    margin-top: 20px;
 }
 
 #state-svg-pillar {
@@ -299,7 +296,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 .text {
     margin-top: 630px;
     font-family: Muli;
-    width: 180px;
+    width: 200px;
     height: 60px;
     border-radius: 3px;
     box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.09);
@@ -316,8 +313,8 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 }
 
 #tap {
-    margin-left: 160px;
-    margin-top: -60px;
+    margin-left: 190px;
+    margin-top: -70px;
     font-family: Muli;
 }
 

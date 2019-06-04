@@ -130,3 +130,9 @@
 .state__map .banner__row .right__align{
   width: 60%;
 }
+
+.banner__image.state-map__svg {
+  width: 705px;
+  height: 600px;
+  margin-right: 50%;
+}
