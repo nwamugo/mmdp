@@ -1,61 +1,62 @@
 $(document).ready(async function() {
   const keys = [
-    'organisationName',
-    'thematicPillars',
-    'subThemes',
-    'partnership',
-    'location',
-    'beneficiaryCount',
-    'amountInvested',
+    "organisationName",
+    "thematicPillars",
+    "subThemes",
+    "partnership",
+    "location",
+    "beneficiaryCount",
+    "amountInvested"
   ];
-  const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
+  const filter = new Filter();
+  const queryNameFromUrl = window.location.search.substring(1).split("=")[1];
   const queryParam = queryNameFromUrl
     ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
-    : 'Nigeria';
+    : "Nigeria";
   let query, param;
   switch (window.location.pathname) {
-    case '/country.html':
-      param = 'country';
+    case "/country.html":
+      param = "country";
       query = `country=${queryParam}`;
       break;
-    case '/state.html':
+    case "/state.html":
       query = `state=${queryParam}`;
       break;
     case "/state-pillars.html":
       query = `state=${queryParam}`;
       break;
     case "/lga.html":
-      param = 'lga'
+      param = "lga";
       query = `lga=${queryParam}`;
       break;
-    case '/active-communities.html':
+    case "/active-communities.html":
       query = `lga=${queryParam}`;
       break;
-    case '/state-pillars.html':
+    case "/state-pillars.html":
       query = `state=${queryParam}`;
       break;
     default:
-      param = 'country';
+      param = "country";
       query = `country=${queryParam}`;
       break;
   }
   const stakeholderData = await fetch(
-    `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`,
+    `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`
   );
   const data = await stakeholderData.json();
   // neededData
   const tableData = handleStakeholdersData(data.filteredStakeholders);
   window.tableData = tableData;
-  keys[4] = param === 'country' ? 'stateLocation' : keys[4];
+  keys[4] = param === "country" ? "stateLocation" : keys[4];
   const paginator = new Paginator(tableData, keys);
 
-  $('#stakeholder-directory-table').load(
-    '/partials/stakeholder-directory-table.html',
+  $("#stakeholder-directory-table").load(
+    "/partials/stakeholder-directory-table.html",
     function() {
-      fetchLgas();
+      fetchLocations();
       paginator.initialPage();
       let n = 5;
-      let options = '';
+      let options = "";
       while (n < 51) {
         if (n === 10) {
           options += `<option selected>${n}</option>\n`;
@@ -64,67 +65,67 @@ $(document).ready(async function() {
         }
         n += 5;
       }
-      $('select#entries-per-page').html(options);
-      $('select#entries-per-page').change(function() {
+      $("select#entries-per-page").html(options);
+      $("select#entries-per-page").change(function() {
         paginator.entriesPerPage = this.value;
         paginator.refreshTableBody();
       });
-      $('#next-page').click(function() {
+      $("#next-page").click(function() {
         paginator.nextPage();
       });
-      $('#previous-page').click(function() {
+      $("#previous-page").click(function() {
         paginator.previousPage();
       });
-      $('.modal').modal();
+      $(".modal").modal();
 
       async function getSHDetails(stakeholderName) {
         const response = await fetch(
-          `${MMDP_BASE_URL}/api/v1/stakeholders-directory?organisationName=${stakeholderName}`,
+          `${MMDP_BASE_URL}/api/v1/stakeholders-directory?organisationName=${stakeholderName}`
         );
-        $('.modal h5')
+        $(".modal h5")
           .html(`<div>${stakeholderName} <a href="#!" class="modal-close waves-effect waves-green btn-flat"
         >X</a></div><hr class="sh-hr">`);
         const stakeholderDataJson = await response.json();
         const stakeholderData = stakeholderDataJson.data[0];
         const beneficiaryData = handleBeneficiaries(
-          stakeholderData.beneficiaries,
+          stakeholderData.beneficiaries
         );
         const requiredDetails = {
-          'Year of Registration': stakeholderData.yearOfCacREG,
-          'RC Number': stakeholderData.cacRcNumber,
+          "Year of Registration": stakeholderData.yearOfCacREG,
+          "RC Number": stakeholderData.cacRcNumber,
           Category: stakeholderData.organisationTypeId.typeName,
-          'Founder Name': stakeholderData.founder,
+          "Founder Name": stakeholderData.founder,
           "Founder's Phone Number": stakeholderData.phoneNumber,
           Location:
             stakeholderData.beneficiaries[0].communities[0].lgaId.lgaName,
-          'Thematic Pillar (s)': beneficiaryData.thematicPillars,
-          'Sub Theme (s)': beneficiaryData.subThemes,
-          'Focus Area (s)': beneficiaryData.focusArea,
-          'Service (s)': beneficiaryData.beneficiaryService,
-          'Source (s) of Funding': beneficiaryData.fundingSources,
-          'Amount Invested till date': beneficiaryData.amountInvested,
-          'Local Communities': beneficiaryData.localCommunities,
-          'LGA of Operation': beneficiaryData.lgas,
-          'Partners (Local and International)': [
+          "Thematic Pillar (s)": beneficiaryData.thematicPillars,
+          "Sub Theme (s)": beneficiaryData.subThemes,
+          "Focus Area (s)": beneficiaryData.focusArea,
+          "Service (s)": beneficiaryData.beneficiaryService,
+          "Source (s) of Funding": beneficiaryData.fundingSources,
+          "Amount Invested till date": beneficiaryData.amountInvested,
+          "Local Communities": beneficiaryData.localCommunities,
+          "LGA of Operation": beneficiaryData.lgas,
+          "Partners (Local and International)": [
             ...new Set(
               stakeholderData.partnerships.map(
-                partner => partner.stakeholder2Id.organisationName,
-              ),
-            ),
-          ].join(', '),
-          'Gender distribution of beneficiaries (in percentage) Male % Female%': `male: ${
+                partner => partner.stakeholder2Id.organisationName
+              )
+            )
+          ].join(", "),
+          "Gender distribution of beneficiaries (in percentage) Male % Female%": `male: ${
             beneficiaryData.malePercent
           }%, female: ${beneficiaryData.femalePercent}%`,
-          'Total Number of Beneficiary':
+          "Total Number of Beneficiary":
             beneficiaryData.totalNumberOfBeneficiaries,
-          'Beneficiary Type': beneficiaryData.beneficiaryTypes,
-          'Target Audience (s)': beneficiaryData.targetAudience,
-          'Number of Staff': stakeholderData.staffStrengthRangeId
+          "Beneficiary Type": beneficiaryData.beneficiaryTypes,
+          "Target Audience (s)": beneficiaryData.targetAudience,
+          "Number of Staff": stakeholderData.staffStrengthRangeId
             ? stakeholderData.staffStrengthRangeId.staffStrength
-            : '',
-          'Number of Volunteers': stakeholderData.volunteersCount,
+            : "",
+          "Number of Volunteers": stakeholderData.volunteersCount
         };
-        let shDetailsTableData = '';
+        let shDetailsTableData = "";
         const keys = Object.keys(requiredDetails);
         while (keys.length > 0) {
           const rowKeys = keys.splice(0, 3);
@@ -133,117 +134,124 @@ $(document).ready(async function() {
               <td>
                 <div class="row__title">${rowKeys[0]}</div>
                 <div class="row__value">${requiredDetails[rowKeys[0]] ||
-                  '-'}</div>
+                  "-"}</div>
               </td>
               <td>
                 <div class="row__title">${rowKeys[1]}</div>
                 <div class="row__value">${requiredDetails[rowKeys[1]] ||
-                  '-'}</div>
+                  "-"}</div>
               </td>
               <td>
                 <div class="row__title">${rowKeys[2]}</div>
                 <div class="row__value">${requiredDetails[rowKeys[2]] ||
-                  '-'}</div>
+                  "-"}</div>
               </td>
           </tr>
           `;
           shDetailsTableData += newRow;
         }
-        $('.stakeholder__details__table tbody').html(shDetailsTableData);
+        $(".stakeholder__details__table tbody").html(shDetailsTableData);
       }
       window.getSHDetails = getSHDetails;
-    },
+    }
   );
 
+  // uncheck checkboxes
   function uncheckCheckboxes() {
-    if ($('table tr .checkBox').is(':checked')) {
+    if ($("table tr .checkBox").is(":checked")) {
       locationValues = [];
     }
-    $('table tr .checkBox').prop('checked', false);
+    $("table tr .checkBox").prop("checked", false);
     paginator.refreshTableBody();
   }
 
-  function closeLocationDropdown() {
-    return $('table tr #location_dropdown__icon', function() {
-      $('table tr #location_dropdown__icon')
-        .next('.container')
-        .find('.subnav')
-        .slideToggle();
+  //close dropdown
+  function closeDropdown() {
+    $("[id*='dropdown__icon_']").each(function(i, e) {
+      $(this)
+        .next(".container")
+        .find(".subnav")
+        .slideUp();
     });
   }
 
-  // display location header dropdown
-  $('div').on('click', 'table tr #location_dropdown__icon', function() {
+  // camel case the dropdown names
+  function camelize(text) {
+    return text.replace(/^([A-Z])|[\s-_]+(\w)/g, function(match, p1, p2, offset) {
+        if (p2) return p2.toUpperCase();
+        return p1.toLowerCase();        
+    });
+  }
+
+  // toggle dropdown arrow
+  let dropdownName;
+  $("div").on("click", "table tr #dropdown__icon_", function() {
+    dropdownName = camelize($.trim(this.previousSibling.nodeValue));
+    if(param === "country" && dropdownName==='location'){
+      dropdownName = "stateLocation"
+    }
     $(this)
-      .next('.container')
-      .find('.subnav')
+      .next(".container")
+      .find(".subnav")
       .slideToggle();
   });
 
-  // fetch states
-  function fetchLgas() {
+  function fetchLocations() {
     lgasArray = window.variable;
+    let stateArray = [];
     if (!lgasArray) {
+      client(`state`).then(res => {
+        res
+          .json()
+          .then(res => {
+            statesArray = res.data.data;
+            for (let i = 0; i < statesArray.length; i++) {
+              stateArray.push(statesArray[i].stateName);
+            }
+            filter.displayDataInDropdown(stateArray);
+          })
+          .catch(err => console.log(err));
+      });
       return;
     }
-    let newArray = [];
-    let i,
-      j,
-      tempArray = [],
-      chunk = 5;
-    // split result array into 5 row cells to be displayed on table
-    for (i = 0, j = lgasArray.length; i < j; i += chunk) {
-      tempArray = lgasArray.slice(i, i + chunk);
-      newArray.push(tempArray);
-    }
-
-    newArray.map(itemArray => {
-      let arrayValue = '';
-      let checkBox = '';
-      let tableRow = `
-          <tr> `;
-      for (let i = 0; i < itemArray.length; i++) {
-        arrayValue = itemArray[i];
-        checkBox = `<input name="${arrayValue}" value="${arrayValue}" class="checkBox" type="checkbox"/> `;
-        tableRow += `<td>${
-          itemArray[i] ? checkBox + `&nbsp;` + itemArray[i] : ''
-        }</td>`;
-      }
-      tableRow += `</tr>`;
-      $('#data tbody').append(tableRow);
-    });
+    filter.displayDataInDropdown(lgasArray);
   }
 
-  // get location checkbox values
-  let locationValues = [];
-  $('div').on('change', 'table tr .checkBox', function() {
-    if ($(this).is(':checked')) {
-      locationValues.push($(this).val());
+  // get checkbox values
+  let checkBoxValues = [];
+  $("div").on("change", "table tr .checkBox", function() {
+    if ($(this).is(":checked")) {
+      checkBoxValues.push($(this).val());
     } else {
-      locationValues = locationValues.filter(loc => loc != $(this).val());
+      checkBoxValues = checkBoxValues.filter(loc => loc != $(this).val());
     }
   });
 
-  // clear filter button
-  $('div').on('click', 'table tr #clearFilter', function() {
+  // clear filter button on click
+  $("div").on("click", "table tr #clearFilter", function() {
     uncheckCheckboxes();
-    closeLocationDropdown();
+    closeDropdown();
   });
 
-  // apply location filters
-  $('div').on('click', 'table tr #applyFilter', function() {
+  // apply filters button on click
+  $("div").on("click", "table tr #applyFilter", function() {
     for (let i = 0; i < tableData.length; i++) {
-      const lgaaName = tableData[i].location;
-      if ($.inArray(lgaaName, locationValues) === -1) {
-        $(`#stakeholder td#${tableData[i].id}`)
-          .parent()
-          .hide();
-      } else {
-        $(`#stakeholder td#${tableData[i].id}`)
-          .parent()
-          .show();
-      }
+      const filterName = tableData[i][dropdownName];
+      applyFilterData(filterName, i);
     }
-    closeLocationDropdown();
+    closeDropdown();
   });
+
+  // function to display apply filter data
+  function applyFilterData(filterByName, index) {
+    if ($.inArray(filterByName, checkBoxValues) === -1) {
+      $(`#stakeholder td#${tableData[index].id}`)
+        .parent()
+        .hide();
+    } else {
+      $(`#stakeholder td#${tableData[index].id}`)
+        .parent()
+        .show();
+    }
+  }
 });

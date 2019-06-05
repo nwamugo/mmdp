@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="assets/styles/coordination-matrix.css">
-<link rel="stylesheet" href="assets/styles/coordination-matrix.css">
+<link rel="stylesheet" href="assets/styles/coordination-matrix.css" />
+<link rel="stylesheet" href="assets/styles/coordination-matrix.css" />
 <div id="test">
   <table id="stakeholder">
     <thead>
@@ -8,27 +8,31 @@
           <input name="aaaaa" value="aaaaa" type="checkbox" />
           <div>
             Organisation Name
-            <i class="fas fa-angle-down fa-xs"></i>
+            <i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i>
           </div>
         </th>
-        <th>Thematic Pillars<i class="fas fa-angle-down fa-xs"></i></th>
-        <th>Sub-Themes<i class="fas fa-angle-down fa-xs"></i></th>
-        <th>Partnership<i class="fas fa-angle-down fa-xs"></i></th>
+        <th>Thematic Pillars<i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i></th>
+        <th>Sub-Themes<i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i></th>
+        <th>Partnership<i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i></th>
         <th class="location__dropdown">
           Location<i
             class="fas fa-angle-down fa-xs"
-            id="location_dropdown__icon"
+            id="dropdown__icon_"
           ></i>
           <div class="container">
             <div class="subnav">
               <div class="location_filters">
                 <p>
                   Location Filters
-                  <button class="clear_filter__button" id="clearFilter" >Clear Filter</button>
-                  <button class="apply_filter__button" id="applyFilter" >Apply Filter</button>
+                  <button class="clear_filter__button" id="clearFilter">
+                    Clear Filter
+                  </button>
+                  <button class="apply_filter__button" id="applyFilter">
+                    Apply Filter
+                  </button>
                 </p>
               </div>
-              <div class="location_filter_data">
+              <div class="stakeholder_filter_data">
                 <table id="data">
                   <tbody>
                     <!--Table rows will be loaded dynamically here-->
@@ -38,8 +42,8 @@
             </div>
           </div>
         </th>
-        <th>Beneficiary Count<i class="fas fa-angle-down fa-xs"></i></th>
-        <th>Amount Invested <i class="fas fa-angle-down fa-xs"></i></th>
+        <th>Beneficiary Count<i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i></th>
+        <th>Amount Invested <i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i></th>
       </tr>
     </thead>
     <tbody id="activities__table__body" class="table__body">
@@ -49,15 +53,22 @@
   <div class="table__footer">
     <tr>
       <td colspan="7">
-        <button  id="export" class="banner__button animated flashing slow delay-2s">
-          <img src="/assets/images/stakeholder-dir/cloud-computing.svg"/>Export CSV
+        <button
+          id="export"
+          class="banner__button animated flashing slow delay-2s"
+        >
+          <img src="/assets/images/stakeholder-dir/cloud-computing.svg" />Export
+          CSV
         </button>
         <span class="footer__right_content">
           <select id="entries-per-page">
             <!-- optios will be loaded dynamically-->
           </select>
           <span>Entries per page</span>
-          <span>Page <span id="current-page">1</span> of <span id="total-page">23</span></span>
+          <span
+            >Page <span id="current-page">1</span> of
+            <span id="total-page">23</span></span
+          >
           <button id="previous-page" class="go-back">&#60;</button>
           <button id="next-page" class="go-forward">&#62;</button>
         </span>
