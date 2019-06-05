@@ -66,6 +66,7 @@ $(document).ready(async function() {
     function() {
       fetchLocations();
       filter.displayDataInDropdown(beneficiaryCount, "#beneficiary_count_data");
+      fetchAmountInvested();
       paginator.initialPage();
       let n = 5;
       let options = "";
@@ -185,6 +186,16 @@ $(document).ready(async function() {
         .next(".container")
         .find(".subnav")
         .slideUp();
+
+      $(this)
+        .next(".container")
+        .find(".amount_subnav")
+        .slideUp();
+
+      $(this)
+        .next(".container")
+        .find(".beneficiary_subnav")
+        .slideUp();
     });
   }
 
@@ -212,6 +223,16 @@ $(document).ready(async function() {
       .next(".container")
       .find(".subnav")
       .slideToggle();
+
+    $(this)
+      .next(".container")
+      .find(".amount_subnav")
+      .slideToggle();
+    
+    $(this)
+        .next(".container")
+        .find(".beneficiary_subnav")
+        .slideToggle();
   });
 
   function fetchLocations() {
@@ -226,13 +247,28 @@ $(document).ready(async function() {
             for (let i = 0; i < statesArray.length; i++) {
               stateArray.push(statesArray[i].stateName);
             }
-            filter.displayDataInDropdown(stateArray);
+            filter.displayDataInDropdown(stateArray, "#data");
           })
           .catch(err => console.log(err));
       });
       return;
     }
-    filter.displayDataInDropdown(lgasArray);
+    filter.displayDataInDropdown(lgasArray, "#data");
+  }
+
+  function fetchAmountInvested(){
+    let amountsInvestedArray = [];
+    client(`amount-invested`).then(res => {
+      res.json()
+      .then(res => {
+        amountInvestedArray = res.data;
+        for (let i = 0; i < amountInvestedArray.length; i++) {
+          amountsInvestedArray.push(amountInvestedArray[i].amountInvestedRange);
+        }
+        filter.displayDataInDropdown(amountsInvestedArray, "#data_amount");
+      })
+      .catch(err => console.log(err));
+    })
   }
 
   // get checkbox values

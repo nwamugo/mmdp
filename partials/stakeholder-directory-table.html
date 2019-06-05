@@ -2,7 +2,7 @@
 <div id="test">
   <table id="stakeholder">
     <thead>
-      <tr>
+      <tr class="filter">
         <th class="organisation__name">
           <input name="aaaaa" value="aaaaa" type="checkbox" />
           <div>
@@ -56,7 +56,7 @@
             id="dropdown__icon_"
           ></i>
           <div class="container">
-            <div id="beneficiary-nav" class="subnav">
+            <div class="beneficiary_subnav">
               <div class="beneficiary_filters">
                 <p>
                   Beneficiary Filters
@@ -78,9 +78,29 @@
             </div>
           </div>
         </th>
-        <th>
-          Amount Invested
-          <i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i>
+        <th>Amount Invested <i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i>
+          <div class="container">
+            <div class="amount_subnav">
+              <div class="amount_filters">
+                <p>
+                  Amount Invested Filters
+                  <button class="clear_filter__button" id="clearFilter">
+                    Clear Filter
+                  </button>
+                  <button class="apply_filter__button" id="applyFilter">
+                    Apply Filter
+                  </button>
+                </p>
+              </div>
+              <div class="amount_filter_data">
+                <table id="data_amount">
+                  <tbody>
+                    <!--Table rows will be loaded dynamically here-->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </th>
       </tr>
     </thead>
