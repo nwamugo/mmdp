@@ -67,6 +67,7 @@ $(document).ready(async function() {
       fetchLocations();
       filter.displayDataInDropdown(beneficiaryCount, "#beneficiary_count_data");
       fetchAmountInvested();
+      fetchSubtheme();
       paginator.initialPage();
       let n = 5;
       let options = "";
@@ -195,7 +196,12 @@ $(document).ready(async function() {
       $(this)
         .next(".container")
         .find(".beneficiary_subnav")
-        .slideUp();
+
+      $(this)
+        .next(".container")
+        .find(".subtheme_subnav")
+        .slideToggle();
+        
     });
   }
 
@@ -233,6 +239,12 @@ $(document).ready(async function() {
         .next(".container")
         .find(".beneficiary_subnav")
         .slideToggle();
+
+     $(this)
+        .next(".container")
+        .find(".subtheme_subnav")
+        .slideToggle();
+        
   });
 
   function fetchLocations() {
@@ -266,6 +278,21 @@ $(document).ready(async function() {
           amountsInvestedArray.push(amountInvestedArray[i].amountInvestedRange);
         }
         filter.displayDataInDropdown(amountsInvestedArray, "#data_amount");
+      })
+      .catch(err => console.log(err));
+    })
+  }
+
+  function fetchSubtheme(){
+    let subthemeArray = [];
+    client(`sub-theme`).then(res => {
+      res.json()
+      .then(res => {
+        subthemesArray = res.data.data;
+        for (let i = 0; i < subthemesArray.length; i++) {
+          subthemeArray.push(subthemesArray[i].subThemeName);
+        }
+        filter.displayDataInDropdownSubtheme(subthemeArray);
       })
       .catch(err => console.log(err));
     })
