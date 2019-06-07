@@ -45,6 +45,7 @@ $(document).ready(async function() {
     `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`
   );
   const data = await stakeholderData.json();
+
   // neededData
   const tableData = handleStakeholdersData(data.filteredStakeholders);
   const beneficiaryCount = tableData.map(item => item.beneficiaryCount);
@@ -68,6 +69,7 @@ $(document).ready(async function() {
       filter.displayDataInDropdown(beneficiaryCount, "#beneficiary_count_data");
       fetchAmountInvested();
       fetchSubtheme();
+      fetchThematicPillars();
       paginator.initialPage();
       let n = 5;
       let options = "";
@@ -104,6 +106,7 @@ $(document).ready(async function() {
         const beneficiaryData = handleBeneficiaries(
           stakeholderData.beneficiaries
         );
+
         const requiredDetails = {
           "Year of Registration": stakeholderData.yearOfCacREG,
           "RC Number": stakeholderData.cacRcNumber,
@@ -202,7 +205,11 @@ $(document).ready(async function() {
         .next(".container")
         .find(".subtheme_subnav")
         .slideUp();
-        
+
+      $(this)
+        .next(".container")
+        .find(".thematic_subnav")
+        .slideUp();
     });
   }
 
@@ -235,17 +242,21 @@ $(document).ready(async function() {
       .next(".container")
       .find(".amount_subnav")
       .slideToggle();
-    
-    $(this)
-        .next(".container")
-        .find(".beneficiary_subnav")
-        .slideToggle();
 
-     $(this)
-        .next(".container")
-        .find(".subtheme_subnav")
-        .slideToggle();
-        
+    $(this)
+      .next(".container")
+      .find(".beneficiary_subnav")
+      .slideToggle();
+
+    $(this)
+      .next(".container")
+      .find(".subtheme_subnav")
+      .slideToggle();
+
+    $(this)
+      .next(".container")
+      .find(".thematic_subnav")
+      .slideToggle();
   });
 
   function fetchLocations() {
@@ -269,34 +280,56 @@ $(document).ready(async function() {
     filter.displayDataInDropdown(lgasArray, "#data");
   }
 
-  function fetchAmountInvested(){
+  function fetchAmountInvested() {
     let amountsInvestedArray = [];
     client(`amount-invested`).then(res => {
-      res.json()
-      .then(res => {
-        amountInvestedArray = res.data;
-        for (let i = 0; i < amountInvestedArray.length; i++) {
-          amountsInvestedArray.push(amountInvestedArray[i].amountInvestedRange);
-        }
-        filter.displayDataInDropdown(amountsInvestedArray, "#data_amount");
-      })
-      .catch(err => console.log(err));
-    })
+      res
+        .json()
+        .then(res => {
+          amountInvestedArray = res.data;
+          for (let i = 0; i < amountInvestedArray.length; i++) {
+            amountsInvestedArray.push(
+              amountInvestedArray[i].amountInvestedRange
+            );
+          }
+          filter.displayDataInDropdown(amountsInvestedArray, "#data_amount");
+        })
+        .catch(err => console.log(err));
+    });
   }
 
-  function fetchSubtheme(){
+  function fetchThematicPillars() {
+    let thematicPillars = [];
+    client(`thematic-pillars`).then(res => {
+      res
+        .json()
+        .then(res => {
+          let thematicData = res.data.data;
+          for (let i = 0; i < thematicData.length; i++) {
+            thematicPillars.push(thematicData[i].pillarTitle);
+          }
+          filter.displayDataInDropdown(thematicPillars, "#thematic_data");
+        })
+        .catch(err => {
+          return err;
+        });
+    });
+  }
+
+  function fetchSubtheme() {
     let subthemeArray = [];
     client(`sub-theme`).then(res => {
-      res.json()
-      .then(res => {
-        subthemesArray = res.data.data;
-        for (let i = 0; i < subthemesArray.length; i++) {
-          subthemeArray.push(subthemesArray[i].subThemeName);
-        }
-        filter.displayDataInDropdown(subthemeArray, "#data_subtheme");
-      })
-      .catch(err => console.log(err));
-    })
+      res
+        .json()
+        .then(res => {
+          subthemesArray = res.data.data;
+          for (let i = 0; i < subthemesArray.length; i++) {
+            subthemeArray.push(subthemesArray[i].subThemeName);
+          }
+          filter.displayDataInDropdown(subthemeArray, "#data_subtheme");
+        })
+        .catch(err => console.log(err));
+    });
   }
 
   // get checkbox values
