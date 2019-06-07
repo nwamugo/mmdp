@@ -32,9 +32,12 @@
           <span id="close-media-player" class="modal-close" aria-label="Close" aria-hidden="true">&times;</span>
       </div>
     </div>
-    <div class="modal-content">
+    <div class="modal-content video-modal">
+      <div class="modal-previous-button btn-modal">
+        <span class="previous-button prevBtn" aria-label="previous" aria-hidden="true">&lt;</span>
+      </div>
       <div id="modal-video" class="media-player">
-        <video class='media-player__video viewer' src='' >
+        <video class='media-player__video viewer photo-viewer' src='' >
           To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
         </video>
         <div class="media-player__controls">
@@ -48,7 +51,32 @@
           <button data-skip="25" class="media-player__button">25s »</button>
         </div>
       </div>
+      <div class="modal-next-button btn-modal">
+        <span class="next-button nextBtn" aria-label="previous" aria-hidden="true" id="next-modal-button">&gt;</span>
+      </div>
     </div>
   </div>
+
+
+  <div id="photos__modal" class="modal">
+    <div class="modal-header">
+      <div class="modal-close-icon">
+        <span id="close-media-player" class="modal-close" aria-label="Close" aria-hidden="true">&times;</span>
+      </div>
+    </div>
+    <div class="modal-content">
+      <div id="modal-video" class="photo-modal">
+        <div class="modal-previous-button btn-modal">
+          <span class="previous-button prevBtn" aria-label="previous" aria-hidden="true">&lt;</span>
+        </div>
+        <div><img class='media-player__video viewer photo-viewer' src='' /></div>
+        <div class="modal-next-button btn-modal">
+          <span class="next-button nextBtn" aria-label="previous" aria-hidden="true">&gt;</span>         
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 <script type="text/javascript" src="../assets/js/cms/resources/photos-videos.js"></script>

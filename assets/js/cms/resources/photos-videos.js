@@ -1,7 +1,17 @@
-(function () {
-  const mediaUrl = 'resources/repository/media';
-  let currentMediaData, player, videoElem, video, playButton, skipButtons,
-    rangeSliders, progress, progressBar;
+(function() {
+  const mediaUrl = "resources/repository/media";
+  let currentMediaData,
+    player,
+    videoElem,
+    video,
+    playButton,
+    skipButtons,
+    rangeSliders,
+    progress,
+    progressBarm,
+    photoElem;
+    slideIndex = 1,
+    arrayData = [];
 
   function render(data) {
     renderMedia(data.media);
@@ -9,14 +19,15 @@
   }
 
   function getElements() {
-    player = $('#modal-video');
-    videoElem = $('.media-player__video');
+    player = $("#modal-video");
+    videoElem = $(".media-player__video");
+    photoElem = $(".photo-viewer");
     video = videoElem.get(0);
-    progress = $('.media-player-progress');
-    progressBar = $('.media-player-progress__filled');
-    playButton = $('.media-player__button.toggle');
-    skipButtons = $('[data-skip]');
-    rangeSliders = $('.media-player__slider');
+    progress = $(".media-player-progress");
+    progressBar = $(".media-player-progress__filled");
+    playButton = $(".media-player__button.toggle");
+    skipButtons = $("[data-skip]");
+    rangeSliders = $(".media-player__slider");
   }
 
   function togglePlay() {
@@ -25,7 +36,7 @@
   }
 
   function togglePlayButton() {
-    const icon = this.paused ? '►' : '❚ ❚';
+    const icon = this.paused ? "►" : "❚ ❚";
     playButton.text(icon);
   }
 
@@ -53,15 +64,49 @@
   }
 
   function videoPlayback(event) {
-    const videoLink = $(event).find('source').attr('src');
+    const videoLink = $(event)
+      .find("source")
+      .attr("src");
     video.pause();
-    videoElem.attr('src', videoLink);
+    videoElem.attr("src", videoLink);
     video.load();
-    $('#photos-videos__modal').modal('open');
+    $("#photos-videos__modal").modal("open");
+  }
+
+  function photoModal() {
+    $("#photos__modal").modal("open");
+  }
+
+  function showImages(index) {
+    var currentIndex = arrayData[index];
+    $(".photo-viewer").attr("src", currentIndex);
+    photoModal();
+  }
+
+  function currentSlide(event) {
+    let photoLink;
+    photoLink = $(event).attr("src");
+    photoElem.attr("src", photoLink);
+    // obtain the all data(photos & videos) once modal is clicked
+    let modalList = currentMediaData.media;
+    // add data to the global array
+    modalList.forEach(function(item, index) {
+      arrayData.push(item.mediaFile.url);
+    });
+    arrayData.find(function (element, index) {
+      if (photoLink === element) {
+        photoLink = element;
+        showImages(slideIndex = index)
+      }     
+    });
+  }
+
+  function ModalClick(n) {
+    showImages((slideIndex += n));
   }
 
   function filterMediaData(data, mediaType) {
-    return data.filter(function (media) {
+    return data.filter(function(media) {
       return media.mediaType === mediaType;
     });
   }
@@ -69,15 +114,17 @@
   function handleVideosCheckbox() {
     if (this.checked) {
       // if both "videos" and "photos" are checked, show all
-      if ($('#photos-checkbox').is(':checked')) return renderMedia(currentMediaData.media);
+      if ($("#photos-checkbox").is(":checked"))
+        return renderMedia(currentMediaData.media);
       // if just "videos" is checked
-      const filteredData = filterMediaData(currentMediaData.media, 'video')
+      const filteredData = filterMediaData(currentMediaData.media, "video");
       renderMedia(filteredData);
     } else {
       // if both "videos" and "photos" are not checked, show all
-      if (!$('#photos-checkbox').is(':checked')) return renderMedia(currentMediaData.media)
+      if (!$("#photos-checkbox").is(":checked"))
+        return renderMedia(currentMediaData.media);
       // if "photo" is checked, show photos
-      const filteredData = filterMediaData(currentMediaData.media, 'photo');
+      const filteredData = filterMediaData(currentMediaData.media, "photo");
       renderMedia(filteredData);
     }
   }
@@ -85,136 +132,157 @@
   function handlePhotosCheckbox() {
     if (this.checked) {
       // if both "photos" and "videos" are checked, show all
-      if ($('#videos-checkbox').is(':checked')) return renderMedia(currentMediaData.media);
+      if ($("#videos-checkbox").is(":checked"))
+        return renderMedia(currentMediaData.media);
       // if just "photos" is checked
-      const filteredData = filterMediaData(currentMediaData.media, 'photo');
+      const filteredData = filterMediaData(currentMediaData.media, "photo");
       renderMedia(filteredData);
     } else {
       // if both "photos" and "videos" are not checked, show all
-      if (!$('#videos-checkbox').is(':checked')) return renderMedia(currentMediaData.media)
+      if (!$("#videos-checkbox").is(":checked"))
+        return renderMedia(currentMediaData.media);
       // if "videos" is checked show videos
-      const filteredData = filterMediaData(currentMediaData.media, 'video');
+      const filteredData = filterMediaData(currentMediaData.media, "video");
       renderMedia(filteredData);
     }
   }
 
   function registerEvents() {
-    $('.modal').modal();
-    $('#close-media-player').click(function () {
+    $(".modal").modal();
+    $("#close-media-player").click(function() {
       video.pause();
     });
-    $('#photos-checkbox').change(handlePhotosCheckbox);
-    $('#videos-checkbox').change(handleVideosCheckbox);
+    $("#photos-checkbox").change(handlePhotosCheckbox);
+    $("#videos-checkbox").change(handleVideosCheckbox);
     videoElem.click(togglePlay);
-    videoElem.on('timeupdate', handleProgress);
-    videoElem.on('play pause', togglePlayButton);
+    videoElem.on("timeupdate", handleProgress);
+    videoElem.on("play pause", togglePlayButton);
     playButton.click(togglePlay);
-    skipButtons.each(function (index, button) {
-      $(button).click(handleSkip)
+    skipButtons.each(function(index, button) {
+      $(button).click(handleSkip);
     });
-    rangeSliders.each(function (index, rangeSlider) {
-      $(rangeSlider).on('change mousemove', handleRangeSliderUpdate)
+    rangeSliders.each(function(index, rangeSlider) {
+      $(rangeSlider).on("change mousemove", handleRangeSliderUpdate);
     });
     let mouseDownOnTimeline = false;
     progress
       .click(scrub)
-      .mousedown(function () {
-        mouseDownOnTimeline = true
+      .mousedown(function() {
+        mouseDownOnTimeline = true;
       })
-      .mouseup(function () {
-        mouseDownOnTimeline = false
+      .mouseup(function() {
+        mouseDownOnTimeline = false;
       })
-      .mousemove(function (e) {
-        mouseDownOnTimeline && scrub(e)
+      .mousemove(function(e) {
+        mouseDownOnTimeline && scrub(e);
       });
 
-    $(document).on("click", ".video-trigger", function (event) {
+    $(document).on("click", ".video-trigger", function(event) {
       videoPlayback(event.target);
     });
+    $(document).on("click", ".photo-trigger", function(event) {
+      currentSlide(event.target);
+    });
+    $(".prevBtn").click(function() {
+      ModalClick(-1);
+    });
+     $(".nextBtn").click(function() {
+       ModalClick(1);
+     });
   }
 
   function renderMedia(mediaData) {
-    let mediaHtml = '';
+    let mediaHtml = "";
     if (!mediaData.length) {
       const noResultHtml = `<div class="card-panel red lighten-5 pagination__no-results">
     There are no results to display.
   </div>`;
-      $('div#media-container').html(noResultHtml);
+      $("div#media-container").html(noResultHtml);
       return;
     }
-    chunk(mediaData, 3).forEach(function (mediaRow) {
-      let mediaRowHtml = '';
-      mediaRow.forEach(function (media) {
-        if (media.mediaType === 'video') {
+    chunk(mediaData, 3).forEach(function(mediaRow) {
+      let mediaRowHtml = "";
+      mediaRow.forEach(function(media) {
+        if (media.mediaType === "video") {
           mediaRowHtml += `<div class="col s12 m4 photos-videos__media-area video-trigger"
         data-media-type="video">
         <div class="play-button"><img src="/assets/images/common/play.svg" /></div>
         <video class="photos-videos__media">
-          <source src="${media.mediaFile.url}" type="${media.mediaFile.mimetype}">
+          <source src="${media.mediaFile.url}" type="${
+            media.mediaFile.mimetype
+          }">
             Sorry, your browser does not support HTML5 video.
         </video>
-      </div>`
+      </div>`;
         } else {
-          mediaRowHtml += `<div class="col s12 m4 photos-videos__media-area">
-        <img alt="image" class="photos-videos__media" src="${media.mediaFile.url}" />
-      </div>`
+          mediaRowHtml += `<div class="col s12 m4 photos-videos__media-area photo-trigger">
+        <img alt="image" class="photos-videos__media" src="${
+          media.mediaFile.url
+        }" />
+      </div>`;
         }
       });
       mediaHtml += `
     <div class="row media-row">${mediaRowHtml}</div>
-    `
+    `;
     });
-    $('div#media-container').html(mediaHtml);
+    $("div#media-container").html(mediaHtml);
   }
 
   function renderPagination(pagination) {
-    const paginationHtml = pagination.total && pagination.totalPages > 1 ?
-      `<div class="research-content__pagination">
+    const paginationHtml =
+      pagination.total && pagination.totalPages > 1
+        ? `<div class="research-content__pagination">
         <div class="pagination__page">Page</div>
         <div class="current-page square-shape">${pagination.currentPage}</div>
         <div class="pagination__total-items">
           of <span class="available_pages">${pagination.totalPages}</span>
         </div>
         <a href="#photos-videos">
-          <div class="previous-button square-shape ${pagination.previous ? '' : 'very-pale'}">
+          <div class="previous-button square-shape ${
+            pagination.previous ? "" : "very-pale"
+          }">
             <i class="material-icons">navigate_before</i>
           </div>
         </a>
         <a href="#photos-videos">
-          <div class="next-button square-shape ${pagination.next ? '' : 'very-pale'}">
+          <div class="next-button square-shape ${
+            pagination.next ? "" : "very-pale"
+          }">
             <i class="material-icons">navigate_next</i>
           </div>
         </a>
-      </div>` : '';
-    $('#media-pagination').html(paginationHtml);
+      </div>`
+        : "";
+    $("#media-pagination").html(paginationHtml);
 
     registerPaginationEventHandlers(pagination.previous, pagination.next);
   }
 
   function registerPaginationEventHandlers(previous, next) {
-    $('.previous-button').click(function () {
+    $(".previous-button").click(function() {
       fetchMedia(previous);
     });
 
-    $('.next-button').click(function () {
+    $(".next-button").click(function() {
       fetchMedia(next);
     });
   }
 
   function fetchMedia(page = 1) {
-    client(`${mediaUrl}?${formatObjectToParams({page: page, perPage: 9})}`)
+    client(`${mediaUrl}?${formatObjectToParams({ page: page, perPage: 9 })}`)
       .then(res => res.json())
-      .then((data) => {
+      .then(data => {
         currentMediaData = Object.assign({}, data.data);
         render(data.data);
         scrollToTop();
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
 
-  cmsLoad = function () {
+  cmsLoad = function() {
     getElements();
     registerEvents();
     fetchMedia();
-  }
+  };
 })();

@@ -65,14 +65,31 @@ $(document).ready(async function() {
     if (a >= b) {
       return 1;
     }
-    if (a < b) {
-      return -1;
-    }
-  });
+  ];
 
-  window.tableData = tableData;
-  keys[4] = param === "country" ? "stateLocation" : keys[4];
-  const paginator = new Paginator(tableData, keys);
+  function createTableRow(data) {
+    return `
+        <tr>
+            <td class="organisation__name">
+                <input name="aaaaa" value="aaaaa" type="checkbox" /> 
+                <div>${data[keys[0]]}</div>
+            </td>
+            <td>${data[keys[1]]}</td>
+            <td>${data[keys[2]]}</td>
+            <td>${data[keys[3]]}</td>
+            <td id=${data.id}>${data[keys[4]]}</td>
+            <td>${data[keys[5]]}</td>
+            <td>${data[keys[6]]}</td>
+    </tr>
+        `;
+  }
+
+  function loadTableData() {
+    const rows = stakeholderDataMock.map(stakeholder =>
+      createTableRow(stakeholder)
+    );
+    $("tbody.table__body").html(rows);
+  }
 
   const handleChange = () => {
     var x = document.getElementById('search__activities').value;
@@ -214,19 +231,17 @@ $(document).ready(async function() {
     }
   );
 
-  // uncheck checkboxes
   function uncheckCheckboxes() {
     if ($("table tr .checkBox").is(":checked")) {
-      checkBoxValues = [];
+      locationValues = [];
     }
     $("table tr .checkBox").prop("checked", false);
-    paginator.refreshTableBody();
+    loadTableData();
   }
 
-  //close dropdown
-  function closeDropdown() {
-    $("[id*='dropdown__icon_']").each(function(i, e) {
-      $(this)
+  function closeLocationDropdown() {
+    return $("table tr #location_dropdown__icon", function() {
+      $("table tr #location_dropdown__icon")
         .next(".container")
         .find(".subnav")
         .slideUp();
@@ -253,26 +268,12 @@ $(document).ready(async function() {
     });
   }
 
-  // camel case the dropdown names
-  function camelize(text) {
-    return text.replace(/^([A-Z])|[\s-_]+(\w)/g, function(
-      match,
-      p1,
-      p2,
-      offset
-    ) {
-      if (p2) return p2.toUpperCase();
-      return p1.toLowerCase();
-    });
-  }
+  $(function() {
+    fetchStates();
+  });
 
-  // toggle dropdown arrow
-  let dropdownName;
-  $("div").on("click", "table tr #dropdown__icon_", function() {
-    dropdownName = camelize($.trim(this.previousSibling.nodeValue));
-    if (param === "country" && dropdownName === "location") {
-      dropdownName = "stateLocation";
-    }
+  // display location header dropdown
+  $("div").on("click", "table tr #location_dropdown__icon", function() {
     $(this)
       .next(".container")
       .find(".subnav")
@@ -372,31 +373,37 @@ $(document).ready(async function() {
     });
   }
 
-  // get checkbox values
-  let checkBoxValues = [];
+  // get location checkbox values
+  let locationValues = [];
   $("div").on("change", "table tr .checkBox", function() {
-    if (!isNaN($(this).val())) {
-      checkBoxValues.push(parseInt($(this).val()));
-    } else if ($(this).is(":checked")) {
-      checkBoxValues.push($(this).val());
+    if ($(this).is(":checked")) {
+      locationValues.push($(this).val());
     } else {
-      checkBoxValues = checkBoxValues.filter(loc => loc != $(this).val());
+      locationValues = locationValues.filter(loc => loc != $(this).val());
     }
   });
 
-  // clear filter button on click
+  // clear filter button
   $("div").on("click", "table tr #clearFilter", function() {
     uncheckCheckboxes();
-    closeDropdown();
+    closeLocationDropdown();
   });
 
-  // apply filters button on click
+  // apply location filters
   $("div").on("click", "table tr #applyFilter", function() {
-    for (let i = 0; i < tableData.length; i++) {
-      const filterName = tableData[i][dropdownName];
-      applyFilterData(filterName, i);
+    for (let i = 0; i < stakeholderDataMock.length; i++) {
+      const stateName = stakeholderDataMock[i].stateName;
+      if ($.inArray(stateName, locationValues) === -1) {
+        $(`table tbody.table__body td#${stakeholderDataMock[i].id}`)
+          .parent()
+          .hide();
+      } else {
+        $(`table tbody.table__body td#${stakeholderDataMock[i].id}`)
+          .parent()
+          .show();
+      }
     }
-    closeDropdown();
+    closeLocationDropdown();
   });
 
   // function to display apply filter data

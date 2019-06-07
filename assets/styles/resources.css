@@ -350,6 +350,11 @@ select.filter__dropdown {
   text-align: right;
   font-size: 30px;
 }
+#photos__modal .modal-header {
+  padding: 5px 25px 15px 25px;
+  text-align: right;
+  font-size: 30px;
+}
 #photos-videos__modal .modal-content {
   width: 80%;
   margin: 0 auto;
@@ -401,6 +406,25 @@ select.filter__dropdown {
   width: 100%;
 }
 
+.video-modal {
+  display: flex;
+}
+
+.photo-modal {
+  display: flex;
+}
+
+.btn-modal {
+  margin-top: 25%;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.photos__modal .modal-header  {
+  padding: 5px 25px 15px 25px;
+  text-align: right;
+  font-size: 30px;
+}
 .media-player__button {
   background: none;
   border: 0;
