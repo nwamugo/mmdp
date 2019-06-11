@@ -80,6 +80,7 @@ body, img {
 footer.footer {
   width: 100%;
   min-height: 430px;
+  max-height: 465px;
   background-color: #296d81;
   font-family: 'Muli', sans-serif;
   color: #fff;
