@@ -1,14 +1,14 @@
 let baseUrl;
 let SocketUrl;
 if (
-  window.location.host.includes('127.0.0.1') ||
-  window.location.host.includes('localhost')
+  window.location.host.includes("127.0.0.1") ||
+  window.location.host.includes("localhost")
 ) {
-  baseUrl = 'http://localhost:3000/api/v1';
-  SocketUrl = 'http://127.0.0.1:3000';
+  baseUrl = "http://localhost:3000/api/v1";
+  SocketUrl = "http://127.0.0.1:3000";
 } else {
-  baseUrl = 'http://cms-staging.mmdp.ng:3000/api/v1';
-  SocketUrl = 'http://cms-staging.mmdp.ng:3000';
+  baseUrl = "http://cms-staging.mmdp.ng:3000/api/v1";
+  SocketUrl = "http://cms-staging.mmdp.ng:3000";
 }
 
 /**
@@ -32,7 +32,7 @@ function client(url) {
  * @returns {string}
  */
 function formatDate(date) {
-  return date.toDateString()
+  return date.toDateString();
 }
 
 /**
@@ -40,10 +40,10 @@ function formatDate(date) {
  *  params {Object} params
  */
 function formatObjectToParams(params) {
-  let url = '';
-  if (typeof params === 'object') {
+  let url = "";
+  if (typeof params === "object") {
     if (Object.keys(params).length >= 1) {
-      Object.keys(params).forEach((key) => {
+      Object.keys(params).forEach(key => {
         url += `${key}=${params[key]}&`;
       });
       // remove last &

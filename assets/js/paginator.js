@@ -67,9 +67,9 @@ class Paginator {
           <tr>
               <td class="organisation__name">
                   <input id=${data[keys[0]]} data-org=${data[keys[0]].replace(
-                    / /g,
-                    "-"
-                  )} name="aaaaa" value="aaaaa" type="checkbox" />
+      / /g,
+      "-"
+    )} name="aaaaa" value="aaaaa" type="checkbox" />
                   <div class="stakeholder__name">${data[keys[0]]}</div>
               </td>
               <td data-target="modal1" class="modal-trigger"  onClick="getSHDetails('${
@@ -102,7 +102,7 @@ class Paginator {
   };
 
   createTableBody = rows => {
-    $('tbody.table__body').html(rows);
+    $("tbody.table__body").html(rows);
   };
 
   updatePageOf = () => {
@@ -113,13 +113,13 @@ class Paginator {
       this.refreshTableBody();
       return;
     }
-    $('#current-page').html(currentPage);
-    $('#total-page').html(totalPage);
+    $("#current-page").html(currentPage);
+    $("#total-page").html(totalPage);
     currentPage === 1
-      ? $('#previous-page').removeClass('active__nav')
-      : $('#previous-page').addClass('active__nav');
+      ? $("#previous-page").removeClass("active__nav")
+      : $("#previous-page").addClass("active__nav");
     currentPage === totalPage
-      ? $('#next-page').removeClass('active__nav')
-      : $('#next-page').addClass('active__nav');
+      ? $("#next-page").removeClass("active__nav")
+      : $("#next-page").addClass("active__nav");
   };
 }

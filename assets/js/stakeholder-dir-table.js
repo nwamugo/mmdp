@@ -9,6 +9,7 @@ $(document).ready(async function() {
     "amountInvested"
   ];
   const filter = new Filter();
+
   const queryNameFromUrl = window.location.search.substring(1).split("=")[1];
   const queryParam = queryNameFromUrl
     ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
@@ -46,6 +47,16 @@ $(document).ready(async function() {
   const data = await stakeholderData.json();
   // neededData
   const tableData = handleStakeholdersData(data.filteredStakeholders);
+  const beneficiaryCount = tableData.map(item => item.beneficiaryCount);
+  beneficiaryCount.sort((a, b) => {
+    if (a >= b) {
+      return 1;
+    }
+    if (a < b) {
+      return -1;
+    }
+  });
+
   window.tableData = tableData;
   keys[4] = param === "country" ? "stateLocation" : keys[4];
   const paginator = new Paginator(tableData, keys);
@@ -54,6 +65,7 @@ $(document).ready(async function() {
     "/partials/stakeholder-directory-table.html",
     function() {
       fetchLocations();
+      filter.displayDataInDropdown(beneficiaryCount, "#beneficiary_count_data");
       paginator.initialPage();
       let n = 5;
       let options = "";
@@ -125,6 +137,7 @@ $(document).ready(async function() {
             : "",
           "Number of Volunteers": stakeholderData.volunteersCount
         };
+
         let shDetailsTableData = "";
         const keys = Object.keys(requiredDetails);
         while (keys.length > 0) {
@@ -159,7 +172,7 @@ $(document).ready(async function() {
   // uncheck checkboxes
   function uncheckCheckboxes() {
     if ($("table tr .checkBox").is(":checked")) {
-      locationValues = [];
+      checkBoxValues = [];
     }
     $("table tr .checkBox").prop("checked", false);
     paginator.refreshTableBody();
@@ -177,9 +190,14 @@ $(document).ready(async function() {
 
   // camel case the dropdown names
   function camelize(text) {
-    return text.replace(/^([A-Z])|[\s-_]+(\w)/g, function(match, p1, p2, offset) {
-        if (p2) return p2.toUpperCase();
-        return p1.toLowerCase();        
+    return text.replace(/^([A-Z])|[\s-_]+(\w)/g, function(
+      match,
+      p1,
+      p2,
+      offset
+    ) {
+      if (p2) return p2.toUpperCase();
+      return p1.toLowerCase();
     });
   }
 
@@ -187,8 +205,8 @@ $(document).ready(async function() {
   let dropdownName;
   $("div").on("click", "table tr #dropdown__icon_", function() {
     dropdownName = camelize($.trim(this.previousSibling.nodeValue));
-    if(param === "country" && dropdownName==='location'){
-      dropdownName = "stateLocation"
+    if (param === "country" && dropdownName === "location") {
+      dropdownName = "stateLocation";
     }
     $(this)
       .next(".container")
@@ -220,7 +238,9 @@ $(document).ready(async function() {
   // get checkbox values
   let checkBoxValues = [];
   $("div").on("change", "table tr .checkBox", function() {
-    if ($(this).is(":checked")) {
+    if (!isNaN($(this).val())) {
+      checkBoxValues.push(parseInt($(this).val()));
+    } else if ($(this).is(":checked")) {
       checkBoxValues.push($(this).val());
     } else {
       checkBoxValues = checkBoxValues.filter(loc => loc != $(this).val());
