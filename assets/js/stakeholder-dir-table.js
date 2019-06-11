@@ -196,11 +196,12 @@ $(document).ready(async function() {
       $(this)
         .next(".container")
         .find(".beneficiary_subnav")
+        .slideUp();
 
       $(this)
         .next(".container")
         .find(".subtheme_subnav")
-        .slideToggle();
+        .slideUp();
         
     });
   }
@@ -292,7 +293,7 @@ $(document).ready(async function() {
         for (let i = 0; i < subthemesArray.length; i++) {
           subthemeArray.push(subthemesArray[i].subThemeName);
         }
-        filter.displayDataInDropdownSubtheme(subthemeArray);
+        filter.displayDataInDropdown(subthemeArray, "#data_subtheme");
       })
       .catch(err => console.log(err));
     })

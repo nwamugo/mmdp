@@ -159,7 +159,8 @@
 
 .location_filters,
 .beneficiary_filters,
-.amount_filters {
+.amount_filters,
+.subtheme_filters {
   width: 100%;
   border-radius: 0px;
   background-color: #296d81;
@@ -170,7 +171,8 @@
 
 .location_filters p,
 .beneficiary_filters p, 
-.amount_filters p{
+.amount_filters p,
+.subtheme_filters p {
   font-family: Muli;
   font-style: normal;
   color: white;
@@ -183,7 +185,8 @@
 
 .location_filters button.apply_filter__button,
 .beneficiary_filters button.apply_filter__button,
-.amount_filters button.apply_filter__button {
+.amount_filters button.apply_filter__button,
+.subtheme_filters button.apply_filter__button {
   color: white;
   background: #3faaca;
   margin-top: 5px;
@@ -204,7 +207,8 @@
 
 .location_filters button.clear_filter__button,
 .beneficiary_filters button.clear_filter__button,
-.amount_filters button.clear_filter__button  {
+.amount_filters button.clear_filter__button,
+.subtheme_filters button.clear_filter__button {
   color: #3faaca;
   cursor: pointer;
   background: white;
@@ -228,7 +232,6 @@
   margin-right: 8px;
   margin-top: 7px;
 }
-
 .subnav {
   display: none;
   position: absolute;
@@ -242,7 +245,8 @@
 .stakeholder_filter_data,
 .location_filter_data,
 .beneficiary_filter_data,
-.amount_filter_data{
+.amount_filter_data,
+.subtheme_filter_data{
   background-color: white;
   margin-top: -5.7%;
   height: 40%;
@@ -250,7 +254,8 @@
 
 #data tbody tr td,
 #beneficiary_count_data tbody tr td,
-#data_amount tbody tr td{
+#data_amount tbody tr td,
+#data_subtheme tbody tr td{
   padding: 5px 5px 5px 5px;
   font-size: small;
   font-weight: normal;
@@ -258,20 +263,20 @@
 }
 #data tbody tr, #data tbody tr td, #data, #data_amount tbody tr ,
 #data_amount tbody tr td, #data_amount, 
-#beneficiary_count_data tbody tr , #beneficiary_count_data tbody tr td, #beneficiary_count_data tbody {
+#beneficiary_count_data tbody tr , #beneficiary_count_data tbody tr td, #beneficiary_count_data tbody,
+#data_subtheme tbody tr, #data_subtheme tbody tr td, #data_subtheme tbody {
   border: none;
 }
-#data tbody tr, #data_amount tbody tr, #beneficiary_count_data tbody tr  {
+#data tbody tr, #data_amount tbody tr, #beneficiary_count_data tbody tr, #data_subtheme tbody tr td  {
   height: 40px;
 }
-#data tbody, #data_amount tbody, #beneficiary_count_data tbody {
+#data tbody, #data_amount tbody, #beneficiary_count_data tbody, #data_subtheme tbody {
   display: block;
   overflow: auto;
   height: 160px;
   padding-left: 30px;
   width: 100%;
 }
-
 .mmdp__bg__img {
   position: absolute;
   position: absolute;
@@ -282,7 +287,7 @@
   opacity: 0.04;
 }
 
-#data #checkBox, #data_amount #checkBox, #beneficiary_filter_data #checkBox{
+#data #checkBox, #data_amount #checkBox, #beneficiary_filter_data #checkBox, #data_subtheme #checkBox{
   cursor: pointer;
 }
 .amount_subnav{
@@ -294,7 +299,7 @@
   -moz-box-shadow: 0px 0px 23px -2px #707070;
   box-shadow: 0px 0px 23px -2px #707070;
 }
-.amount_filter_data, .beneficiary_filter_data{
+.amount_filter_data, .beneficiary_filter_data, .subtheme_filter_data{
   background-color: white;
   margin-top:-9.3%;
   height: 40%;
@@ -304,6 +309,16 @@
   position: absolute;
   width: 62.5%;
   margin-left: -43%;
+  -webkit-box-shadow: 0px 0px 23px -2px #707070;
+  -moz-box-shadow: 0px 0px 23px -2px #707070;
+  box-shadow: 0px 0px 23px -2px #707070;
+}
+
+.subtheme_subnav {
+  display: none;
+  position: absolute;
+  width: 60%;
+  margin-left: -1.5%;
   -webkit-box-shadow: 0px 0px 23px -2px #707070;
   -moz-box-shadow: 0px 0px 23px -2px #707070;
   box-shadow: 0px 0px 23px -2px #707070;
