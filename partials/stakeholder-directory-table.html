@@ -63,12 +63,29 @@
             </div>
           </div>
         </th>
-        <th>
-          Partnership<i
-            class="fas fa-angle-down fa-xs"
-            id="dropdown__icon_"
-          ></i>
-        </th>
+        <th>Partnership<i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i>
+          <div class="container">
+          <div class="partnership_subnav">
+            <div class="partnership_filters">
+              <p>
+                Partnership Filters
+                <button class="clear_filter__button" id="clearFilter">
+                  Clear Filter
+                </button>
+                <button class="apply_filter__button" id="applyFilter">
+                  Apply Filter
+                </button>
+              </p>
+            </div>
+            <div class="partnership_filter_data">
+              <table id="partnership_data">
+                <tbody>
+                  <!--Table rows will be loaded dynamically here-->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div></th>
         <th class="location__dropdown">
           Location<i
             class="fas fa-angle-down fa-xs"

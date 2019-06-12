@@ -1,133 +1,70 @@
 $(document).ready(async function() {
   const keys = [
-    'organisationName',
-    'thematicPillars',
-    'subThemes',
-    'partnership',
-    'location',
-    'beneficiaryCount',
-    'amountInvested',
+    "organisationName",
+    "thematicPillars",
+    "subThemes",
+    "partnership",
+    "location",
+    "beneficiaryCount",
+    "amountInvested"
   ];
   const filter = new Filter();
 
   const queryNameFromUrl = window.location.search.substring(1).split("=")[1];
   const queryParam = queryNameFromUrl
     ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
-    : 'Nigeria';
+    : "Nigeria";
   let query, param;
-
-
   switch (window.location.pathname) {
-    case '/country.html':
-      param = 'country';
+    case "/country.html":
+      param = "country";
       query = `country=${queryParam}`;
       break;
-    case '/state.html':
+    case "/state.html":
       query = `state=${queryParam}`;
       break;
-    case '/lga.html':
-      param = 'lga';
+    case "/state-pillars.html":
+      query = `state=${queryParam}`;
+      break;
+    case "/lga.html":
+      param = "lga";
       query = `lga=${queryParam}`;
       break;
-    case '/active-communities.html':
+    case "/active-communities.html":
       query = `lga=${queryParam}`;
       break;
-    case '/state-pillars.html':
+    case "/state-pillars.html":
       query = `state=${queryParam}`;
       break;
     default:
-      param = 'country';
+      param = "country";
       query = `country=${queryParam}`;
       break;
   }
-
-  let MMDP_BASE_URL;
-
-  if (
-    window.location.host.includes('127.0.0.1') ||
-    window.location.host.includes('localhost')
-  ) {
-    MMDP_BASE_URL = 'http://localhost:3000';
-  } else {
-    MMDP_BASE_URL = 'http://cms-staging.mmdp.ng:3000';
-  }
-
   const stakeholderData = await fetch(
-    `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName=${''}`,
+    `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`
   );
-
   const data = await stakeholderData.json();
 
   // neededData
   const tableData = handleStakeholdersData(data.filteredStakeholders);
   const beneficiaryCount = tableData.map(item => item.beneficiaryCount);
-  beneficiaryCount.sort((a, b) => {
-    if (a >= b) {
-      return 1;
-    }
-  ];
 
-  function createTableRow(data) {
-    return `
-        <tr>
-            <td class="organisation__name">
-                <input name="aaaaa" value="aaaaa" type="checkbox" /> 
-                <div>${data[keys[0]]}</div>
-            </td>
-            <td>${data[keys[1]]}</td>
-            <td>${data[keys[2]]}</td>
-            <td>${data[keys[3]]}</td>
-            <td id=${data.id}>${data[keys[4]]}</td>
-            <td>${data[keys[5]]}</td>
-            <td>${data[keys[6]]}</td>
-    </tr>
-        `;
-  }
+  const allCount = tableData.map(item => item.partnership);
+  
+  window.tableData = tableData;
+  keys[4] = param === "country" ? "stateLocation" : keys[4];
+  const paginator = new Paginator(tableData, keys);
 
-  function loadTableData() {
-    const rows = stakeholderDataMock.map(stakeholder =>
-      createTableRow(stakeholder)
-    );
-    $("tbody.table__body").html(rows);
-  }
-
-  const handleChange = () => {
-    var x = document.getElementById('search__activities').value;
-    if (x === '' || x === null) {
-      paginator.empData = false;
-      paginator.setTableTempData();
-    }
-  };
-
-  const handleSearch = async () => {
-    var searchQuery = document.getElementById('search__activities').value;
-    if (searchQuery) {
-      const stakeholderData = await fetch(
-        `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName=${searchQuery ||
-          ''}`,
-      );
-      const data = await stakeholderData.json();
-      // neededData
-      const tableData = handleStakeholdersData(data.filteredStakeholders);
-      paginator.setTableTempData(tableData);
-      paginator.empData = true;
-    } else {
-      paginator.empData = false;
-      paginator.setTableTempData();
-    }
-  };
-
-  $('#search__activities').keyup(handleChange);
-  $('#btn_search').click(handleSearch);
-
-  $('#stakeholder-directory-table').load(
-    '/partials/stakeholder-directory-table.html',
+  $("#stakeholder-directory-table").load(
+    "/partials/stakeholder-directory-table.html",
     function() {
       fetchLocations();
-      filter.displayDataInDropdown(beneficiaryCount, "#beneficiary_count_data");
+      filter.displayDataInDropdown([... new Set(beneficiaryCount)], "#beneficiary_count_data");
       fetchAmountInvested();
       fetchSubtheme();
       fetchThematicPillars();
+      filter.displayDataInDropdown([... new Set(allCount)], "#partnership_data");
       paginator.initialPage();
       let n = 5;
       let options = "";
@@ -144,7 +81,7 @@ $(document).ready(async function() {
         paginator.entriesPerPage = this.value;
         paginator.refreshTableBody();
       });
-      $('#next-page').click(function() {
+      $("#next-page").click(function() {
         paginator.nextPage();
       });
       $("#previous-page").click(function() {
@@ -162,7 +99,7 @@ $(document).ready(async function() {
         const stakeholderDataJson = await response.json();
         const stakeholderData = stakeholderDataJson.data[0];
         const beneficiaryData = handleBeneficiaries(
-          stakeholderData.beneficiaries,
+          stakeholderData.beneficiaries
         );
 
         const requiredDetails = {
@@ -200,6 +137,7 @@ $(document).ready(async function() {
             : "",
           "Number of Volunteers": stakeholderData.volunteersCount
         };
+
         let shDetailsTableData = "";
         const keys = Object.keys(requiredDetails);
         while (keys.length > 0) {
@@ -231,17 +169,19 @@ $(document).ready(async function() {
     }
   );
 
+  // uncheck checkboxes
   function uncheckCheckboxes() {
     if ($("table tr .checkBox").is(":checked")) {
-      locationValues = [];
+      checkBoxValues = [];
     }
     $("table tr .checkBox").prop("checked", false);
-    loadTableData();
+    paginator.refreshTableBody();
   }
 
-  function closeLocationDropdown() {
-    return $("table tr #location_dropdown__icon", function() {
-      $("table tr #location_dropdown__icon")
+  //close dropdown
+  function closeDropdown() {
+    $("[id*='dropdown__icon_']").each(function(i, e) {
+      $(this)
         .next(".container")
         .find(".subnav")
         .slideUp();
@@ -265,25 +205,45 @@ $(document).ready(async function() {
         .next(".container")
         .find(".thematic_subnav")
         .slideUp();
+        
+      
+      $(this)
+      .next(".container")
+      .find(".partnership_subnav")
+      .slideUp();
     });
   }
 
-  $(function() {
-    fetchStates();
-  });
+  // camel case the dropdown names
+  function camelize(text) {
+    return text.replace(/^([A-Z])|[\s-_]+(\w)/g, function(
+      match,
+      p1,
+      p2,
+      offset
+    ) {
+      if (p2) return p2.toUpperCase();
+      return p1.toLowerCase();
+    });
+  }
 
-  // display location header dropdown
-  $("div").on("click", "table tr #location_dropdown__icon", function() {
+  // toggle dropdown arrow
+  let dropdownName;
+  $("div").on("click", "table tr #dropdown__icon_", function() {
+    dropdownName = camelize($.trim(this.previousSibling.nodeValue));
+    if (param === "country" && dropdownName === "location") {
+      dropdownName = "stateLocation";
+    }
     $(this)
       .next(".container")
       .find(".subnav")
       .slideToggle();
 
     $(this)
-      .next(".container")
-      .find(".amount_subnav")
-      .slideToggle();
-
+    .next(".container")
+    .find(".amount_subnav")
+    .slideToggle();
+    
     $(this)
       .next(".container")
       .find(".beneficiary_subnav")
@@ -298,6 +258,11 @@ $(document).ready(async function() {
       .next(".container")
       .find(".thematic_subnav")
       .slideToggle();
+
+    $(this)
+    .next(".container")
+    .find(".partnership_subnav")
+    .slideToggle();
   });
 
   function fetchLocations() {
@@ -373,37 +338,31 @@ $(document).ready(async function() {
     });
   }
 
-  // get location checkbox values
-  let locationValues = [];
+  // get checkbox values
+  let checkBoxValues = [];
   $("div").on("change", "table tr .checkBox", function() {
-    if ($(this).is(":checked")) {
-      locationValues.push($(this).val());
+    if (!isNaN($(this).val())) {
+      checkBoxValues.push(parseInt($(this).val()));
+    } else if ($(this).is(":checked")) {
+      checkBoxValues.push($(this).val());
     } else {
-      locationValues = locationValues.filter(loc => loc != $(this).val());
+      checkBoxValues = checkBoxValues.filter(loc => loc != $(this).val());
     }
   });
 
-  // clear filter button
+  // clear filter button on click
   $("div").on("click", "table tr #clearFilter", function() {
     uncheckCheckboxes();
-    closeLocationDropdown();
+    closeDropdown();
   });
 
-  // apply location filters
+  // apply filters button on click
   $("div").on("click", "table tr #applyFilter", function() {
-    for (let i = 0; i < stakeholderDataMock.length; i++) {
-      const stateName = stakeholderDataMock[i].stateName;
-      if ($.inArray(stateName, locationValues) === -1) {
-        $(`table tbody.table__body td#${stakeholderDataMock[i].id}`)
-          .parent()
-          .hide();
-      } else {
-        $(`table tbody.table__body td#${stakeholderDataMock[i].id}`)
-          .parent()
-          .show();
-      }
+    for (let i = 0; i < tableData.length; i++) {
+      const filterName = tableData[i][dropdownName];
+      applyFilterData(filterName, i);
     }
-    closeLocationDropdown();
+    closeDropdown();
   });
 
   // function to display apply filter data
