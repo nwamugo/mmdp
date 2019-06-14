@@ -24,7 +24,7 @@
               <div class="prev">
               <img src="assets/images/index/group-4-copy-2.png"
               srcset="assets/images/index/group-4-copy-3@2x.png 2x, assets/images/group-4-copy-3@3x.png 3x"
-              alt="arrow for next event" onclick="plusSlides(-1)">
+              alt="arrow for next event" onclick="plusSlides(-1)" class="plusSlides">
               </div>
                 <div class="fade">
                   <div class="event_slide_card">
@@ -48,7 +48,7 @@
                 <div class="next">
                 <img src="assets/images/index/group-4-copy-2.png"
                 srcset="assets/images/index/group-4-copy-2@2x.png 2x,assets/images/group-4-copy-2@3x.png 3x" class=""
-                alt="arrow for next event" onclick="plusSlides(1)">
+                alt="arrow for next event" onclick="plusSlides(1)" class="plusSlides">
               </div>`
         } else {
         slideHtml += `
@@ -57,7 +57,7 @@
             <div class="prev">
             <img src="assets/images/index/group-4-copy-2.png"
             srcset="assets/images/index/group-4-copy-3@2x.png 2x, assets/images/group-4-copy-3@3x.png 3x"
-            alt="arrow for next event" onclick="plusSlides(-1)">
+            alt="arrow for next event" onclick="plusSlides(-1)" class="plusSlides">
             </div>
               <div class="fade">
                 <div class="event_slide_card">
@@ -100,7 +100,7 @@
             <div class="next">
               <img src="assets/images/index/group-4-copy-2.png"
               srcset="assets/images/index/group-4-copy-2@2x.png 2x,assets/images/group-4-copy-2@3x.png 3x" class=""
-              alt="arrow for next event" onclick="plusSlides(1)">
+              alt="arrow for next event" onclick="plusSlides(1)" class="plusSlides">
             </div>
           </div>
         </div>`;
@@ -110,9 +110,11 @@
       let slideIndex = 1;
       showSlides(slideIndex);
 
+      document.
+        getElementsByClassName("plusSlides")
+        .addEventListener("click", plusSlides(1), false)
+
       function plusSlides(n) {
-        console.log('ut');
-        
         showSlides(slideIndex += n);
       }
       
@@ -129,14 +131,12 @@
         for (i = 0; i < slides.length; i++) {                    
           slides[i].style.display = "none";
         }
-        slideIndex++;        
         if (slideIndex > slides.length) { slideIndex = 1 }
         for (i = 0; i < dots.length; i++) {
           dots[i].className = dots[i].className.replace(" active", "");
         }
         slides[slideIndex - 1].style.display = "block";  
         dots[slideIndex - 1].className += " active";
-        setTimeout(showSlides, 3000);
       }
 
     })
