@@ -151,7 +151,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 
 .matrix-logout {
     width: 150px;
-    height: 40px;
+    height: 35px;
     background-color: #3faaca;
     border-radius: 3px;
     border: 0;
