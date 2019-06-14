@@ -655,9 +655,10 @@ textarea {
   font-size: 30px;
   font-weight: 800;
   line-height: 1.43;
-  letter-spacing: -0.7px;
+  letter-spacing: -1.2px;
   color: #1a1f37;
   margin-top: 40px;
+  text-align: justify;
 }
 
 .banner__desc__text {
@@ -668,6 +669,7 @@ textarea {
   letter-spacing: -0.3px;
   margin-top: 24px;
   color: #1a1f37;
+  text-align: justify;
 }
 
 .banner__button {
@@ -691,12 +693,12 @@ textarea {
 .banner__image {
   height: 460px;
   border-radius: 9px;
-  width: 200px;
+  width: 210px;
   margin-left: -5px;
 }
 
 .banner__image--wide {
-  width: 202px;
+  width: 210px;
   margin-right: 0;
 }
 @media screen and (max-width: 768px) {
@@ -782,7 +784,7 @@ textarea {
 
 @media (min-width: 769px) {
   .banner__desc__heading {
-    font-size: 24px;
+    font-size: 32px;
   }
 
   .banner__button {
