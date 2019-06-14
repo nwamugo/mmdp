@@ -1,4 +1,5 @@
 function loaded() {
+  redirectUnAuthUser('/coordination-matrix.html');
   $("#map").load(
     `https://s3.amazonaws.com/mmdp-img-assets/assets/documents/tv7BEAdCYkHMAbI5`,
     function(responseTxt, statusTxt, xhr) {

@@ -1,6 +1,8 @@
 $(document).ready(function () {
+  redirectUnAuthUser('/coordination-matrix.html');
   $("#header-section").load("/partials/matrix-header.html", function () {
     //once header is loaded activate sidenav
+    activateLogoutBtn()
     enableMenuItemContentLoad();
     changeLinkState();
   });

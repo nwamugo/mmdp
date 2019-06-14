@@ -1,4 +1,5 @@
 (function() {
+  redirectUnAuthUser('/coordination-matrix.html');
   let MMDP_BASE_URL;
   if (
     window.location.host.includes("127.0.0.1") ||
