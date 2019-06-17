@@ -28,7 +28,8 @@
   height: 40px;
 }
 
-.state__map .map__legend__container {
+.state__map .map__legend__container,
+.report__map__legend__container {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -38,7 +39,12 @@
   margin-top: 40px;
 }
 
-.state__map .map__legend__container .map__legend {
+.report__map__legend__container {
+  height: 220px;
+}
+
+.state__map .map__legend__container .map__legend,
+.report__map__legend {
   height: 29px;
   font-family: Muli;
   font-size: 16px;
@@ -52,13 +58,29 @@
   margin-left: 3rem;
 }
 
+.report__map__legend {
+  line-height: 3.81;
+}
+
 .map__legend:before {
-  content: '';
+  content: "";
   height: 34px;
   width: 34px;
   display: inline-block;
   margin-right: 1rem;
   border-radius: 3px;
+  border: solid 1px #cae7f0;
+  position: absolute;
+  left: -3rem;
+  top: -3px;
+}
+
+.report__map__legend:before {
+  content: "";
+  height: 58px;
+  width: 24px;
+  display: inline-block;
+  margin-right: 1rem;
   border: solid 1px #cae7f0;
   position: absolute;
   left: -3rem;
@@ -79,6 +101,26 @@
 
 .four:before {
   background-color: #eaf9fe;
+}
+
+.report__one:before {
+  background-color: #e72525;
+  border: solid 1px #e72525;
+}
+
+.report__two:before {
+  border: solid 1px #e56466;
+  background-color: #e56466;
+}
+
+.report__three:before {
+  border: solid 1px #e89090;
+  background-color: #e89090;
+}
+
+.report__four:before {
+  border: solid 1px #e7d9d9;
+  background-color: #e7d9d9;
 }
 
 .banner__button.logout__button {
@@ -127,7 +169,7 @@
   margin-left: 0;
 }
 
-.state__map .banner__row .right__align{
+.state__map .banner__row .right__align {
   width: 60%;
 }
 

@@ -1,5 +1,5 @@
 body {
-  zoom: 90%
+  zoom: 90%;
 }
 
 .banner__desc {
@@ -661,6 +661,15 @@ textarea {
   text-align: justify;
 }
 
+.report__desc__heading {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.43;
+  letter-spacing: 1.5px;
+  color: #1a1f37;
+  margin-top: 40px;
+}
+
 .banner__desc__text {
   margin-top: 24px;
   font-size: 16px;
@@ -702,17 +711,17 @@ textarea {
   margin-right: 0;
 }
 @media screen and (max-width: 768px) {
-  main{
+  main {
     background-image: linear-gradient(to bottom, #ebf2f4, #ffffff);
   }
-.banner__images{
-  display: none;
-}
+  .banner__images {
+    display: none;
+  }
   .banner {
-    background:url(../../assets/images/index/lead-mobile-version.svg);
+    background: url(../../assets/images/index/lead-mobile-version.svg);
     background-size: cover;
     text-align: center;
-    padding:0;
+    padding: 0;
   }
   .banner__desc {
     margin-top: 50%;
@@ -733,16 +742,16 @@ textarea {
     margin: 0;
   }
 
-  .section.section__pillars{
-    margin-top:-10%;
+  .section.section__pillars {
+    margin-top: -10%;
     background: none;
   }
 
-  .thematic-pillars__title{
-    margin-top:10%;
+  .thematic-pillars__title {
+    margin-top: 10%;
   }
-  .thematic-pillars__title{
-    margin-top:10%;
+  .thematic-pillars__title {
+    margin-top: 10%;
   }
   .thematic-pillars__content {
     display: none;
@@ -765,7 +774,7 @@ textarea {
   }
   .card.governors-message-section {
     box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.06);
-    margin-bottom:-10%;
+    margin-bottom: -10%;
   }
   .section__governor__mobile .governors-message__title {
     margin-bottom: 10%;
@@ -777,10 +786,11 @@ textarea {
   .event_slide_card_description {
     height: 303px !important;
   }
-  .prev, .next{
+  .prev,
+  .next {
     padding: 0px 5px !important;
   }
-  }
+}
 
 @media (min-width: 769px) {
   .banner__desc__heading {
@@ -792,19 +802,18 @@ textarea {
     margin: 20px 0;
     font-size: 14px;
   }
-  .section__pillars__mobile{
+  .section__pillars__mobile {
     display: none;
   }
-  .pillar__slides{
+  .pillar__slides {
     display: none;
   }
-  .section__governor__mobile{
-    display: none; 
+  .section__governor__mobile {
+    display: none;
   }
-  .events-section-mobile-view{
-    display: none; 
+  .events-section-mobile-view {
+    display: none;
   }
-
 }
 
 @media only screen and (max-width: 1080px) {
@@ -943,7 +952,7 @@ textarea {
 .events-card__desc-body {
   color: #1a1f37;
   max-height: 140px;
-  overflow : hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
@@ -951,5 +960,5 @@ textarea {
 }
 
 .Slides_show {
-  display: 'inline-block';
+  display: "inline-block";
 }
