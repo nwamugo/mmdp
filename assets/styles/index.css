@@ -807,6 +807,29 @@ textarea {
 
 }
 
+@media only screen and (max-width: 1080px) {
+  .banner {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+  .map-display {
+    margin-top: 20px;
+    grid-row-start: 2;
+    grid-column-start: 1/-1;
+    margin-left: 100px;
+  }
+  .banner__desc {
+    max-width: 50%;
+    text-align: center;
+    min-height: 300px;
+    grid-row-start: 1;
+    margin-left: 100px;
+  }
+  .tapButton {
+    margin-left: -450px;
+  }
+}
 
 /* Hide the images by default */
 .mySlides {

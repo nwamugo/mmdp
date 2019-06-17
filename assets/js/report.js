@@ -11,8 +11,18 @@ $(document).ready(function () {
     $("#dropdown__icon").toggleClass("fas fa-angle-down");
   });
   $("#footer-section").load("/partials/footer.html");
-  $("#reportBtn").click(function () {
-    baseURL = window.location.host;
-    window.location.href = `http://${baseURL}/report.html`;
-  })
+});
+
+function loaded() {
+  loadMap('state-report.html');
+}
+
+document.addEventListener("DOMContentLoaded", loaded, false);
+
+$("#tap").load("../assets/svg/tap.svg", function(statusText) {
+  if (statusText == "success") {
+    document.querySelectorAll("path").forEach(pointer => {
+      pointer.setAttribute("fill", "green");
+    });
+  }
 });
