@@ -1,5 +1,4 @@
 (function() {
-  redirectUnAuthUser('/coordination-matrix.html');
   let MMDP_BASE_URL;
   if (
     window.location.host.includes("127.0.0.1") ||
@@ -33,7 +32,7 @@
     stateSpan.innerHTML = stateName.replace("%20", " ");
     try {
       const responsePromise = await fetch(
-        `${MMDP_BASE_URL}/api/v1/state-map/${stateName}`,
+        `${MMDP_BASE_URL}/api/v1/state-map/${stateName}`
       );
       const response = await responsePromise.json();
       const { stateUrl, lgaServices } = response.data;
@@ -43,20 +42,18 @@
       $("#svg-container").load(stateUrl, function(responseTxt, statusTxt, xhr) {
         if (statusTxt == "success") {
           const [, xmlPart, svgPart] = responseTxt.match(
-            /([\s\S.]*)(<svg[\s\S]*<\/svg>)/,
+            /([\s\S.]*)(<svg[\s\S]*<\/svg>)/
           );
           $("#svg-container").html(svgPart);
           $("g#Nigeria_LGA_Boundary")
             .parents("svg")
             .addClass("banner__image animated fadeInLeft slow state-map__svg");
           const lgsIds = responseTxt.match(/STL\d{6}/gm);
-          // let lgaName = '';
-          let lgasArray = [];
-          let statesArray = [];
+          let lgasArray = []
           lgsIds.map(lgsId => {
             const svgPath = document.querySelector(`[fme\\:ID=${lgsId}]`);
             const lgaName = svgPath.getAttribute('fme:lga_name');
-            const numberOfServices = getNumberOfServices(lgaServices, lgaName);
+            const numberOfServices = getNumberOfServices(lgaServices, lgaName)
             if (numberOfServices >= 35) {
               svgPath.setAttribute("fill", "#296d81");
             } else if (numberOfServices < 35 && numberOfServices >= 25) {
@@ -64,15 +61,15 @@
             } else if (numberOfServices < 25 && numberOfServices >= 5) {
               svgPath.setAttribute("fill", "#bad9e3");
             } else if (numberOfServices < 5) {
-              svgPath.setAttribute('fill', '#eaf9fe');
+              svgPath.setAttribute("fill", "#eaf9fe");
             } else {
-              svgPath.setAttribute('fill', '#eaf9fe');
+              svgPath.setAttribute("fill", "#eaf9fe");
             }
             svgPath.innerHTML = `<title>${lgaName}</title>`;
             svgPath.addEventListener(
-              'click',
+              "click",
               () => handleMapClick(lgaName),
-              false,
+              false
             );
             lgasArray.push(lgaName);
             window.variable = lgasArray;

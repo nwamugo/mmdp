@@ -51,7 +51,7 @@ $(document).ready(async function() {
   const beneficiaryCount = tableData.map(item => item.beneficiaryCount);
 
   const allCount = tableData.map(item => item.partnership);
-  
+
   window.tableData = tableData;
   keys[4] = param === "country" ? "stateLocation" : keys[4];
   const paginator = new Paginator(tableData, keys);
@@ -60,11 +60,14 @@ $(document).ready(async function() {
     "/partials/stakeholder-directory-table.html",
     function() {
       fetchLocations();
-      filter.displayDataInDropdown([... new Set(beneficiaryCount)], "#beneficiary_count_data");
+      filter.displayDataInDropdown(
+        [...new Set(beneficiaryCount)],
+        "#beneficiary_count_data"
+      );
       fetchAmountInvested();
       fetchSubtheme();
       fetchThematicPillars();
-      filter.displayDataInDropdown([... new Set(allCount)], "#partnership_data");
+      filter.displayDataInDropdown([...new Set(allCount)], "#partnership_data");
       paginator.initialPage();
       let n = 5;
       let options = "";
@@ -205,12 +208,11 @@ $(document).ready(async function() {
         .next(".container")
         .find(".thematic_subnav")
         .slideUp();
-        
-      
+
       $(this)
-      .next(".container")
-      .find(".partnership_subnav")
-      .slideUp();
+        .next(".container")
+        .find(".partnership_subnav")
+        .slideUp();
     });
   }
 
@@ -240,10 +242,10 @@ $(document).ready(async function() {
       .slideToggle();
 
     $(this)
-    .next(".container")
-    .find(".amount_subnav")
-    .slideToggle();
-    
+      .next(".container")
+      .find(".amount_subnav")
+      .slideToggle();
+
     $(this)
       .next(".container")
       .find(".beneficiary_subnav")
@@ -260,9 +262,9 @@ $(document).ready(async function() {
       .slideToggle();
 
     $(this)
-    .next(".container")
-    .find(".partnership_subnav")
-    .slideToggle();
+      .next(".container")
+      .find(".partnership_subnav")
+      .slideToggle();
   });
 
   function fetchLocations() {
