@@ -382,7 +382,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: "Muli", sans-serif !important;
+  font-family: 'Muli', sans-serif !important;
 }
 
 @media screen and (max-width: 1069px) {
@@ -698,6 +698,12 @@ textarea {
   cursor: pointer;
   opacity: 0.9;
 }
+
+.banner__button:focus {
+  outline: none;
+  background-color: #3faaca;
+}
+
 .banner__image {
   height: 460px;
   border-radius: 9px;
@@ -959,5 +965,5 @@ textarea {
 }
 
 .Slides_show {
-  display: "inline-block";
+  display: 'inline-block';
 }
