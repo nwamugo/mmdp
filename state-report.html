@@ -80,7 +80,7 @@
         <div class="thematic-pillars">
           <div class="row thematic-pillars__heading">
             <div class="thematic-pillars__title">
-              Gap Analysis Report
+              Partnership / Collaboration Report
             </div>
             <div class="thematic-pillars__desc">
               Search through our listing to quickly get information about gaps
@@ -91,22 +91,55 @@
         </div>
         <!-- Search Stakeholders Activities -->
         <section class="section search__activities__section">
-          <input
-            id="search__activities"
-            placeholder="Search Stakeholder activities"
-          />
-          <button
-            id="btn_search"
-            class="banner__button animated flashing slow delay-2s"
-          >
-            Search
-          </button>
+            <input
+              id="search__activities"
+              placeholder="Search Stakeholder activities"
+            />
+            <button
+              id="btn_search"
+              class="banner__button animated flashing slow delay-2s"
+            >
+              Search
+            </button>
         </section>
+
+        <!-- Toggle Button -->
+        <section class="gap-analysis-toggle">
+          <button
+            id="partnership-report-button"
+            class="banner__button gap-analysis-button">
+            Partnership / Collaboration
+          </button>
+
+          <button
+            id="gap-analysis-report-button"
+            class="banner__button gap-analysis-button disable">
+            Gap Analysis
+          </button> 
+        </section>
+        
         <section
-          id="stakeholder-directory-table"
-          class="stakeholder__dir__table"
-        >
-          <!-- Stakeholder directory table will be loaded dynamically here-->
+          id="partnership-report-table"
+          class="stakeholder__dir__table">
+          <div>
+            <div class="partnership-flex-container">
+              <div class="partnership-flex-row">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+
+              <div class="partnership-flex-row">
+                  
+              </div>
+
+              <div class="partnership-flex-row">
+                    
+              </div>
+            </div>
+          </div>
         </section>
       </div>
       <!-- Modal Structure -->
@@ -122,6 +155,7 @@
             >
               <tbody>
                 <!--Table rows will be loaded dynamically here-->
+                
               </tbody>
             </table>
             <img
@@ -164,5 +198,10 @@
       type="text/javascript"
       src="assets/js/stakeholder-dir-table.js"
     ></script>
+    <script
+      type="text/javascript"
+      src="assets/js/gap-analysis-toggle.js"
+    ></script>
   </body>
 </html>
+

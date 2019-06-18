@@ -699,6 +699,12 @@ textarea {
   cursor: pointer;
   opacity: 0.9;
 }
+
+.banner__button:focus {
+  outline: none;
+  background-color: #3faaca;
+}
+
 .banner__image {
   height: 460px;
   border-radius: 9px;
