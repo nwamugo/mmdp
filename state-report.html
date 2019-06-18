@@ -1,64 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="icon" href="favicon.icon" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
-      integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous" />
     <link rel="stylesheet" href="assets/styles/index.css" />
     <link rel="stylesheet" href="assets/styles/common.css" />
     <link rel="stylesheet" href="assets/styles/sidebar.css" />
     <link rel="stylesheet" href="assets/styles/animations.css?version=1" />
     <link rel="stylesheet" href="assets/styles/state-map.css" />
     <link rel="stylesheet" href="assets/styles/stakeholder-dir-table.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" />
     <title>MMDP | Report</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <header id="header-section" class="row header">
-      <!-- Header content will be loaded dynamically here -->
+        <!-- Header content will be loaded dynamically here -->
     </header>
     <main>
-      <div class="banner valign-wrapper state__map relative__position">
-        <div class="row banner__row">
-          <!-- Left hand side -->
-          <div class="col l5 banner__desc animated fadeInLeft delay-1s">
-            <div class="report__desc__heading">
-              Gap Analysis and Collaboration Report for <span id="state-name"></span> State
-            </div>
-            <div class="state-matrix-welcome-msg">
-              Report shall display an overview of missing thematic Pillars and
-              areas of collaboration/partnerships between stakeholders.
-              <br />
-              <br />
-              Tap on any Local Government Area to view the gap analysis within
-              that area.
-            </div>
-            <!-- Legend -->
-            <div class="report__map__legend__container">
-              <span class="report__map__legend report__one"
-                >&gt; 80 Services
+        <div class="banner valign-wrapper state__map relative__position">
+            <div class="row banner__row">
+                <!-- Left hand side -->
+                <div class="col l5 banner__desc animated fadeInLeft delay-1s">
+                    <div class="report__desc__heading">
+                        Gap Analysis and Collaboration Report
+                    </div>
+                    <div class="state-matrix-welcome-msg">
+                        Report shall display an overview of missing thematic Pillars and areas of collaboration/partnerships between stakeholders.
+                        <br />
+                        <br /> Tap on any Local Government Area to view the gap analysis within that area.
+                    </div>
+                    <!-- Legend -->
+                    <div class="report__map__legend__container">
+                        <span class="report__map__legend report__one">&gt; 80 Services
               </span>
-              <span class="report__map__legend report__two"
-                >40 - 80 Services</span
+                        <span class="report__map__legend report__two">40 - 80 Services</span
               >
               <span class="report__map__legend report__three"
                 >6 - 40 Services</span
@@ -117,29 +99,36 @@
             Gap Analysis
           </button> 
         </section>
+        <!-- stakeholder toggle button -->
+        <!-- <section class="section gap_analysis__toggle__button">
+        </section> -->
         
-        <section
-          id="partnership-report-table"
-          class="stakeholder__dir__table">
-          <div>
-            <div class="partnership-flex-container">
-              <div class="partnership-flex-row">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+        <section id="stakeholder-directory-table"
+          class="table">
+            <header class="table-row header">
+              <div class="col-1">
+                <input type="checkbox" name="check" class="check">
               </div>
-
-              <div class="partnership-flex-row">
-                  
+              <div class="col-2">Thematic Pillar</div>
+              <div class="col-3">Sub theme</div>
+              <div class="col-4">LGA with gaps</div>
+              <div class="col-5">Number-of-Focus-Area</div>
+            </header>
+            <main class="table-row body">
+            <!--forloop-->
+              <div class="col-1">
+                <div>
+                  <input type="checkbox" name="check" class="check">
+                </div>
               </div>
-
-              <div class="partnership-flex-row">
-                    
-              </div>
-            </div>
-          </div>
+              <div class="col-2"> <div>Pillar 1:Returnee Resettlement and Re-integration</div></div>
+              <div class="col-3"><div>Pillar 2: Skills development and Employablity</div></div>
+              <div class="col-4"><div>Pillar 3: Akoko Edo, Egor, Ikpoba Okha, Ovia North East</div></div>
+              <div class="col-5"><div>2</div></div>
+            <!--end-->
+            </main>
+        </section>
+          <!-- Stakeholder directory table will be loaded dynamically here-->
         </section>
       </div>
       <!-- Modal Structure -->
@@ -204,4 +193,3 @@
     ></script>
   </body>
 </html>
-
