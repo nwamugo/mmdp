@@ -124,15 +124,17 @@ function filteredLga(target, array = []) {
   }
   let stateName;
   const baseURL = window.location.host;
-
+  
   async function loaded() {
-    const stateNameFromUrl = window.location.search.substring(1).split("=")[1];
+    const stateNameFromUrl = 'Edo'
     if (!stateNameFromUrl) {
       window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
     }
+    
     stateName =
       stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
-    const stateSpan = document.getElementById("state-name");
+      
+    const stateSpan = document.getElementById("state-name");    
     stateSpan.innerHTML = stateName.replace("%20", " ");
     try {
       const lgaPillarPromise = await fetch(
@@ -141,7 +143,7 @@ function filteredLga(target, array = []) {
       const responsePromise = await fetch(
         `${MMDP_BASE_URL}/api/v1/state-map/${stateName}`
       );
-      const response = await responsePromise.json();
+      const response = await responsePromise.json();      
       const data = await lgaPillarPromise.json();
       const { thematicPillarCountPerLGA } = data;
       // const data  = await getPillars(stateName);
