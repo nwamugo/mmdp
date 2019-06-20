@@ -30,7 +30,7 @@
     stateName =
       stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
     const stateSpan = document.getElementById("state-name");
-    stateSpan.innerHTML = stateName.replace("%20", " ");
+    stateSpan ? stateSpan.innerHTML = stateName.replace("%20", " ") : null;
     try {
       const responsePromise = await fetch(
         `${MMDP_BASE_URL}/api/v1/state-map/${stateName}`,
@@ -78,10 +78,16 @@
             window.variable = lgasArray;
           });
           const link = document.getElementById("show-pillars");
+          const stateReportBtn = document.getElementById("state-report-btn");
           link.addEventListener(
             "click",
             () =>
               (window.location.href = `http://${baseURL}/state-pillars.html?state=${stateName}`)
+          );
+          stateReportBtn.addEventListener(
+            "click",
+            () =>
+              (window.location.href = `http://${baseURL}/state-report.html?state=${stateName}`)
           );
         }
       });
