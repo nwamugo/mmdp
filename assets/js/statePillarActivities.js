@@ -73,11 +73,25 @@ function appendDefs(id, number, pillarType) {
       "m0, 1 l-8.8, -17.7 c-3.3, -6.6 1.4, -14.3 8.8, -14.3 l0, 0 c7.4, 0 12.1, 7.7 8.8, 14.3 l-8.8, 17.7 z "
     );
 
-  const parent = document.getElementById('def' + id);
+  const parent = document.getElementById("def" + id);
   const group = d3.select(parent);
-  group.append('circle').attr('r', 6.414).attr('cy', -20.69).attr('cx', 0.1).attr('fill', '#FFF');
-  group.append('text').attr('fill', '#1A1F37').attr('font-size', 8).attr('letter-spacing', -.148).attr('font-weight', 'bold')
-    .append('tspan').attr('x', -4).attr('y', -18.69).attr('id', 'tspan').html(number);
+  group
+    .append("circle")
+    .attr("r", 6.414)
+    .attr("cy", -20.69)
+    .attr("cx", 0.1)
+    .attr("fill", "#FFF");
+  group
+    .append("text")
+    .attr("fill", "#1A1F37")
+    .attr("font-size", 8)
+    .attr("letter-spacing", -0.148)
+    .attr("font-weight", "bold")
+    .append("tspan")
+    .attr("x", -4)
+    .attr("y", -18.69)
+    .attr("id", "tspan")
+    .html(number);
 }
 
 function addMarker(x, y, pillarId) {
