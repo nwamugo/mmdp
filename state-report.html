@@ -21,6 +21,7 @@
     />
     <link rel="stylesheet" href="assets/styles/index.css" />
     <link rel="stylesheet" href="assets/styles/common.css" />
+    <link rel="stylesheet" href="assets/styles/coordination-matrix.css" />
     <link rel="stylesheet" href="assets/styles/sidebar.css" />
     <link rel="stylesheet" href="assets/styles/animations.css?version=1" />
     <link rel="stylesheet" href="assets/styles/state-map.css" />
@@ -42,7 +43,7 @@
           <!-- Left hand side -->
           <div class="col l5 banner__desc animated fadeInLeft delay-1s">
             <div class="report__desc__heading">
-              Gap Analysis and Collaboration Report for <span id="state-name"></span> State
+              Gap Analysis and Collaboration Report
             </div>
             <div class="state-matrix-welcome-msg">
               Report shall display an overview of missing thematic Pillars and
@@ -99,6 +100,7 @@
           </ul>
         </div>
       </div>
+
       <!-- Stakeholder directory section -->
       <div class="section section__pillars">
         <div class="thematic-pillars">
@@ -120,7 +122,6 @@
         <section class="section search__activities__section">
           <input
             id="search__activities"
-            placeholder="Search Stakeholder activities"
           />
           <button
             id="btn_search"
@@ -146,9 +147,11 @@
             Gap Analysis
           </button>
         </section>
+        <!-- stakeholder toggle button -->
+
+        <!-- Report Tables -->
+        <div id="potential-partnerships-table"></div>
       </div>
-      <!-- Report Tables -->
-      <div id="potential-partnerships-table"></div>
     </main>
     <footer id="footer-section" class="footer">
       <!-- content will be loaded dynamically here -->
@@ -167,8 +170,6 @@
       type="text/javascript"
       src="assets/js/state-matrix-header.js"
     ></script>
-    <script type="text/javascript" src="assets/js/utils.js"></script>
-    <script type="text/javascript" src="assets/js/matrix-header.js"></script>
     <script type="text/javascript" src="assets/js/cms/utils.js"></script>
     <script
       type="text/javascript"
@@ -176,13 +177,23 @@
       charset="utf-8"
     ></script>
     <script type="text/javascript" src="assets/js/paginator.js"></script>
+    <script type="text/javascript" src="assets/js/tableRows.js"></script>
+    <script type="text/javascript" src="assets/js/tableRows.js"></script>
     <script
       type="text/javascript"
       src="assets/js/beneficiary-handlers.js"
     ></script>
     <script
       type="text/javascript"
-      src="assets/js/stakeholder-dir-table.js"
+      src="assets/js/getFocusAreasByLga.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="assets/js/potentialPartnershipsTable.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="assets/js/gap-analysis-toggle.js"
     ></script>
   </body>
 </html>

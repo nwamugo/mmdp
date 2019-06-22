@@ -127,19 +127,15 @@ function getNumberOfServices(lgaServices, lgaName) {
   }
 
   let stateName;
-  const baseURL = window.location.host;
 
   async function loaded() {
-    const stateNameFromUrl = 'Edo';
+    const stateNameFromUrl = window.location.search.substring(1).split('=')[1];
     if (!stateNameFromUrl) {
       window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
     }
-
     stateName =
       stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
 
-    const stateSpan = document.getElementById('state-name');
-    stateSpan.innerHTML = stateName.replace('%20', ' ');
     try {
       const lgaPillarPromise = await fetch(
         `${MMDP_BASE_URL}/api/v1/location?state=${stateName}&focusAreaName`
