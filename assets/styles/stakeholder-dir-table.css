@@ -606,6 +606,11 @@ table.stakeholder__details__table .row__value {
   border: 2px solid #cae7f0;
 }
 
+.gap-analysis-table-mobile {
+  display: none;
+  border: 2px solid #cae7f0;
+}
+
 .partnership-table-web .fas {
   color: #73d5e7;
 }
@@ -647,6 +652,10 @@ table.stakeholder__details__table .row__value {
   font-size: 16px;
 }
 
+#gap-analysis-report-table {
+  display: none;
+}
+
 @media screen and (max-width: 1118px) {
   #partnership-report-button {
     margin-left: 0;
@@ -662,6 +671,10 @@ table.stakeholder__details__table .row__value {
     display: block;
   }
 
+  .gap-analysis-table-mobile {
+    display: block;
+  }
+
   .gap-analysis-button {
     font-size: 12px;
   }
@@ -673,6 +686,10 @@ table.stakeholder__details__table .row__value {
   }
 
   .partnership-table-mobile {
+    width: 90%;
+  }
+
+  .gap-analysis-table-mobile {
     width: 90%;
   }
 }

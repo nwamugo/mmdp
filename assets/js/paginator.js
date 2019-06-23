@@ -1,5 +1,5 @@
 class Paginator {
-  constructor(data, columnKeys) {
+  constructor(data, columnKeys, table) {
     this.data = data;
     this.tempData = [];
     this.empData = false;
@@ -8,6 +8,7 @@ class Paginator {
     this.totalPage = this.getTotalPage();
     this.columnKeys = columnKeys;
     this.potentialPartnershipsTable = false;
+    this.table = table;
   }
   getData = () => {
     if (this.empData) {
@@ -96,7 +97,12 @@ class Paginator {
   };
   createTableBody = rows => {
     if (this.potentialPartnershipsTable) {
-      $('#partnership-report-data').html(rows);
+      if (this.table === 'gapAnalysis') {
+        $('#gap-analysis-data').html(rows);
+      } else {
+        $('#partnership-report-data').html(rows);
+      }
+      
     } else {
       $('tbody.table__body').html(rows);
       bindJQuery();
