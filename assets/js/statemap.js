@@ -53,7 +53,7 @@
           lgsIds.map(lgsId => {
             const svgPath = document.querySelector(`[fme\\:ID=${lgsId}]`);
             const lgaName = svgPath.getAttribute('fme:lga_name');
-            const numberOfServices = getNumberOfServices(lgaServices, lgaName);
+            const numberOfServices = getNumberOfServices(lgaServices, lgaName)
             if (numberOfServices >= 35) {
               svgPath.setAttribute('fill', '#296d81');
             } else if (numberOfServices < 35 && numberOfServices >= 25) {
@@ -61,14 +61,14 @@
             } else if (numberOfServices < 25 && numberOfServices >= 5) {
               svgPath.setAttribute('fill', '#bad9e3');
             } else if (numberOfServices < 5) {
-              svgPath.setAttribute('fill', '#eaf9fe');
+              svgPath.setAttribute("fill", "#eaf9fe");
             } else {
-              svgPath.setAttribute('fill', '#eaf9fe');
+              svgPath.setAttribute("fill", "#eaf9fe");
             }
 
             svgPath.innerHTML = `<title>${lgaName}</title>`;
             svgPath.addEventListener(
-              'click',
+              "click",
               () => handleMapClick(lgaName),
               false
             );

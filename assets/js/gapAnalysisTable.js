@@ -49,13 +49,14 @@ $(document).ready(async function() {
           paginator.entriesPerPage = this.value;
           paginator.refreshTableBody();
         });
-        $('#next-page').click(function() {
+        $('#gap-next-page').click(function() {
           paginator.nextPage();
         });
-        $('#previous-page').click(function() {
+        $('#gap-previous-page').click(function() {
           paginator.previousPage();
         });
       }
     );
   });
+
   

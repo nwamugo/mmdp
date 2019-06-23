@@ -2,14 +2,14 @@
     <!-- Partnership Table -->
     <section id="gap-analysis-report-table" class="table">
         <section class="partnership-table-web">
-            <header class="table-row header">
-                <div class="col-1">
+            <header class="table-row header gap-header">
+                <div class="report-col-1">
                     <input type="checkbox" name="check" class="check" />
                 </div>
-                <div class="col-2">Thematic Pillar <i class="fas fa-angle-down fa-xs"></i></div>
-                <div class="col-3">Sub theme <i class="fas fa-angle-down fa-xs"></i></div>
-                <div class="col-4">LGA with gaps <i class="fas fa-angle-down fa-xs"></i></div>
-                <div class="col-5">Number of Focus Areas with gaps <i class="fas fa-angle-down fa-xs"></i></div>
+                <div class="report-col-2">Thematic Pillar <i class="fas fa-angle-down fa-xs"></i></div>
+                <div class="report-col-3">Sub theme <i class="fas fa-angle-down fa-xs"></i></div>
+                <div class="report-col-4">LGA with gaps <i class="fas fa-angle-down fa-xs"></i></div>
+                <div class="report-col-5">Number of Focus Areas with gaps <i class="fas fa-angle-down fa-xs"></i></div>
             </header>
             <!--Rows will be loaded dynamically here-->
             <div id="gap-analysis-data"></div>
@@ -26,10 +26,10 @@
                                 <!-- options will be loaded dynamically-->
                             </select>
                             <span>Entries per page</span>
-                            <span>Page <span id="current-page">1</span> of
-                                <span id="total-page">1</span></span>
-                            <button id="previous-page" class="go-back">&#60;</button>
-                            <button id="next-page" class="go-forward">&#62;</button>
+                            <span>Page <span id="gap-current-page">1</span> of
+                                <span id="gap-total-page">1</span></span>
+                            <button id="gap-previous-page" class="go-back">&#60;</button>
+                            <button id="gap-next-page" class="go-forward">&#62;</button>
                         </span>
                     </td>
                 </tr>
