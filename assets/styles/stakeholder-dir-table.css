@@ -234,7 +234,6 @@ table.stakeholder__details__table .row__value {
 
 .mmdp__bg__img {
   position: absolute;
-  position: absolute;
   right: 55px;
   bottom: 69px;
   width: 32%;
@@ -259,7 +258,7 @@ table.stakeholder__details__table .row__value {
   border-radius: 0px;
   background-color: #296d81;
   padding: 0%;
-  margin-top: -1.3%;
+  margin-top: -1.5%;
   height: 40px;
 }
 
@@ -366,6 +365,22 @@ table.stakeholder__details__table .row__value {
   height: 40%;
 }
 
+.beneficiary_filter_data,
+.subtheme_filter_data,
+.amount_filter_data,
+.thematic_filter_data,
+.partnership_filter_data {
+  background-color: white;
+  margin-top: -7.7%;
+  height: 40%;
+}
+
+.beneficiary_filter_data {
+  background-color: white;
+  margin-top: -8.5%;
+  height: 40%;
+}
+
 #data tbody tr td,
 #beneficiary_count_data tbody tr td,
 #data_amount tbody tr td,
@@ -416,18 +431,9 @@ table.stakeholder__details__table .row__value {
 #partnership_data tbody {
   display: block;
   overflow: auto;
-  height: 160px;
+  height: 100%;
   padding-left: 30px;
   width: 100%;
-}
-
-.mmdp__bg__img {
-  position: absolute;
-  right: 55px;
-  bottom: 69px;
-  width: 32%;
-  object-fit: contain;
-  opacity: 0.04;
 }
 
 #data #checkBox,
@@ -464,7 +470,7 @@ table.stakeholder__details__table .row__value {
   display: none;
   position: absolute;
   width: 62.5%;
-  margin-left: -43%;
+  margin-left: -30%;
   -webkit-box-shadow: 0px 0px 23px -2px #707070;
   -moz-box-shadow: 0px 0px 23px -2px #707070;
   box-shadow: 0px 0px 23px -2px #707070;
@@ -474,7 +480,7 @@ table.stakeholder__details__table .row__value {
   display: none;
   position: absolute;
   width: 62.5%;
-  margin-left: -20%;
+  margin-left: -16%;
   -webkit-box-shadow: 0px 0px 23px -2px #707070;
   -moz-box-shadow: 0px 0px 23px -2px #707070;
   box-shadow: 0px 0px 23px -2px #707070;

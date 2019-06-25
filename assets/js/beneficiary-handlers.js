@@ -78,9 +78,9 @@ function handleBeneficiaries(beneficiaries) {
   );
 
   const benefitTotal = benefitMale + benefitFemale;
-  const malePercent = Math.round(benefitTotal
-    ? (parseInt(benefitMale) / parseInt(benefitTotal)) * 100
-    : 0);
+  const malePercent = Math.round(
+    benefitTotal ? (parseInt(benefitMale) / parseInt(benefitTotal)) * 100 : 0
+  );
   const femalePercent = benefitTotal ? 100 - malePercent : 0;
   return {
     thematicPillars: [...extractedData.thematicPillars].join(", "),
@@ -110,10 +110,10 @@ function handleStakeholdersData(data) {
   return data.map((stakeholder, index) => {
     const organisationName = stakeholder.organisationName;
     const partners = getParnerships(stakeholder.partnerships);
-    const partnership = partners.length ? partners.join(', ') : 'None';
+    const partnership = partners.length ? partners.join(", ") : "None";
     const founder = stakeholder.founder;
     const organisationType = stakeholder.organisationTypeId.typeName; // needs modification from the backend
-    const notes = stakeholder.notes || '';
+    const notes = stakeholder.notes || "";
     const otherDetails = stakeholder.beneficiaries.reduce(
       (tempStore, beneficiary) => {
         tempStore.duration.add(beneficiary.duration);
@@ -126,6 +126,7 @@ function handleStakeholdersData(data) {
         tempStore.beneficiaryCount.add(beneficiary.totalNumberOfBeneficiaries);
         tempStore.amountInvested =
           beneficiary.fundingSources[0].amountInvestedRange.amountInvestedRange;
+
         tempStore.focusArea.add(
           beneficiary.focusArea.focusAreaName.focusAreaName
         );
@@ -139,7 +140,9 @@ function handleStakeholdersData(data) {
           ...beneficiary.communities.map(community => community.lgaId.lgaName)
         );
         tempStore.stateLocation.push(
-          ...beneficiary.communities.map(community => community.stateId.stateName)
+          ...beneficiary.communities.map(
+            community => community.stateId.stateName
+          )
         );
         return tempStore;
       },
@@ -156,22 +159,21 @@ function handleStakeholdersData(data) {
         stateLocation: []
       }
     );
-
     // stringify beneficiary other details
     const stringifiedDetails = {
-      thematicPillars: [...otherDetails.thematicPillars].join(', '),
-      subThemes: [...otherDetails.subThemes].join(', '),
+      thematicPillars: [...otherDetails.thematicPillars].join(", "),
+      subThemes: [...otherDetails.subThemes].join(", "),
       beneficiaryCount: [...otherDetails.beneficiaryCount].reduce(
         (partial_sum, count) => partial_sum + count,
         0
       ),
       amountInvested: otherDetails.amountInvested,
-      focusArea: [...otherDetails.focusArea].join(', '),
-      fundingSources: [...otherDetails.fundingSources].join(', '),
-      beneficiaryService: [...otherDetails.beneficiaryService].join(', '),
-      duration: [...otherDetails.duration].join(', '),
-      location: [...new Set(otherDetails.location)].join(', '),
-      stateLocation: [...new Set(otherDetails.stateLocation)].join(', ')
+      focusArea: [...otherDetails.focusArea].join(", "),
+      fundingSources: [...otherDetails.fundingSources].join(", "),
+      beneficiaryService: [...otherDetails.beneficiaryService].join(", "),
+      duration: [...otherDetails.duration].join(", "),
+      location: [...new Set(otherDetails.location)].join(", "),
+      stateLocation: [...new Set(otherDetails.stateLocation)].join(", ")
     };
     return {
       id: index + 1,
