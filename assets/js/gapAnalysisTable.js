@@ -5,9 +5,11 @@ $(document).ready(async function() {
         "LgasWithGaps",
         "focusAreasWithGapsCount",
     ];
+
+    const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
   
     const gapAnalysisReportData = await fetch(
-      `${MMDP_BASE_URL}/api/v1/gapAnalysis`
+      `${MMDP_BASE_URL}/api/v1/gapAnalysis/${queryNameFromUrl}`
     );
     const data = await gapAnalysisReportData.json();
   
@@ -17,13 +19,32 @@ $(document).ready(async function() {
         let gapReport = [];
         for (const report of data.report){
             for (const item of report.data){
-                const row = {};
-                row.pillar = report.pillarName;
-                row.subtheme = item.subThemeName;
-                row.LgasWithGaps = item.AllLgasWithGaps;
-                row.focusAreasWithGapsCount = item.focusAreasWithGapsCount;
-                gapReport.push(row)
+              const row = {};
+              row.pillar = report.pillarName;
+              row.subtheme = item.subThemeName;
+              if (item.AllLgasWithGaps.length !== 0) {
+                var lgas = item.AllLgasWithGaps;
+                let LGAs = []
+                for (let lga of lgas) {
+                  if(lga.includes(",")){
+                    lga = lga.substring( 0, lga.indexOf(","))
+                    LGAs.push(lga)
+                  } else {
+                    lga = lga
+                    LGAs.push(lga)
+                  }
                 }
+                var uniqueLgas = [];
+                $.each(LGAs, function(i, el){
+                    if($.inArray(el, uniqueLgas) === -1) uniqueLgas.push(el);
+                });
+                row.LgasWithGaps = uniqueLgas.join(', ');
+              } else {
+                row.LgasWithGaps = 'No Lga with gap'; 
+              }
+              row.focusAreasWithGapsCount = item.focusAreasWithGapsCount;
+              gapReport.push(row)
+              }
         }
 
         let table = 'gapAnalysis';

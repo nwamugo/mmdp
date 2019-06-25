@@ -281,7 +281,9 @@ $(document).ready(async function() {
             }
             filter.displayDataInDropdown(stateArray, "#data");
           })
-          .catch(err => console.log(err));
+          .catch(err => {
+            throw err;
+          });
       });
       return;
     }
@@ -302,7 +304,9 @@ $(document).ready(async function() {
           }
           filter.displayDataInDropdown(amountsInvestedArray, "#data_amount");
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          throw err;
+        });
     });
   }
 
@@ -336,7 +340,9 @@ $(document).ready(async function() {
           }
           filter.displayDataInDropdown(subthemeArray, "#data_subtheme");
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          throw err;
+        });
     });
   }
 

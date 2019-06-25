@@ -24,7 +24,9 @@
       $('#past-events').html(RenderAllEvents(pastList, 6, false, pastEventsHtml));
       $('#up-events').html(RenderAllEvents(commingList, 3, true, ComingEventsHtml));
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      throw error;
+    });
 
   // Web Sockets
   const socket = io(SocketUrl);

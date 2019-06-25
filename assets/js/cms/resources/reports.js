@@ -72,7 +72,9 @@
           const { pagination, reports } = res.data
           render(reports, elementId, url, pagination);
           scrollToTop();
-        }).catch((err) => console.log(err));
+        }).catch((err) => {
+          throw err;
+        });
       })
   }
 

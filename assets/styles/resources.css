@@ -170,6 +170,7 @@ hr.content-devider.reports-devider {
 
 .previous-button, .next-button {
   padding: 0em .4em;
+  margin-right: 15px;
 }
 
 .square-shape {
@@ -339,6 +340,8 @@ select.filter__dropdown {
   width: 100%;
   margin-bottom: 1em;
   background-color: #d8d8d8;
+  /* max-width: 100%; */
+  max-height: 100% !important;
 }
 
 .photos-videos__pagination {
@@ -404,6 +407,7 @@ select.filter__dropdown {
 
 .media-player__video {
   width: 100%;
+  height: 100%;
 }
 
 .video-modal {
@@ -415,7 +419,7 @@ select.filter__dropdown {
 }
 
 .btn-modal {
-  margin-top: 25%;
+  margin-top: 20%;
   font-size: 40px;
   cursor: pointer;
 }

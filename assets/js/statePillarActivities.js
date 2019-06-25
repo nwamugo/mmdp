@@ -127,32 +127,25 @@ function filteredLga(target, array = []) {
 
   async function loaded() {
     const stateNameFromUrl = window.location.search.substring(1).split("=")[1];
-    console.log(stateNameFromUrl, 'statenamefromurl');
     
     if (!stateNameFromUrl) {
       window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
     }
     stateName =
       stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
-    console.log(stateName, 'statename');
 
     const stateSpan = document.getElementById("state-name");
     stateSpan.innerHTML = stateName.replace("%20", " ");
-    console.log(stateSpan, 'stateSpan');
     
     try {
       const lgaPillarPromise = await fetch(
         `${MMDP_BASE_URL}/api/v1/location?state=${stateName}&focusAreaName`
       );
-      console.log(lgaPillarPromise, 'lgapillarpromise')
       const responsePromise = await fetch(
         `${MMDP_BASE_URL}/api/v1/state-map/${stateName}`
       );
-      console.log(responsePromise, 'responsePromise')
       const response = await responsePromise.json();
-      console.log(response, 'response')
       const data = await lgaPillarPromise.json();
-      console.log(data, 'data');
       
       const { thematicPillarCountPerLGA } = data;
       // const data  = await getPillars(stateName);
@@ -161,31 +154,25 @@ function filteredLga(target, array = []) {
         window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
       }
       $("#state-map-pillars").load(stateUrl, function(responseTxt, statusTxt) {
-        console.log(statusTxt, 'txt');
         
         if (statusTxt === "success") {
           const [, xmlPart, svgPart] = responseTxt.match(
             /([\s\S.]*)(<svg[\s\S]*<\/svg>)/
           );
-          console.log(svgPart, 'svgpart');
           
           $("#state-map-pillars").html(svgPart);
           $("g#Nigeria_LGA_Boundary")
             .parents("svg")
             .addClass("banner__image animated fadeInLeft slow state-map__svg");
           document.querySelectorAll("path").forEach(lgaMap => {
-            // console.log(lgaMap);
             
             // select lga_name as the lgaId
             const lgaId = d3.select(lgaMap).attr(":fme:lga_name");
-            console.log(lgaId, 'lgaid');
             
             lgaMap.setAttribute("fill", "#fcffff");
             lgaMap.innerHTML = `<title>${lgaId}</title>`;
             const lgaData = filteredLga(lgaId, thematicPillarCountPerLGA);
-            console.log(lgaData, 'lgadata');
-            
-
+          
             if (lgaId && lgaData) {
               lgaMap.setAttribute("id", lgaId.replace(/ +/g, ""));
               lgaMap.setAttribute("class", "path");
