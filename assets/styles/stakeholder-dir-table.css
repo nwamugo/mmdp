@@ -66,10 +66,6 @@
   margin-top: 7px;
 }
 
-.stakeholder__dir__table .organisation__name div {
-  width: 85%;
-}
-
 .search__activities__section {
   display: flex;
   flex-wrap: wrap;
@@ -252,7 +248,8 @@ table.stakeholder__details__table .row__value {
 .amount_filters,
 .partnership_filters,
 .subtheme_filters,
-.thematic_filters {
+.thematic_filters,
+.organisation_filters {
   width: 100%;
   border-radius: 0px;
   background-color: #296d81;
@@ -265,7 +262,8 @@ table.stakeholder__details__table .row__value {
 .amount_filters p,
 .partnership_filters p,
 .subtheme_filters p,
-.thematic_filters p {
+.thematic_filters p,
+.organisation_filters p {
   font-family: Muli;
   font-style: normal;
   color: white;
@@ -280,7 +278,8 @@ table.stakeholder__details__table .row__value {
 .amount_filters button.apply_filter__button,
 .partnership_filters button.apply_filter__button,
 .subtheme_filters button.apply_filter__button,
-.thematic_filters button.apply_filter__button {
+.thematic_filters button.apply_filter__button,
+.organisation_filters button.apply_filter__button {
   color: white;
   background: #3faaca;
   margin-top: 5px;
@@ -303,7 +302,8 @@ table.stakeholder__details__table .row__value {
 .amount_filters button.clear_filter__button,
 .partnership_filters button.clear_filter__button,
 .subtheme_filters button.clear_filter__button,
-.thematic_filters button.clear_filter__button {
+.thematic_filters button.clear_filter__button,
+.organisation_filters button.clear_filter__button {
   color: #3faaca;
   cursor: pointer;
   background: white;
@@ -340,18 +340,18 @@ table.stakeholder__details__table .row__value {
 }
 
 .stakeholder_filter_data,
-.location_filter_data,
-.partnership_filter_data {
+.partnership_filter_data
+.location_filter_data {
   background-color: white;
   margin-top: -5.7%;
   height: 40%;
 }
 
-.beneficiary_filter_data,
 .subtheme_filter_data,
 .amount_filter_data,
 .thematic_filter_data,
-.partnership_filter_data {
+.partnership_filter_data,
+.organisation_filter_data {
   background-color: white;
   margin-top: -7.7%;
   height: 40%;
@@ -359,7 +359,7 @@ table.stakeholder__details__table .row__value {
 
 .beneficiary_filter_data {
   background-color: white;
-  margin-top: -8.5%;
+  margin-top: -10%;
   height: 40%;
 }
 
@@ -368,11 +368,12 @@ table.stakeholder__details__table .row__value {
 #data_amount tbody tr td,
 #data_subtheme tbody tr td,
 #thematic_data tbody tr td,
-#partnership_data tbody tr td {
+#partnership_data tbody tr td,
+#organisation_data tbody tr td {
   padding: 5px 5px 5px 5px;
   font-size: small;
   font-weight: normal;
-  width: 10%;
+  width: 5%;
 }
 #data tbody tr,
 #data tbody tr td,
@@ -391,7 +392,10 @@ table.stakeholder__details__table .row__value {
 #thematic_data tbody tr,
 #partnership_data tbody tr td,
 #partnership_data,
-#partnership_data tbody tr {
+#partnership_data tbody tr,
+#organisation_data,
+#organisation_data tbody tr,
+#organisation_data tbody tr td {
   border: none;
 }
 #data tbody tr,
@@ -399,7 +403,8 @@ table.stakeholder__details__table .row__value {
 #beneficiary_count_data tbody tr,
 #data_subtheme tbody tr,
 #thematic_data tbody tr,
-#partnership_data tbody tr {
+#partnership_data tbody tr,
+#organisation_data tbody tr {
   height: 40px;
 }
 #data tbody,
@@ -407,7 +412,8 @@ table.stakeholder__details__table .row__value {
 #beneficiary_count_data tbody,
 #data_subtheme tbody,
 #thematic_data tbody,
-#partnership_data tbody {
+#partnership_data tbody,
+#organisation_data tbody {
   display: block;
   overflow: auto;
   height: 100%;
@@ -428,7 +434,8 @@ table.stakeholder__details__table .row__value {
 #beneficiary_filter_data #checkBox,
 #data_subtheme #checkBox,
 #thematic_data #checkBox,
-#partnership_data #checkBox {
+#partnership_data #checkBox,
+#organisation_data #checkBox {
   cursor: pointer;
 }
 .amount_subnav {
@@ -706,4 +713,14 @@ table.stakeholder__details__table .row__value {
   .gap-analysis-button {
     font-size: 6px;
   }
+}
+
+.organisation_subnav {
+  display: none;
+  position: absolute;
+  width: 62.5%;
+  margin-left: -4%;
+  -webkit-box-shadow: 0px 0px 23px -2px #707070;
+  -moz-box-shadow: 0px 0px 23px -2px #707070;
+  box-shadow: 0px 0px 23px -2px #707070;
 }

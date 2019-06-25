@@ -49,6 +49,7 @@ $(document).ready(async function() {
   // neededData
   const tableData = handleStakeholdersData(data.filteredStakeholders);
   const beneficiaryCount = tableData.map(item => item.beneficiaryCount);
+  const organisationName = tableData.map(item => item.organisationName);
 
   const allCount = tableData.map(item => item.partnership);
 
@@ -63,6 +64,10 @@ $(document).ready(async function() {
       filter.displayDataInDropdown(
         [...new Set(beneficiaryCount)],
         "#beneficiary_count_data"
+      );
+      filter.displayDataInDropdown(
+        [...new Set(organisationName)],
+        "#organisation_data"
       );
       fetchAmountInvested();
       fetchSubtheme();
@@ -213,6 +218,11 @@ $(document).ready(async function() {
         .next(".container")
         .find(".partnership_subnav")
         .slideUp();
+
+      $(this)
+        .next(".container")
+        .find(".organisation_subnav")
+        .slideUp();
     });
   }
 
@@ -264,6 +274,11 @@ $(document).ready(async function() {
     $(this)
       .next(".container")
       .find(".partnership_subnav")
+      .slideToggle();
+
+    $(this)
+      .next(".container")
+      .find(".organisation_subnav")
       .slideToggle();
   });
 
