@@ -65,6 +65,8 @@
 
 .lga__position {
   margin-top: 196px;
+  margin-left: -200px !important;
+  margin-right: 100px;
 }
 
 .one:before {
@@ -133,6 +135,7 @@
 #svg-container {
   width: 677px;
   height: 584px;
+  padding-left: 200px;
 }
 
 .info_panel {
