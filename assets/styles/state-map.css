@@ -21,6 +21,7 @@
 
 .state__map .links__container .right__align {
   float: right;
+  margin-right: 140px;
 }
 
 .state__map .banner__button {
@@ -164,6 +165,10 @@
   width: 100%;
 }
 
+.pillars__container {
+  margin-left: -180px !important; 
+}
+
 .state__map .banner__row .banner__desc {
   width: 40%;
   margin-left: 0;
@@ -176,5 +181,4 @@
 .banner__image.state-map__svg {
   width: 705px;
   height: 600px;
-  margin-right: 50%;
 }
