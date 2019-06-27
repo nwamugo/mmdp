@@ -1,7 +1,7 @@
 function getPoint(x, y) {
   const svg = document
-    .querySelector('#report-map-pillars')
-    .querySelector('svg');
+    .querySelector("#report-map-pillars")
+    .querySelector("svg");
   let pt = svg.createSVGPoint();
   pt.x = x;
   pt.y = y;
@@ -121,8 +121,8 @@ function getNumberOfServices(lgaServices, lgaName) {
 (function() {
   const baseURL = window.location.host;
   let MMDP_BASE_URL;
-  if (baseURL.includes('127.0.0.1') || baseURL.includes('localhost')) {
-    MMDP_BASE_URL = 'http://localhost:3000';
+  if (baseURL.includes("127.0.0.1") || baseURL.includes("localhost")) {
+    MMDP_BASE_URL = "http://localhost:3000";
   } else {
     MMDP_BASE_URL = 'http://cms-staging.mmdp.ng:3000';
   }

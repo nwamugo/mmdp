@@ -44,10 +44,10 @@
           const [, xmlPart, svgPart] = responseTxt.match(
             /([\s\S.]*)(<svg[\s\S]*<\/svg>)/
           );
-          $('#svg-container').html(svgPart);
-          $('g#Nigeria_LGA_Boundary')
-            .parents('svg')
-            .addClass('banner__image animated fadeInLeft slow state-map__svg');
+          $("#svg-container").html(svgPart);
+          $("g#Nigeria_LGA_Boundary")
+            .parents("svg")
+            .addClass("banner__image state-map__svg");
           const lgsIds = responseTxt.match(/STL\d{6}/gm);
           let lgasArray = [];
           lgsIds.map(lgsId => {

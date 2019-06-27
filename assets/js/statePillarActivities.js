@@ -31,6 +31,7 @@ function getCoordinates(lgaId, count) {
     //elementFromPoint returns the topmost Element at the specified coordinates (relative to the viewport).
     let elmt = document.elementFromPoint(x, y);
     // if the point is in path
+
     if (
       elmt &&
       elmt.className.baseVal === "path" &&
@@ -148,7 +149,6 @@ function filteredLga(target, array = []) {
       const data = await lgaPillarPromise.json();
       
       const { thematicPillarCountPerLGA } = data;
-      // const data  = await getPillars(stateName);
       const { stateUrl } = response.data;
       if (!stateUrl) {
         window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
@@ -163,7 +163,7 @@ function filteredLga(target, array = []) {
           $("#state-map-pillars").html(svgPart);
           $("g#Nigeria_LGA_Boundary")
             .parents("svg")
-            .addClass("banner__image animated fadeInLeft slow state-map__svg");
+            .addClass("banner__image state-map__svg");
           document.querySelectorAll("path").forEach(lgaMap => {
             
             // select lga_name as the lgaId
@@ -179,6 +179,7 @@ function filteredLga(target, array = []) {
               lgaMap.setAttribute("class", "path");
               const count = lgaData.pillars.length;
               const points = getCoordinates(lgaId, count);
+
               if (points.length > 0) {
                 for (let i = 0; i <= points.length - 1; i++) {
                   const number = lgaData.pillars[i].count;

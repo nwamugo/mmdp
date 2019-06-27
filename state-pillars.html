@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="icon" href="favicon.icon" />
     <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
     <link
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
     />
     <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
-            integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
-            crossorigin="anonymous"
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
+      integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
+      crossorigin="anonymous"
     />
     <link rel="stylesheet" href="assets/styles/index.css" />
     <link rel="stylesheet" href="assets/styles/common.css" />
@@ -26,138 +26,176 @@
     <link rel="stylesheet" href="assets/styles/state-map.css" />
     <link rel="stylesheet" href="assets/styles/stakeholder-dir-table.css" />
     <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
     />
     <title>MMDP | State Map</title>
-</head>
+  </head>
 
-<body>
-<header id="header-section" class="row header">
-    <!-- Header content will be loaded dynamically here -->
-</header>
-<main>
-    <div class="banner valign-wrapper state__map relative__position">
+  <body>
+    <header id="header-section" class="row header">
+      <!-- Header content will be loaded dynamically here -->
+    </header>
+    <main>
+      <div class="banner valign-wrapper state__map relative__position">
         <div class="row banner__row">
-            <!-- Left hand side -->
-            <div class="col l5 banner__desc animated fadeInLeft delay-1s">
-                <div class="banner__desc__heading">
-                    Welcome to The <span id="state-name"></span> State <br>Coordination
-                    Matrix
-                </div>
-                <div class="state-matrix-welcome-msg">
-                    Click on any Local Government Area on the map to view the activities
-                    of organisations within that area.
-                </div>
-                <!-- Legend -->
-                <div class="map__legend__container">
-                    <span class="map__legend one">&gt; 35 Services </span>
-                    <span class="map__legend two">23 - 25 Services</span>
-                    <span class="map__legend three">6 - 22 Services</span>
-                    <span class="map__legend four">&lt; 5 Services</span>
-                </div>
-                <!-- Report Button-->
-                <a href="#">
-                    <button class="banner__button animated flashing slow delay-2s">
-                        Report
-                    </button>
-                </a>
+          <!-- Left hand side -->
+          <div class="col l5 banner__desc">
+            <div class="banner__desc__heading">
+              Welcome to The <span id="state-name"></span> State Cordination
+              Matrix
             </div>
-            <!-- Right hand side - Map -->
-            <div
-                    id="state-map-pillars"
-                    class="col l7 banner__images right-align"
-            >
-                <!-- SVG content will be loaded dynamically here -->
+            <div class="state-matrix-welcome-msg">
+              Click on any Local Government Area on the map to view the
+              activities of organisations within that area.
             </div>
+            <!-- Legend -->
+            <div class="map__legend__container">
+              <span class="map__legend one">&gt; 35 Services </span>
+              <span class="map__legend two">23 - 25 Services</span>
+              <span class="map__legend three">6 - 22 Services</span>
+              <span class="map__legend four">&lt; 5 Services</span>
+            </div>
+            <!-- Report Button-->
+            <a href="#">
+              <button class="banner__button animated flashing slow delay-2s">
+                Report
+              </button>
+            </a>
+          </div>
+          <!-- Right hand side - Map -->
+          <div id="state-map-pillars" class="col l7 banner__images right-align">
+            <!-- SVG content will be loaded dynamically here -->
+          </div>
         </div>
         <!-- Pillars -->
-        <div class="row pillar-icons">
-            <ul class="pillars__container">
-                <li><img src="/assets/svg/pillar1.svg" alt="pillar1"><span class="span-text">Pillar 1</span></li>
-                <li><img src="/assets/svg/pillar2.svg" alt="pillar1"><span class="span-text">Pillar 2</span></li>
-                <li><img src="/assets/svg/pillar3.svg" alt="pillar1"><span class="span-text">Pillar 3</span></li>
-                <li><img src="/assets/svg/pillar4.svg" alt="pillar1"><span class="span-text">Pillar 4</span></li>
-            </ul>
+        <div class="pillar-icons">
+          <ul>
+            <li>
+              <img src="/assets/svg/pillar1.svg" alt="pillar1" /><span
+                class="span-text"
+                >Pillar 1</span
+              >
+            </li>
+            <li>
+              <img src="/assets/svg/pillar2.svg" alt="pillar1" /><span
+                class="span-text"
+                >Pillar 2</span
+              >
+            </li>
+            <li>
+              <img src="/assets/svg/pillar3.svg" alt="pillar1" /><span
+                class="span-text"
+                >Pillar 3</span
+              >
+            </li>
+            <li>
+              <img src="/assets/svg/pillar4.svg" alt="pillar1" /><span
+                class="span-text"
+                >Pillar 4</span
+              >
+            </li>
+          </ul>
         </div>
         <!-- Footer links -->
         <div class="row absolute__position links__container">
-            <a class="nav__links left__align" href="/index-cordination-matrix.html">Back to Nigeria</a>
-            <a class="nav__links right__align" href="#" id="hide-pillars">Hide pillar activities</a>
+          <a
+            class="nav__links left__align"
+            href="/index-cordination-matrix.html"
+            >Back to Nigeria</a
+          >
+          <a class="nav__links right__align" href="#" id="hide-pillars"
+            >Hide pillar activities</a
+          >
         </div>
-    </div>
+      </div>
 
-    <!-- Stakeholder directory section -->
-    <div class="section section__pillars">
+      <!-- Stakeholder directory section -->
+      <div class="section section__pillars">
         <div class="thematic-pillars">
-            <div class="row thematic-pillars__heading">
-                <div class="thematic-pillars__title">
-                    Stakeholder Directory Listing
-                </div>
-                <div class="thematic-pillars__desc">
-                    Search through our stakeholders directory listing to quickly get
-                    information about the various stakeholders / organisations and
-                    their activities with respect to curbing irregular migration and
-                    human trafficking
-                </div>
+          <div class="row thematic-pillars__heading">
+            <div class="thematic-pillars__title">
+              Stakeholder Directory Listing
             </div>
+            <div class="thematic-pillars__desc">
+              Search through our stakeholders directory listing to quickly get
+              information about the various stakeholders / organisations and
+              their activities with respect to curbing irregular migration and
+              human trafficking
+            </div>
+          </div>
         </div>
         <!-- Search Stakeholders Activities -->
         <section class="section search__activities__section">
-            <input
-                    id="search__activities"
-                    placeholder="Search Stakeholder activities"
-            />
-            <button class="banner__button animated flashing slow delay-2s">
-                Search
-            </button>
+          <input
+            id="search__activities"
+            placeholder="Search Stakeholder activities"
+          />
+          <button class="banner__button animated flashing slow delay-2s">
+            Search
+          </button>
         </section>
         <section
-                id="stakeholder-directory-table"
-                class="stakeholder__dir__table"
+          id="stakeholder-directory-table"
+          class="stakeholder__dir__table"
         >
-            <!-- Stakeholder directory table will be loaded dynamically here-->
+          <!-- Stakeholder directory table will be loaded dynamically here-->
         </section>
-    </div>
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal">
+      </div>
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal">
         <div class="modal-content">
-            <h5>
-                <!-- Content will be loaded dynamically here -->
-            </h5>
-            <div id="modal__body">
-                <table id="stakeholder__details__table" class="stakeholder__details__table">
-                    <tbody
-                    >
-                    <!--Table rows will be loaded dynamically here-->
-                    </tbody>
-                </table>
-                <img class="mmdp__bg__img" src="./assets/images/common/group-2@3x.png" />
-            </div>
+          <h5>
+            <!-- Content will be loaded dynamically here -->
+          </h5>
+          <div id="modal__body">
+            <table
+              id="stakeholder__details__table"
+              class="stakeholder__details__table"
+            >
+              <tbody>
+                <!--Table rows will be loaded dynamically here-->
+              </tbody>
+            </table>
+            <img
+              class="mmdp__bg__img"
+              src="./assets/images/common/group-2@3x.png"
+            />
+          </div>
         </div>
-    </div>
-</main>
-<footer id="footer-section" class="footer">
-    <!-- content will be loaded dynamically here -->
-</footer>
-<script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"
-></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script type="text/javascript" src="assets/js/utils.js"></script>
-<script type="text/javascript" src="assets/js/auth/utils.js"></script>
-<script type="text/javascript" src="assets/js/state-matrix-header.js"></script>
-<script type="text/javascript" src="assets/js/cms/utils.js"></script>
-<script src="https://d3js.org/d3.v5.js"></script>
-<script type="text/javascript" src="assets/js/statePillarActivities.js" charset="utf-8"></script>
-<script type="text/javascript" src="assets/js/paginator.js"></script>
-<script type="text/javascript" src="assets/js/filter.js"></script>
-<script type="text/javascript" src="assets/js/beneficiary-handlers.js"></script>
-<script
-        type="text/javascript"
-        src="assets/js/stakeholder-dir-table.js"
-></script>
-</body>
+      </div>
+    </main>
+    <footer id="footer-section" class="footer">
+      <!-- content will be loaded dynamically here -->
+    </footer>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="assets/js/utils.js"></script>
+    <script type="text/javascript" src="assets/js/auth/utils.js"></script>
+    <script
+      type="text/javascript"
+      src="assets/js/state-matrix-header.js"
+    ></script>
+    <script type="text/javascript" src="assets/js/cms/utils.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script
+      type="text/javascript"
+      src="assets/js/statePillarActivities.js"
+      charset="utf-8"
+    ></script>
+    <script type="text/javascript" src="assets/js/paginator.js"></script>
+    <script type="text/javascript" src="assets/js/filter.js"></script>
+    <script
+      type="text/javascript"
+      src="assets/js/beneficiary-handlers.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="assets/js/stakeholder-dir-table.js"
+    ></script>
+  </body>
 </html>
