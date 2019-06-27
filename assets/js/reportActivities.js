@@ -105,6 +105,7 @@ function addMarker(x, y, pillarId) {
 
 function filteredLga(target, array = []) {
   return array.find(item => {
+    if (item.lgaName === "Igueben") return "Iguegben" === target;
     return item.lgaName === target;
   });
 }
@@ -190,7 +191,8 @@ function getNumberOfServices(lgaServices, lgaName) {
 
           document.querySelectorAll('path').forEach(lgaMap => {
             // select lga_name as the lgaId
-            const lgaId = d3.select(lgaMap).attr(':fme:lga_name');
+            let lgaId = d3.select(lgaMap).attr(":fme:lga_name");
+            lgaId = lgaId.replace(/\s+/g, " ");
 
             lgaMap.innerHTML = `<title>${lgaId}</title>`;
             const lgaData = filteredLga(lgaId, thematicPillarCountPerLGA);
