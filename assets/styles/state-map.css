@@ -129,7 +129,7 @@
 
 .span-text {
   display: inline-block;
-  padding-left: 60px;
+  padding-left: 20px;
 }
 
 .span-img {
@@ -183,7 +183,7 @@
 }
 
 .pillars__container {
-  margin-left: -180px !important; 
+  margin-left: -180px !important;
 }
 
 .state__map .banner__row .banner__desc {
@@ -198,4 +198,9 @@
 .banner__image.state-map__svg {
   width: 705px;
   height: 600px;
+}
+
+.hide-pillar-icons,
+#hide-pillars {
+  display: none;
 }

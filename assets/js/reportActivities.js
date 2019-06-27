@@ -234,7 +234,6 @@ function getNumberOfServices(lgaServices, lgaName) {
       if (!stateUrl) {
         window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
       }
-
       const potentialPartnerships = getPotentialPartnershipsForLGAs(
         data,
         potentialPartnershipPerLGA

@@ -15,7 +15,6 @@ function randomIntFromInterval(mn, mx) {
 }
 
 function getCoordinates(lgaId, count) {
-
   let points = [];
   const lgaPath = document.getElementById(lgaId.replace(/ +/g, ""));
   let pillarIconCount = count;
@@ -127,6 +126,14 @@ function filteredLga(target, array = []) {
   let stateName;
   const baseURL = window.location.host;
 
+  function getNumberOfServices(lgaServices, lgaName) {
+    for (const lgaService of lgaServices) {
+      if (lgaService.lgaName === lgaName) {
+        return lgaService.serviceCount;
+      }
+    }
+  }
+
   async function loaded() {
     const stateNameFromUrl = window.location.search.substring(1).split("=")[1];
     if (!stateNameFromUrl) {
@@ -147,7 +154,7 @@ function filteredLga(target, array = []) {
       const response = await responsePromise.json();
       const data = await lgaPillarPromise.json();
       const { thematicPillarCountPerLGA } = data;
-      const { stateUrl } = response.data;
+      const { stateUrl, lgaServices } = response.data;
       if (!stateUrl) {
         window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
       }
@@ -163,8 +170,20 @@ function filteredLga(target, array = []) {
           document.querySelectorAll("path").forEach(lgaMap => {
             // select lga_name as the lgaId
             const lgaId = d3.select(lgaMap).attr(":fme:lga_name");
-            
-            lgaMap.setAttribute("fill", "#fcffff");
+            const numberOfServices = getNumberOfServices(lgaServices, lgaId);
+            if (numberOfServices >= 35) {
+              lgaMap.setAttribute("fill", "#296d81");
+            } else if (numberOfServices < 35 && numberOfServices >= 25) {
+              lgaMap.setAttribute("fill", "#83c4d8");
+            } else if (numberOfServices < 25 && numberOfServices >= 5) {
+              lgaMap.setAttribute("fill", "#bad9e3");
+            } else if (numberOfServices < 5) {
+              lgaMap.setAttribute("fill", "#eaf9fe");
+            } else {
+              lgaMap.setAttribute("fill", "#eaf9fe");
+            }
+
+            // lgaMap.setAttribute("fill", "#fcffff");
             lgaMap.innerHTML = `<title>${lgaId}</title>`;
             const lgaData = filteredLga(lgaId, thematicPillarCountPerLGA);
             if (lgaId && lgaData) {
