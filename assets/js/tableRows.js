@@ -14,7 +14,7 @@ getTableRows = (data, keys) => {
         </main>
         `,
     gapAnalysisTableRows: `
-        <main id="table" class="table-row body">
+        <main id="${data.id}" class="table-row body gap-analysis-details">
         <div class="col-1">
         <div>
         <input type="checkbox" name="check" class="check">

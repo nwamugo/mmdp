@@ -12,28 +12,40 @@ $(document).ready(async function() {
       `${MMDP_BASE_URL}/api/v1/gapAnalysis/${queryNameFromUrl}`
     );
     const data = await gapAnalysisReportData.json();
-  
+    
     $('#gap-analysis-table').load(
       '/partials/gap-analysis-table.html',
       function() {
         let gapReport = [];
+        const focusAreaGaps = [];
+
         for (const report of data.report){
             for (const item of report.data){
-              const row = {};
-              row.pillar = report.pillarName;
-              row.subtheme = item.subThemeName;
               if (item.AllLgasWithGaps.length !== 0) {
+                const row = {};
+                const modalRow = {};
+                let pillarObject = {};
+
+                modalRow.focusArea = item.focusAreas;
+                row.id = item.subThemeName;
+                row.pillar = report.pillarName;
+                row.subtheme = item.subThemeName;
+                row.focusAreasWithGapsCount = item.focusAreasWithGapsCount;
                 var lgas = item.AllLgasWithGaps;
                 var LgasWithGaps = lgas.filter(Boolean);
                 row.LgasWithGaps = LgasWithGaps.join(', ');
-              } else {
-                row.LgasWithGaps = 'No Lga with gap'; 
-              }
-              row.focusAreasWithGapsCount = item.focusAreasWithGapsCount;
-              gapReport.push(row)
-              }
+                modalRow.focusAreaCount = item.focusAreaCount;
+                modalRow.pillarDescription = report.pillarDescription;
+                
+                  pillarObject = {
+                    ...row,
+                    ...modalRow
+                  }
+                gapReport.push(row);
+                focusAreaGaps.push(pillarObject);
+              }      
+            }
         }
-
         let table = 'gapAnalysis';
   
         const paginator = new Paginator(gapReport, keys, table);
@@ -63,8 +75,8 @@ $(document).ready(async function() {
         $('#gap-previous-page').click(function() {
           paginator.previousPage();
         });
+        bindGapAnalysisModalJQuery(focusAreaGaps);
+        window.focusAreaGaps = focusAreaGaps;
       }
     );
   });
-
-  
