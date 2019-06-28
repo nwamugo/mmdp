@@ -19,7 +19,9 @@ $(document).ready(async function() {
         return item;
       });
 
-      const paginator = new Paginator(tableData, keys);
+      let table = 'potential partnerships';
+
+      const paginator = new Paginator(tableData, keys, table);
       paginator.potentialPartnershipsTable = true;
       potentialPartnershipsTableData = paginator.initialPage();
 

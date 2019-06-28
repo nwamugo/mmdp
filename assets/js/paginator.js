@@ -1,5 +1,5 @@
 class Paginator {
-  constructor(data, columnKeys) {
+  constructor(data, columnKeys, table) {
     this.data = data;
     this.tempData = [];
     this.empData = false;
@@ -8,6 +8,7 @@ class Paginator {
     this.totalPage = this.getTotalPage();
     this.columnKeys = columnKeys;
     this.potentialPartnershipsTable = false;
+    this.table = table;
   }
   getData() {
     if (this.empData) {
@@ -82,7 +83,11 @@ class Paginator {
     let tableRow;
     let tableRowData = getTableRows(data, keys);
     if (this.potentialPartnershipsTable) {
-      tableRow = tableRowData.portentialPartnershipsTableRows;
+      if (this.table === 'gapAnalysis') {
+        tableRow = tableRowData.gapAnalysisTableRows;
+      } else {
+        tableRow = tableRowData.portentialPartnershipsTableRows;
+      }
     } else {
       tableRow = tableRowData.stakeholderDirectoryTableRows;
     }
@@ -93,10 +98,15 @@ class Paginator {
       this.createTableRow(stakeholder)
     );
     return rows;
-  }
-  createTableBody(rows) {
+  };
+  createTableBody = rows => {
     if (this.potentialPartnershipsTable) {
-      $('#partnership-report-data').html(rows);
+      if (this.table === 'gapAnalysis') {
+        $('#gap-analysis-data').html(rows);
+      } else {
+        $('#partnership-report-data').html(rows);
+      }
+      
     } else {
       $('tbody.table__body').html(rows);
       bindJQuery();
@@ -110,13 +120,31 @@ class Paginator {
       this.refreshTableBody();
       return;
     }
-    $('#current-page').html(currentPage);
-    $('#total-page').html(totalPage);
-    currentPage === 1
-      ? $('#previous-page').removeClass('active__nav')
-      : $('#previous-page').addClass('active__nav');
-    currentPage === totalPage
-      ? $('#next-page').removeClass('active__nav')
-      : $('#next-page').addClass('active__nav');
-  }
+    if (this.potentialPartnershipsTable) {
+      if (this.table === 'gapAnalysis') {
+        $('#gap-current-page').html(currentPage);
+        $('#gap-total-page').html(totalPage);
+      } 
+    } else {
+      $('#current-page').html(currentPage);
+      $('#total-page').html(totalPage);
+    }
+    if (this.potentialPartnershipsTable) {
+      if (this.table === 'gapAnalysis') {
+        currentPage === 1
+          ? $('#gap-previous-page').removeClass('active__nav')
+          : $('#gap-previous-page').addClass('active__nav');
+        currentPage === totalPage
+          ? $('#gap-next-page').removeClass('active__nav')
+          : $('#gap-next-page').addClass('active__nav');
+      } 
+    } else {
+      currentPage === 1
+        ? $('#previous-page').removeClass('active__nav')
+        : $('#previous-page').addClass('active__nav');
+      currentPage === totalPage
+        ? $('#next-page').removeClass('active__nav')
+        : $('#next-page').addClass('active__nav');
+    }
+  };
 }

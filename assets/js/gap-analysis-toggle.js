@@ -21,6 +21,7 @@ $(document).ready(async function() {
     $('#partnership-report-button').addClass('disable');
     $('#gap-analysis-report-button').removeClass('disable');
     $('#partnership-report-table').hide();
+    $('#gap-analysis-report-table').show();
     $('#thematic-pillars__heading').html(gapAnalysisHeader)
   })
 
@@ -28,6 +29,7 @@ $(document).ready(async function() {
     $('#gap-analysis-report-button').addClass('disable');
     $('#partnership-report-button').removeClass('disable');
     $('#partnership-report-table').show();
+    $('#gap-analysis-report-table').hide();
     $('#thematic-pillars__heading').html(partnershipHeader)
   })
 });

@@ -31,7 +31,9 @@
         res.json().then((res) => {
           render(res.data);
           scrollToTop();
-        }).catch((err) => console.log(err));
+        }).catch((err) => {
+          throw err;
+        });
       })
   }
 

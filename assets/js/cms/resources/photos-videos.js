@@ -277,7 +277,9 @@
         render(data.data);
         scrollToTop();
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        throw err;
+      });
   }
 
   cmsLoad = function() {

@@ -1,0 +1,59 @@
+<main>
+    <!-- Partnership Table -->
+    <section id="gap-analysis-report-table" class="table">
+        <section class="partnership-table-web">
+            <header class="table-row header gap-header">
+                <div class="report-col-1">
+                    <input type="checkbox" name="check" class="check" />
+                </div>
+                <div class="report-col-2">Thematic Pillar <i class="fas fa-angle-down fa-xs"></i></div>
+                <div class="report-col-3">Sub theme <i class="fas fa-angle-down fa-xs"></i></div>
+                <div class="report-col-4">LGA with gaps <i class="fas fa-angle-down fa-xs"></i></div>
+                <div class="report-col-5">Number of Focus Areas with gaps <i class="fas fa-angle-down fa-xs"></i></div>
+            </header>
+            <!--Rows will be loaded dynamically here-->
+            <div id="gap-analysis-data"></div>
+
+            <!--Start Footer-->
+            <div class="table__footer">
+                <tr>
+                    <td colspan="7">
+                        <button id="export" class="banner__button animated flashing slow delay-2s">
+                            <img src="/assets/images/stakeholder-dir/cloud-computing.svg" />Export CSV
+                        </button>
+                        <span class="footer__right_content">
+                            <select id="entries-per-page">
+                                <!-- options will be loaded dynamically-->
+                            </select>
+                            <span>Entries per page</span>
+                            <span>Page <span id="gap-current-page">1</span> of
+                                <span id="gap-total-page">1</span></span>
+                            <button id="gap-previous-page" class="go-back">&#60;</button>
+                            <button id="gap-next-page" class="go-forward">&#62;</button>
+                        </span>
+                    </td>
+                </tr>
+            </div>
+        </section>
+        <section id="gap-analysis-table-mobile" class="gap-analysis-table-mobile">
+            <!-- Mobile Table rows come here -->
+        </section>
+    </section>
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h5>
+                <!-- Content will be loaded dynamically here -->
+            </h5>
+            <div id="modal__body">
+                <table id="stakeholder__details__table" class="stakeholder__details__table">
+                    <tbody>
+                        <!--Table rows will be loaded dynamically here-->
+                    </tbody>
+                </table>
+                <img class="mmdp__bg__img" src="./assets/images/common/group-2@3x.png" />
+            </div>
+        </div>
+    </div>
+</main>

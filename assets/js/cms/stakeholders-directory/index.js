@@ -20,7 +20,9 @@
         displayPaginationBtn(PAGINATION_INFO);
         registerEventHandlers();
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        throw err;
+      });
   }
 
   function selectState(e) {
