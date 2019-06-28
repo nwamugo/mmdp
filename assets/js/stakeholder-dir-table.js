@@ -26,6 +26,9 @@ $(document).ready(async function() {
     case "/state-pillars.html":
       query = `state=${queryParam}`;
       break;
+    case "/state-report.html":
+      query = `state=${queryParam}`;
+      break;
     case "/lga.html":
       param = "lga";
       query = `lga=${queryParam}`;
@@ -218,7 +221,7 @@ $(document).ready(async function() {
         .next(".container")
         .find(".partnership_subnav")
         .slideUp();
-
+        
       $(this)
         .next(".container")
         .find(".organisation_subnav")

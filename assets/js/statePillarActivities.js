@@ -15,6 +15,7 @@ function randomIntFromInterval(mn, mx) {
 }
 
 function getCoordinates(lgaId, count) {
+
   let points = [];
   const lgaPath = document.getElementById(lgaId.replace(/ +/g, ""));
   let pillarIconCount = count;
@@ -128,7 +129,6 @@ function filteredLga(target, array = []) {
 
   async function loaded() {
     const stateNameFromUrl = window.location.search.substring(1).split("=")[1];
-    
     if (!stateNameFromUrl) {
       window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
     }
@@ -137,7 +137,6 @@ function filteredLga(target, array = []) {
 
     const stateSpan = document.getElementById("state-name");
     stateSpan.innerHTML = stateName.replace("%20", " ");
-    
     try {
       const lgaPillarPromise = await fetch(
         `${MMDP_BASE_URL}/api/v1/location?state=${stateName}&focusAreaName`
@@ -147,33 +146,27 @@ function filteredLga(target, array = []) {
       );
       const response = await responsePromise.json();
       const data = await lgaPillarPromise.json();
-      
       const { thematicPillarCountPerLGA } = data;
       const { stateUrl } = response.data;
       if (!stateUrl) {
         window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
       }
       $("#state-map-pillars").load(stateUrl, function(responseTxt, statusTxt) {
-        
         if (statusTxt === "success") {
           const [, xmlPart, svgPart] = responseTxt.match(
             /([\s\S.]*)(<svg[\s\S]*<\/svg>)/
           );
-          
           $("#state-map-pillars").html(svgPart);
           $("g#Nigeria_LGA_Boundary")
             .parents("svg")
             .addClass("banner__image state-map__svg");
           document.querySelectorAll("path").forEach(lgaMap => {
-            
             // select lga_name as the lgaId
             const lgaId = d3.select(lgaMap).attr(":fme:lga_name");
             
             lgaMap.setAttribute("fill", "#fcffff");
             lgaMap.innerHTML = `<title>${lgaId}</title>`;
             const lgaData = filteredLga(lgaId, thematicPillarCountPerLGA);
-            
-
             if (lgaId && lgaData) {
               lgaMap.setAttribute("id", lgaId.replace(/ +/g, ""));
               lgaMap.setAttribute("class", "path");

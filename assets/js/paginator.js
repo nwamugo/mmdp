@@ -99,7 +99,7 @@ class Paginator {
     );
     return rows;
   };
-  createTableBody = rows => {
+  createTableBody(rows) {
     if (this.potentialPartnershipsTable) {
       if (this.table === 'gapAnalysis') {
         $('#gap-analysis-data').html(rows);

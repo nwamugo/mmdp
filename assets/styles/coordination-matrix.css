@@ -353,7 +353,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
   width: 550px;
 }
 
-.pillar-text {
+.pillar-text, .potential-partnership-text {
   vertical-align: top;
   width: 57px;
   height: 20px;
@@ -367,6 +367,10 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
   letter-spacing: 0px;
   text-align: center;
   color: var(--dark);
+}
+
+.potential-partnership-text{
+    margin-left: 2px;
 }
 
 @media only screen and (max-width: 770px) {
