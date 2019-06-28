@@ -16,7 +16,7 @@ $(document).ready(async function() {
       let arr = getLgas(data);
       let potentialPartners = potentialPartnershipsByLga(arr);
       const tableData = potentialPartners.map(item => {
-        return item[0];
+        return item;
       });
 
       let table = 'potential partnerships';

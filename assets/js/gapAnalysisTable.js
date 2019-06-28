@@ -24,21 +24,8 @@ $(document).ready(async function() {
               row.subtheme = item.subThemeName;
               if (item.AllLgasWithGaps.length !== 0) {
                 var lgas = item.AllLgasWithGaps;
-                let LGAs = []
-                for (let lga of lgas) {
-                  if(lga.includes(",")){
-                    lga = lga.substring( 0, lga.indexOf(","))
-                    LGAs.push(lga)
-                  } else {
-                    lga = lga
-                    LGAs.push(lga)
-                  }
-                }
-                var uniqueLgas = [];
-                $.each(LGAs, function(i, el){
-                    if($.inArray(el, uniqueLgas) === -1) uniqueLgas.push(el);
-                });
-                row.LgasWithGaps = uniqueLgas.join(', ');
+                var LgasWithGaps = lgas.filter(Boolean);
+                row.LgasWithGaps = LgasWithGaps.join(', ');
               } else {
                 row.LgasWithGaps = 'No Lga with gap'; 
               }

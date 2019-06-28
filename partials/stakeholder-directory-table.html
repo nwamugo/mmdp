@@ -4,10 +4,32 @@
     <thead>
       <tr class="filter">
         <th class="organisation__name">
-          <input name="aaaaa" value="aaaaa" type="checkbox" />
+          <input name="organisation__name" value="aaaaa" type="checkbox" />
           <div>
             Organisation Name
-            <i class="fas fa-angle-down fa-xs"></i>
+            <i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i>
+            <div class="container">
+              <div class="organisation_subnav">
+                <div class="organisation_filters">
+                  <p>
+                    Organisation Filters
+                    <button class="clear_filter__button" id="clearFilter">
+                      Clear Filter
+                    </button>
+                    <button class="apply_filter__button" id="applyFilter">
+                      Apply Filter
+                    </button>
+                  </p>
+                </div>
+                <div class="organisation_filter_data">
+                  <table id="organisation_data">
+                    <tbody>
+                      <!--Table rows will be loaded dynamically here-->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </th>
         <th>

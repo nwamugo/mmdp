@@ -3,8 +3,8 @@ const partnershipHeader = `<div class="thematic-pillars__title">
                           </div>
                           <div class="thematic-pillars__desc">
                             Search through our listing to quickly get information about 
-                            the various stakeholders/ organizations carrying out similar activities 
-                            in contiguous local governement areas
+                            the various stakeholders / organizations carrying out similar activities 
+                            in contiguous local government areas
                           </div>`
 
 const gapAnalysisHeader = `<div class="thematic-pillars__title">

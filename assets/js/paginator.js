@@ -16,23 +16,23 @@ class Paginator {
     }
     const data = this.tempData.length ? this.tempData : this.data;
     return data;
-  };
-  setTempData (data = []) {
+  }
+  setTempData(data = []) {
     this.tempData = data;
-  };
-  setTableTempData (data = []) {
+  }
+  setTableTempData(data = []) {
     this.setTempData(data);
     this.refreshTableBody();
-  };
-  getTotalPage () {
+  }
+  getTotalPage() {
     const data = this.getData();
     const tp =
       data.length % this.entriesPerPage
         ? 1 + data.length / this.entriesPerPage
         : data.length / this.entriesPerPage;
     return Math.floor(tp);
-  };
-  nextPage () {
+  }
+  nextPage() {
     const data = this.getData();
     const currentIndex = this.entriesPerPage * this.currentPage;
     const nextIndex = (this.currentPage + 1) * this.entriesPerPage;
@@ -44,8 +44,8 @@ class Paginator {
       this.updatePageOf();
       return rows;
     }
-  };
-  initialPage () {
+  }
+  initialPage() {
     const data = this.getData();
     const paginatedData = data.slice(0, 10);
     const rows = this.createTableRows(paginatedData);
@@ -53,18 +53,18 @@ class Paginator {
     this.createTableBody(rows);
     this.updatePageOf();
     return rows;
-  };
-  currentPageData () {
+  }
+  currentPageData() {
     const data = this.getData();
     const endIndex = this.currentPage * this.entriesPerPage;
     const startIndex = endIndex - this.entriesPerPage;
     return data.slice(startIndex, endIndex);
-  };
-  refreshTableBody () {
+  }
+  refreshTableBody() {
     this.createTableBody(this.createTableRows(this.currentPageData()));
     this.updatePageOf();
-  };
-  previousPage () {
+  }
+  previousPage() {
     const data = this.getData();
     const currentIndex = this.entriesPerPage * this.currentPage;
     const endIndex = currentIndex - this.entriesPerPage;
@@ -77,8 +77,8 @@ class Paginator {
       this.updatePageOf();
       return rows;
     }
-  };
-  createTableRow (data) {
+  }
+  createTableRow(data) {
     const keys = this.columnKeys;
     let tableRow;
     let tableRowData = getTableRows(data, keys);
@@ -92,8 +92,8 @@ class Paginator {
       tableRow = tableRowData.stakeholderDirectoryTableRows;
     }
     return tableRow;
-  };
-  createTableRows (paginatedData) {
+  }
+  createTableRows(paginatedData) {
     const rows = paginatedData.map(stakeholder =>
       this.createTableRow(stakeholder)
     );
@@ -111,7 +111,7 @@ class Paginator {
       $('tbody.table__body').html(rows);
       bindJQuery();
     }
-  };
+  }
   updatePageOf() {
     const currentPage = this.currentPage;
     const totalPage = this.getTotalPage();
