@@ -166,6 +166,10 @@
   stroke-width: 0.003;
 }
 
+#svg-container {
+  margin-left: -170px;
+}
+
 @media (max-width: 995px) {
   .state__map div.banner__desc {
     order: 1;
