@@ -3,9 +3,9 @@
     <section id="gap-analysis-report-table" class="table">
         <section class="partnership-table-web">
             <header class="table-row header gap-header">
-                <div class="report-col-1">
-                    <input type="checkbox" name="check" class="check" />
-                </div>
+                <label class="report-col-1">
+                    <input type="checkbox" name="check" class="check" data-org='check-all' id='check-all' />
+                </label>
                 <div class="report-col-2">Thematic Pillar <i class="fas fa-angle-down fa-xs"></i></div>
                 <div class="report-col-3">Sub theme <i class="fas fa-angle-down fa-xs"></i></div>
                 <div class="report-col-4">LGA with gaps <i class="fas fa-angle-down fa-xs"></i></div>
@@ -18,7 +18,7 @@
             <div class="table__footer">
                 <tr>
                     <td colspan="7">
-                        <button id="export" class="banner__button animated flashing slow delay-2s">
+                        <button id="gap-export" class="banner__button animated flashing slow delay-2s">
                             <img src="/assets/images/stakeholder-dir/cloud-computing.svg" />Export CSV
                         </button>
                         <span class="footer__right_content">
@@ -57,3 +57,4 @@
         </div>
     </div>
 </main>
+<script type="text/javascript" src="assets/js/csv.js"></script>

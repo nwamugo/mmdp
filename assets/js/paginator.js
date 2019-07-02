@@ -104,6 +104,7 @@ class Paginator {
       if (this.table === 'gapAnalysis') {
         $('#gap-analysis-data').html(rows);
         bindGapAnalysisModalJQuery(window.focusAreaGaps);
+        bindJQuery(this.table);
       } else {
         $('#partnership-report-data').html(rows);
       }

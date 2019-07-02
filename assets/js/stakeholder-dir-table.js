@@ -55,7 +55,7 @@ $(document).ready(async function() {
   const organisationName = tableData.map(item => item.organisationName);
 
   const allCount = tableData.map(item => item.partnership);
-
+  
   window.tableData = tableData;
   keys[4] = param === "country" ? "stateLocation" : keys[4];
   const paginator = new Paginator(tableData, keys);

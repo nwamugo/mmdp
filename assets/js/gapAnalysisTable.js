@@ -47,7 +47,9 @@ $(document).ready(async function() {
             }
         }
         let table = 'gapAnalysis';
-  
+
+        window.gapTableData = gapReport;
+
         const paginator = new Paginator(gapReport, keys, table);
         paginator.potentialPartnershipsTable = true;
         potentialPartnershipsTableData = paginator.initialPage();
