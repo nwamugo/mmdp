@@ -1,42 +1,41 @@
 const bindJQuery = (table, selectedItems) => {
   $(document).ready(async function() {
-    console.log(table)
     if (table === 'gapAnalysis') {
       tableData = [...window.gapTableData];
-    } else {
+    } else if (table === 'stakeholder') {
       tableData = [...window.tableData];
     }
 
     function convertToCSV(objArray) {
       var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
       var str = '';
-  
+
       for (var i = 0; i < array.length; i++) {
         var line = '';
         for (var index in array[i]) {
           if (line != '') line += ',';
-  
+
           line += array[i][index];
         }
-  
+
         str += line + '\r\n';
       }
-  
+
       return str;
     }
-  
+
     function exportCSVFile(headers, items, fileTitle) {
       if (headers) {
         items.unshift(headers);
       }
-  
+
       // Convert Object to JSON
       var jsonObject = JSON.stringify(items);
-  
+
       var csv = convertToCSV(jsonObject);
-  
+
       var exportedFilename = fileTitle + '.csv' || 'export.csv';
-  
+
       var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       if (navigator.msSaveBlob) {
         navigator.msSaveBlob(blob, exportedFilename);
@@ -53,16 +52,15 @@ const bindJQuery = (table, selectedItems) => {
         }
       }
     }
-  
     function download(selectedItems) {
       if (table === 'gapAnalysis') {
         var headers = {
           thematicPillar: 'ThematicPillar',
           subTheme: 'SubTheme',
           lgasWithGaps: 'LGAsWithGaps',
-          numberOfFocusAreasWithGaps: 'NumberOfFocusAreasWithGaps',
+          numberOfFocusAreasWithGaps: 'NumberOfFocusAreasWithGaps'
         };
-      } else {
+      } else if (table === 'stakeholder') {
         var headers = {
           organisationName: 'OrganisationName',
           thematicPillars: 'ThematicPillars',
@@ -80,13 +78,12 @@ const bindJQuery = (table, selectedItems) => {
           organisationType: 'OrganisationTypes'
         };
       }
-      
+
       itemsNotFormatted = tableData;
-  
       var itemsFormatted = [];
 
-      let fileTitle = ''
-  
+      let fileTitle = '';
+
       // format the data
       itemsNotFormatted.forEach(item => {
         if (table === 'gapAnalysis') {
@@ -95,7 +92,9 @@ const bindJQuery = (table, selectedItems) => {
               thematicPillar: item.pillar.replace(/,/g, ''),
               subTheme: item.subtheme.replace(/,/g, ''),
               lgasWithGaps: item.LgasWithGaps.replace(/,/g, ''),
-              numberOfFocusAreasWithGaps: item.focusAreasWithGapsCount.toString().replace(/,/g, '')
+              numberOfFocusAreasWithGaps: item.focusAreasWithGapsCount
+                .toString()
+                .replace(/,/g, '')
             });
           }
           fileTitle = 'gapAnalysisReport';
@@ -124,7 +123,6 @@ const bindJQuery = (table, selectedItems) => {
       // (itemsFormatted)
       exportCSVFile(headers, itemsFormatted, fileTitle);
     }
-
     $('#gap-export, #export').on('click', function() {
       if (selectedItems.length === 0) {
         return null;
@@ -137,8 +135,7 @@ const bindJQuery = (table, selectedItems) => {
         $('#check-all, #check-all-stakeholder').prop('checked', false);
       }
     });
-    
-  
+
     $('td').ready(function() {
       var row_index = 0;
       $('.focusTable').ready(function() {
@@ -171,7 +168,7 @@ const bindJQuery = (table, selectedItems) => {
             .mousemove(function(e) {
               var mouseX = e.pageX,
                 mouseY = e.pageY;
-  
+
               $('.info_panel').css({
                 top: mouseY - 50,
                 left: mouseX - $('.info_panel').width() / 2
@@ -181,4 +178,4 @@ const bindJQuery = (table, selectedItems) => {
       });
     });
   });
-}
+};

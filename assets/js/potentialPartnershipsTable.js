@@ -1,5 +1,12 @@
 $(document).ready(async function() {
-  const keys = ['thematicPillar', 'subTheme', 'lga', 'organizationName'];
+  const keys = [
+    'thematicPillar',
+    'focusArea',
+    'subTheme',
+    'lga',
+    'organizationName',
+    '_id'
+  ];
 
   const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
   const queryParam = queryNameFromUrl
@@ -10,6 +17,50 @@ $(document).ready(async function() {
   );
   const data = await stakeholderData.json();
 
+  let selectedItems = [];
+
+  $('#potential-partnerships-table').on(
+    'click',
+    'input[type="checkbox"]',
+    function() {
+      if (
+        $(this).is(':checked') &&
+        $(this).attr('data-org') !== 'check-all-items'
+      ) {
+        var strinn = $(this).attr('data-org');
+        selectedItems.push(strinn.replace(/-/g, ' '));
+      } else if (
+        $(this).is(':checked') &&
+        $(this).attr('data-org') === 'check-all-items'
+      ) {
+        $('input[name="collaboration"]').each(function() {
+          var strinn = $(this).attr('data-org');
+          selectedItems.push(strinn.replace(/-/g, ' '));
+          this.checked = true;
+        });
+      } else if (
+        $(this).is(':not(:checked)') &&
+        $(this).attr('data-org') !== 'check-all-items'
+      ) {
+        var strinn = $(this).attr('data-org');
+        var filtered = selectedItems.filter(function(value, index, arr) {
+          return value !== strinn.replace(/-/g, ' ');
+        });
+        selectedItems.splice(0, selectedItems.length, ...filtered);
+
+        $('#partnerships-check-all').prop('checked', false);
+      } else if (
+        $(this).is(':not(:checked)') &&
+        $(this).attr('data-org') === 'check-all-items'
+      ) {
+        $('input[name="collaboration"]').each(function() {
+          this.checked = false;
+        });
+        selectedItems.length = 0;
+      }
+    }
+  );
+
   $('#potential-partnerships-table').load(
     '/partials/potential-partnerships-table.html',
     function() {
@@ -19,9 +70,9 @@ $(document).ready(async function() {
         return item;
       });
 
-      let table = 'potential partnerships';
-
-      const paginator = new Paginator(tableData, keys, table);
+      let table = 'potentialPartnerships';
+      window.partnershipsCsvTableData = tableData;
+      const paginator = new Paginator(tableData, keys, table, selectedItems);
       paginator.potentialPartnershipsTable = true;
       potentialPartnershipsTableData = paginator.initialPage();
 
@@ -42,10 +93,10 @@ $(document).ready(async function() {
         paginator.entriesPerPage = this.value;
         paginator.refreshTableBody();
       });
-      $('#next-page').click(function() {
+      $('#potential-next-page').click(function() {
         paginator.nextPage();
       });
-      $('#previous-page').click(function() {
+      $('#potential-previous-page').click(function() {
         paginator.previousPage();
       });
     }

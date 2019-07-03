@@ -1,248 +1,240 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" href="favicon.icon" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
-      integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="assets/styles/index.css" />
-    <link rel="stylesheet" href="assets/styles/common.css" />
-    <link rel="stylesheet" href="assets/styles/coordination-matrix.css" />
-    <link rel="stylesheet" href="assets/styles/sidebar.css" />
-    <link rel="stylesheet" href="assets/styles/animations.css?version=1" />
-    <link rel="stylesheet" href="assets/styles/state-map.css" />
-    <link rel="stylesheet" href="assets/styles/stakeholder-dir-table.css" />
-    <link rel="stylesheet" href="assets/styles/gap-analysis.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
-    />
-    <title>MMDP | Report</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="icon" href="favicon.icon" />
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+  />
+  <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+  />
+  <link
+          rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
+          integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
+          crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="assets/styles/index.css" />
+  <link rel="stylesheet" href="assets/styles/common.css" />
+  <link rel="stylesheet" href="assets/styles/coordination-matrix.css" />
+  <link rel="stylesheet" href="assets/styles/sidebar.css" />
+  <link rel="stylesheet" href="assets/styles/animations.css?version=1" />
+  <link rel="stylesheet" href="assets/styles/state-map.css" />
+  <link rel="stylesheet" href="assets/styles/stakeholder-dir-table.css" />
+  <link rel="stylesheet" href="assets/styles/gap-analysis.css" />
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
+  />
+  <title>MMDP | Report</title>
+</head>
 
-  <body>
-    <header id="header-section" class="row header">
-      <!-- Header content will be loaded dynamically here -->
-    </header>
-    <main>
-      <div class="banner valign-wrapper state__map relative__position">
-        <div class="row banner__row">
-          <!-- Left hand side -->
-          <div class="col l5 banner__desc animated fadeInLeft delay-1s">
-            <div class="report__desc__heading">
-              Gap Analysis and Collaboration Report
-            </div>
-            <div class="state-matrix-welcome-msg">
-              Report shall display an overview of missing thematic Pillars and
-              areas of collaboration/partnerships between stakeholders.
-              <br />
-              <br />
-              Tap on any Local Government Area to view the gap analysis within
-              that area.
-            </div>
-            <!-- Legend -->
-            <div class="report__map__legend__container">
+<body>
+<header id="header-section" class="row header">
+  <!-- Header content will be loaded dynamically here -->
+</header>
+<main>
+  <div class="banner valign-wrapper state__map relative__position">
+    <div class="row banner__row">
+      <!-- Left hand side -->
+      <div class="col l5 banner__desc animated fadeInLeft delay-1s">
+        <div class="report__desc__heading">
+          Gap Analysis and Collaboration Report
+        </div>
+        <div class="state-matrix-welcome-msg">
+          Report shall display an overview of missing thematic Pillars and
+          areas of collaboration/partnerships between stakeholders.
+          <br />
+          <br />
+          Tap on any Local Government Area to view the gap analysis within
+          that area.
+        </div>
+        <!-- Legend -->
+        <div class="report__map__legend__container">
               <span class="report__map__legend report__one"
-                >&gt; 80 Services
+              >&gt; 80 Services
               </span>
-              <span class="report__map__legend report__two"
-                >40 - 80 Services</span
-              >
-              <span class="report__map__legend report__three"
-                >6 - 40 Services</span
-              >
-              <span class="report__map__legend report__four"
-                >&lt; 5 Services</span
-              >
-            </div>
-          </div>
-          <!-- Right hand side - Map -->
-          <div
-            id="report-map-pillars"
-            class="col l7 banner__images right-align"
+          <span class="report__map__legend report__two"
+          >40 - 80 Services</span
           >
-            <!-- SVG content will be loaded dynamically here -->
-          </div>
-        </div>
-
-        <!-- Pillars -->
-        <div class="thematic-pillar-icons">
-          <ul>
-            <li>
-              <img src="/assets/svg/thematic-pillar1.svg" alt="pillar1" />
-              <span class="pillar-text">Pillar 1</span>
-            </li>
-            <li>
-              <img src="/assets/svg/thematic-pillar2.svg" alt="pillar2" />
-              <span class="pillar-text">Pillar 2</span>
-            </li>
-            <li>
-              <img src="/assets/svg/thematic-pillar3.svg" alt="pillar3" />
-              <span class="pillar-text">Pillar 3</span>
-            </li>
-            <li>
-              <img src="/assets/svg/thematic-pillar4.svg" alt="pillar4" />
-              <span class="pillar-text">Pillar 4</span>
-            </li>
-            <li>
-              <img
-                src="/assets/svg/hand-icon@2x.svg"
-                alt="partnership/collaboration icon"
-                width="34"
-                height="34"
-              />
-              <span class="potential-partnership-text"
-                >Potential Partnership</span
-              >
-            </li>
-          </ul>
+          <span class="report__map__legend report__three"
+          >6 - 40 Services</span
+          >
+          <span class="report__map__legend report__four"
+          >&lt; 5 Services</span
+          >
         </div>
       </div>
-
-      <!-- Stakeholder directory section -->
-      <div class="section section__pillars">
-        <div class="thematic-pillars">
-          <div
-            id="thematic-pillars__heading"
-            class="row thematic-pillars__heading"
-          >
-            <div class="thematic-pillars__title">
-              Partnership / Collaboration Report
-            </div>
-            <div class="thematic-pillars__desc">
-              Search through our listing to quickly get information about the
-              various stakeholders / organizations carrying out similar
-              activities in contiguous local government areas
-            </div>
-          </div>
-        </div>
-        <!-- Search Stakeholders Activities -->
-        <section class="section search__activities__section">
-          <input id="search__activities" />
-          <button
-            id="btn_search"
-            class="banner__button animated flashing slow delay-2s"
-          >
-            Search
-          </button>
-        </section>
-
-        <!-- Toggle Button -->
-        <section class="gap-analysis-toggle">
-          <button
-            id="partnership-report-button"
-            class="banner__button gap-analysis-button"
-          >
-            Partnership / Collaboration
-          </button>
-
-          <button
-            id="gap-analysis-report-button"
-            class="banner__button gap-analysis-button disable"
-          >
-            Gap Analysis
-          </button>
-        </section>
-        <!-- stakeholder toggle button -->
-
-        <!-- Report Tables -->
-        <div id="potential-partnerships-table"></div>
-        <div id="gap-analysis-table"></div>
+      <!-- Right hand side - Map -->
+      <div
+              id="report-map-pillars"
+              class="col l7 banner__images right-align"
+      >
+        <!-- SVG content will be loaded dynamically here -->
       </div>
-    </main>
+    </div>
 
-    <section class="gap-analysis-modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="modal-header-navigation">
-            <div class="hamburger">
-              <div class="hamburger-line"></div>
-              <div class="hamburger-line"></div>
-              <div class="hamburger-line"></div>
-            </div> 
-            <img class="cancel-modal" src="/assets/images/cancel.svg"/>
-          </div>
+    <!-- Pillars -->
+    <div class="thematic-pillar-icons">
+      <ul>
+        <li>
+          <img src="/assets/svg/thematic-pillar1.svg" alt="pillar1" />
+          <span class="pillar-text">Pillar 1</span>
+        </li>
+        <li>
+          <img src="/assets/svg/thematic-pillar2.svg" alt="pillar2" />
+          <span class="pillar-text">Pillar 2</span>
+        </li>
+        <li>
+          <img src="/assets/svg/thematic-pillar3.svg" alt="pillar3" />
+          <span class="pillar-text">Pillar 3</span>
+        </li>
+        <li>
+          <img src="/assets/svg/thematic-pillar4.svg" alt="pillar4" />
+          <span class="pillar-text">Pillar 4</span>
+        </li>
+        <li>
+          <img
+                  src="/assets/svg/hand-icon@2x.svg"
+                  alt="partnership/collaboration icon"
+                  width="34"
+                  height="34"
+          />
+          <span class="potential-partnership-text"
+          >Potential Partnership</span
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Stakeholder directory section -->
+  <div class="section section__pillars">
+    <div class="thematic-pillars">
+      <div
+              id="thematic-pillars__heading"
+              class="row thematic-pillars__heading"
+      >
+        <div class="thematic-pillars__title">
+          Partnership / Collaboration Report
         </div>
-        <div class="modal-body">
-          <div class="modal-grid-container">
-        
-              <!-- LGA displays go here -->
-    
-          </div>
+        <div class="thematic-pillars__desc">
+          Search through our listing to quickly get information about the
+          various stakeholders / organizations carrying out similar
+          activities in contiguous local government areas
         </div>
       </div>
+    </div>
+    <!-- Search Stakeholders Activities -->
+    <section class="section search__activities__section">
+      <input id="search__activities" />
+      <button
+              id="btn_search"
+              class="banner__button animated flashing slow delay-2s"
+      >
+        Search
+      </button>
     </section>
 
-    <footer id="footer-section" class="footer">
-      <!-- content will be loaded dynamically here -->
-    </footer>
+    <!-- Toggle Button -->
+    <section class="gap-analysis-toggle">
+      <button
+              id="partnership-report-button"
+              class="banner__button gap-analysis-button"
+      >
+        Partnership / Collaboration
+      </button>
 
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://d3js.org/d3.v5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script type="text/javascript" src="assets/js/utils.js"></script>
-    <script type="text/javascript" src="assets/js/auth/utils.js"></script>
-    <script
-      type="text/javascript"
-      src="assets/js/state-matrix-header.js"
-    ></script>
-    <script type="text/javascript" src="assets/js/cms/utils.js"></script>
-    <script
-      type="text/javascript"
-      src="assets/js/state-report/potentialPartnershipFilters.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="assets/js/reportActivities.js"
-      charset="utf-8"
-    ></script>
-    <script type="text/javascript" src="assets/js/paginator.js"></script>
-    <script type="text/javascript" src="assets/js/tableRows.js"></script>
-    <script
-      type="text/javascript"
-      src="assets/js/beneficiary-handlers.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="assets/js/getFocusAreasByLga.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="assets/js/potentialPartnershipsTable.js"
-    ></script>
-    <script
-    type="text/javascript"
-    src="assets/js/gapAnalysisUtils.js"
-  ></script>
-    <script
-    type="text/javascript"
-    src="assets/js/gapAnalysisTable.js"
-  ></script>
-  <script
-  type="text/javascript"
-  src="assets/js/gap-analysis-table-modal.js"
+      <button
+              id="gap-analysis-report-button"
+              class="banner__button gap-analysis-button disable"
+      >
+        Gap Analysis
+      </button>
+    </section>
+    <!-- stakeholder toggle button -->
+
+    <!-- Report Tables -->
+    <div id="potential-partnerships-table"></div>
+    <div id="gap-analysis-table"></div>
+  </div>
+</main>
+
+<section class="gap-analysis-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-header-navigation">
+        <div class="hamburger">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </div>
+        <img class="cancel-modal" src="/assets/images/cancel.svg" />
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-grid-container">
+        <!-- LGA displays go here -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer-section" class="footer">
+  <!-- content will be loaded dynamically here -->
+</footer>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"
 ></script>
-    <script
-      type="text/javascript"
-      src="assets/js/gap-analysis-toggle.js"
-    ></script>
-  </body>
+<script src="https://d3js.org/d3.v5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script type="text/javascript" src="assets/js/utils.js"></script>
+<script type="text/javascript" src="assets/js/auth/utils.js"></script>
+<script
+        type="text/javascript"
+        src="assets/js/state-matrix-header.js"
+></script>
+<script type="text/javascript" src="assets/js/cms/utils.js"></script>
+<script
+        type="text/javascript"
+        src="assets/js/state-report/potentialPartnershipFilters.js"
+></script>
+<script
+        type="text/javascript"
+        src="assets/js/reportActivities.js"
+        charset="utf-8"
+></script>
+<script type="text/javascript" src="assets/js/paginator.js"></script>
+<script type="text/javascript" src="assets/js/tableRows.js"></script>
+<script
+        type="text/javascript"
+        src="assets/js/beneficiary-handlers.js"
+></script>
+<script
+        type="text/javascript"
+        src="assets/js/getFocusAreasByLga.js"
+></script>
+<script
+        type="text/javascript"
+        src="assets/js/potentialPartnershipsTable.js"
+></script>
+<script type="text/javascript" src="assets/js/gapAnalysisUtils.js"></script>
+<script type="text/javascript" src="assets/js/gapAnalysisTable.js"></script>
+<script
+        type="text/javascript"
+        src="assets/js/gap-analysis-table-modal.js"
+></script>
+<script
+        type="text/javascript"
+        src="assets/js/gap-analysis-toggle.js"
+></script>
+</body>
 </html>

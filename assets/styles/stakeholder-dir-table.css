@@ -1,5 +1,5 @@
-.stakeholder__dir__table table [type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
+.stakeholder__dir__table table [type='checkbox']:not(:checked),
+[type='checkbox']:checked {
   position: static;
   opacity: 1;
   pointer-events: auto;
@@ -166,7 +166,7 @@
   justify-content: center;
 }
 
-.body .col-1 [type="checkbox"]:not(:checked) {
+.body .col-1 [type='checkbox']:not(:checked) {
   opacity: 1;
   margin-left: -21px;
 }
@@ -179,7 +179,7 @@
   padding-right: 43px;
 }
 
-[type="checkbox"]:not(:checked) {
+[type='checkbox']:not(:checked) {
   opacity: 1;
 }
 
@@ -611,8 +611,8 @@ table.stakeholder__details__table .row__value {
   cursor: pointer;
 }
 
-[type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
+[type='checkbox']:not(:checked),
+[type='checkbox']:checked {
   position: relative;
 }
 /* ---------------------------------------------- */
@@ -631,7 +631,7 @@ table.stakeholder__details__table .row__value {
 }
 
 #partnership-report-button {
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 .disable {
