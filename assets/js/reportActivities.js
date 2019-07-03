@@ -51,6 +51,7 @@ function getPotentialPartnershipsCountCoordinates(lgaId) {
     points.push({ x: svgPoint.x, y: svgPoint.y, lga });
     return points;
   }
+
   return points;
 }
 
@@ -161,6 +162,29 @@ function appendPotentialPartnershipsDefs(id, number, pillarType) {
     .attr('y', -4)
     .attr('id', 'tspan')
     .html(number);
+
+    $("#report-map-pillars").on("click", function(e) {
+      const mouseX = e.pageX;
+      const mouseY = e.pageY;
+    
+      if(e.target.nodeName === "use") {
+        $("#display-map").html(
+          `${pillarType} 
+          <br /> 
+          Number of potential partnership 
+          <br /> 
+          ${number} 
+          <br /> 
+          <a href="${pillarType}">View potential partnership / collaboration</a>`
+          ).addClass("display-map").css({
+            display: "block",
+            top: mouseY - 180,
+            left: mouseX - 160,
+          })
+      } else {
+        $(".display-map").html('').css({display: "none"});
+      }
+    })
 }
 
 function addMarker(x, y, pillarId) {

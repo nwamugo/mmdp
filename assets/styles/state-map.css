@@ -29,6 +29,18 @@
   height: 40px;
 }
 
+.display-map {
+  width: 20%;
+  background-color: white;
+  padding: 5px;
+  text-align: left;
+  border: 1px solid gray;
+  z-index: 100;
+  line-height: 25px;
+  position: absolute;
+  cursor: pointer;
+}
+
 .state__map .map__legend__container,
 .report__map__legend__container {
   display: flex;
