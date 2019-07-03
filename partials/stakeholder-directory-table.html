@@ -209,14 +209,20 @@
           CSV
         </button>
         <span class="footer__right_content">
-          <select id="entries-per-page">
-            <!-- optios will be loaded dynamically-->
-          </select>
+
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger' data-target='entries-per-page'><span id="row-number">10 </span><i class="fas fa-caret-down"></i><a>
+
+          <!-- Dropdown Structure -->
+          <ul id='entries-per-page' class='dropdown-content'>
+            <!-- Dynamic display goes here -->
+          </ul>
+    
           <span>Entries per page</span>
           <span
             >Page <span id="current-page">1</span> of
             <span id="total-page">1</span></span
-          >
+           >
           <button id="previous-page" class="go-back">&#60;</button>
           <button id="next-page" class="go-forward">&#62;</button>
         </span>
