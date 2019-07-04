@@ -219,7 +219,7 @@
       }
 
       $('.marker')
-        .mouseover(function(e) {
+        .mouseover(function(e) {          
           var community = $(this).attr('communityName') || '';
           var stakeholders = servicesCount[1];
           var focusarea = servicesCount[2];
@@ -244,9 +244,9 @@
         .mouseleave(function() {
           $('.info_panel').remove();
         })
-        .mousemove(function(e) {
+        .mousemove(function(e) {          
           var mouseX = e.pageX,
-            mouseY = e.pageY;
+            mouseY = e.pageY;            
 
           $('.info_panel').css({
             top: mouseY - 50,
