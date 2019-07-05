@@ -8,14 +8,7 @@ $(document).ready(async function() {
     '_id'
   ];
 
-  const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
-  const queryParam = queryNameFromUrl
-    ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
-    : 'Nigeria';
-  const stakeholderData = await fetch(
-    `${MMDP_BASE_URL}/api/v1/location?state=${queryParam}&focusAreaName`
-  );
-  const data = await stakeholderData.json();
+  const dataForTable = await getPartnershipData();
 
   let selectedItems = [];
 
@@ -64,15 +57,9 @@ $(document).ready(async function() {
   $('#potential-partnerships-table').load(
     '/partials/potential-partnerships-table.html',
     function() {
-      let arr = getLgas(data);
-      let potentialPartners = potentialPartnershipsByLga(arr);
-      const tableData = potentialPartners.map(item => {
-        return item;
-      });
-
       let table = 'potentialPartnerships';
-      window.partnershipsCsvTableData = tableData;
-      const paginator = new Paginator(tableData, keys, table, selectedItems);
+      window.partnershipsCsvTableData = dataForTable;
+      const paginator = new Paginator(dataForTable, keys, table, selectedItems);
       paginator.potentialPartnershipsTable = true;
       potentialPartnershipsTableData = paginator.initialPage();
 
@@ -101,4 +88,6 @@ $(document).ready(async function() {
       });
     }
   );
+
+  
 });

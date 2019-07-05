@@ -99,3 +99,21 @@ function execCmsLoad() {
 		cmsLoad();
 	}
 }
+
+async function getPartnershipData() {
+	const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
+  const queryParam = queryNameFromUrl
+    ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
+    : 'Nigeria';
+  const stakeholderData = await fetch(
+    `${MMDP_BASE_URL}/api/v1/location?state=${queryParam}&focusAreaName`
+  );
+	const data = await stakeholderData.json();
+	
+	  let arr = getLgas(data);
+      let potentialPartners = potentialPartnershipsByLga(arr);
+      const tableData = potentialPartners.map(item => {
+        return item;
+			});
+	return tableData;
+}
