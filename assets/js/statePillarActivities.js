@@ -56,7 +56,7 @@ function getCoordinates(lgaId, count) {
   return points;
 }
 
-function appendDefs(id, number, pillarType) {
+function appendDefs(id, number, pillarType) {  
   const svgContainer = d3.select("#state-map-pillars").select("svg");
   // append pillarMarker to the SVG container
   svgContainer
@@ -96,7 +96,7 @@ function appendDefs(id, number, pillarType) {
     .html(number);
 }
 
-function addMarker(x, y, pillarId) {
+function addMarker(x, y, pillarId) {  
   const svgContainer = d3.select("#state-map-pillars").select("svg");
   svgContainer
     .append("use")
@@ -176,7 +176,7 @@ function filteredLga(target, array = []) {
               if (points.length > 0) {
                 for (let i = 0; i <= points.length - 1; i++) {
                   const number = lgaData.pillars[i].count;
-                  const pillar = lgaData.pillars[i].name;
+                  const pillar = lgaData.pillars[i].name;                  
                   appendDefs(lgaId + i, number, pillar);
                   addMarker(points[i].x, points[i].y, lgaId + i);
                 }

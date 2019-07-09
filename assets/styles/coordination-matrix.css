@@ -338,13 +338,13 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 }
 
 .pillar-icons {
-  width: 120px;
+  width: 375px;
   float: right;
-  margin-top: 400px;
+  margin-top: 420px;
 }
 
 .span-text {
-  margin-left: 6px;
+  margin-left: 10px;
   vertical-align: top;
 }
 

@@ -125,11 +125,11 @@
 }
 .pillar-icons {
   margin-top: 30%;
+  left: 30px;
 }
 
 .span-text {
   display: inline-block;
-  padding-left: 60px;
 }
 
 .span-img {
@@ -198,4 +198,5 @@
 .banner__image.state-map__svg {
   width: 705px;
   height: 600px;
+  left: 100px;
 }
