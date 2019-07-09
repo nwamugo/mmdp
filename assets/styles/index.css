@@ -843,6 +843,10 @@ textarea {
   .tapButton {
     margin-left: -450px;
   }
+
+  .allSlides {
+    margin-left: 2%;
+  }
 }
 
 /* Hide the images by default */
@@ -879,8 +883,9 @@ textarea {
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
   animation-duration: 1.5s;
-  max-width: 450px;
+  max-width: 44%;
   margin: 0 10px;
+  flex: 2
 }
 
 @-webkit-keyframes fade {
@@ -903,7 +908,7 @@ textarea {
 
 .event_slide_card img {
   height: 443px;
-  width: 450px;
+  width: 100%;
   padding: 20px;
 }
 
@@ -925,7 +930,8 @@ textarea {
 .allSlides {
   display: flex;
   margin-bottom: 30px;
-  justify-content: center;
+  justify-content: left;
+  margin-left: 5%;
 }
 .content_slides {
   background-color: #fafafa;
@@ -966,4 +972,16 @@ textarea {
 
 .Slides_show {
   display: 'inline-block';
+}
+
+@media only screen and (max-width: 1085px) {
+  .allSlides {
+    margin-left: 2%;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .allSlides {
+    margin-left: 1%;
+  }
 }

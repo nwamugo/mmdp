@@ -645,7 +645,8 @@ table.stakeholder__details__table .row__value {
   height: 50px;
 }
 
-.partnership-table-mobile {
+.partnership-table-mobile,
+.gap-analysis-table-mobile {
   display: none;
   border: 2px solid #cae7f0;
 }
@@ -813,7 +814,8 @@ table.stakeholder__details__table .row__value {
     display: none;
   }
 
-  .partnership-table-mobile {
+  .partnership-table-mobile,
+  .gap-analysis-table-mobile {
     display: block;
   }
 
@@ -827,7 +829,8 @@ table.stakeholder__details__table .row__value {
     font-size: 12px;
   }
 
-  .partnership-table-mobile {
+  .partnership-table-mobile,
+  .gap-analysis-table-mobile {
     width: 90%;
   }
 }
