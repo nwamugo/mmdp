@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="70" height="69" viewBox="0 0 70 69">
-  <g fill="none" fill-rule="evenodd">
-    <rect width="48" height="48" x="11.5" y="11" fill="#1A91A1" stroke="#1A91A1"/>
-    <path fill="#1FCFC0" stroke="#1FCFC0" d="M11.5949762,11.102552 L11.2611599,58.1706583 L58.3292662,57.836842 L58.6630826,10.7687356 L11.5949762,11.102552 Z" transform="rotate(-135 34.962 34.47)"/>
-  </g>
+    <g fill="none" fill-rule="evenodd">
+        <rect width="48" height="48" x="11.5" y="11" fill="#1A91A1" stroke="#1A91A1"/>
+        <path fill="#1FCFC0" stroke="#1FCFC0" d="M11.5949762,11.102552 L11.2611599,58.1706583 L58.3292662,57.836842 L58.6630826,10.7687356 L11.5949762,11.102552 Z" transform="rotate(-135 34.962 34.47)"/>
+    </g>
 </svg>
