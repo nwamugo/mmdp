@@ -1,5 +1,6 @@
-const bindJQuery = (table) => {
+const bindJQuery = (table, selectedItems) => {
   $(document).ready(async function() {
+    console.log(table)
     if (table === 'gapAnalysis') {
       tableData = [...window.gapTableData];
     } else {
@@ -89,14 +90,7 @@ const bindJQuery = (table) => {
       // format the data
       itemsNotFormatted.forEach(item => {
         if (table === 'gapAnalysis') {
-          if (selectedItems.includes('all')) {
-            itemsFormatted.push({
-              thematicPillar: item.pillar.replace(/,/g, ''),
-              subTheme: item.subtheme.replace(/,/g, ''),
-              lgasWithGaps: item.LgasWithGaps.replace(/,/g, ''),
-              numberOfFocusAreasWithGaps: item.focusAreasWithGapsCount.toString().replace(/,/g, '')
-            });
-          } else if (selectedItems.includes(item.subtheme.replace(/ /g, ''))) {
+          if (selectedItems.includes(item.subtheme.replace(/ /g, ''))) {
             itemsFormatted.push({
               thematicPillar: item.pillar.replace(/,/g, ''),
               subTheme: item.subtheme.replace(/,/g, ''),
@@ -106,24 +100,7 @@ const bindJQuery = (table) => {
           }
           fileTitle = 'gapAnalysisReport';
         } else {
-          if (selectedItems.includes('all')) {
-            itemsFormatted.push({
-              organisationName: item.organisationName.replace(/,/g, ''),
-              thematicPillars: item.thematicPillars.replace(/,/g, ''),
-              subThemes: item.subThemes.replace(/,/g, ''),
-              partnership: item.partnership.replace(/,/g, ''),
-              location: item.location.replace(/,/g, ''),
-              beneficiaryCount: item.beneficiaryCount,
-              amountInvested: item.amountInvested,
-              beneficiaryService: item.beneficiaryService.replace(/,/g, ''),
-              duration: item.duration.replace(/,/g, ''),
-              focusArea: item.focusArea.replace(/,/g, ''),
-              fundingSources: item.fundingSources.replace(/,/g, ''),
-              notes: item.notes.replace(/,/g, ''),
-              founder: item.founder.replace(/,/g, ''),
-              organisationType: item.organisationType.replace(/,/g, '')
-            });
-          } else if (selectedItems.includes(item.organisationName.replace(/ /g, ''))) {
+          if (selectedItems.includes(item.organisationName.replace(/ /g, ''))) {
             itemsFormatted.push({
               organisationName: item.organisationName.replace(/,/g, ''),
               thematicPillars: item.thematicPillars.replace(/,/g, ''),
@@ -147,47 +124,7 @@ const bindJQuery = (table) => {
       // (itemsFormatted)
       exportCSVFile(headers, itemsFormatted, fileTitle);
     }
-  
-    let selectedItems = [];
 
-    let all = [];
-
-    let gAll = document.getElementById('check-all');
-    let sAll = document.getElementById('check-all-stakeholder');
-    
-    all.push(gAll);
-    all.push(sAll);
-
-    for (const item of all){
-      if (item === null) {
-        continue;
-      } else {
-        item.onclick = function () {
-          if ($(this).is(':checked')) {
-            $('input[name="aaaaa"]').each(function() {
-              this.checked = true;
-            });
-            selectedItems.push('all')  
-          } else if ($(this).is(':not(:checked)')) {
-            $('input[name="aaaaa"]').each(function() {
-              this.checked = false;
-              selectedItems.pop('all');
-            });
-          }
-        }
-      }
-    }
-
-    $('input[type="checkbox"]').click(function() {
-      if ($(this).is(':checked') && $(this).attr('data-org') !== 'check-all') {
-        var strinn = $(this).attr('data-org');
-        selectedItems.push(strinn.replace(/-/g, ' '));
-      } else if ($(this).is(':not(:checked)')) {
-        return null
-      }
-    });
-    
-  
     $('#gap-export, #export').on('click', function() {
       if (selectedItems.length === 0) {
         return null;

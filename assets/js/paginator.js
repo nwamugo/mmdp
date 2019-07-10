@@ -1,5 +1,5 @@
 class Paginator {
-  constructor(data, columnKeys, table) {
+  constructor(data, columnKeys, table, selectedItems) {
     this.data = data;
     this.tempData = [];
     this.empData = false;
@@ -9,6 +9,7 @@ class Paginator {
     this.columnKeys = columnKeys;
     this.potentialPartnershipsTable = false;
     this.table = table;
+    this.selectedItems = selectedItems;
   }
   getData() {
     if (this.empData) {
@@ -99,19 +100,21 @@ class Paginator {
     );
     return rows;
   };
+
+  
   createTableBody(rows) {
     if (this.potentialPartnershipsTable) {
       if (this.table === 'gapAnalysis') {
         $('#gap-analysis-data').html(rows);
         bindGapAnalysisModalJQuery(window.focusAreaGaps);
-        bindJQuery(this.table);
+        bindJQuery(this.table, this.selectedItems);
       } else {
         $('#partnership-report-data').html(rows);
       }
       
     } else {
       $('tbody.table__body').html(rows);
-      bindJQuery();
+      bindJQuery(this.table, this.selectedItems);
     }
   }
   updatePageOf() {

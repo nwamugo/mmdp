@@ -57,12 +57,42 @@ $(document).ready(async function() {
   const allCount = tableData.map(item => item.partnership);
   
   window.tableData = tableData;
+  table = 'stakeholder';
+
   keys[4] = param === "country" ? "stateLocation" : keys[4];
-  const paginator = new Paginator(tableData, keys);
+  let selectedItems = [];
+      
+  $('#stakeholder-directory-table').on('click', 'input[type="checkbox"]', function() {
+    if ($(this).is(':checked') && $(this).attr('data-org') !== 'check-all-stakeholder') {
+      var strinn = $(this).attr('data-org');
+      selectedItems.push(strinn.replace(/-/g, ' '));
+    } else if ($(this).is(':checked') && $(this).attr('data-org') === 'check-all-stakeholder') {
+      $('input[name="aaaaa"]').each(function() {
+        var strinn = this.id;
+        selectedItems.push(strinn.replace(/-/g, ' '));
+        this.checked = true;
+      });
+    } else if ($(this).is(':not(:checked)') && $(this).attr('data-org') !== 'check-all-stakeholder') {
+      var strinn = $(this).attr('data-org');
+      var filtered = selectedItems.filter(function(value, index, arr){
+        return value !== strinn.replace(/-/g, ' ');
+      });
+      selectedItems.splice(0, selectedItems.length, ...filtered);
+      $('#check-all-stakeholder').prop('checked', false);
+    } else if ($(this).is(':not(:checked)') && $(this).attr('data-org') === 'check-all-stakeholder') {
+      $('input[name="aaaaa"]').each(function() {
+        this.checked = false;
+      });
+      selectedItems.length = 0;
+    }
+  })
 
   $("#stakeholder-directory-table").load(
     "/partials/stakeholder-directory-table.html",
     function() {
+      
+      const paginator = new Paginator(tableData, keys, table, selectedItems);
+    
       fetchLocations();
       filter.displayDataInDropdown(
         [...new Set(beneficiaryCount)],
