@@ -80,7 +80,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 }
 
 #reportBtn {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #map svg g path r {
@@ -353,7 +353,8 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
   width: 550px;
 }
 
-.pillar-text, .potential-partnership-text {
+.pillar-text,
+.potential-partnership-text {
   vertical-align: top;
   width: 57px;
   height: 20px;
@@ -369,82 +370,85 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
   color: var(--dark);
 }
 
-.potential-partnership-text{
-    margin-left: 2px;
+.potential-partnership-text {
+  margin-left: 2px;
 }
 
 @media only screen and (max-width: 770px) {
-    .hide-on-small-only, .hide-on-small-and-down {
-        display: block !important;
-    }
-    #map {
-        width: 750px;
-        margin-top: 1px;
-    }
-    .tapButton {
-        margin-right: -900px;
-        margin-top: -90px;
-        margin-bottom: 100px;
-    }
-    .banner {
-        margin-left: 25px;
-        background: none;
-        font-size: 10px;
-        display: grid !important;
-        grid-template-columns: 1fr;
-        justify-items: center;
-        min-height: 400px;
-    }
-    .banner__desc {
-        margin-top: 1%;
-        font-size: 2px;
-    }
-    .tapButton {
-        margin-left: -450px;
-    }
+  .hide-on-small-only,
+  .hide-on-small-and-down {
+    display: block !important;
+  }
+  #map {
+    width: 750px;
+    margin-top: 1px;
+  }
+  .tapButton {
+    margin-right: -900px;
+    margin-top: -90px;
+    margin-bottom: 100px;
+  }
+  .banner {
+    margin-left: 25px;
+    background: none;
+    font-size: 10px;
+    display: grid !important;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    min-height: 400px;
+  }
+  .banner__desc {
+    margin-top: 1%;
+    font-size: 2px;
+  }
+  .tapButton {
+    margin-left: -450px;
+  }
 }
 
 @media only screen and (max-width: 1100px) {
-    .hide-on-small-only, .hide-on-small-and-down {
-        display: block !important;
-    }
-    #map {
-        width: 750px;
-        margin-top: 1px;
-    }
-    .tapButton {
-        margin-right: -900px;
-        margin-top: -90px;
-        margin-bottom: 100px;
-    }
-    .banner {
-        margin-left: 0;
-        background: none;
-        font-size: 10px;
-        display: grid !important;
-        grid-template-columns: 1fr;
-        justify-items: center;
-    }
-    .banner__desc {
-        margin-top: 1%;
-        font-size: 2px;
-    }
-    .tapButton {
-        margin-left: -450px;
-    }
+  .hide-on-small-only,
+  .hide-on-small-and-down {
+    display: block !important;
+  }
+  #map {
+    width: 750px;
+    margin-top: 1px;
+  }
+  .tapButton {
+    margin-right: -900px;
+    margin-top: -90px;
+    margin-bottom: 100px;
+  }
+  .banner {
+    margin-left: 0;
+    background: none;
+    font-size: 10px;
+    display: grid !important;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .banner__desc {
+    margin-top: 1%;
+    font-size: 2px;
+  }
+  .tapButton {
+    margin-left: -450px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-    .hide-on-small-only, .hide-on-small-and-down {
-        display: block !important;
-    }
-    #map {
-        margin-left: -90px;
-        width: 350px;
-        margin-top: 1px;
-    }
-    .tapButton {
-        margin-right: -600px;
-        margin-top: 30px;
-    }
+  .hide-on-small-only,
+  .hide-on-small-and-down {
+    display: block !important;
+  }
+  #map {
+    margin-left: -90px;
+    width: 350px;
+    margin-top: 1px;
+  }
+  .tapButton {
+    margin-right: -600px;
+    margin-top: 30px;
+  }
 }

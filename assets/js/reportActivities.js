@@ -1,5 +1,7 @@
 function getPoint(x, y) {
-  const svg = document.querySelector("#report-map-pillars").querySelector("svg");
+  const svg = document
+    .querySelector("#report-map-pillars")
+    .querySelector("svg");
   let pt = svg.createSVGPoint();
   pt.x = x;
   pt.y = y;
@@ -16,12 +18,12 @@ function getPillarsCoordinates(lgaId) {
   let lgaDOMRect = lgaPath.getBoundingClientRect();
 
   //get a position in the rect
-  const positionX = lgaDOMRect.x + (lgaDOMRect.width * 0.26);
-  let positionY = lgaDOMRect.y + (lgaDOMRect.height / 2);
+  const positionX = lgaDOMRect.x + lgaDOMRect.width * 0.26;
+  let positionY = lgaDOMRect.y + lgaDOMRect.height / 2;
 
   if (lgaPath && lgaDOMRect) {
     //get the coordinates of the point on the svg
-    let svgPoint = getPoint(positionX, positionY);  
+    let svgPoint = getPoint(positionX, positionY);
     //Put all the points and lgaId together
     pointsData.push({ x: svgPoint.x, y: svgPoint.y, lgaId });
   }
@@ -34,14 +36,14 @@ function getPotentialPartnershipsCountCoordinates(lgaId) {
 
   // path client rect
   let cr = lgaPath.getBoundingClientRect();
-  const centerX = cr.x + (cr.width * 0.416);
-  let centerY = cr.y + (cr.height * 0.5);
+  const centerX = cr.x + cr.width * 0.416;
+  let centerY = cr.y + cr.height * 0.5;
   // get a random point on the svg canvas
   let x = centerX;
   let y = centerY;
   //elementFromPoint returns the topmost Element at the specified coordinates (relative to the viewport).
 
-  if(lgaPath && cr){
+  if (lgaPath && cr) {
     //get the coordinates of the point on the svg
     let svgPoint = getPoint(x, y);
     //draw a circle with the center on the svg point
@@ -116,41 +118,49 @@ function appendPotentialPartnershipsDefs(id, number, pillarType) {
   const svgContainer = d3.select("#report-map-pillars").select("svg");
   const lgaPath = document.getElementById(id.replace(/ +/g, ""));
 
-
   // append pillarMarker to the SVG container
   const defsContainer = svgContainer
-      .append("defs")
-      .append("symbol")
-      .attr("id", "defPotentialPartnerships" + id.replace(/ +/g, ""))
-      .attr("viewBox", "-10 -34 40 40");
+    .append("defs")
+    .append("symbol")
+    .attr("id", "defPotentialPartnerships" + id.replace(/ +/g, ""))
+    .attr("fill", "none")
+    .attr("fill-rule", "evenodd")
+    .attr("viewBox", "-10 -34 50 50");
 
-
-  const parent = document.getElementById('defPotentialPartnerships' + id.replace(/ +/g, ""));
+  const parent = document.getElementById(
+    "defPotentialPartnerships" + id.replace(/ +/g, "")
+  );
   const group = d3.select(parent);
-  group.append("rect")
-      .attr("x", -12.5)
-      .attr("y", -30)
-      .attr("transform", "rotate(40)")
-      .style("width",27.5)
-      .style("height", 8.8)
-      .style("stroke", 'gray')
-      .style("fill", "white")
-      .style("stroke-width", 2)
-      .style("rx", 3);
 
- group.append("rect")
-      .attr("x", -39)
-      .attr("y", -8)
-      .attr("transform", "rotate(125)")
-     .style("width",27.5)
-     .style("height", 8.8)
-      .style("stroke", 'gray')
-      .style("fill", "white")
-      .style("stroke-width", 2)
-      .style("rx", 3);
-  group.append('circle').attr('r', 7.914).attr('cy', -18.69).attr('cx', 17.8).attr('fill', '#000');
-  group.append('text').attr('fill', '#FFF').attr('font-size', 12).attr('letter-spacing', -.148).attr('font-weight', 'bold')
-      .append('tspan').attr('x', 14).attr('y', -15).attr('id', 'tspan').html(number);
+  group
+    .append("image")
+    .attr("x", -2)
+    .attr("y", -12)
+    .attr("width", 36)
+    .attr("height", 36)
+    .attr(
+      "xlink:href",
+      "https://mmdp-img-assets.s3.amazonaws.com/assets/icons/hand-icon%402x.svg"
+    );
+
+  group
+    .append("circle")
+    .attr("r", 7.914)
+    .attr("cy", -6.69)
+    .attr("cx", 15.8)
+    .attr("fill", "#000");
+
+  group
+    .append("text")
+    .attr("fill", "#FFF")
+    .attr("font-size", 12)
+    .attr("letter-spacing", -0.148)
+    .attr("font-weight", "bold")
+    .append("tspan")
+    .attr("x", 12)
+    .attr("y", -4)
+    .attr("id", "tspan")
+    .html(number);
 }
 
 function addMarker(x, y, pillarId) {
@@ -168,13 +178,13 @@ function addMarker(x, y, pillarId) {
 function addPotentialPartnershipsMarker(x, y, pillarId) {
   const svgContainer = d3.select("#report-map-pillars").select("svg");
   svgContainer
-      .append("use") // add
-      .attr("xlink:href", "#defPotentialPartnerships" + pillarId)
-      .attr("id", "use" + pillarId.replace(/ +/g, ""))
-      .attr("width", 0.1)
-      .attr("height", 0.1)
-      .attr("x", x - 0.02742495015)
-      .attr("y", y - 0.1);
+    .append("use") // add
+    .attr("xlink:href", "#defPotentialPartnerships" + pillarId)
+    .attr("id", "use" + pillarId.replace(/ +/g, ""))
+    .attr("width", 0.1)
+    .attr("height", 0.1)
+    .attr("x", x - 0.02742495015)
+    .attr("y", y - 0.1);
 }
 
 function filteredLga(target, array = []) {
@@ -194,10 +204,7 @@ function getNumberOfServices(lgaServices, lgaName) {
 (function() {
   const baseURL = window.location.host;
   let MMDP_BASE_URL;
-  if (
-    baseURL.includes("127.0.0.1") ||
-    baseURL.includes("localhost")
-  ) {
+  if (baseURL.includes("127.0.0.1") || baseURL.includes("localhost")) {
     MMDP_BASE_URL = "http://localhost:3000";
   } else {
     MMDP_BASE_URL = "http://cms-staging.mmdp.ng:3000";
@@ -227,9 +234,10 @@ function getNumberOfServices(lgaServices, lgaName) {
       if (!stateUrl) {
         window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
       }
-      // getPotentialPartnershipsForLGAs is defined in a state-report util folder :
-      //    assets/js/state-report/potentialPartnershipFilters.js
-      const potentialPartnerships = getPotentialPartnershipsForLGAs(data, potentialPartnershipPerLGA);
+      const potentialPartnerships = getPotentialPartnershipsForLGAs(
+        data,
+        potentialPartnershipPerLGA
+      );
       $("#report-map-pillars").load(stateUrl, function(responseTxt, statusTxt) {
         if (statusTxt === "success") {
           const [, xmlPart, svgPart] = responseTxt.match(
@@ -279,17 +287,39 @@ function getNumberOfServices(lgaServices, lgaName) {
               lgaMap.setAttribute("class", "path");
 
               const points = getPillarsCoordinates(lgaId);
-              const lgaPotentialPartnershipData = filteredLga(lgaId, potentialPartnerships);
+              const lgaPotentialPartnershipData = filteredLga(
+                lgaId,
+                potentialPartnerships
+              );
 
-              if (lgaId && lgaData && lgaData.lgaName===lgaId && lgaPotentialPartnershipData.potentialLGAPartnershipsCount > 0) {
-
-                const potentialPartnershipPoints = getPotentialPartnershipsCountCoordinates(lgaId, lgaData.potentialLGAPartnershipsCount);
+              if (
+                lgaId &&
+                lgaData &&
+                lgaData.lgaName === lgaId &&
+                lgaPotentialPartnershipData.potentialLGAPartnershipsCount > 0
+              ) {
+                const potentialPartnershipPoints = getPotentialPartnershipsCountCoordinates(
+                  lgaId,
+                  lgaData.potentialLGAPartnershipsCount
+                );
                 if (potentialPartnershipPoints.length > 0) {
-                  for (let CoordinateIndex = 0; CoordinateIndex < potentialPartnershipPoints.length ; CoordinateIndex++) {
-                    const number = lgaPotentialPartnershipData.potentialLGAPartnershipsCount;
-                    appendPotentialPartnershipsDefs(lgaId.replace(/ +/g, "") + CoordinateIndex, number, lgaId.replace(/ +/g, ""));
-                    addPotentialPartnershipsMarker(potentialPartnershipPoints[CoordinateIndex].x,
-                        potentialPartnershipPoints[CoordinateIndex].y, lgaId.replace(/ +/g, "") + CoordinateIndex);
+                  for (
+                    let CoordinateIndex = 0;
+                    CoordinateIndex < potentialPartnershipPoints.length;
+                    CoordinateIndex++
+                  ) {
+                    const number =
+                      lgaPotentialPartnershipData.potentialLGAPartnershipsCount;
+                    appendPotentialPartnershipsDefs(
+                      lgaId.replace(/ +/g, "") + CoordinateIndex,
+                      number,
+                      lgaId.replace(/ +/g, "")
+                    );
+                    addPotentialPartnershipsMarker(
+                      potentialPartnershipPoints[CoordinateIndex].x,
+                      potentialPartnershipPoints[CoordinateIndex].y,
+                      lgaId.replace(/ +/g, "") + CoordinateIndex
+                    );
                   }
                 }
               }

@@ -55,7 +55,7 @@ $(document).ready(async function() {
   const organisationName = tableData.map(item => item.organisationName);
 
   const allCount = tableData.map(item => item.partnership);
-
+  
   window.tableData = tableData;
   keys[4] = param === "country" ? "stateLocation" : keys[4];
   const paginator = new Paginator(tableData, keys);
@@ -81,15 +81,19 @@ $(document).ready(async function() {
       let options = "";
       while (n < 51) {
         if (n === 10) {
-          options += `<option selected>${n}</option>\n`;
+          options += `<div class="selected">${n} </div>\n`;
         } else {
-          options += `<option>${n}</option>\n`;
+          options += `<div class="selected">${n} </div>\n`;
         }
         n += 5;
       }
-      $("select#entries-per-page").html(options);
-      $("select#entries-per-page").change(function() {
-        paginator.entriesPerPage = this.value;
+      $('.dropdown-trigger').dropdown();
+      $("#entries-per-page").html(options);
+     
+      $(".selected").click(function() {
+        const text = $(this).text();
+        $("#row-number").text(text);
+        paginator.entriesPerPage = $("#row-number").text();
         paginator.refreshTableBody();
       });
       $("#next-page").click(function() {

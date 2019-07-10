@@ -1,7 +1,11 @@
-const bindJQuery = () => {
+const bindJQuery = (table) => {
   $(document).ready(async function() {
-    tableData = [...window.tableData];
-  
+    if (table === 'gapAnalysis') {
+      tableData = [...window.gapTableData];
+    } else {
+      tableData = [...window.tableData];
+    }
+
     function convertToCSV(objArray) {
       var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
       var str = '';
@@ -30,17 +34,17 @@ const bindJQuery = () => {
   
       var csv = convertToCSV(jsonObject);
   
-      var exportedFilenmae = fileTitle + '.csv' || 'export.csv';
+      var exportedFilename = fileTitle + '.csv' || 'export.csv';
   
       var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       if (navigator.msSaveBlob) {
-        navigator.msSaveBlob(blob, exportedFilenmae);
+        navigator.msSaveBlob(blob, exportedFilename);
       } else {
         var link = document.createElement('a');
         if (link.download !== undefined) {
           var url = URL.createObjectURL(blob);
           link.setAttribute('href', url);
-          link.setAttribute('download', exportedFilenmae);
+          link.setAttribute('download', exportedFilename);
           link.style.visibility = 'hidden';
           document.body.appendChild(link);
           link.click();
@@ -50,67 +54,141 @@ const bindJQuery = () => {
     }
   
     function download(selectedItems) {
-      var headers = {
-        organisationName: 'OrganisationName',
-        thematicPillars: 'ThematicPillars',
-        subThemes: 'SubThemes',
-        partnership: 'Partnership',
-        location: 'Location',
-        beneficiaryCount: 'BeneficiaryCount',
-        amountInvested: 'AmountInvested',
-        beneficiaryService: 'BeneficiaryService',
-        duration: 'Duration',
-        focusArea: 'FocusArea',
-        fundingSources: 'FundingSources',
-        notes: 'Notes',
-        founder: 'Founder',
-        organisationType: 'OrganisationTypes'
-      };
-  
+      if (table === 'gapAnalysis') {
+        var headers = {
+          thematicPillar: 'ThematicPillar',
+          subTheme: 'SubTheme',
+          lgasWithGaps: 'LGAsWithGaps',
+          numberOfFocusAreasWithGaps: 'NumberOfFocusAreasWithGaps',
+        };
+      } else {
+        var headers = {
+          organisationName: 'OrganisationName',
+          thematicPillars: 'ThematicPillars',
+          subThemes: 'SubThemes',
+          partnership: 'Partnership',
+          location: 'Location',
+          beneficiaryCount: 'BeneficiaryCount',
+          amountInvested: 'AmountInvested',
+          beneficiaryService: 'BeneficiaryService',
+          duration: 'Duration',
+          focusArea: 'FocusArea',
+          fundingSources: 'FundingSources',
+          notes: 'Notes',
+          founder: 'Founder',
+          organisationType: 'OrganisationTypes'
+        };
+      }
+      
       itemsNotFormatted = tableData;
   
       var itemsFormatted = [];
+
+      let fileTitle = ''
   
       // format the data
       itemsNotFormatted.forEach(item => {
-        if (selectedItems.includes(item.organisationName)) {
-          itemsFormatted.push({
-            organisationName: item.organisationName.replace(/,/g, ''),
-            thematicPillars: item.thematicPillars.replace(/,/g, ''),
-            subThemes: item.subThemes.replace(/,/g, ''),
-            partnership: item.partnership.replace(/,/g, ''),
-            location: item.location.replace(/,/g, ''),
-            beneficiaryCount: item.beneficiaryCount,
-            amountInvested: item.amountInvested,
-            beneficiaryService: item.beneficiaryService.replace(/,/g, ''),
-            duration: item.duration.replace(/,/g, ''),
-            focusArea: item.focusArea.replace(/,/g, ''),
-            fundingSources: item.fundingSources.replace(/,/g, ''),
-            notes: item.notes.replace(/,/g, ''),
-            founder: item.founder.replace(/,/g, ''),
-            organisationType: item.organisationType.replace(/,/g, '')
-          });
+        if (table === 'gapAnalysis') {
+          if (selectedItems.includes('all')) {
+            itemsFormatted.push({
+              thematicPillar: item.pillar.replace(/,/g, ''),
+              subTheme: item.subtheme.replace(/,/g, ''),
+              lgasWithGaps: item.LgasWithGaps.replace(/,/g, ''),
+              numberOfFocusAreasWithGaps: item.focusAreasWithGapsCount.toString().replace(/,/g, '')
+            });
+          } else if (selectedItems.includes(item.subtheme.replace(/ /g, ''))) {
+            itemsFormatted.push({
+              thematicPillar: item.pillar.replace(/,/g, ''),
+              subTheme: item.subtheme.replace(/,/g, ''),
+              lgasWithGaps: item.LgasWithGaps.replace(/,/g, ''),
+              numberOfFocusAreasWithGaps: item.focusAreasWithGapsCount.toString().replace(/,/g, '')
+            });
+          }
+          fileTitle = 'gapAnalysisReport';
+        } else {
+          if (selectedItems.includes('all')) {
+            itemsFormatted.push({
+              organisationName: item.organisationName.replace(/,/g, ''),
+              thematicPillars: item.thematicPillars.replace(/,/g, ''),
+              subThemes: item.subThemes.replace(/,/g, ''),
+              partnership: item.partnership.replace(/,/g, ''),
+              location: item.location.replace(/,/g, ''),
+              beneficiaryCount: item.beneficiaryCount,
+              amountInvested: item.amountInvested,
+              beneficiaryService: item.beneficiaryService.replace(/,/g, ''),
+              duration: item.duration.replace(/,/g, ''),
+              focusArea: item.focusArea.replace(/,/g, ''),
+              fundingSources: item.fundingSources.replace(/,/g, ''),
+              notes: item.notes.replace(/,/g, ''),
+              founder: item.founder.replace(/,/g, ''),
+              organisationType: item.organisationType.replace(/,/g, '')
+            });
+          } else if (selectedItems.includes(item.organisationName.replace(/ /g, ''))) {
+            itemsFormatted.push({
+              organisationName: item.organisationName.replace(/,/g, ''),
+              thematicPillars: item.thematicPillars.replace(/,/g, ''),
+              subThemes: item.subThemes.replace(/,/g, ''),
+              partnership: item.partnership.replace(/,/g, ''),
+              location: item.location.replace(/,/g, ''),
+              beneficiaryCount: item.beneficiaryCount,
+              amountInvested: item.amountInvested,
+              beneficiaryService: item.beneficiaryService.replace(/,/g, ''),
+              duration: item.duration.replace(/,/g, ''),
+              focusArea: item.focusArea.replace(/,/g, ''),
+              fundingSources: item.fundingSources.replace(/,/g, ''),
+              notes: item.notes.replace(/,/g, ''),
+              founder: item.founder.replace(/,/g, ''),
+              organisationType: item.organisationType.replace(/,/g, '')
+            });
+          }
+          fileTitle = 'StakeholderDirectoryListing';
         }
       });
-  
-      var fileTitle = 'StakeholderDirectoryListing';
+      // (itemsFormatted)
       exportCSVFile(headers, itemsFormatted, fileTitle);
     }
   
     let selectedItems = [];
-  
-    $(document).ready(function() {
-      $('input[type="checkbox"]').click(function() {
-        if ($(this).is(':checked')) {
-          var strinn = $(this).attr('data-org');
-          selectedItems.push(strinn.replace(/-/g, ' '));
-        } else if ($(this).is(':not(:checked)')) {
-          return null
+
+    let all = [];
+
+    let gAll = document.getElementById('check-all');
+    let sAll = document.getElementById('check-all-stakeholder');
+    
+    all.push(gAll);
+    all.push(sAll);
+
+    for (const item of all){
+      if (item === null) {
+        continue;
+      } else {
+        item.onclick = function () {
+          if ($(this).is(':checked')) {
+            $('input[name="aaaaa"]').each(function() {
+              this.checked = true;
+            });
+            selectedItems.push('all')  
+          } else if ($(this).is(':not(:checked)')) {
+            $('input[name="aaaaa"]').each(function() {
+              this.checked = false;
+              selectedItems.pop('all');
+            });
+          }
         }
-      });
+      }
+    }
+
+    $('input[type="checkbox"]').click(function() {
+      if ($(this).is(':checked') && $(this).attr('data-org') !== 'check-all') {
+        var strinn = $(this).attr('data-org');
+        selectedItems.push(strinn.replace(/-/g, ' '));
+      } else if ($(this).is(':not(:checked)')) {
+        return null
+      }
     });
+    
   
-    $('#export').on('click', function() {
+    $('#gap-export, #export').on('click', function() {
       if (selectedItems.length === 0) {
         return null;
       } else {
@@ -119,8 +197,10 @@ const bindJQuery = () => {
         $('input[name="aaaaa"]').each(function() {
           this.checked = false;
         });
+        $('#check-all, #check-all-stakeholder').prop('checked', false);
       }
     });
+    
   
     $('td').ready(function() {
       var row_index = 0;

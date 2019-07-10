@@ -1,0 +1,166 @@
+.table-row:hover {
+  background-color: aliceblue;
+}
+
+.gap-analysis-modal {
+  display: none;
+  position: absolute;
+  top: 1304px; /*1204px fits well*/
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gap-analysis-modal .modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  width: 80%;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
+}
+
+.gap-analysis-modal .modal-header {
+  background-color: #296d81;
+  height: 43px;
+}
+
+.modal-body{
+  overflow: auto;
+  height: 532px;
+}
+
+.modal-grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.lga-grid-box {
+  background-color: #ffffff;
+  font-size: 30px;
+  margin:3px;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
+}
+
+.gap-analysis-modal .lga-header{
+  background-color: #3faaca;
+  min-height: 92px;
+  display: flex;
+}
+
+.gap-analysis-modal .lga-header .lga-name{
+  flex: 2;
+  text-align: left;
+  padding-left: 21px;
+}
+
+.gap-analysis-modal .lga-header .lga-stats{
+  flex: 3;
+  text-align: left;
+  color: #ffffff;
+}
+
+.gap-analysis-modal .lga-header .lga-name p{
+  font-size: 27px;
+  color: #ffffff;
+  margin-top: 2.1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.gap-analysis-modal .lga-header .lga-stats p{
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.gap-analysis-modal .lga-body {
+  background-color: #ffffff;
+}
+
+.gap-analysis-modal .lga-body-top{
+  display: flex;
+  font-size: 14px;
+}
+
+.gap-analysis-modal .lga-body-top img{
+  width: 35px;
+}
+
+.gap-analysis-modal .lga-body-top .top-1{
+  flex: 1;
+  padding: 11px 11px 11px 21px;
+  display: flex;
+}
+
+.gap-analysis-modal .lga-body-top .top-1 .top-1-image,
+.gap-analysis-modal .lga-body-top .top-2 .top-2-image,
+.gap-analysis-modal .lga-body-top .top-3 .top-3-image {
+  flex: 1;
+}
+
+.gap-analysis-modal .lga-body-top .top-1 .top-1-text,
+.gap-analysis-modal .lga-body-top .top-2 .top-2-text {
+  flex: 2;
+}
+
+.gap-analysis-modal .lga-body-top .top-3 .top-3-text {
+  flex: 4;
+}
+
+.gap-analysis-modal .lga-body-top .top-1 span{
+  font-weight: bold;
+}
+
+.gap-analysis-modal .lga-body-top .top-2{
+  flex: 1;
+  padding: 11px 11px 11px 21px;
+  display: flex;
+}
+
+.gap-analysis-modal .lga-body-top .top-3{
+  flex: 2;
+  padding: 11px 11px 11px 21px;
+  display: flex;
+}
+
+.gap-analysis-modal .lga-body-top .top-3 span{
+  font-weight: bold;
+}
+
+.gap-analysis-modal .lga-body-bottom p {
+  margin-left: 21px;
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.gap-analysis-modal .lga-body-bottom li {
+  font-size: 14px;
+  list-style-type: disc;
+  margin-left: 42px;
+}
+
+.modal-header .modal-header-navigation {
+  display: flex;
+  width: 120px;
+  margin-left: 70rem;
+  padding-top: 3px;
+}
+
+.hamburger{
+  margin-top: 10px 0 5px 0;
+  cursor: pointer;
+}
+
+.hamburger-line{
+  width: 35px;
+  height: 5px;
+  background-color: #f5f6fa;
+  margin: 6px 0;
+  flex: 1
+}
+
+.modal-header img {
+  flex: 1;
+  height: 36px;
+  padding-top: 3px;
+  cursor: pointer;
+}

@@ -183,7 +183,7 @@
 }
 
 .pillars__container {
-  margin-left: -180px !important; 
+  margin-left: -180px !important;
 }
 
 .state__map .banner__row .banner__desc {
@@ -199,4 +199,9 @@
   width: 705px;
   height: 600px;
   left: 100px;
+}
+
+.hide-pillar-icons,
+#hide-pillars {
+  display: none;
 }
