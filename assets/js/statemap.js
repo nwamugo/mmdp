@@ -164,9 +164,11 @@ function filteredLga(target, array = []) {
             .parents("svg")
             .addClass("banner__image state-map__svg");
           const lgsIds = responseTxt.match(/STL\d{6}/gm);
+
           let lgasArray = [];
           lgsIds.map(lgsId => {
             const svgPath = document.querySelector(`[fme\\:ID=${lgsId}]`);
+
             const lgaName = svgPath.getAttribute("fme:lga_name");
             const numberOfServices = getNumberOfServices(lgaServices, lgaName);
             if (numberOfServices >= 35) {
@@ -192,7 +194,7 @@ function filteredLga(target, array = []) {
           });
 
           $("#show-pillars").click(async function() {
-            $(".hide-me2").show();
+            $(".hide-pillar-icons").show();
             $("#show-pillars").hide();
             $("#hide-pillars").toggle();
             try {

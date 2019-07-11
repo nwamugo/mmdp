@@ -87,9 +87,9 @@ $(document).ready(async function() {
         }
         n += 5;
       }
-      $('.dropdown-trigger').dropdown();
+      $(".dropdown-trigger").dropdown();
       $("#entries-per-page").html(options);
-     
+
       $(".selected").click(function() {
         const text = $(this).text();
         $("#row-number").text(text);
@@ -225,7 +225,7 @@ $(document).ready(async function() {
         .next(".container")
         .find(".partnership_subnav")
         .slideUp();
-        
+
       $(this)
         .next(".container")
         .find(".organisation_subnav")

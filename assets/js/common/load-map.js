@@ -1,5 +1,5 @@
 function loadMap(redirectUrl) {
-  redirectUnAuthUser('/coordination-matrix.html');
+  redirectUnAuthUser("/coordination-matrix.html");
   $("#map").load(
     `https://s3.amazonaws.com/mmdp-img-assets/assets/documents/tv7BEAdCYkHMAbI5`,
     function(responseTxt, statusTxt, xhr) {
@@ -7,18 +7,29 @@ function loadMap(redirectUrl) {
         const [, xmlPart, svgPart] = responseTxt.match(
           /([\s\S.]*)(<svg[\s\S]*<\/svg>)/
         );
-        $('#map').html(svgPart);
+        $("#map").html(svgPart);
         document.querySelectorAll("path").forEach(stateMap => {
           stateMap.setAttribute("fill", "#fcffff");
         });
-        $.get("http://mmdp-cms-app.4rpphcs76y.us-west-2.elasticbeanstalk.com:3000/api/v1/ActiveStates/", function(data) {
-          var states = data.states;
-          for (var i = 0; i < states.length; i++) {
-            document
-              .querySelector(`[fme\\:StateName=${states[i]}]`)
-              .setAttribute("fill", "#296d81");
+
+        $.get(
+          `${MMDP_BASE_URL}/api/v1/stakeholders-directory?organisationName`,
+          function(data) {
+            const stakeholderDataJson = data;
+            const getBeneficiaries = stakeholderDataJson.data.map(
+              item => item.beneficiaries
+            );
+            const getStateName = getBeneficiaries.map(
+              item => item[0].communities[0].stateId.stateName
+            );
+
+            for (var i = 0; i < getStateName.length; i++) {
+              document
+                .querySelector(`[fme\\:StateName=${getStateName[i]}]`)
+                .setAttribute("fill", "#296d81");
+            }
           }
-        });
+        );
       }
 
       $("path")
