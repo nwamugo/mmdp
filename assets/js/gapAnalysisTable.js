@@ -12,6 +12,33 @@ $(document).ready(async function() {
       `${MMDP_BASE_URL}/api/v1/gapAnalysis/${queryNameFromUrl}`
     );
     const data = await gapAnalysisReportData.json();
+
+    let selectedItems = [];
+    $('#gap-analysis-table').on('click', 'input[type="checkbox"]', function() {
+      if ($(this).is(':checked') && $(this).attr('data-org') !== 'check-all') {
+        var strinn = $(this).attr('data-org');
+        selectedItems.push(strinn.replace(/-/g, ' '));
+      } else if ($(this).is(':checked') && $(this).attr('data-org') === 'check-all') {
+        $('input[name="aaaaa"]').each(function() {
+          var strinn = this.id;
+          selectedItems.push(strinn.replace(/-/g, ' '));
+          this.checked = true;
+        });
+      } else if ($(this).is(':not(:checked)') && $(this).attr('data-org') !== 'check-all') {
+        var strinn = $(this).attr('data-org');
+        var filtered = selectedItems.filter(function(value, index, arr){
+          return value !== strinn.replace(/-/g, ' ');
+        });
+        selectedItems.splice(0, selectedItems.length, ...filtered);
+        $('#check-all').prop('checked', false);
+      } else if ($(this).is(':not(:checked)') && $(this).attr('data-org') === 'check-all') {
+        $('input[name="aaaaa"]').each(function() {
+          this.checked = false;
+        });
+        selectedItems.length = 0;
+      }
+    })
+  
     
     $('#gap-analysis-table').load(
       '/partials/gap-analysis-table.html',
@@ -50,7 +77,7 @@ $(document).ready(async function() {
 
         window.gapTableData = gapReport;
 
-        const paginator = new Paginator(gapReport, keys, table);
+        const paginator = new Paginator(gapReport, keys, table, selectedItems);
         paginator.potentialPartnershipsTable = true;
         potentialPartnershipsTableData = paginator.initialPage();
   

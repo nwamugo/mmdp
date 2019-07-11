@@ -17,7 +17,7 @@ getTableRows = (data, keys) => {
         <main id="${data.id}" class="table-row body gap-analysis-details">
         <label class="report-col-1">
         <div>
-        <input data-org=${data[keys[1]].replace(/ /g, '')} type="checkbox" name="aaaaa" class="check">
+        <input id=${data[keys[1]].replace(/ /g, '')} data-org=${data[keys[1]].replace(/ /g, '')} type="checkbox" name="aaaaa" class="check">
         </div>
         </label>
         <div class="report-col-2"> <div>${data[keys[0]]}</div></div>
@@ -29,7 +29,7 @@ getTableRows = (data, keys) => {
         stakeholderDirectoryTableRows: `
         <tr>
             <td class="organisation__name">
-                <input id=${data[keys[0]]} data-org=${
+                <input id=${data[keys[0]].replace(/ /g, '')} data-org=${
               data[keys[0]].replace(/ /g, '')
             } name="aaaaa" value="aaaaa" type="checkbox" />
                 <div class="stakeholder__name">${data[keys[0]]}</div>
