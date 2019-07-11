@@ -229,6 +229,7 @@ function getNumberOfServices(lgaServices, lgaName) {
       );
       const response = await responsePromise.json();
       const data = await lgaPillarPromise.json();
+
       const { thematicPillarCountPerLGA, potentialPartnershipPerLGA } = data;
       const { stateUrl, lgaServices } = response.data;
       if (!stateUrl) {
@@ -248,8 +249,10 @@ function getNumberOfServices(lgaServices, lgaName) {
             .parents("svg")
             .addClass("banner__image animated fadeInLeft slow state-map__svg");
           const lgsIds = responseTxt.match(/STL\d{6}/gm);
+
           lgsIds.map(lgsId => {
             const svgPath = document.querySelector(`[fme\\:ID=${lgsId}]`);
+
             const lgaName = svgPath.getAttribute("fme:lga_name");
             const numberOfServicesReport = getNumberOfServices(
               lgaServices,
