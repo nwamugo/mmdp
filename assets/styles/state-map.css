@@ -21,7 +21,7 @@
 
 .state__map .links__container .right__align {
   float: right;
-  margin-right: 140px;
+  margin-right: 4px;
 }
 
 .state__map .banner__button {
@@ -179,7 +179,7 @@
 }
 
 #svg-container {
-  margin-left: -170px;
+  margin-left: 0px;
 }
 
 @media (max-width: 995px) {
