@@ -3,10 +3,10 @@ getLgas = data => {
   let results = data.filteredStakeholders;
 
   results.forEach(result => {
-    if (result['beneficiaries']) {
-      let beneficiariesArr = result['beneficiaries'][0];
-
+    result.beneficiaries.forEach(key => {
+      let beneficiariesArr = key;
       arr.push({
+        _id: beneficiariesArr['_id'],
         thematicPillar:
           beneficiariesArr['focusArea'].thematicPillarName.pillarName,
         subTheme: beneficiariesArr['focusArea'].subThemeName.subThemeName,
@@ -29,15 +29,13 @@ getLgas = data => {
           return lgaArr;
         })()
       });
-    }
+    });
   });
   return arr;
 };
-
 getFocusAreasByLga = arr => {
   let lgas = {};
-
-  for (item of arr) {
+  for (let item of arr) {
     const { lga, focusArea } = item;
     for (let lgaIndex in lga) {
       let eachLga = lga[lgaIndex];
@@ -45,10 +43,15 @@ getFocusAreasByLga = arr => {
       if (!lgas[eachLga]) {
         // if no, structure the obj as needed, and push the relevant item to it
         lgas[eachLga] = [];
-        if (!lgas[eachLga][focusArea]) lgas[eachLga][focusArea] = [];
+
+        if (!lgas[eachLga][focusArea]) {
+          lgas[eachLga][focusArea] = [];
+        }
         lgas[eachLga][focusArea].push(item);
       } else if (lgas[eachLga]) {
-        if (!lgas[eachLga][focusArea]) lgas[eachLga][focusArea] = [];
+        if (!lgas[eachLga][focusArea]) {
+          lgas[eachLga][focusArea] = [];
+        }
         lgas[eachLga][focusArea].push(item);
       }
     }
@@ -58,7 +61,6 @@ getFocusAreasByLga = arr => {
 
 potentialPartnershipsByLga = arr => {
   let lgas = getFocusAreasByLga(arr);
-
   let potentialPartnerships = [];
   Object.keys(lgas).forEach(lga => {
     //Loop through the lgas key
@@ -66,9 +68,8 @@ potentialPartnershipsByLga = arr => {
       //Loop through the lgas object items array
       if (lgas[lga][focusArea].length > 1) {
         // If the array has a length > 1, there is a potential partnership
-        let potentialPartnership = [];
         let focusAreaArr = lgas[lga][focusArea];
-        const { thematicPillar, subTheme, organizationName } = focusAreaArr[0];
+        let { thematicPillar, _id } = focusAreaArr[0];
         let justTheSubThemes = [];
 
         for (let i = 0; i < focusAreaArr.length; i++) {
@@ -79,7 +80,10 @@ potentialPartnershipsByLga = arr => {
         if (justTheSubThemes.length === 1) {
           let ourPotentialPartners = [];
           focusAreaArr.forEach(focusArea => {
-            if (!focusArea['partnerships'].length) {
+            if (
+              !focusArea['partnerships'].length &&
+              !ourPotentialPartners.includes(focusArea.organizationName)
+            ) {
               ourPotentialPartners.push(focusArea.organizationName);
             } else {
               focusArea['partnerships'].forEach(partnership => {
@@ -96,11 +100,14 @@ potentialPartnershipsByLga = arr => {
               });
             }
           });
+
           potentialPartnerships.push({
             thematicPillar,
             subTheme: justTheSubThemes[0],
+            focusArea,
             lga,
-            organizationName: ourPotentialPartners.join(', ')
+            organizationName: ourPotentialPartners.join(', '),
+            _id
           });
         } else {
           justTheSubThemes = [];
@@ -108,5 +115,9 @@ potentialPartnershipsByLga = arr => {
       }
     }
   });
+  //Modify the _id so we get a unique value that will be used to export to csv
+  for (let i = 0; i < potentialPartnerships.length; i++) {
+    potentialPartnerships[i]['_id'] = potentialPartnerships[i]['_id'] + i;
+  }
   return potentialPartnerships;
 };

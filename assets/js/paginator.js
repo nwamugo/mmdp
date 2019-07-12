@@ -99,9 +99,8 @@ class Paginator {
       this.createTableRow(stakeholder)
     );
     return rows;
-  };
+  }
 
-  
   createTableBody(rows) {
     if (this.potentialPartnershipsTable) {
       if (this.table === 'gapAnalysis') {
@@ -110,8 +109,8 @@ class Paginator {
         bindJQuery(this.table, this.selectedItems);
       } else {
         $('#partnership-report-data').html(rows);
+        bindJQueryPartnerships(this.selectedItems);
       }
-      
     } else {
       $('tbody.table__body').html(rows);
       bindJQuery(this.table, this.selectedItems);
@@ -125,24 +124,31 @@ class Paginator {
       this.refreshTableBody();
       return;
     }
-    if (this.potentialPartnershipsTable) {
-      if (this.table === 'gapAnalysis') {
-        $('#gap-current-page').html(currentPage);
-        $('#gap-total-page').html(totalPage);
-      } 
+
+    if (this.table === 'gapAnalysis') {
+      $('#gap-current-page').html(currentPage);
+      $('#gap-total-page').html(totalPage);
+    } else if (this.table === 'potentialPartnerships') {
+      $('#potential-current-page').html(currentPage);
+      $('#potentialtotal-page').html(totalPage);
     } else {
       $('#current-page').html(currentPage);
       $('#total-page').html(totalPage);
     }
-    if (this.potentialPartnershipsTable) {
-      if (this.table === 'gapAnalysis') {
-        currentPage === 1
-          ? $('#gap-previous-page').removeClass('active__nav')
-          : $('#gap-previous-page').addClass('active__nav');
-        currentPage === totalPage
-          ? $('#gap-next-page').removeClass('active__nav')
-          : $('#gap-next-page').addClass('active__nav');
-      } 
+    if (this.table === 'gapAnalysis') {
+      currentPage === 1
+        ? $('#gap-previous-page').removeClass('active__nav')
+        : $('#gap-previous-page').addClass('active__nav');
+      currentPage === totalPage
+        ? $('#gap-next-page').removeClass('active__nav')
+        : $('#gap-next-page').addClass('active__nav');
+    } else if (this.table === 'potentialPartnerships') {
+      currentPage === 1
+        ? $('#potential-previous-page').removeClass('active__nav')
+        : $('#potential-previous-page').addClass('active__nav');
+      currentPage === totalPage
+        ? $('#potential-next-page').removeClass('active__nav')
+        : $('#potential-next-page').addClass('active__nav');
     } else {
       currentPage === 1
         ? $('#previous-page').removeClass('active__nav')
@@ -151,5 +157,5 @@ class Paginator {
         ? $('#next-page').removeClass('active__nav')
         : $('#next-page').addClass('active__nav');
     }
-  };
+  }
 }

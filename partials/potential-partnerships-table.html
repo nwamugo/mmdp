@@ -4,7 +4,8 @@
         <section class="partnership-table-web">
             <header class="table-row header">
                 <label class="col-1">
-                    <input type="checkbox" name="check" class="check" />
+                    <input class = "check" name="collaboration" value="collaboration" type="checkbox" data-org="check-all-items" id="partnerships-check-all"/>
+
                 </label>
                 <div class="col-2">Thematic Pillar <i class="fas fa-angle-down fa-xs"></i></div>
                 <div class="col-3">Sub theme <i class="fas fa-angle-down fa-xs"></i></div>
@@ -18,7 +19,7 @@
             <div class="table__footer">
                 <tr>
                     <td colspan="7">
-                        <button id="export" class="banner__button animated flashing slow delay-2s">
+                        <button id="partnerships-export" class="banner__button animated flashing slow delay-2s">
                             <img src="/assets/images/stakeholder-dir/cloud-computing.svg" />Export CSV
                         </button>
                         <span class="footer__right_content">
@@ -26,10 +27,10 @@
                                 <!-- options will be loaded dynamically-->
                             </select>
                             <span>Entries per page</span>
-                            <span>Page <span id="current-page">1</span> of
-                                <span id="total-page">1</span></span>
-                            <button id="previous-page" class="go-back">&#60;</button>
-                            <button id="next-page" class="go-forward">&#62;</button>
+                            <span>Page <span id="potential-current-page">1</span> of
+                                <span id="potential-total-page">1</span></span>
+                            <button id="potential-previous-page" class="go-back">&#60;</button>
+                            <button id="potential-next-page" class="go-forward">&#62;</button>
                         </span>
                     </td>
                 </tr>
@@ -49,7 +50,7 @@
             <div id="modal__body">
                 <table id="stakeholder__details__table" class="stakeholder__details__table">
                     <tbody>
-                        <!--Table rows will be loaded dynamically here-->
+                    <!--Table rows will be loaded dynamically here-->
                     </tbody>
                 </table>
                 <img class="mmdp__bg__img" src="./assets/images/common/group-2@3x.png" />
@@ -57,3 +58,4 @@
         </div>
     </div>
 </main>
+<script type="text/javascript" src="assets/js/partnershipsCsv.js"></script>
