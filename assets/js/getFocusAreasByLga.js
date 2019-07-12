@@ -62,55 +62,301 @@ getFocusAreasByLga = arr => {
 potentialPartnershipsByLga = arr => {
   let lgas = getFocusAreasByLga(arr);
   let potentialPartnerships = [];
-  Object.keys(lgas).forEach(lga => {
-    //Loop through the lgas key
-    for (focusArea in lgas[lga]) {
-      //Loop through the lgas object items array
-      if (lgas[lga][focusArea].length > 1) {
-        // If the array has a length > 1, there is a potential partnership
-        let focusAreaArr = lgas[lga][focusArea];
-        let { thematicPillar, _id } = focusAreaArr[0];
-        let justTheSubThemes = [];
 
-        for (let i = 0; i < focusAreaArr.length; i++) {
-          if (!justTheSubThemes.includes(focusAreaArr[i]['subTheme']))
-            justTheSubThemes.push(focusAreaArr[i]['subTheme']);
-        }
+  Object.keys(lgas).forEach(lga => {
+    for (focusArea in lgas[lga]) {
+      // If the array has a length > 1, there is a potential partnership
+      if (lgas[lga][focusArea].length > 1) {
+        let focusAreaArr = lgas[lga][focusArea];
+        let justTheSubThemes = [];
+        let ourPotentialPartners = [];
+
+        focusAreaArr.forEach(focusAreaRecord => {
+          if (!justTheSubThemes.includes(focusAreaRecord['subTheme']))
+            justTheSubThemes.push(focusAreaRecord['subTheme']);
+        });
 
         if (justTheSubThemes.length === 1) {
-          let ourPotentialPartners = [];
-          focusAreaArr.forEach(focusArea => {
-            if (
-              !focusArea['partnerships'].length &&
-              !ourPotentialPartners.includes(focusArea.organizationName)
-            ) {
-              ourPotentialPartners.push(focusArea.organizationName);
+          let linkedUpOrganisations = [];
+          let theRemainingOrganizations = [];
+          let multiplePotentialPartnerships = [];
+          let indexLocation = 0;
+          const { thematicPillar, _id } = focusAreaArr[0];
+
+          focusAreaArr.forEach(focusAreaRecord => {
+            let theOrganizationName = focusAreaRecord['organizationName'];
+            if (!focusAreaRecord['partnerships'].length) {
+              ourPotentialPartners.push(theOrganizationName);
             } else {
-              focusArea['partnerships'].forEach(partnership => {
-                if (
-                  !ourPotentialPartners.includes(
-                    partnership.stakeholder2Id['organisationName']
-                  )
-                ) {
-                  if (
-                    !ourPotentialPartners.includes(focusArea.organizationName)
-                  )
-                    ourPotentialPartners.push(focusArea.organizationName);
-                }
+              theRemainingOrganizations.push(theOrganizationName);
+              linkedUpOrganisations.push({ togetherWith: [] });
+              focusAreaRecord['partnerships'].forEach(partnership => {
+                const existingPartner =
+                  partnership.stakeholder2Id['organisationName'];
+                linkedUpOrganisations[indexLocation]['togetherWith'].push(
+                  existingPartner
+                );
               });
+              indexLocation++;
             }
           });
 
-          potentialPartnerships.push({
-            thematicPillar,
-            subTheme: justTheSubThemes[0],
-            focusArea,
-            lga,
-            organizationName: ourPotentialPartners.join(', '),
-            _id
+          if (theRemainingOrganizations.length) {
+            let allPotentialMatches = [];
+            let capturedStakeholders = [];
+            let count = 0;
+
+            if (theRemainingOrganizations.length === 1) {
+              ourPotentialPartners = ourPotentialPartners.concat(
+                theRemainingOrganizations[0]
+              );
+            } else {
+              for (let i = 0; i < theRemainingOrganizations.length - 1; i++) {
+                let nextItem = 0;
+                nextItem++;
+                for (
+                  let j = nextItem;
+                  j < theRemainingOrganizations.length;
+                  j++
+                ) {
+                  if (
+                    !linkedUpOrganisations[i]['togetherWith'].includes(
+                      theRemainingOrganizations[j]
+                    )
+                  ) {
+                    capturedStakeholders.push(theRemainingOrganizations[i]);
+                    let subPotentialMatches = [];
+                    subPotentialMatches.push(
+                      theRemainingOrganizations[i],
+                      theRemainingOrganizations[j]
+                    );
+                    allPotentialMatches[count] = [];
+                    allPotentialMatches[count] = ourPotentialPartners.concat(
+                      subPotentialMatches
+                    );
+                    count++;
+                  }
+                }
+              }
+              for (let i = 0; i < theRemainingOrganizations.length; i++) {
+                if (
+                  !capturedStakeholders.includes(
+                    theRemainingOrganizations[i]
+                  ) &&
+                  ourPotentialPartners.length
+                ) {
+                  allPotentialMatches[count] = [];
+                  allPotentialMatches[count] = ourPotentialPartners.concat(
+                    theRemainingOrganizations[i]
+                  );
+                  count++;
+                }
+              }
+              multiplePotentialPartnerships = allPotentialMatches;
+            }
+          }
+          if (multiplePotentialPartnerships.length) {
+            multiplePotentialPartnerships.forEach(pair => {
+              potentialPartnerships.push({
+                thematicPillar,
+                subTheme: justTheSubThemes[0],
+                focusArea,
+                lga,
+                organizationName: pair.join(', '),
+                _id
+              });
+            });
+          } else if (ourPotentialPartners.length > 1) {
+            potentialPartnerships.push({
+              thematicPillar,
+              subTheme: justTheSubThemes[0],
+              focusArea,
+              lga,
+              organizationName: ourPotentialPartners.join(', '),
+              _id
+            });
+          }
+        } else if (justTheSubThemes.length > 1 && focusAreaArr.length > 2) {
+          let linkedUpOrganisations = [];
+          let theRemainingOrganizations = [];
+          let ourPotentialPartners = [];
+          let indexLocation = 0;
+          let subThemeIndexTracker = 0;
+
+          justTheSubThemes.forEach(subTheme => {
+            ourPotentialPartners.push({ subTheme: [subTheme] });
+            linkedUpOrganisations[subThemeIndexTracker] = [];
+            theRemainingOrganizations[subThemeIndexTracker] = [];
+            ourPotentialPartners[subThemeIndexTracker]['subTheme'][2] = [];
+
+            for (let i = 0; i < focusAreaArr.length; i++) {
+              if (focusAreaArr[i]['subTheme'] === subTheme) {
+                if (
+                  !ourPotentialPartners[subThemeIndexTracker][
+                    'subTheme'
+                  ].includes(focusAreaArr[i]['thematicPillar'])
+                )
+                  ourPotentialPartners[subThemeIndexTracker]['subTheme'][1] =
+                    focusAreaArr[i]['thematicPillar'];
+                if (!focusAreaArr[i]['partnerships'].length) {
+                  ourPotentialPartners[subThemeIndexTracker][
+                    'subTheme'
+                  ][2].push(focusAreaArr[i]['organizationName']);
+                } else {
+                  theRemainingOrganizations[subThemeIndexTracker].push(
+                    focusAreaArr[i]['organizationName']
+                  );
+                  linkedUpOrganisations[subThemeIndexTracker].push({
+                    togetherWith: []
+                  });
+                  focusAreaArr[i]['partnerships'].forEach(partnership => {
+                    const existingPartner =
+                      partnership.stakeholder2Id['organisationName'];
+                    linkedUpOrganisations[subThemeIndexTracker][indexLocation][
+                      'togetherWith'
+                    ].push(existingPartner);
+                  });
+                  indexLocation++;
+                }
+              }
+            }
+            if (theRemainingOrganizations[subThemeIndexTracker].length) {
+              let allPotentialMatches = [];
+              let capturedStakeholders = [];
+              let count = 0;
+
+              if (
+                theRemainingOrganizations[subThemeIndexTracker].length === 1
+              ) {
+                ourPotentialPartners[subThemeIndexTracker][
+                  'subTheme'
+                ][2] = ourPotentialPartners[subThemeIndexTracker][
+                  'subTheme'
+                ][2].concat(theRemainingOrganizations[subThemeIndexTracker][0]);
+              } else {
+                arrayLength =
+                  theRemainingOrganizations[subThemeIndexTracker].length;
+                for (
+                  let i = 0;
+                  i <
+                  theRemainingOrganizations[subThemeIndexTracker].length - 1;
+                  i++
+                ) {
+                  let nextItem = 0;
+                  nextItem++;
+                  for (
+                    let j = nextItem;
+                    j < theRemainingOrganizations[subThemeIndexTracker].length;
+                    j++
+                  ) {
+                    if (
+                      !linkedUpOrganisations[subThemeIndexTracker][i][
+                        'togetherWith'
+                      ].includes(
+                        theRemainingOrganizations[subThemeIndexTracker][j]
+                      )
+                    ) {
+                      capturedStakeholders.push(
+                        theRemainingOrganizations[subThemeIndexTracker][i]
+                      );
+                      let subPotentialMatches = [];
+                      subPotentialMatches.push(
+                        theRemainingOrganizations[subThemeIndexTracker][i],
+                        theRemainingOrganizations[subThemeIndexTracker][j]
+                      );
+                      if (
+                        subPotentialMatches.includes(
+                          theRemainingOrganizations[subThemeIndexTracker][
+                            arrayLength - 1
+                          ]
+                        ) &&
+                        !capturedStakeholders.includes(
+                          theRemainingOrganizations[subThemeIndexTracker][
+                            arrayLength - 1
+                          ]
+                        )
+                      ) {
+                        capturedStakeholders.push(
+                          theRemainingOrganizations[subThemeIndexTracker][
+                            arrayLength - 1
+                          ]
+                        );
+                      }
+                      allPotentialMatches[count] = [];
+                      allPotentialMatches[count] = ourPotentialPartners[
+                        subThemeIndexTracker
+                      ]['subTheme'][2].concat(subPotentialMatches);
+                      count++;
+                    }
+                  }
+                }
+                for (
+                  let i = 0;
+                  i < theRemainingOrganizations[subThemeIndexTracker].length;
+                  i++
+                ) {
+                  if (
+                    !capturedStakeholders.includes(
+                      theRemainingOrganizations[subThemeIndexTracker][i]
+                    ) &&
+                    ourPotentialPartners[subThemeIndexTracker][
+                      'subTheme'
+                    ][2] !== []
+                  ) {
+                    allPotentialMatches[count] = [];
+                    allPotentialMatches[count] = ourPotentialPartners[
+                      subThemeIndexTracker
+                    ]['subTheme'][2].concat(
+                      theRemainingOrganizations[subThemeIndexTracker][i]
+                    );
+                    count++;
+                  }
+                }
+                ourPotentialPartners[subThemeIndexTracker]['subTheme'].pop();
+                ourPotentialPartners[subThemeIndexTracker][
+                  'subTheme'
+                ] = ourPotentialPartners[subThemeIndexTracker][
+                  'subTheme'
+                ].concat(allPotentialMatches);
+              }
+            }
+            subThemeIndexTracker++;
           });
-        } else {
-          justTheSubThemes = [];
+          ourPotentialPartners.forEach(ourPotentialPartnership => {
+            if (ourPotentialPartnership['subTheme'].length > 2) {
+              // there is potential partnership
+              if (
+                ourPotentialPartnership['subTheme'].length < 4 &&
+                ourPotentialPartnership['subTheme'][2].length > 1
+              ) {
+                potentialPartnerships.push({
+                  thematicPillar: ourPotentialPartnership['subTheme'][1],
+                  subTheme: ourPotentialPartnership['subTheme'][0],
+                  focusArea,
+                  lga,
+                  organizationName: ourPotentialPartnership['subTheme'][2].join(
+                    ', ',
+                    _id
+                  )
+                });
+              } else if (ourPotentialPartnership['subTheme'].length > 3) {
+                let justThePairings = ourPotentialPartnership[
+                  'subTheme'
+                ].filter(
+                  element =>
+                    ourPotentialPartnership['subTheme'].indexOf(element) > 1
+                );
+                potentialPartnerships.push({
+                  thematicPillar: ourPotentialPartnership['subTheme'][1],
+                  subTheme: ourPotentialPartnership['subTheme'][0],
+                  focusArea,
+                  lga,
+                  organizationName: justThePairings.join(', '),
+                  _id
+                });
+              }
+            }
+          });
         }
       }
     }
