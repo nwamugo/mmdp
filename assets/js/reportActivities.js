@@ -51,6 +51,7 @@ function getPotentialPartnershipsCountCoordinates(lgaId) {
     points.push({ x: svgPoint.x, y: svgPoint.y, lga });
     return points;
   }
+
   return points;
 }
 
@@ -115,8 +116,8 @@ function appendDefs(id, pillarType) {
 }
 
 function appendPotentialPartnershipsDefs(id, number, pillarType) {
-  const svgContainer = d3.select('#report-map-pillars').select('svg');
-  const lgaPath = document.getElementById(id.replace(/ +/g, ''));
+  const svgContainer = d3.select("#report-map-pillars").select("svg");
+  const lgaPath = document.getElementById(id.replace(/ +/g, ""));
 
   // append pillarMarker to the SVG container
   const defsContainer = svgContainer
@@ -138,6 +139,7 @@ function appendPotentialPartnershipsDefs(id, number, pillarType) {
     .attr('y', -12)
     .attr('width', 36)
     .attr('height', 36)
+    .style('cursor', 'pointer')
     .attr(
       'xlink:href',
       'https://mmdp-img-assets.s3.amazonaws.com/assets/icons/hand-icon%402x.svg'
@@ -148,6 +150,7 @@ function appendPotentialPartnershipsDefs(id, number, pillarType) {
     .attr('r', 7.914)
     .attr('cy', -6.69)
     .attr('cx', 15.8)
+    .style('cursor', 'pointer')
     .attr('fill', '#000');
 
   group
@@ -160,7 +163,32 @@ function appendPotentialPartnershipsDefs(id, number, pillarType) {
     .attr('x', 12)
     .attr('y', -4)
     .attr('id', 'tspan')
-    .html(number);
+    .style('cursor', 'pointer')
+    .html(number);     
+
+    group.on("click", function(e) {          
+      $(document).on("click", function(e) {
+        const mouseX = e.pageX;
+        const mouseY = e.pageY;              
+        if(e.target.nodeName === "use") {
+          $("#display-map").html(
+            `${pillarType}
+            <br /> 
+            Number of potential partnership 
+            <br /> 
+            ${number} 
+            <br /> 
+            <a href="${pillarType}">View potential partnership / collaboration</a>`
+            ).addClass("display-map").css({
+              display: "block",
+              top: mouseY - 180,
+              left: mouseX - 160,
+            })
+        } else {
+          $(".display-map").html('').css({display: "none"});
+        }
+      })
+    })
 }
 
 function addMarker(x, y, pillarId) {
@@ -317,7 +345,7 @@ function getNumberOfServices(lgaServices, lgaName) {
                       lgaId.replace(/ +/g, '') + CoordinateIndex,
                       number,
                       lgaId.replace(/ +/g, '')
-                    );
+                      );
                     addPotentialPartnershipsMarker(
                       potentialPartnershipPoints[CoordinateIndex].x,
                       potentialPartnershipPoints[CoordinateIndex].y,
