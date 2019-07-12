@@ -39,7 +39,6 @@ $(document).ready(async function() {
       }
     })
   
-    
     $('#gap-analysis-table').load(
       '/partials/gap-analysis-table.html',
       function() {
