@@ -11,6 +11,7 @@ class Paginator {
     this.table = table;
     this.selectedItems = selectedItems;
   }
+  
   getData() {
     if (this.empData) {
       return this.tempData;
