@@ -338,9 +338,10 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 }
 
 .pillar-icons {
-  width: 375px;
+  width: 151px;
   float: right;
   margin-top: 420px;
+  margin-left: -50px;
 }
 
 .span-text {
@@ -350,7 +351,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 
 .thematic-pillar-icons {
   margin-top: 450px;
-  width: 550px;
+  width: 250px;
 }
 
 .pillar-text,
@@ -372,6 +373,16 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 
 .potential-partnership-text {
   margin-left: 2px;
+}
+
+.map-right {
+  margin-left: 21px;
+}
+
+@media only screen and (min-width: 993px) {
+  .row .col.l7 {
+      width: 44.333333%;
+  }
 }
 
 @media only screen and (max-width: 770px) {
