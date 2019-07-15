@@ -69,15 +69,19 @@ $(document).ready(async function() {
       let options = '';
       while (n < 51) {
         if (n === 10) {
-          options += `<option selected>${n}</option>\n`;
+          options += `<div class="selected">${n}</div>\n`;
         } else {
-          options += `<option>${n}</option>\n`;
+          options += `<div class="selected">${n}</div >\n`;
         }
         n += 5;
       }
-      $('select#entries-per-page').html(options);
-      $('select#entries-per-page').change(function() {
-        paginator.entriesPerPage = this.value;
+      $('.partnership-dropdown-trigger').dropdown();
+      $('#partnership-entries-per-page').html(options);
+      
+      $('.selected').click(function() {
+        const text = $(this).text();
+        $('#partnership-row-number').text(text);
+        paginator.entriesPerPage = $('#partnership-row-number').text();
         paginator.refreshTableBody();
       });
       $('#potential-next-page').click(function() {
@@ -87,5 +91,5 @@ $(document).ready(async function() {
         paginator.previousPage();
       });
     }
-  );
+  );  
 });

@@ -86,15 +86,19 @@ $(document).ready(async function() {
         let options = '';
         while (n < 51) {
           if (n === 10) {
-            options += `<option selected>${n}</option>\n`;
+            options += `<div class="selected">${n}</div>\n`;
           } else {
-            options += `<option>${n}</option>\n`;
+            options += `<div class="selected">${n}</div>\n`;
           }
           n += 5;
         }
-        $('select#entries-per-page').html(options);
-        $('select#entries-per-page').change(function() {
-          paginator.entriesPerPage = this.value;
+        $('.gap-analysis-dropdown-trigger').dropdown();
+        $('#gap-analysis-entries-per-page').html(options);
+        
+        $('.selected').click(function() {
+          const text = $(this).text();
+          $('#gap-analysis-row-number').text(text);
+          paginator.entriesPerPage = $('#gap-analysis-row-number').text();
           paginator.refreshTableBody();
         });
         $('#gap-next-page').click(function() {
