@@ -25,7 +25,7 @@ function loadMap(redirectUrl) {
 
             for (var i = 0; i < getStateName.length; i++) {
               document
-                .querySelector(`[fme\\:StateName=${getStateName[i]}]`)
+                .querySelector(`[fme\\:statename=${getStateName[i]}]`)
                 .setAttribute("fill", "#296d81");
             }
           }
