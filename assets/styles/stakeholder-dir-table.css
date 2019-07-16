@@ -252,7 +252,6 @@
 
 .selected {
   cursor: pointer;
-  margin: 0 26px 0 51px;
 }
 
 .footer__right_content :nth-child(3) span#current-page,

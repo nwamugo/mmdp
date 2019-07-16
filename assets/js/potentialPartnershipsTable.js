@@ -88,6 +88,4 @@ $(document).ready(async function() {
       });
     }
   );
-
-  
 });
