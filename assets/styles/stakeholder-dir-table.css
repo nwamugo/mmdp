@@ -242,7 +242,7 @@
   margin: 0 26px 0 22px;
 }
 
-/* Page Dropdown*/
+/* Page Dropdown */
 .dropdown-content {
   background-color: #8395a7;
   color: #ffffff;
@@ -253,6 +253,17 @@
 .selected {
   cursor: pointer;
 }
+
+#partnership-row-number,
+#gap-analysis-row-number {
+  margin-right: 2px;
+}
+
+.partnership-dropdown-trigger,
+.gap-analysis-dropdown-trigger {
+  cursor: pointer;
+}
+/* End of Page Dropdown */
 
 .footer__right_content :nth-child(3) span#current-page,
 .footer__right_content :nth-child(3) span#gap-current-page {

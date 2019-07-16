@@ -23,9 +23,13 @@
                             <img src="/assets/images/stakeholder-dir/cloud-computing.svg" />Export CSV
                         </button>
                         <span class="footer__right_content">
-                            <select id="entries-per-page">
-                                <!-- options will be loaded dynamically-->
-                            </select>
+                            <!-- Dropdown Trigger -->
+                            <a class='partnership-dropdown-trigger' data-target='partnership-entries-per-page'><span id="partnership-row-number">10 </span><i class="fas fa-caret-down"></i><a>
+
+                            <!-- Dropdown Structure -->
+                            <ul id='partnership-entries-per-page' class='dropdown-content'>
+                                <!-- Dynamic display goes here -->
+                            </ul>
                             <span>Entries per page</span>
                             <span>Page <span id="potential-current-page">1</span> of
                                 <span id="potential-total-page">1</span></span>
