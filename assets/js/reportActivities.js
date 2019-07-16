@@ -345,7 +345,7 @@ function getNumberOfServices(lgaServices, lgaName) {
           const lgsIds = responseTxt.match(/STL\d{6}/gm);
 
           lgsIds.map(lgsId => {
-            const svgPath = document.querySelector(`[fme\\:ID=${lgsId}]`);
+            const svgPath = document.querySelector(`[fme\\:id=${lgsId}]`);
 
             const lgaName = svgPath.getAttribute("fme:lga_name");
             const numberOfServicesReport = getNumberOfServices(
