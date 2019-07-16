@@ -338,7 +338,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 }
 
 .pillar-icons {
-  width: 151px;
+  width: 198px;
   float: right;
   margin-top: 420px;
   margin-left: -50px;
@@ -347,6 +347,8 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 .span-text {
   margin-left: 10px;
   vertical-align: top;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .thematic-pillar-icons {
@@ -373,10 +375,6 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 
 .potential-partnership-text {
   margin-left: 2px;
-}
-
-.map-right {
-  margin-left: 21px;
 }
 
 @media only screen and (min-width: 993px) {

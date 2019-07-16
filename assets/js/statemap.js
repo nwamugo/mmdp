@@ -193,10 +193,11 @@ function filteredLga(target, array = []) {
             window.variable = lgasArray;
           });
 
-          $("#show-pillars").click(async function() {
-            $(".hide-pillar-icons").show();
-            $("#show-pillars").hide();
-            $("#hide-pillars").toggle();
+          async function displayMap(
+            MMDP_BASE_URL,
+            stateName,
+            showIcons = false
+          ) {
             try {
               const lgaPillarPromise = await fetch(
                 `${MMDP_BASE_URL}/api/v1/location?state=${stateName}&focusAreaName`
@@ -259,7 +260,7 @@ function filteredLga(target, array = []) {
                       const count = lgaData.pillars.length;
                       const points = getCoordinates(lgaId, count);
 
-                      if (points.length > 0) {
+                      if (points.length > 0 && showIcons) {
                         for (let i = 0; i <= points.length - 1; i++) {
                           const number = lgaData.pillars[i].count;
                           const pillar = lgaData.pillars[i].name;
@@ -276,11 +277,25 @@ function filteredLga(target, array = []) {
                 `http://${baseURL}/state.html?state=${stateName}` ||
                 `http://${baseURL}/index-cordination-matrix.html`;
             }
+          }
+
+
+          $("#show-pillars").click(function() {
+            $(".hide-pillar-icons").show();
+            $("#show-pillars").hide();
+            $("#hide-pillars").toggle();
+
+            displayMap(MMDP_BASE_URL, stateName, true);
           });
 
           $("#hide-pillars").click(function() {
-            window.location.href = `http://${baseURL}/state.html?state=${stateName}`;
+            $(".hide-pillar-icons").hide();
+            $("#show-pillars").show();
+            $("#hide-pillars").toggle();
+
+            displayMap(MMDP_BASE_URL, stateName);
           });
+
         }
       });
       const stateReportBtn = document.getElementById("state-report-btn");
