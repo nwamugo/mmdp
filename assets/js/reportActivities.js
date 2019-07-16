@@ -187,62 +187,64 @@ async function appendPotentialPartnershipsDefs(id, number, pillarType) {
           });
         function getFilteredTable() {
           $(".myBtn").on("click", async function(e) {
-            const dataForTable = await getPartnershipData();
-            const lgaName = e.currentTarget.id;
-            const filter = lgaName => {
-              const filteredData = dataForTable.filter(filtered => {
-                return filtered.lga === lgaName;
-              });
-              const data = filteredData;
-              return data;
-            };
-            const newTableData = filter(lgaName);
-            const keys = [
-              "thematicPillar",
-              "focusArea",
-              "subTheme",
-              "lga",
-              "organizationName",
-              "_id"
-            ];
-
-            $("#potential-partnerships-table").load(
-              "/partials/potential-partnerships-table.html",
-              function() {
-                let table = "potential partnerships";
-                const paginator = new Paginator(newTableData, keys, table);
-                paginator.potentialPartnershipsTable = true;
-                potentialPartnershipsTableData = paginator.initialPage();
-
-                $("#partnership-report-data").html(
-                  potentialPartnershipsTableData
-                );
-                $("#partnership-table-mobile").html(
-                  potentialPartnershipsTableData
-                );
-                let n = 5;
-                let options = "";
-                while (n < 51) {
-                  if (n === 10) {
-                    options += `<option selected>${n}</option>\n`;
-                  } else {
-                    options += `<option>${n}</option>\n`;
+            if($("#partnership-report-table").is(":visible")){
+              const dataForTable = await getPartnershipData();
+              const lgaName = e.currentTarget.id;
+              const filter = lgaName => {
+                const filteredData = dataForTable.filter(filtered => {
+                  return filtered.lga === lgaName;
+                });
+                const data = filteredData;
+                return data;
+              };
+              const newTableData = filter(lgaName);
+              const keys = [
+                "thematicPillar",
+                "focusArea",
+                "subTheme",
+                "lga",
+                "organizationName",
+                "_id"
+              ];
+  
+              $("#potential-partnerships-table").load(
+                "/partials/potential-partnerships-table.html",
+                function() {
+                  let table = "potential partnerships";
+                  const paginator = new Paginator(newTableData, keys, table);
+                  paginator.potentialPartnershipsTable = true;
+                  potentialPartnershipsTableData = paginator.initialPage();
+  
+                  $("#partnership-report-data").html(
+                    potentialPartnershipsTableData
+                  );
+                  $("#partnership-table-mobile").html(
+                    potentialPartnershipsTableData
+                  );
+                  let n = 5;
+                  let options = "";
+                  while (n < 51) {
+                    if (n === 10) {
+                      options += `<option selected>${n}</option>\n`;
+                    } else {
+                      options += `<option>${n}</option>\n`;
+                    }
+                    n += 5;
                   }
-                  n += 5;
+                  $("select#entries-per-page").html(options);
+                  $("select#entries-per-page").change(function() {
+                    paginator.entriesPerPage = this.value;
+                    paginator.refreshTableBody();
+                  });
+                  $("#next-page").click(function() {
+                    paginator.nextPage();
+                  });
+                  $("#previous-page").click(function() {
+                    paginator.previousPage();
+                  });
                 }
-                $("select#entries-per-page").html(options);
-                $("select#entries-per-page").change(function() {
-                  paginator.entriesPerPage = this.value;
-                  paginator.refreshTableBody();
-                });
-                $("#next-page").click(function() {
-                  paginator.nextPage();
-                });
-                $("#previous-page").click(function() {
-                  paginator.previousPage();
-                });
-              }
-            );
+              );
+            }
           });
         }
         getFilteredTable();
