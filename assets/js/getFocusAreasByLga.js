@@ -6,18 +6,23 @@ getLgas = data => {
     result.beneficiaries.forEach(key => {
       let beneficiariesArr = key;
       arr.push({
-        _id: beneficiariesArr['_id'],
         thematicPillar:
-          beneficiariesArr['focusArea'].thematicPillarName.pillarName,
+        beneficiariesArr['focusArea'].thematicPillarName.pillarName,
+        subThemeId:
+        beneficiariesArr['focusArea'].subThemeName
+            ._id,
         subTheme: beneficiariesArr['focusArea'].subThemeName.subThemeName,
         organizationName: result['organisationName'],
         partnerships: result['partnerships'],
         beneficiariesCount:
-          beneficiariesArr.beneficiaryTypes[0].totalNumberOfBeneficiaries,
+        beneficiariesArr.beneficiaryTypes[0].totalNumberOfBeneficiaries,
         amountInvested:
-          beneficiariesArr.fundingSources[0].amountInvestedRange
+        beneficiariesArr.fundingSources[0].amountInvestedRange
             .amountInvestedRange,
         service: beneficiariesArr['serviceName'],
+        focusAreaId:
+        beneficiariesArr['focusArea'].focusAreaName
+            ._id,
         focusArea: beneficiariesArr['focusArea'].focusAreaName.focusAreaName,
         lga: (() => {
           let lgaArr = [];
@@ -68,6 +73,7 @@ potentialPartnershipsByLga = arr => {
       // If the array has a length > 1, there is a potential partnership
       if (lgas[lga][focusArea].length > 1) {
         let focusAreaArr = lgas[lga][focusArea];
+
         let justTheSubThemes = [];
         let ourPotentialPartners = [];
 
@@ -81,7 +87,7 @@ potentialPartnershipsByLga = arr => {
           let theRemainingOrganizations = [];
           let multiplePotentialPartnerships = [];
           let indexLocation = 0;
-          const { thematicPillar, _id } = focusAreaArr[0];
+          const { thematicPillar,subThemeId,focusAreaId, subTheme, organizationName } = focusAreaArr[0];
 
           focusAreaArr.forEach(focusAreaRecord => {
             let theOrganizationName = focusAreaRecord['organizationName'];
@@ -160,34 +166,38 @@ potentialPartnershipsByLga = arr => {
               potentialPartnerships.push({
                 thematicPillar,
                 subTheme: justTheSubThemes[0],
+                subThemeId,
+                focusAreaId,
                 focusArea,
                 lga,
-                organizationName: pair.join(', '),
-                _id
+                organizationName: pair.join(', ')
               });
             });
           } else if (ourPotentialPartners.length > 1) {
             potentialPartnerships.push({
               thematicPillar,
               subTheme: justTheSubThemes[0],
+              subThemeId,
+              focusAreaId,
               focusArea,
               lga,
-              organizationName: ourPotentialPartners.join(', '),
-              _id
+              organizationName: ourPotentialPartners.join(', ')
             });
           }
-        } else if (justTheSubThemes.length > 1 && focusAreaArr.length > 2) {
+        }
+        else if (justTheSubThemes.length > 1 && focusAreaArr.length > 2) {
           let linkedUpOrganisations = [];
-          let theRemainingOrganizations = [];
+          let partnershipHavingOrganizations = [];
           let ourPotentialPartners = [];
           let indexLocation = 0;
           let subThemeIndexTracker = 0;
+          let stakeholdersIndex = 4;
 
           justTheSubThemes.forEach(subTheme => {
             ourPotentialPartners.push({ subTheme: [subTheme] });
             linkedUpOrganisations[subThemeIndexTracker] = [];
-            theRemainingOrganizations[subThemeIndexTracker] = [];
-            ourPotentialPartners[subThemeIndexTracker]['subTheme'][2] = [];
+            partnershipHavingOrganizations[subThemeIndexTracker] = [];
+            ourPotentialPartners[subThemeIndexTracker]['subTheme'][stakeholdersIndex] = [];
 
             for (let i = 0; i < focusAreaArr.length; i++) {
               if (focusAreaArr[i]['subTheme'] === subTheme) {
@@ -198,86 +208,102 @@ potentialPartnershipsByLga = arr => {
                 )
                   ourPotentialPartners[subThemeIndexTracker]['subTheme'][1] =
                     focusAreaArr[i]['thematicPillar'];
+                if (
+                    !ourPotentialPartners[subThemeIndexTracker][
+                        'subTheme'
+                        ].includes(focusAreaArr[i]['subThemeId'])
+                )
+                  ourPotentialPartners[subThemeIndexTracker]['subTheme'][2] =
+                      focusAreaArr[i]['subThemeId'];
+                if (
+                    !ourPotentialPartners[subThemeIndexTracker][
+                        'subTheme'
+                        ].includes(focusAreaArr[i]['focusAreaId'])
+                )
+                  ourPotentialPartners[subThemeIndexTracker]['subTheme'][3] =
+                      focusAreaArr[i]['focusAreaId'];
                 if (!focusAreaArr[i]['partnerships'].length) {
                   ourPotentialPartners[subThemeIndexTracker][
                     'subTheme'
-                  ][2].push(focusAreaArr[i]['organizationName']);
+                  ][stakeholdersIndex].push(focusAreaArr[i]['organizationName']);
                 } else {
-                  theRemainingOrganizations[subThemeIndexTracker].push(
+                  partnershipHavingOrganizations[subThemeIndexTracker].push(
                     focusAreaArr[i]['organizationName']
                   );
                   linkedUpOrganisations[subThemeIndexTracker].push({
                     togetherWith: []
                   });
                   focusAreaArr[i]['partnerships'].forEach(partnership => {
-                    const existingPartner =
-                      partnership.stakeholder2Id['organisationName'];
-                    linkedUpOrganisations[subThemeIndexTracker][indexLocation][
-                      'togetherWith'
-                    ].push(existingPartner);
+                    if(linkedUpOrganisations[subThemeIndexTracker][indexLocation]){
+                      const existingPartner =
+                          partnership.stakeholder2Id['organisationName'];
+                      linkedUpOrganisations[subThemeIndexTracker][indexLocation][
+                          'togetherWith'
+                          ].push(existingPartner);
+                    }
                   });
                   indexLocation++;
                 }
               }
             }
-            if (theRemainingOrganizations[subThemeIndexTracker].length) {
+            if (partnershipHavingOrganizations[subThemeIndexTracker].length) {
               let allPotentialMatches = [];
               let capturedStakeholders = [];
               let count = 0;
 
               if (
-                theRemainingOrganizations[subThemeIndexTracker].length === 1
+                partnershipHavingOrganizations[subThemeIndexTracker].length === 1
               ) {
                 ourPotentialPartners[subThemeIndexTracker][
                   'subTheme'
-                ][2] = ourPotentialPartners[subThemeIndexTracker][
+                ][stakeholdersIndex] = ourPotentialPartners[subThemeIndexTracker][
                   'subTheme'
-                ][2].concat(theRemainingOrganizations[subThemeIndexTracker][0]);
+                ][stakeholdersIndex].concat(partnershipHavingOrganizations[subThemeIndexTracker][0]);
               } else {
                 arrayLength =
-                  theRemainingOrganizations[subThemeIndexTracker].length;
+                  partnershipHavingOrganizations[subThemeIndexTracker].length;
                 for (
                   let i = 0;
                   i <
-                  theRemainingOrganizations[subThemeIndexTracker].length - 1;
+                  partnershipHavingOrganizations[subThemeIndexTracker].length - 1;
                   i++
                 ) {
                   let nextItem = 0;
                   nextItem++;
                   for (
                     let j = nextItem;
-                    j < theRemainingOrganizations[subThemeIndexTracker].length;
+                    j < partnershipHavingOrganizations[subThemeIndexTracker].length;
                     j++
                   ) {
                     if (
                       !linkedUpOrganisations[subThemeIndexTracker][i][
                         'togetherWith'
                       ].includes(
-                        theRemainingOrganizations[subThemeIndexTracker][j]
+                        partnershipHavingOrganizations[subThemeIndexTracker][j]
                       )
                     ) {
                       capturedStakeholders.push(
-                        theRemainingOrganizations[subThemeIndexTracker][i]
+                        partnershipHavingOrganizations[subThemeIndexTracker][i]
                       );
                       let subPotentialMatches = [];
                       subPotentialMatches.push(
-                        theRemainingOrganizations[subThemeIndexTracker][i],
-                        theRemainingOrganizations[subThemeIndexTracker][j]
+                        partnershipHavingOrganizations[subThemeIndexTracker][i],
+                        partnershipHavingOrganizations[subThemeIndexTracker][j]
                       );
                       if (
                         subPotentialMatches.includes(
-                          theRemainingOrganizations[subThemeIndexTracker][
+                          partnershipHavingOrganizations[subThemeIndexTracker][
                             arrayLength - 1
                           ]
                         ) &&
                         !capturedStakeholders.includes(
-                          theRemainingOrganizations[subThemeIndexTracker][
+                          partnershipHavingOrganizations[subThemeIndexTracker][
                             arrayLength - 1
                           ]
                         )
                       ) {
                         capturedStakeholders.push(
-                          theRemainingOrganizations[subThemeIndexTracker][
+                          partnershipHavingOrganizations[subThemeIndexTracker][
                             arrayLength - 1
                           ]
                         );
@@ -285,29 +311,29 @@ potentialPartnershipsByLga = arr => {
                       allPotentialMatches[count] = [];
                       allPotentialMatches[count] = ourPotentialPartners[
                         subThemeIndexTracker
-                      ]['subTheme'][2].concat(subPotentialMatches);
+                      ]['subTheme'][stakeholdersIndex].concat(subPotentialMatches);
                       count++;
                     }
                   }
                 }
                 for (
                   let i = 0;
-                  i < theRemainingOrganizations[subThemeIndexTracker].length;
+                  i < partnershipHavingOrganizations[subThemeIndexTracker].length;
                   i++
                 ) {
                   if (
                     !capturedStakeholders.includes(
-                      theRemainingOrganizations[subThemeIndexTracker][i]
+                      partnershipHavingOrganizations[subThemeIndexTracker][i]
                     ) &&
                     ourPotentialPartners[subThemeIndexTracker][
                       'subTheme'
-                    ][2] !== []
+                    ][stakeholdersIndex] !== []
                   ) {
                     allPotentialMatches[count] = [];
                     allPotentialMatches[count] = ourPotentialPartners[
                       subThemeIndexTracker
-                    ]['subTheme'][2].concat(
-                      theRemainingOrganizations[subThemeIndexTracker][i]
+                    ]['subTheme'][stakeholdersIndex].concat(
+                      partnershipHavingOrganizations[subThemeIndexTracker][i]
                     );
                     count++;
                   }
@@ -323,36 +349,38 @@ potentialPartnershipsByLga = arr => {
             subThemeIndexTracker++;
           });
           ourPotentialPartners.forEach(ourPotentialPartnership => {
-            if (ourPotentialPartnership['subTheme'].length > 2) {
+            if (ourPotentialPartnership['subTheme'].length > 4) {
               // there is potential partnership
               if (
-                ourPotentialPartnership['subTheme'].length < 4 &&
-                ourPotentialPartnership['subTheme'][2].length > 1
+                ourPotentialPartnership['subTheme'].length < 6 &&
+                ourPotentialPartnership['subTheme'][stakeholdersIndex].length > 1
               ) {
                 potentialPartnerships.push({
                   thematicPillar: ourPotentialPartnership['subTheme'][1],
                   subTheme: ourPotentialPartnership['subTheme'][0],
+                  subThemeId: ourPotentialPartnership['subTheme'][2],
+                  focusAreaId: ourPotentialPartnership['subTheme'][3],
                   focusArea,
                   lga,
-                  organizationName: ourPotentialPartnership['subTheme'][2].join(
-                    ', ',
-                    _id
+                  organizationName: ourPotentialPartnership['subTheme'][stakeholdersIndex].join(
+                    ', '
                   )
                 });
-              } else if (ourPotentialPartnership['subTheme'].length > 3) {
+              } else if (ourPotentialPartnership['subTheme'].length > 5) {
                 let justThePairings = ourPotentialPartnership[
                   'subTheme'
                 ].filter(
                   element =>
-                    ourPotentialPartnership['subTheme'].indexOf(element) > 1
+                    ourPotentialPartnership['subTheme'].indexOf(element) > 4
                 );
                 potentialPartnerships.push({
                   thematicPillar: ourPotentialPartnership['subTheme'][1],
                   subTheme: ourPotentialPartnership['subTheme'][0],
                   focusArea,
+                  subThemeId: ourPotentialPartnership['subTheme'][2],
+                  focusAreaId: ourPotentialPartnership['subTheme'][3],
                   lga,
-                  organizationName: justThePairings.join(', '),
-                  _id
+                  organizationName: justThePairings.join(', ')
                 });
               }
             }
@@ -363,7 +391,7 @@ potentialPartnershipsByLga = arr => {
   });
   //Modify the _id so we get a unique value that will be used to export to csv
   for (let i = 0; i < potentialPartnerships.length; i++) {
-    potentialPartnerships[i]['_id'] = potentialPartnerships[i]['_id'] + i;
+    potentialPartnerships[i]['_id']= potentialPartnerships[i]['subThemeId'] + i;
   }
   return potentialPartnerships;
 };

@@ -9,6 +9,14 @@ $(document).ready(async function() {
   ];
 
   const dataForTable = await getPartnershipData();
+  const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
+  const queryParam = queryNameFromUrl
+      ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
+      : 'Nigeria';
+  const stakeholderData = await fetch(
+      `${MMDP_BASE_URL}/api/v1/location?state=${queryParam}&focusAreaName`
+  );
+  const data = await stakeholderData.json();
 
   let selectedItems = [];
 
@@ -57,9 +65,19 @@ $(document).ready(async function() {
   $('#potential-partnerships-table').load(
     '/partials/potential-partnerships-table.html',
     function() {
+      let arr = getLgas(data);
+      let stakeholderServicesArray = getStakeholderServicesArray([data.filteredStakeholders]);
+      const potentialPartnershipsModalData = getPartnershipDetailsByFocusArea(stakeholderServicesArray);
+      // add id for row to each item in this map of potential partnerships
+      let potentialPartners = potentialPartnershipsByLga(arr);
+      const tableData = potentialPartners.map(item => {
+        item['ppRowId'] = getPotentialPartnershipRowId(item.lga, item.subThemeId,item.focusAreaId, stakeholderServicesArray);
+        return item;
+      });
+
       let table = 'potentialPartnerships';
       window.partnershipsCsvTableData = dataForTable;
-      const paginator = new Paginator(dataForTable, keys, table, selectedItems);
+      const paginator = new Paginator(tableData, keys, table, selectedItems);
       paginator.potentialPartnershipsTable = true;
       potentialPartnershipsTableData = paginator.initialPage();
 
@@ -77,7 +95,7 @@ $(document).ready(async function() {
       }
       $('.partnership-dropdown-trigger').dropdown();
       $('#partnership-entries-per-page').html(options);
-      
+
       $('.selected').click(function() {
         const text = $(this).text();
         $('#partnership-row-number').text(text);
@@ -90,6 +108,9 @@ $(document).ready(async function() {
       $('#potential-previous-page').click(function() {
         paginator.previousPage();
       });
+      bindPotentialPartnershipModalJQuery(potentialPartnershipsModalData);
+      window.potentialPartnershipsModalData = potentialPartnershipsModalData;
+
     }
-  );  
+  );
 });

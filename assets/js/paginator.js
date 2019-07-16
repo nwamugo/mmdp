@@ -88,7 +88,7 @@ class Paginator {
       if (this.table === 'gapAnalysis') {
         tableRow = tableRowData.gapAnalysisTableRows;
       } else {
-        tableRow = tableRowData.portentialPartnershipsTableRows;
+        tableRow = tableRowData.potentialPartnershipsTableRows;
       }
     } else {
       tableRow = tableRowData.stakeholderDirectoryTableRows;
@@ -111,6 +111,7 @@ class Paginator {
       } else {
         $('#partnership-report-data').html(rows);
         bindJQueryPartnerships(this.selectedItems);
+        bindPotentialPartnershipModalJQuery(window.potentialPartnershipsModalData);
       }
     } else {
       $('tbody.table__body').html(rows);
@@ -131,7 +132,7 @@ class Paginator {
       $('#gap-total-page').html(totalPage);
     } else if (this.table === 'potentialPartnerships') {
       $('#potential-current-page').html(currentPage);
-      $('#potentialtotal-page').html(totalPage);
+      $('#potential-total-page').html(totalPage);
     } else {
       $('#current-page').html(currentPage);
       $('#total-page').html(totalPage);

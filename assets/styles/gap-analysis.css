@@ -164,3 +164,21 @@
   padding-top: 3px;
   cursor: pointer;
 }
+
+.row-split {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.check-box {
+  padding-top: 0.5rem;
+}
+
+.header-row {
+  margin-left: -0.5rem;
+}
+
+.gap-header{
+  justify-content: flex-start;
+}
