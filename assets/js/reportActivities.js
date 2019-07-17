@@ -177,7 +177,7 @@ async function appendPotentialPartnershipsDefs(id, number, pillarType) {
             <br /> 
             ${number} 
             <br /> 
-          <button id='${pillarType}' class=myBtn>View potential partnership / collaboration</button>`
+            <a href="#table" id='${pillarType}' class="partnershipLink">View potential partnership / collaboration</a>`
           )
           .addClass("display-map")
           .css({
@@ -186,7 +186,7 @@ async function appendPotentialPartnershipsDefs(id, number, pillarType) {
             left: mouseX - 160
           });
         function getFilteredTable() {
-          $(".myBtn").on("click", async function(e) {
+          $(".partnershipLink").on("click", async function(e) {
             if($("#partnership-report-table").is(":visible")){
               const dataForTable = await getPartnershipData();
               const lgaName = e.currentTarget.id;
