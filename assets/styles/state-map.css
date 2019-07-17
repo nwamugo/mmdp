@@ -171,6 +171,12 @@
   margin-left: 183px;
 }
 
+@-moz-document url-prefix() { 
+  #report-map-pillars {
+    margin-left: 146px;
+  }
+}
+
 .pillar-state-legend {
   width: 18px;
 }
