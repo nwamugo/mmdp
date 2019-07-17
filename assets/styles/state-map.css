@@ -71,8 +71,9 @@
   margin-left: 3rem;
 }
 
-.map__legend:before, .report__map__legend:before {
-  content: "";
+.map__legend:before,
+.report__map__legend:before {
+  content: '';
   height: 34px;
   width: 34px;
   display: inline-block;
@@ -166,6 +167,19 @@
   margin-left: 0px;
 }
 
+#report-map-pillars {
+  margin-left: 183px;
+}
+
+.pillar-state-legend {
+  width: 18px;
+}
+
+#hide-pillars,
+#show-pillars {
+  margin-right: 50px;
+}
+
 @media (max-width: 995px) {
   .state__map div.banner__desc {
     order: 1;
@@ -192,12 +206,16 @@
 }
 
 .banner__image.state-map__svg {
-  width: 705px;
+  width: 525px;
   height: 600px;
   left: 100px;
 }
 
-.hide-pillar-icons,
+.hide-pillar-icons {
+  display: none;
+  position: absolute;
+  right: 3.7em;
+}
 #hide-pillars {
   display: none;
 }
