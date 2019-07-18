@@ -1,6 +1,6 @@
 // a function to get the svg coordinates of a point on the svg canvas
 function getPoint(x, y) {
-  const svg = document.querySelector("#svg-container").querySelector("svg");
+  const svg = document.querySelector('#svg-container').querySelector('svg');
   let p = svg.createSVGPoint();
   p.x = x;
   p.y = y;
@@ -16,7 +16,7 @@ function randomIntFromInterval(mn, mx) {
 
 function getCoordinates(lgaId, count) {
   let points = [];
-  const lgaPath = document.getElementById(lgaId.replace(/ +/g, ""));
+  const lgaPath = document.getElementById(lgaId.replace(/ +/g, ''));
   let pillarIconCount = count;
 
   // path client rect
@@ -34,13 +34,13 @@ function getCoordinates(lgaId, count) {
 
     if (
       elmt &&
-      elmt.className.baseVal === "path" &&
-      elmt.id === lgaId.replace(/ +/g, "")
+      elmt.className.baseVal === 'path' &&
+      elmt.id === lgaId.replace(/ +/g, '')
     ) {
       //get the coordinates of the point on the svg
       let svgPoint = getPoint(x, y);
       //draw a circle with the center on the svg point
-      const lga = lgaId.replace(/ +/g, "");
+      const lga = lgaId.replace(/ +/g, '');
       points.push({ x: svgPoint.x, y: svgPoint.y, lga });
 
       //increase the counter
@@ -56,55 +56,55 @@ function getCoordinates(lgaId, count) {
 }
 
 function appendDefs(id, number, pillarType) {
-  const svgContainer = d3.select("#svg-container").select("svg");
+  const svgContainer = d3.select('#svg-container').select('svg');
   // append pillarMarker to the SVG container
   svgContainer
-    .append("defs")
-    .append("symbol")
-    .attr("id", "def" + id)
-    .attr("class", pillarType.replace(/ +/g, ""))
-    .attr("viewBox", "-10 -34 22 36")
-    .append("g")
-    .attr("fill", "none")
-    .attr("fill-rule", "evenodd")
-    .append("path")
-    .attr("stroke", "black")
+    .append('defs')
+    .append('symbol')
+    .attr('id', 'def' + id)
+    .attr('class', pillarType.replace(/ +/g, ''))
+    .attr('viewBox', '-10 -34 22 36')
+    .append('g')
+    .attr('fill', 'none')
+    .attr('fill-rule', 'evenodd')
+    .append('path')
+    .attr('stroke', 'black')
     .attr(
-      "d",
-      "m0, 1 l-8.8, -17.7 c-3.3, -6.6 1.4, -14.3 8.8, -14.3 l0, 0 c7.4, 0 12.1, 7.7 8.8, 14.3 l-8.8, 17.7 z "
+      'd',
+      'm0, 1 l-8.8, -17.7 c-3.3, -6.6 1.4, -14.3 8.8, -14.3 l0, 0 c7.4, 0 12.1, 7.7 8.8, 14.3 l-8.8, 17.7 z '
     );
 
-  const parent = document.getElementById("def" + id);
+  const parent = document.getElementById('def' + id);
   const group = d3.select(parent);
   group
-    .append("circle")
-    .attr("r", 6.414)
-    .attr("cy", -20.69)
-    .attr("cx", 0.1)
-    .attr("fill", "#FFF");
+    .append('circle')
+    .attr('r', 6.414)
+    .attr('cy', -20.69)
+    .attr('cx', 0.1)
+    .attr('fill', '#FFF');
   group
-    .append("text")
-    .attr("fill", "#1A1F37")
-    .attr("font-size", 8)
-    .attr("letter-spacing", -0.148)
-    .attr("font-weight", "bold")
-    .append("tspan")
-    .attr("x", -4)
-    .attr("y", -18.69)
-    .attr("id", "tspan")
+    .append('text')
+    .attr('fill', '#1A1F37')
+    .attr('font-size', 8)
+    .attr('letter-spacing', -0.148)
+    .attr('font-weight', 'bold')
+    .append('tspan')
+    .attr('x', -4)
+    .attr('y', -18.69)
+    .attr('id', 'tspan')
     .html(number);
 }
 
 function addMarker(x, y, pillarId) {
-  const svgContainer = d3.select("#svg-container").select("svg");
+  const svgContainer = d3.select('#svg-container').select('svg');
   svgContainer
-    .append("use")
-    .attr("xlink:href", "#def" + pillarId)
-    .attr("id", "#use" + pillarId)
-    .attr("width", 0.1)
-    .attr("height", 0.1)
-    .attr("x", x - 0.02742495015)
-    .attr("y", y - 0.1);
+    .append('use')
+    .attr('xlink:href', '#def' + pillarId)
+    .attr('id', '#use' + pillarId)
+    .attr('width', 0.1)
+    .attr('height', 0.1)
+    .attr('x', x - 0.02742495015)
+    .attr('y', y - 0.1);
 }
 
 function filteredLga(target, array = []) {
@@ -116,12 +116,12 @@ function filteredLga(target, array = []) {
 (function() {
   let MMDP_BASE_URL;
   if (
-    window.location.host.includes("127.0.0.1") ||
-    window.location.host.includes("localhost")
+    window.location.host.includes('127.0.0.1') ||
+    window.location.host.includes('localhost')
   ) {
-    MMDP_BASE_URL = "http://localhost:3000";
+    MMDP_BASE_URL = 'http://localhost:3000';
   } else {
-    MMDP_BASE_URL = "http://cms-staging.mmdp.ng:3000";
+    MMDP_BASE_URL = 'http://cms-staging.mmdp.ng:3000';
   }
   let stateName;
   const baseURL = window.location.host;
@@ -133,18 +133,18 @@ function filteredLga(target, array = []) {
       }
     }
   }
-  function handleMapClick(lgaName) {
-    window.location.href = `http://${baseURL}/lga.html?lga=${lgaName}`;
+  function handleMapClick(lgaName, stateName) {
+    window.location.href = `http://${baseURL}/lga.html?lga=${lgaName}&state=${stateName}`;
   }
   async function loaded() {
-    const stateNameFromUrl = window.location.search.substring(1).split("=")[1];
+    const stateNameFromUrl = window.location.search.substring(1).split('=')[1];
     if (!stateNameFromUrl) {
       window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
     }
     stateName =
       stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
-    const stateSpan = document.getElementById("state-name");
-    stateSpan ? (stateSpan.innerHTML = stateName.replace("%20", " ")) : null;
+    const stateSpan = document.getElementById('state-name');
+    stateSpan ? (stateSpan.innerHTML = stateName.replace('%20', ' ')) : null;
     try {
       const responsePromise = await fetch(
         `${MMDP_BASE_URL}/api/v1/state-map/${stateName}`
@@ -154,39 +154,39 @@ function filteredLga(target, array = []) {
       if (!stateUrl) {
         window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
       }
-      $("#svg-container").load(stateUrl, function(responseTxt, statusTxt, xhr) {
-        if (statusTxt == "success") {
+      $('#svg-container').load(stateUrl, function(responseTxt, statusTxt, xhr) {
+        if (statusTxt == 'success') {
           const [, xmlPart, svgPart] = responseTxt.match(
             /([\s\S.]*)(<svg[\s\S]*<\/svg>)/
           );
-          $("#svg-container").html(svgPart);
-          $("g#Nigeria_LGA_Boundary")
-            .parents("svg")
-            .addClass("banner__image state-map__svg");
+          $('#svg-container').html(svgPart);
+          $('g#Nigeria_LGA_Boundary')
+            .parents('svg')
+            .addClass('banner__image state-map__svg');
           const lgsIds = responseTxt.match(/STL\d{6}/gm);
 
           let lgasArray = [];
           lgsIds.map(lgsId => {
             const svgPath = document.querySelector(`[fme\\:id=${lgsId}]`);
 
-            const lgaName = svgPath.getAttribute("fme:lga_name");
+            const lgaName = svgPath.getAttribute('fme:lga_name');
             const numberOfServices = getNumberOfServices(lgaServices, lgaName);
             if (numberOfServices >= 35) {
-              svgPath.setAttribute("fill", "#296d81");
+              svgPath.setAttribute('fill', '#296d81');
             } else if (numberOfServices < 35 && numberOfServices >= 25) {
-              svgPath.setAttribute("fill", "#83c4d8");
+              svgPath.setAttribute('fill', '#83c4d8');
             } else if (numberOfServices < 25 && numberOfServices >= 5) {
-              svgPath.setAttribute("fill", "#bad9e3");
+              svgPath.setAttribute('fill', '#bad9e3');
             } else if (numberOfServices < 5) {
-              svgPath.setAttribute("fill", "#eaf9fe");
+              svgPath.setAttribute('fill', '#eaf9fe');
             } else {
-              svgPath.setAttribute("fill", "#eaf9fe");
+              svgPath.setAttribute('fill', '#eaf9fe');
             }
 
             svgPath.innerHTML = `<title>${lgaName}</title>`;
             svgPath.addEventListener(
-              "click",
-              () => handleMapClick(lgaName),
+              'click',
+              () => handleMapClick(lgaName, stateName),
               false
             );
             lgasArray.push(lgaName);
@@ -213,39 +213,39 @@ function filteredLga(target, array = []) {
               if (!stateUrl) {
                 window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
               }
-              $("#svg-container").load(stateUrl, function(
+              $('#svg-container').load(stateUrl, function(
                 responseTxt,
                 statusTxt
               ) {
-                if (statusTxt === "success") {
+                if (statusTxt === 'success') {
                   const [, xmlPart, svgPart] = responseTxt.match(
                     /([\s\S.]*)(<svg[\s\S]*<\/svg>)/
                   );
 
-                  $("#svg-container").html(svgPart);
-                  $("g#Nigeria_LGA_Boundary")
-                    .parents("svg")
-                    .addClass("banner__image state-map__svg");
-                  document.querySelectorAll("path").forEach(lgaMap => {
+                  $('#svg-container').html(svgPart);
+                  $('g#Nigeria_LGA_Boundary')
+                    .parents('svg')
+                    .addClass('banner__image state-map__svg');
+                  document.querySelectorAll('path').forEach(lgaMap => {
                     // select lga_name as the lgaId
-                    const lgaId = d3.select(lgaMap).attr(":fme:lga_name");
+                    const lgaId = d3.select(lgaMap).attr(':fme:lga_name');
                     const numberOfServices = getNumberOfServices(
                       lgaServices,
                       lgaId
                     );
                     if (numberOfServices >= 35) {
-                      lgaMap.setAttribute("fill", "#296d81");
+                      lgaMap.setAttribute('fill', '#296d81');
                     } else if (
                       numberOfServices < 35 &&
                       numberOfServices >= 25
                     ) {
-                      lgaMap.setAttribute("fill", "#83c4d8");
+                      lgaMap.setAttribute('fill', '#83c4d8');
                     } else if (numberOfServices < 25 && numberOfServices >= 5) {
-                      lgaMap.setAttribute("fill", "#bad9e3");
+                      lgaMap.setAttribute('fill', '#bad9e3');
                     } else if (numberOfServices < 5) {
-                      lgaMap.setAttribute("fill", "#eaf9fe");
+                      lgaMap.setAttribute('fill', '#eaf9fe');
                     } else {
-                      lgaMap.setAttribute("fill", "#eaf9fe");
+                      lgaMap.setAttribute('fill', '#eaf9fe');
                     }
 
                     lgaMap.innerHTML = `<title>${lgaId}</title>`;
@@ -255,8 +255,8 @@ function filteredLga(target, array = []) {
                     );
 
                     if (lgaId && lgaData) {
-                      lgaMap.setAttribute("id", lgaId.replace(/ +/g, ""));
-                      lgaMap.setAttribute("class", "path");
+                      lgaMap.setAttribute('id', lgaId.replace(/ +/g, ''));
+                      lgaMap.setAttribute('class', 'path');
                       const count = lgaData.pillars.length;
                       const points = getCoordinates(lgaId, count);
 
@@ -279,28 +279,26 @@ function filteredLga(target, array = []) {
             }
           }
 
-
-          $("#show-pillars").click(function() {
-            $(".hide-pillar-icons").show();
-            $("#show-pillars").hide();
-            $("#hide-pillars").toggle();
+          $('#show-pillars').click(function() {
+            $('.hide-pillar-icons').show();
+            $('#show-pillars').hide();
+            $('#hide-pillars').toggle();
 
             displayMap(MMDP_BASE_URL, stateName, true);
           });
 
-          $("#hide-pillars").click(function() {
-            $(".hide-pillar-icons").hide();
-            $("#show-pillars").show();
-            $("#hide-pillars").toggle();
+          $('#hide-pillars').click(function() {
+            $('.hide-pillar-icons').hide();
+            $('#show-pillars').show();
+            $('#hide-pillars').toggle();
 
             displayMap(MMDP_BASE_URL, stateName);
           });
-
         }
       });
-      const stateReportBtn = document.getElementById("state-report-btn");
+      const stateReportBtn = document.getElementById('state-report-btn');
       stateReportBtn.addEventListener(
-        "click",
+        'click',
         () =>
           (window.location.href = `http://${baseURL}/state-report.html?state=${stateName}`)
       );
@@ -308,5 +306,5 @@ function filteredLga(target, array = []) {
       window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
     }
   }
-  document.addEventListener("DOMContentLoaded", loaded, false);
+  document.addEventListener('DOMContentLoaded', loaded, false);
 })();
