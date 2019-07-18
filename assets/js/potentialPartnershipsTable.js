@@ -1,4 +1,4 @@
-$(document).ready(async function() {
+function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
   const keys = [
     'thematicPillar',
     'focusArea',
@@ -7,16 +7,6 @@ $(document).ready(async function() {
     'organizationName',
     '_id'
   ];
-
-  const dataForTable = await getPartnershipData();
-  const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
-  const queryParam = queryNameFromUrl
-      ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
-      : 'Nigeria';
-  const stakeholderData = await fetch(
-      `${MMDP_BASE_URL}/api/v1/location?state=${queryParam}&focusAreaName`
-  );
-  const data = await stakeholderData.json();
 
   let selectedItems = [];
 
@@ -61,56 +51,77 @@ $(document).ready(async function() {
       }
     }
   );
+  let table = 'potentialPartnerships';
+
+  const paginator = new Paginator(tableData, keys, table, selectedItems);
+  paginator.potentialPartnershipsTable = true;
+  potentialPartnershipsTableData = paginator.initialPage();
+
+  $('#partnership-report-data').html(potentialPartnershipsTableData);
+  $('#partnership-table-mobile').html(potentialPartnershipsTableData);
+  let n = 5;
+  let options = '';
+  while (n < 51) {
+    if (n === 10) {
+      options += `<div class="selected">${n}</div>\n`;
+    } else {
+      options += `<div class="selected">${n}</div >\n`;
+    }
+    n += 5;
+  }
+  $('.partnership-dropdown-trigger').dropdown();
+  $('#partnership-entries-per-page').html(options);
+
+  $('.selected').click(function() {
+    const text = $(this).text();
+    $('#partnership-row-number').text(text);
+    paginator.entriesPerPage = $('#partnership-row-number').text();
+    paginator.refreshTableBody();
+  });
+  $('#potential-next-page').click(function() {
+    paginator.nextPage();
+  });
+  $('#potential-previous-page').click(function() {
+    paginator.previousPage();
+  });
+  const potentialPartnershipsModalData = getPartnershipDetailsByFocusArea(
+    stakeholderServicesArray
+  );
+  bindPotentialPartnershipModalJQuery(potentialPartnershipsModalData);
+  window.potentialPartnershipsModalData = potentialPartnershipsModalData;
+}
+$(document).ready(async function() {
+  const dataForTable = await getPartnershipData();
+  const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
+  const queryParam = queryNameFromUrl
+    ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
+    : 'Nigeria';
+  const stakeholderData = await fetch(
+    `${MMDP_BASE_URL}/api/v1/location?state=${queryParam}&focusAreaName`
+  );
+  const data = await stakeholderData.json();
 
   $('#potential-partnerships-table').load(
     '/partials/potential-partnerships-table.html',
     function() {
       let arr = getLgas(data);
-      let stakeholderServicesArray = getStakeholderServicesArray([data.filteredStakeholders]);
-      const potentialPartnershipsModalData = getPartnershipDetailsByFocusArea(stakeholderServicesArray);
+      let stakeholderServicesArray = getStakeholderServicesArray([
+        data.filteredStakeholders
+      ]);
+
+      window.partnershipsCsvTableData = dataForTable;
       // add id for row to each item in this map of potential partnerships
       let potentialPartners = potentialPartnershipsByLga(arr);
       const tableData = potentialPartners.map(item => {
-        item['ppRowId'] = getPotentialPartnershipRowId(item.lga, item.subThemeId,item.focusAreaId, stakeholderServicesArray);
+        item['ppRowId'] = getPotentialPartnershipRowId(
+          item.lga,
+          item.subThemeId,
+          item.focusAreaId,
+          stakeholderServicesArray
+        );
         return item;
       });
-
-      let table = 'potentialPartnerships';
-      window.partnershipsCsvTableData = dataForTable;
-      const paginator = new Paginator(tableData, keys, table, selectedItems);
-      paginator.potentialPartnershipsTable = true;
-      potentialPartnershipsTableData = paginator.initialPage();
-
-      $('#partnership-report-data').html(potentialPartnershipsTableData);
-      $('#partnership-table-mobile').html(potentialPartnershipsTableData);
-      let n = 5;
-      let options = '';
-      while (n < 51) {
-        if (n === 10) {
-          options += `<div class="selected">${n}</div>\n`;
-        } else {
-          options += `<div class="selected">${n}</div >\n`;
-        }
-        n += 5;
-      }
-      $('.partnership-dropdown-trigger').dropdown();
-      $('#partnership-entries-per-page').html(options);
-
-      $('.selected').click(function() {
-        const text = $(this).text();
-        $('#partnership-row-number').text(text);
-        paginator.entriesPerPage = $('#partnership-row-number').text();
-        paginator.refreshTableBody();
-      });
-      $('#potential-next-page').click(function() {
-        paginator.nextPage();
-      });
-      $('#potential-previous-page').click(function() {
-        paginator.previousPage();
-      });
-      bindPotentialPartnershipModalJQuery(potentialPartnershipsModalData);
-      window.potentialPartnershipsModalData = potentialPartnershipsModalData;
-
+      createPotentialPartnershipsTable(tableData, stakeholderServicesArray);
     }
   );
 });
