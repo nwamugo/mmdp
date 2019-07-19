@@ -1,4 +1,4 @@
-getTableRows = (data, keys) => {
+getTableRows = (data, keys) => {    
   tableRows = {
     potentialPartnershipsTableRows: `
     <main id="table" class="table-row body">
@@ -94,7 +94,24 @@ getTableRows = (data, keys) => {
           }</div></div>
         </span>
         </main>
-        `
+        `,
+    stakeholderDirMobileTable: `
+    <button class="btn-accordion-table">
+       <span class="title">${data[keys[0]]}</span>
+       <span class="icon"><i class="fas fa-chevron-down"></i></span>
+       <span class="d-flex">
+         <div class="d-flex-div">Thematic Pillar(s)<br>${data[keys[1]]}</div>
+         <div>Beneficiary Count<br>${data[keys[5]]}</div>
+    </button>
+    <div class="panel">
+      <p><span class='features'>Thematic Pillar(s)</span><br>${data[keys[1]]}</p>
+      <p><span class='features'>Sub-Themes</span><br>${data[keys[2]]}</p>
+      <p><span class='features'>Partnership</span><br>${data[keys[3]]}</p>
+      <p><span class='features'>Location</span><br>${data[keys[4]]}</p>
+      <p><span class='features'>Beneficiary Count</span><br>${data[keys[5]]}</p>
+      <p><span class='features'>Amount Invested</span><br>${data[keys[6]]}</p>
+    </div>
+    `
   };
 
   return tableRows;

@@ -81,6 +81,8 @@ nav {
 
 .nav-wrapper {
   padding: 5px 50px;
+  display: flex;
+  justify-content: space-between;
 }
 
 nav ul a:hover {
@@ -141,6 +143,10 @@ nav ul a:hover {
   .row .menu-item-content {
     padding: 0 40px 100px 40px;
   }
+
+  .nav-wrapper {
+    padding: 5px 5px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -188,9 +194,7 @@ a.collapsible-header {
 .left-sidebar__navigation-item--collapsible .collapsible-body {
   border: none;
 }
-.left-sidebar__navigation-item--collapsible .collapsible-body li{
-  /* margin: 10px 0;  */
-}
+
 .left-sidebar__navigation-item--collapsible {
   flex-direction: column;
 }

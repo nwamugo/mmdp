@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="assets/styles/coordination-matrix.css" />
 <div id="test">
-  <table id="stakeholder">
+  <!-- large table display -->
+  <table id="stakeholder" class="table-lg">
     <thead>
       <tr class="filter">
         <th class="organisation__name">
@@ -198,6 +199,128 @@
     <!--Table rows will be loaded dynamically here-->
     </tbody>
   </table>
+
+  <!-- small table display -->
+  <section id="stakeholder">
+  <div>
+      <button class="btn-accordion-table">Add or Edit filters</button>
+        <div class="panel">
+          <div class="c-flex">
+            <span class="e-flex">Thematic Pillar(s)</span>
+            <div class="dropdown">
+              <button class="dropbtn">All</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <div class='filter'>
+                    <input type="checkbox" id="coding" name="interest" value="coding">
+                    <label for="coding">1: Coding</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="music" name="interest" value="music">
+                    <label for="music">2: Music</label>
+                  </div>
+              </div>
+            </div>
+            </div>
+          <div class="c-flex">
+            <span class="e-flex">Sub-Themes</span>
+            <div class="dropdown">
+              <button class="dropbtn">All</button>
+              <div id="myDropdown" class="dropdown-content">
+                  <div class='filter'>
+                    <input type="checkbox" id="coding" name="interest" value="coding">
+                    <label for="coding">1: Coding</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="music" name="interest" value="music">
+                    <label for="music">2: Music</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+           <div class="c-flex">
+            <span class="e-flex">Partnership</span>
+            <div class="dropdown">
+              <button class="dropbtn">All</button>
+              <div id="myDropdown" class="dropdown-content">
+                  <div class='filter'>
+                    <input type="checkbox" id="coding" name="interest" value="coding">
+                    <label for="coding">1: Coding</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="music" name="interest" value="music">
+                    <label for="music">2: Music</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="c-flex">
+            <span class="e-flex">Location</span>
+            <div class="dropdown">
+              <button class="dropbtn">All</button>
+               <div id="myDropdown" class="dropdown-content">
+                  <div class='filter'>
+                    <input type="checkbox" id="coding" name="interest" value="coding">
+                    <label for="coding">1: Coding</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="music" name="interest" value="music">
+                    <label for="music">2: Music</label>
+                  </div>
+              </div>
+            </div>
+            </div>
+           <div class="c-flex">
+            <span class="e-flex">Beneficiary Count</span>
+            <div class="dropdown">
+              <button class="dropbtn">All</button>
+              <div id="myDropdown" class="dropdown-content">
+                  <div class='filter'>
+                    <input type="checkbox" id="coding" name="interest" value="coding">
+                    <label for="coding">1: Coding</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="music" name="interest" value="music">
+                    <label for="music">2: Music</label>
+                  </div>
+              </div>
+            </div>
+            </div>
+          <div class="c-flex">
+            <span class="e-flex">Amount Invested</span>
+            <div class="dropdown">
+              <button class="dropbtn">All</button>
+               <div id="myDropdown" class="dropdown-content">
+                  <div class='filter'>
+                    <input type="checkbox" id="coding" name="interest" value="coding">
+                    <label for="coding">1: Coding</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="music" name="interest" value="music">
+                    <label for="music">2: Music</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+  <br><br>
+  <section class="table-sm">
+    <!-- dynamically display small table -->
+  </section>
+  </section>
+
+  <div class="responsive_table__footer">
+          <a href="report.html"><button class="reportBtn" id="reportBtn">Report</button></a>
+          
+          <span class="footer__right_content">   
+          <span class="matrix-page-of-text"
+          >Page <span id="current-page">1</span> of
+            <span id="total-page">1</span></span>
+          <button id="previous-page" class="go-back">&#60;</button>
+          <button id="next-page" class="go-forward">&#62;</button>
+        </span>
+  </div>
+
   <div class="table__footer">
     <tr>
       <td colspan="7">
@@ -221,8 +344,7 @@
           <span>Entries per page</span>
           <span class="matrix-page-of-text"
           >Page <span id="current-page">1</span> of
-            <span id="total-page">1</span></span
-          >
+            <span id="total-page">1</span></span>
           <button id="previous-page" class="go-back">&#60;</button>
           <button id="next-page" class="go-forward">&#62;</button>
         </span>
@@ -230,4 +352,16 @@
     </tr>
   </div>
 </div>
+
 <script type="text/javascript" src="/assets/js/csv.js"></script>
+<script type="text/javascript" src="/assets/js/responsive.js"></script>
+<script>
+$(document).ready(function(){
+  $(".dropbtn").each(function(index, elem) {
+  	$(elem).click(function(event){
+      var dropdown = $(event.target).next();
+	    dropdown.toggleClass("dropdown-content").toggleClass("show");
+	  });
+  });
+});
+</script>

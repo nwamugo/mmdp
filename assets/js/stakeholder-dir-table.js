@@ -154,6 +154,7 @@ $(document).ready(async function() {
 
   // Should always load the default table on page load
   loadStakeholderTable();
+  $(window).resize(() => loadStakeholderTable());
 
   /**
    * @description - Load the stakeholder table when filtered with search value
