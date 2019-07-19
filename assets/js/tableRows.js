@@ -1,4 +1,4 @@
-getTableRows = (data, keys) => {    
+getTableRows = (data, keys) => {
   tableRows = {
     potentialPartnershipsTableRows: `
     <main id="table" class="table-row body">
@@ -106,7 +106,9 @@ getTableRows = (data, keys) => {
        </span>
     </button>
     <div class="panel" id="${data['id']}">
-      <p><span class='features'>Thematic Pillar(s)</span><br>${data[keys[1]]}</p>
+      <p><span class='features'>Thematic Pillar(s)</span><br>${
+        data[keys[1]]
+      }</p>
       <p><span class='features'>Sub-Themes</span><br>${data[keys[2]]}</p>
       <p><span class='features'>Partnership</span><br>${data[keys[3]]}</p>
       <p><span class='features'>Location</span><br>${data[keys[4]]}</p>
