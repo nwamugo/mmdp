@@ -153,6 +153,16 @@
   font-size: 16px;
 }
 
+@-moz-document url-prefix() { 
+  .col-1,
+  .col-2,
+  .col-3,
+  .col-4,
+  .col-5 {
+    font-size: 14px;
+  }
+}
+
 .body .col-1,
 .body .col-2,
 .body .col-3,
@@ -630,15 +640,27 @@ table.stakeholder__details__table .row__value {
 
 .gap-analysis-toggle {
   display: flex;
-  width: 58%;
+  width: 56.5%;
   margin: 0 auto;
 }
 
 .gap-analysis-button {
   border: 1px solid #ffffff;
-  width: 35.5%;
+  width: 36.4%;
   box-shadow: 1px 1px 6px 0.5px #8395a7;
   margin: 0 0 18px 0;
+}
+
+@-moz-document url-prefix() { 
+  .gap-analysis-toggle {
+    display: flex;
+    width: 58.7%;
+    margin: 0 auto;
+  }
+
+  .gap-analysis-button {
+    width: 35.3%;
+  }
 }
 
 #partnership-report-button {
@@ -887,7 +909,7 @@ table.stakeholder__details__table .row__value {
 .table-row {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 102%;
   min-height: 88px;
   border: solid 1px #cae7f0;
   background-color: white;
@@ -898,10 +920,16 @@ table.stakeholder__details__table .row__value {
 }
 
 .header {
-  width: 100%;
+  width: 102%;
   height: 88px;
   border: solid 1px #cae7f0;
   background-color: white;
+}
+
+@-moz-document url-prefix() { 
+  .table-row, .header {
+    width: 102%;
+  }
 }
 
 .report-col-1 {
@@ -960,6 +988,16 @@ table.stakeholder__details__table .row__value {
   letter-spacing: -0.19px;
   text-align: center;
   color: var(--dark);
+}
+
+@-moz-document url-prefix() { 
+  .report-col-1,
+  .report-col-2,
+  .report-col-3,
+  .report-col-4,
+  .report-col-5 {
+    font-size: 14px;
+  }
 }
 
 #gap-analysis-report-table {
