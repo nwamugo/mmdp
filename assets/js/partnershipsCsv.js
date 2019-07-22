@@ -84,7 +84,7 @@ const bindJQueryPartnerships = selectedItems => {
 
       // format the data
       itemsNotFormatted.forEach(item => {
-        if (selectedItems.includes('all')) {
+        if (selectedItems.includes('check all items')) {
           itemsFormatted.push({
             thematicPillar: item.thematicPillar.replace(/,/g, ''),
             subTheme: item.subTheme.replace(/,/g, ''),
@@ -106,8 +106,9 @@ const bindJQueryPartnerships = selectedItems => {
       // (itemsFormatted)
       exportCSVFile(headers, itemsFormatted, fileTitle);
     }
+    var partnershipsExport = document.getElementById('partnerships-export');
 
-    $('#partnerships-export').on('click', function() {
+    partnershipsExport.onclick = function() {
       if (selectedItems.length === 0) {
         return null;
       } else {
@@ -118,6 +119,6 @@ const bindJQueryPartnerships = selectedItems => {
         });
         $('#partnerships-check-all').prop('checked', false);
       }
-    });
+    };
   });
 };
