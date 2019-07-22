@@ -114,6 +114,14 @@ function handleStakeholdersData(data) {
     const founder = stakeholder.founder;
     const organisationType = stakeholder.organisationTypeId.typeName; // needs modification from the backend
     const notes = stakeholder.notes || "";
+    const filterAmount = stakeholder.beneficiaries.map(item => item);
+    const allAmount = filterAmount.map(
+      item => item.fundingSources[0].amountInvestedRange.amountInvestedRange
+    );
+    const sumAmount = allAmount.reduce(
+      (total, amt) => Number(total) + Number(amt)
+    );
+
     const otherDetails = stakeholder.beneficiaries.reduce(
       (tempStore, beneficiary) => {
         tempStore.duration.add(beneficiary.duration);
@@ -124,8 +132,7 @@ function handleStakeholdersData(data) {
           beneficiary.focusArea.subThemeName.subThemeName
         );
         tempStore.beneficiaryCount.add(beneficiary.totalNumberOfBeneficiaries);
-        tempStore.amountInvested =
-          beneficiary.fundingSources[0].amountInvestedRange.amountInvestedRange;
+        tempStore.amountInvested = sumAmount;
 
         tempStore.focusArea.add(
           beneficiary.focusArea.focusAreaName.focusAreaName
