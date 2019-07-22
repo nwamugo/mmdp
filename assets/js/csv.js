@@ -58,7 +58,8 @@ const bindJQuery = (table, selectedItems) => {
           thematicPillar: 'ThematicPillar',
           subTheme: 'SubTheme',
           lgasWithGaps: 'LGAsWithGaps',
-          numberOfFocusAreasWithGaps: 'NumberOfFocusAreasWithGaps'
+          numberOfFocusAreasWithGaps: 'NumberOfFocusAreasWithGaps',
+          focusAreasWithGaps: 'FocusAreasWithGaps'
         };
       } else if (table === 'stakeholder') {
         var headers = {
@@ -91,10 +92,13 @@ const bindJQuery = (table, selectedItems) => {
             itemsFormatted.push({
               thematicPillar: item.pillar.replace(/,/g, ''),
               subTheme: item.subtheme.replace(/,/g, ''),
-              lgasWithGaps: item.LgasWithGaps.replace(/,/g, ''),
+              lgasWithGaps: item.LgasWithGaps.replace(/,/g, '; '),
               numberOfFocusAreasWithGaps: item.focusAreasWithGapsCount
                 .toString()
-                .replace(/,/g, '')
+                .replace(/,/g, ''),
+              focusAreasWithGaps: item.focusAreasWithGaps
+              .toString()
+              .replace(/,/g, '; ')
             });
           }
           fileTitle = 'gapAnalysisReport';
