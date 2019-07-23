@@ -249,6 +249,15 @@ function filteredLga(target, array = []) {
                     }
 
                     lgaMap.innerHTML = `<title>${lgaId}</title>`;
+
+                    lgaMap.addEventListener(
+                      "click",
+                      () => handleMapClick(lgaId),
+                      false
+                    );
+                    lgasArray.push(lgaId);
+                    window.variable = lgasArray;
+
                     const lgaData = filteredLga(
                       lgaId,
                       thematicPillarCountPerLGA
