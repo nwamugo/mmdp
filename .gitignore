@@ -1,6 +1,10 @@
 # IDEs
 .idea/
 .vscode/
+.eslintrc.js
+node_modules
+package.json
+package-lock.json
 
 # misc
 .DS_Store
