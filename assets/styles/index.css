@@ -699,6 +699,14 @@ textarea {
   opacity: 0.9;
 }
 
+.banner__button:last-child{
+  margin-left: 2px;
+}
+
+.banner__button:first-child{
+  margin-right: 2px;
+}
+
 .banner__button:focus {
   outline: none;
   background-color: #3faaca;

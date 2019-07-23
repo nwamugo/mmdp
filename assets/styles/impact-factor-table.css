@@ -1,0 +1,56 @@
+.impact-table-header-col {
+    min-width: 17%;
+    max-width: 17%;
+    align-items: center;
+}
+
+.impact-header {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.impact-table-col{
+    min-width: 15%;
+    max-width: 15%;
+    padding: 7px 0;
+}
+
+.impact-row-split{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 16px;
+    align-items: center;
+}
+
+.target-completion-col{
+    text-align: center;
+    margin-right: 5px;
+    overflow-x: hidden;
+}
+
+.thematic-pillar-col{
+    padding-left: 2.5%;
+}
+
+#impact-factor-table{
+    display: none;
+}
+
+.impact-factor-table-web .fas {
+    color: #d9eaef;
+}
+
+.impact-factor-fa-icon {
+    font-size: 1.15em;
+    line-height: .75em;
+    vertical-align: -.0667em;
+}
+
+.impact_factor_thematic-pillars__desc {
+    padding: 0 37px;
+}
+
+.text-center{
+    text-align: center;
+}

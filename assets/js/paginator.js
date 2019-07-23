@@ -87,8 +87,10 @@ class Paginator {
     if (this.potentialPartnershipsTable) {
       if (this.table === 'gapAnalysis') {
         tableRow = tableRowData.gapAnalysisTableRows;
-      } else {
+      } else if (this.table === 'potentialPartnerships') {
         tableRow = tableRowData.potentialPartnershipsTableRows;
+      } else if (this.table === 'impactFactor' ){
+        tableRow = tableRowData.impactFactorTableRows;
       }
     } else {
       tableRow = tableRowData.stakeholderDirectoryTableRows;
@@ -108,10 +110,12 @@ class Paginator {
         $('#gap-analysis-data').html(rows);
         bindGapAnalysisModalJQuery(window.focusAreaGaps);
         bindJQuery(this.table, this.selectedItems);
-      } else {
+      } else if (this.table === 'potentialPartnerships') {
         $('#partnership-report-data').html(rows);
         bindJQueryPartnerships(this.selectedItems);
         bindPotentialPartnershipModalJQuery(window.potentialPartnershipsModalData);
+      } else if (this.table === 'impactFactor'){
+        $('#impact-factor-data').html(rows);
       }
     } else {
       $('tbody.table__body').html(rows);
@@ -133,6 +137,9 @@ class Paginator {
     } else if (this.table === 'potentialPartnerships') {
       $('#potential-current-page').html(currentPage);
       $('#potential-total-page').html(totalPage);
+    } else if (this.table === 'impactFactor') {
+      $('#impact-factor-current-page').html(currentPage);
+      $('#impact-factor-total-page').html(totalPage);
     } else {
       $('#current-page').html(currentPage);
       $('#total-page').html(totalPage);
@@ -151,6 +158,13 @@ class Paginator {
       currentPage === totalPage
         ? $('#potential-next-page').removeClass('active__nav')
         : $('#potential-next-page').addClass('active__nav');
+    } else if (this.table === 'impactFactor') {
+      currentPage === 1
+          ? $('#impact-factor-previous-page').removeClass('active__nav')
+          : $('#impact-factor-previous-page').addClass('active__nav');
+      currentPage === totalPage
+          ? $('#impact-factor-next-page').removeClass('active__nav')
+          : $('#impact-factor-next-page').addClass('active__nav');
     } else {
       currentPage === 1
         ? $('#previous-page').removeClass('active__nav')
