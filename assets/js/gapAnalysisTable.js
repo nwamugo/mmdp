@@ -51,12 +51,25 @@ $(document).ready(async function() {
                 const row = {};
                 const modalRow = {};
                 let pillarObject = {};
+                let focusAreaWithGaps = [];
+
+                for (const focusArea of item.focusAreas) {
+                  if (typeof(focusArea) === 'object') {
+                    if (focusArea.lgasWithGaps.length !== 0) {
+                        focusAreaWithGaps.push(focusArea.focusArea)
+                        
+                    }
+                  } else {
+                    focusAreaWithGaps.push(focusArea)
+                  }
+                }
 
                 modalRow.focusArea = item.focusAreas;
                 row.id = item.subThemeName;
                 row.pillar = report.pillarName;
                 row.subtheme = item.subThemeName;
                 row.focusAreasWithGapsCount = item.focusAreasWithGapsCount;
+                row.focusAreasWithGaps = focusAreaWithGaps;
                 var lgas = item.AllLgasWithGaps;
                 var LgasWithGaps = lgas.filter(Boolean);
                 row.LgasWithGaps = LgasWithGaps.join(', ');
