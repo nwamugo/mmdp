@@ -65,23 +65,23 @@ function getPoint(x, y) {
 }
 
 function getPillarsCoordinates(lgaId) {
-    let pointsData = [];
-    const lgaPath = document.getElementById(lgaId);
+  let pointsData = [];
+  const lgaPath = document.getElementById(lgaId);  
 
-    // path client rect
-    let lgaDOMRect = lgaPath.getBoundingClientRect();
+  // path client rect
+  let lgaDOMRect = lgaPath.getBoundingClientRect();
 
-    //get a position in the rect
-    const positionX = lgaDOMRect.x + lgaDOMRect.width * 0.26;
-    let positionY = lgaDOMRect.y + lgaDOMRect.height / 2;
+  //get a position in the rect
+  const positionX = lgaDOMRect.x + lgaDOMRect.width * 0.26;
+  let positionY = lgaDOMRect.y + lgaDOMRect.height / 2;
 
-    if (lgaPath && lgaDOMRect) {
-        //get the coordinates of the point on the svg
-        let svgPoint = getPoint(positionX, positionY);
-        //Put all the points and lgaId together
-        pointsData.push({ x: svgPoint.x, y: svgPoint.y, lgaId });
-    }
-    return pointsData;
+  if (lgaPath && lgaDOMRect) {
+    //get the coordinates of the point on the svg
+    let svgPoint = getPoint(positionX, positionY);
+    //Put all the points and lgaId together
+    pointsData.push({ x: svgPoint.x, y: svgPoint.y, lgaId });
+  }
+  return pointsData;
 }
 
 function getPotentialPartnershipsCountCoordinates(lgaId) {
