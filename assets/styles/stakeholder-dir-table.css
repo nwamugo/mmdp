@@ -120,6 +120,60 @@
   outline: none;
 }
 
+.search__messages {
+  display: none;
+  width: 38%;
+  color: #3faaca;
+  margin-left: 24%;
+  text-align: center;
+}
+
+@media screen and (max-width: 1150px) {
+  .search__messages {
+    margin-left: 22%;
+  }
+} 
+
+@media screen and (max-width: 874px) {
+  .search__messages {
+    margin-left: 20.5%;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .search__messages {
+    margin-left: 19%;
+  }
+}
+
+@media screen and (max-width: 705px) {
+  .search__messages {
+    margin-left: 18%;
+  }
+}
+
+@media screen and (max-width: 573px) {
+  .search__messages {
+    margin-left: 15%;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .search__messages {
+    margin-left: 12%;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .search__messages {
+    margin-left: 5%;
+  }
+}
+
+.section {
+  padding-bottom: 0;
+}
+
 .col-1 {
   min-width: 5.317460317460317%;
   max-width: 5.317460317460317%;
