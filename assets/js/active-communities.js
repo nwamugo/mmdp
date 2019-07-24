@@ -10,19 +10,30 @@
   }
 
   let lgaName;
+  let stateName;
   const baseURL = window.location.host;
   const SVG_NS = 'http://www.w3.org/2000/svg';
 
   const link = document.getElementById('hide-active');
   link.addEventListener(
     'click',
-    () => (window.location.href = `http://${baseURL}/lga.html?lga=${lgaName}`),
+    () =>
+      (window.location.href = `http://${baseURL}/lga.html?lga=${lgaName}&state=${stateName}`)
   );
 
-  const backToEdo = document.getElementById('back-edo');
-  backToEdo.addEventListener(
+  const backToState = document.getElementById('back-state');
+
+  stateName = getqueryName('stateName');
+
+  backToState.innerText = `Back to ${stateName.replace('%20', ' ')} state`;
+
+  backToState.addEventListener(
     'click',
-    () => (window.location.href = `http://${baseURL}/state.html?state=Edo`),
+    () =>
+      (window.location.href = `http://${baseURL}/state.html?state=${stateName.replace(
+        '%20',
+        ' '
+      )}`)
   );
 
   async function fetchCount() {
@@ -31,7 +42,7 @@
     query = `lga=${lgaName}`;
     try {
       const stakeholderData = await fetch(
-        `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`,
+        `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`
       );
       const data = await stakeholderData.json();
       const {
@@ -57,7 +68,7 @@
         beneficiaryServicesCount,
         stakeholderCount,
         focusAreasCount,
-        uniqueNames,
+        uniqueNames
       );
       return counts;
     } catch (error) {}
@@ -167,13 +178,12 @@
   }
 
   async function loaded() {
-    const lgaNameFromUrl = window.location.search.substring(1).split('=')[1];
-    lgaName = lgaNameFromUrl.charAt(0).toUpperCase() + lgaNameFromUrl.slice(1);
+    lgaName = getqueryName('lgaName');
     const lgaSpan = document.getElementById('lga-name');
     lgaSpan.innerHTML = lgaName.replace('%20', ' ');
     try {
       const responsePromise = await fetch(
-        `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`,
+        `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`
       );
       const response = await responsePromise.json();
       const { name, path } = response.data[0];
@@ -189,7 +199,7 @@
       svg.setAttributeNS(
         null,
         'viewBox',
-        `${bb.x} ${bb.y} ${bb.width} ${bb.height}`,
+        `${bb.x} ${bb.y} ${bb.width} ${bb.height}`
       );
       appendDefs();
       let stakeName;
@@ -214,12 +224,12 @@
             cy: points[i].cy,
             r: 0.004,
           },
-          svg,
+          svg
         );
       }
 
       $('.marker')
-        .mouseover(function(e) {          
+        .mouseover(function(e) {
           var community = $(this).attr('communityName') || '';
           var stakeholders = servicesCount[1];
           var focusarea = servicesCount[2];
@@ -238,15 +248,15 @@
               'Services: ' +
               services +
               '</div><br>' +
-              '</div>',
+              '</div>'
           ).appendTo('body');
         })
         .mouseleave(function() {
           $('.info_panel').remove();
         })
-        .mousemove(function(e) {          
+        .mousemove(function(e) {
           var mouseX = e.pageX,
-            mouseY = e.pageY;            
+            mouseY = e.pageY;
 
           $('.info_panel').css({
             top: mouseY - 50,
@@ -254,7 +264,7 @@
           });
         });
     } catch (error) {
-      throw(error);
+      throw error;
     }
   }
   document.addEventListener('DOMContentLoaded', loaded, true);

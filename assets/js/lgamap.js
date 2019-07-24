@@ -10,6 +10,7 @@
   }
 
   let lgaName;
+  let stateName;
   const baseURL = window.location.host;
   const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -18,14 +19,26 @@
   link.addEventListener(
     'click',
     () =>
-      (window.location.href = `http://${baseURL}/active-communities.html?lga=${lgaName}`),
+      (window.location.href = `http://${baseURL}/active-communities.html?lga=${lgaName}&state=${stateName.replace(
+        '%20',
+        ' '
+      )}`)
   );
 
-  // link to go back to edo state
-  const backToEdo = document.getElementById('back-edo');
-  backToEdo.addEventListener(
+  // link to go back to previous state
+  const backToState = document.getElementById('back-state');
+
+  stateName = getqueryName('stateName');
+
+  backToState.innerText = `Back to ${stateName.replace('%20', ' ')} state`;
+
+  backToState.addEventListener(
     'click',
-    () => (window.location.href = `http://${baseURL}/state.html?state=Edo`),
+    () =>
+      (window.location.href = `http://${baseURL}/state.html?state=${stateName.replace(
+        '%20',
+        ' '
+      )}`)
   );
 
   // function to fetch the data to be dispayed in our markers.
@@ -35,7 +48,7 @@
     query = `lga=${lgaName}`;
     try {
       const stakeholderData = await fetch(
-        `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`,
+        `${MMDP_BASE_URL}/api/v1/location?${query}&focusAreaName`
       );
       const data = await stakeholderData.json();
       const { focusAreasCount, beneficiaryServicesCount } = data;
@@ -115,13 +128,12 @@
 
   // function to load the map
   async function loaded() {
-    const lgaNameFromUrl = window.location.search.substring(1).split('=')[1];
-    lgaName = lgaNameFromUrl.charAt(0).toUpperCase() + lgaNameFromUrl.slice(1);
+    lgaName = getqueryName('lgaName');
     const lgaSpan = document.getElementById('lga-name');
     lgaSpan.innerHTML = lgaName.replace('%20', ' ');
     try {
       const responsePromise = await fetch(
-        `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`,
+        `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`
       );
       const response = await responsePromise.json();
       const { name, path } = response.data[0];
@@ -137,7 +149,7 @@
       svg.setAttributeNS(
         null,
         'viewBox',
-        `${bb.x} ${bb.y} ${bb.width} ${bb.height}`,
+        `${bb.x} ${bb.y} ${bb.width} ${bb.height}`
       );
 
       // add markers
@@ -156,7 +168,7 @@
             r: 0.02,
           },
           svg,
-          counts[i],
+          counts[i]
         );
       }
     } catch (error) {
