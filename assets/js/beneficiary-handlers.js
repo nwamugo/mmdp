@@ -1,3 +1,21 @@
+function calculateBeneficiaries(beneficiaries) {
+  let totalNumberOfBeneficiaries = 0;
+  beneficiaries.forEach(service => {
+    let duration = 1;
+    let noOfMaleBeneficiaries = 0;
+    let noOfFemaleBeneficiaries = 0;
+    if (service.duration) {
+      duration = parseInt(service.duration, 10);
+    }
+    service.beneficiaryTypes.forEach(item => {
+      noOfMaleBeneficiaries += parseInt(item.noOfMaleBeneficiaries, 10);
+      noOfFemaleBeneficiaries += parseInt(item.noOfFemaleBeneficiaries, 10);
+    });
+    totalNumberOfBeneficiaries +=
+      duration * (noOfMaleBeneficiaries + noOfFemaleBeneficiaries);
+  });
+  return totalNumberOfBeneficiaries;
+}
 function handleBeneficiaries(beneficiaries) {
   const extractedData = beneficiaries.reduce(
     (accum, beneficiary) => {
@@ -77,25 +95,19 @@ function handleBeneficiaries(beneficiaries) {
     0
   );
 
-  const benefitTotal = benefitMale + benefitFemale;
-  const malePercent = Math.round(
-    benefitTotal ? (parseInt(benefitMale) / parseInt(benefitTotal)) * 100 : 0
-  );
-  const femalePercent = benefitTotal ? 100 - malePercent : 0;
+  const benefitTotal = calculateBeneficiaries(beneficiaries);
   return {
-    thematicPillars: [...extractedData.thematicPillars].join(", "),
-    subThemes: [...extractedData.subThemes].join(", "),
-    focusArea: [...extractedData.focusArea].join(", "),
-    beneficiaryService: [...extractedData.beneficiaryService].join(", "),
-    fundingSources: [...new Set(extractedData.fundingSources)].join(", "),
-    amountInvested: extractedData.amountInvested.join(", "),
-    localCommunities: [...new Set(extractedData.localCommunities)].join(", "),
-    lgas: [...new Set(extractedData.lgas)].join(", "),
-    beneficiaryTypes: [...new Set(extractedData.beneficiaryTypes)].join(", "),
-    targetAudience: [...new Set(extractedData.targetAudience)].join(", "),
-    totalNumberOfBeneficiaries: benefitTotal,
-    malePercent,
-    femalePercent
+    thematicPillars: [...extractedData.thematicPillars].join(', '),
+    subThemes: [...extractedData.subThemes].join(', '),
+    focusArea: [...extractedData.focusArea].join(', '),
+    beneficiaryService: [...extractedData.beneficiaryService].join(', '),
+    fundingSources: [...new Set(extractedData.fundingSources)].join(', '),
+    amountInvested: extractedData.amountInvested.join(', '),
+    localCommunities: [...new Set(extractedData.localCommunities)].join(', '),
+    lgas: [...new Set(extractedData.lgas)].join(', '),
+    beneficiaryTypes: [...new Set(extractedData.beneficiaryTypes)].join(', '),
+    targetAudience: [...new Set(extractedData.targetAudience)].join(', '),
+    totalNumberOfBeneficiaries: benefitTotal
   };
 }
 
@@ -110,11 +122,13 @@ function handleStakeholdersData(data) {
   return data.map((stakeholder, index) => {
     const organisationName = stakeholder.organisationName;
     const partners = getParnerships(stakeholder.partnerships);
-    const partnership = partners.length ? partners.join(", ") : "None";
+    const partnership = partners.length ? partners.join(', ') : 'None';
     const founder = stakeholder.founder;
     const organisationType = stakeholder.organisationTypeId.typeName; // needs modification from the backend
-    const notes = stakeholder.notes || "";
+    const notes = stakeholder.notes || '';
     const filterAmount = stakeholder.beneficiaries.map(item => item);
+    const beneficiaryAmount = calculateBeneficiaries(stakeholder.beneficiaries);
+
     const allAmount = filterAmount.map(
       item => item.fundingSources[0].amountInvestedRange.amountInvestedRange
     );
@@ -131,7 +145,7 @@ function handleStakeholdersData(data) {
         tempStore.subThemes.add(
           beneficiary.focusArea.subThemeName.subThemeName
         );
-        tempStore.beneficiaryCount.add(beneficiary.totalNumberOfBeneficiaries);
+        tempStore.beneficiaryCount = beneficiaryAmount;
         tempStore.amountInvested = sumAmount;
 
         tempStore.focusArea.add(
@@ -156,7 +170,7 @@ function handleStakeholdersData(data) {
       {
         thematicPillars: new Set(),
         subThemes: new Set(),
-        beneficiaryCount: new Set(),
+        beneficiaryCount: 0,
         amountInvested: 0,
         focusArea: new Set(),
         fundingSources: new Set(),
@@ -168,19 +182,16 @@ function handleStakeholdersData(data) {
     );
     // stringify beneficiary other details
     const stringifiedDetails = {
-      thematicPillars: [...otherDetails.thematicPillars].join(", "),
-      subThemes: [...otherDetails.subThemes].join(", "),
-      beneficiaryCount: [...otherDetails.beneficiaryCount].reduce(
-        (partial_sum, count) => partial_sum + count,
-        0
-      ),
+      thematicPillars: [...otherDetails.thematicPillars].join(', '),
+      subThemes: [...otherDetails.subThemes].join(', '),
+      beneficiaryCount: otherDetails.beneficiaryCount,
       amountInvested: otherDetails.amountInvested,
-      focusArea: [...otherDetails.focusArea].join(", "),
-      fundingSources: [...otherDetails.fundingSources].join(", "),
-      beneficiaryService: [...otherDetails.beneficiaryService].join(", "),
-      duration: [...otherDetails.duration].join(", "),
-      location: [...new Set(otherDetails.location)].join(", "),
-      stateLocation: [...new Set(otherDetails.stateLocation)].join(", ")
+      focusArea: [...otherDetails.focusArea].join(', '),
+      fundingSources: [...otherDetails.fundingSources].join(', '),
+      beneficiaryService: [...otherDetails.beneficiaryService].join(', '),
+      duration: [...otherDetails.duration].join(', '),
+      location: [...new Set(otherDetails.location)].join(', '),
+      stateLocation: [...new Set(otherDetails.stateLocation)].join(', ')
     };
     return {
       id: index + 1,
