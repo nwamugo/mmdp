@@ -67,8 +67,9 @@ $(document).ready(async function() {
     'input[type="checkbox"]',
     function() {
       if (
-        $(this).is(":checked") &&
-        $(this).attr("data-org") !== "check-all-stakeholder"
+        $(this).is(':checked') &&
+        $(this).attr('data-org') !== 'check-all-stakeholder'
+        && selectedItems.length > 0
       ) {
         var strinn = $(this).attr("data-org");
         selectedItems.push(strinn.replace(/-/g, " "));
@@ -234,8 +235,7 @@ $(document).ready(async function() {
     if ($("table tr .checkBox").is(":checked")) {
       checkBoxValues = [];
     }
-    $("table tr .checkBox").prop("checked", false);
-    paginator.refreshTableBody();
+    $('table tr .checkBox').prop('checked', false);
   }
 
   //close dropdown
@@ -425,24 +425,32 @@ $(document).ready(async function() {
     }
   });
 
-  // clear filter button on click
-  $("div").on("click", "table tr #clearFilter", function() {
-    uncheckCheckboxes();
-    closeDropdown();
-  });
-
-  // apply filters button on click
-  $("div").on("click", "table tr #applyFilter", function() {
+  function filterData () {
     for (let i = 0; i < tableData.length; i++) {
       const filterName = tableData[i][dropdownName];
       applyFilterData(filterName, i);
     }
+  }
+
+  // clear filter button on click
+  $('div').on('click', 'table tr #clearFilter', function() {
+    
+    uncheckCheckboxes();
+    closeDropdown();
+    filterData();
+    
+  });
+
+  // apply filters button on click
+  $('div').on('click', 'table tr #applyFilter', function() {
+    filterData();
+    uncheckCheckboxes();
     closeDropdown();
   });
 
   // function to display apply filter data
   function applyFilterData(filterByName, index) {
-    if ($.inArray(filterByName, checkBoxValues) === -1) {
+    if (checkBoxValues.length > 0 && $.inArray(filterByName, checkBoxValues) === -1) {
       $(`#stakeholder td#${tableData[index].id}`)
         .parent()
         .hide();
@@ -451,5 +459,8 @@ $(document).ready(async function() {
         .parent()
         .show();
     }
+
+    closeDropdown();
+    
   }
 });
