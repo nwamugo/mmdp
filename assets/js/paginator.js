@@ -114,8 +114,8 @@ class Paginator {
         bindPotentialPartnershipModalJQuery(window.potentialPartnershipsModalData);
       }
     } else {
-      $('tbody.table__body').html(rows);
-      bindJQuery(this.table, this.selectedItems);
+        $('tbody.table__body').html(rows);
+        bindJQuery(this.table, this.selectedItems);
     }
   }
   updatePageOf() {

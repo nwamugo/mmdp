@@ -1,4 +1,4 @@
-const bindJQuery = (table, selectedItems) => {
+bindJQuery = (table, selectedItems) => {
   $(document).ready(async function() {
     if (table === 'gapAnalysis') {
       tableData = [...window.gapTableData];

@@ -68,11 +68,10 @@ $(document).ready(async function() {
     function() {
       if (
         $(this).is(':checked') &&
-        $(this).attr('data-org') !== 'check-all-stakeholder' &&
-        selectedItems.length > 0
+        $(this).attr('data-org') !== 'check-all-stakeholder'
       ) {
         var strinn = $(this).attr('data-org');
-        selectedItems.push(strinn.replace(/-/g, ' '));
+        strinn && selectedItems.push(strinn.replace(/-/g, ' '));
       } else if (
         $(this).is(':checked') &&
         $(this).attr('data-org') === 'check-all-stakeholder'
@@ -102,13 +101,83 @@ $(document).ready(async function() {
         selectedItems.length = 0;
       }
     }
-  );
+  )
 
-  $('#stakeholder-directory-table').load(
-    '/partials/stakeholder-directory-table.html',
+/**
+ * @description - Search on pressing Enter
+ */
+$('#search__activities').keypress(function (e) {
+  var key = e.which;
+  if(key == 13) {
+    if($('#search__activities').val().trim() === '') {
+      loadStakeholderTable();
+    } else {
+      loadSearchStakeholderTable();
+    }
+  }
+  }); 
+
+/**
+ * @description - Search on search button click
+ */
+$('#search_stakeholder').click(function(){
+  if($('#search__activities').val().trim() === '') {
+    loadStakeholderTable();
+  } else {
+    loadSearchStakeholderTable();
+  }
+});
+
+/**
+ * @description - Load full table when search field is cleared
+ */
+$('#search__activities').keyup(function(){
+  if($('#search__activities').val().trim() === '') {
+    $('.search__messages').css({'display': 'none'});
+    loadStakeholderTable();
+  }
+})
+
+// Should always load the default table on page load
+loadStakeholderTable();
+
+/**
+ * @description - Load the stakeholder table when filtered with search value
+ */
+function loadSearchStakeholderTable() {
+  $("#stakeholder-directory-table").load(
+    "/partials/stakeholder-directory-table.html",
+    function() {
+      const search = $('#search__activities').val();
+      const filteredData = tableData.filter(organization => organization.organisationName.trim().toLowerCase().includes(search.trim().toLowerCase()) )
+      if (!filteredData || filteredData.length === 0) {
+        $('.search__messages').css({'display': 'block'});
+      } else {
+        paginator = new Paginator(filteredData, keys, table, selectedItems);
+        loadStakeholderDetails(paginator)
+      }
+    }
+  );
+}
+
+/**
+ * @description - Load the stakeholder table
+ */
+function loadStakeholderTable() {
+  $("#stakeholder-directory-table").load(
+    "/partials/stakeholder-directory-table.html",
     function() {
       const paginator = new Paginator(tableData, keys, table, selectedItems);
-      fetchLocations();
+      loadStakeholderDetails(paginator);
+    }
+  );
+}
+
+/**
+ * @description - Every other operation that is to be done on the stakeholder table and rows
+ */
+function loadStakeholderDetails(paginator) {
+  fetchLocations();
       filter.displayDataInDropdown(
         [...new Set(beneficiaryCount)],
         '#beneficiary_count_data'
@@ -161,7 +230,6 @@ $(document).ready(async function() {
         const beneficiaryData = handleBeneficiaries(
           stakeholderData.beneficiaries
         );
-        console.log(beneficiaryData.totalNumberOfBeneficiaries, '======>');
         const requiredDetails = {
           'Year of Registration': stakeholderData.yearOfCacREG,
           'RC Number': stakeholderData.cacRcNumber,
@@ -226,8 +294,7 @@ $(document).ready(async function() {
         $('.stakeholder__details__table tbody').html(shDetailsTableData);
       }
       window.getSHDetails = getSHDetails;
-    }
-  );
+}
 
   // uncheck checkboxes
   function uncheckCheckboxes() {
