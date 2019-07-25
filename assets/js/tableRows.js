@@ -63,7 +63,24 @@ getTableRows = (data, keys) => {
               data[keys[0]]
             }')">${data[keys[6]]}</td>
         </tr>
-        `
+        `,
+    impactFactorTableRows: `
+        <main class="table-row body">
+        <label class="report-col-1">
+        <div class="check-box">
+            <input type="checkbox" name="aaaaa" class="check">
+        </div>
+        </label>
+        <span   class="impact-row-split">
+          <div class="impact-table-col"> <div>${data[keys[0]]}</div></div>
+          <div class="impact-table-col"> <div>${data[keys[1]]}</div></div>
+          <div class="impact-table-col"><div>${data[keys[2]]}</div></div>
+          <div class="impact-table-col"><div>${data[keys[3]]}</div></div>
+          <div class="impact-table-col thematic-pillar-col"><div>${data[keys[4]]}</div></div>
+          <div class="impact-table-col target-completion-col"><div>${data[keys[5]]}</div></div>
+        </span>
+        </main>
+        `,
   };
   return tableRows;
 };

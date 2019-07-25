@@ -88,9 +88,10 @@
 }
 
 .search__activities__section input {
-  width: 40%;
+  width: 41.03%;
   padding-left: 1em;
   margin-right: 1em;
+  margin-left: 1rem;
   height: 50px;
   border-radius: 3px;
   border: solid 1px #cae7f0;
