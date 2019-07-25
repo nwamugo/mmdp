@@ -2,20 +2,20 @@
     <!-- Partnership Table -->
     <section id="gap-analysis-report-table" class="table">
         <section class="partnership-table-web">
-            <header class="table-row header gap-header">
+            <header class="table-row report-table-header gap-header">
                 <label class="report-col-1">
                     <input type="checkbox" name="check" class="check" data-org='check-all' id='check-all' />
                 </label>
-                <div class="report-col-2 header-row">Thematic Pillar <i class="fas fa-angle-down fa-xs"></i></div>
-                <div class="report-col-3 header-row">Sub theme <i class="fas fa-angle-down fa-xs"></i></div>
-                <div class="report-col-4 header-row">LGA with gaps <i class="fas fa-angle-down fa-xs"></i></div>
-                <div class="report-col-5 header-row">Number of Focus Areas with gaps <i class="fas fa-angle-down fa-xs"></i></div>
+                <div class="report-col-2 header-row">Thematic Pillar <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
+                <div class="report-col-3 header-row">Sub theme <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
+                <div class="report-col-4 header-row">LGA with gaps <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
+                <div class="report-col-5 header-row">Number of Focus Areas with gaps <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
             </header>
             <!--Rows will be loaded dynamically here-->
             <div id="gap-analysis-data"></div>
 
             <!--Start Footer-->
-            <div class="table__footer">
+            <div class="table__footer_report">
                 <tr>
                     <td colspan="7">
                         <button id="gap-export" class="banner__button animated flashing slow delay-2s">
@@ -29,8 +29,8 @@
                             <ul id='gap-analysis-entries-per-page' class='dropdown-content'>
                                 <!-- Dynamic display goes here -->
                             </ul>
-                            <span>Entries per page</span>
-                            <span>Page <span id="gap-current-page">1</span> of
+                            <span class="footer-page-entries">Entries per page</span>
+                            <span class="page-of-text">Page <span id="gap-current-page">1</span> of
                                 <span id="gap-total-page">1</span></span>
                             <button id="gap-previous-page" class="go-back">&#60;</button>
                             <button id="gap-next-page" class="go-forward">&#62;</button>
