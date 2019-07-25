@@ -1,27 +1,29 @@
 <div class="main__content-section">
   <div id="research-content" class="row">
-    <input 
-      id="stakeholder-search" 
-      type="text" 
-      placeholder="Search directory" 
+    <input
+      id="stakeholder-search"
+      type="text"
+      placeholder="Search directory"
       class="input research-content__form-input"
     />
     <button id="btn-search" class="btn-large btn-search">Search</button>
     <div class="row">
       <div class="col m4 filter">
-        <select 
-          onchange="selectState(event)"
-          class="filter__dropdown" 
-          id="state-dropdown" 
-          name="state-dropdown">
+        <select
+          onchange="selectState()"
+          class="filter__dropdown"
+          id="state-dropdown"
+          name="state-dropdown"
+        >
         </select>
       </div>
       <div class="col m4 filter">
-        <select 
-          onchange="selectLG(event)"
-          class="filter__dropdown" 
-          id="lg-dropdown" 
-          name="lg-dropdown">
+        <select
+          onchange="selectLG()"
+          class="filter__dropdown"
+          id="lg-dropdown"
+          name="lg-dropdown"
+        >
         </select>
       </div>
     </div>
@@ -30,9 +32,18 @@
     <div class="stakeholders-details">
       <div id="stakeholders"></div>
       <!-- pagination -->
-      <div id="pagination-control"class="research-content__pagination stakeholder"></div>
+      <div
+        id="pagination-control"
+        class="research-content__pagination stakeholder"
+      ></div>
     </div>
   </div>
 </div>
-  <script type="text/javascript" src="../assets/js/cms/stakeholders-directory/nigeria-states.js"></script>
-<script type="text/javascript" src="../assets/js/cms/stakeholders-directory/index.js"></script>
+<script
+  type="text/javascript"
+  src="../assets/js/cms/stakeholders-directory/nigeria-states.js"
+></script>
+<script
+  type="text/javascript"
+  src="../assets/js/cms/stakeholders-directory/index.js"
+></script>
