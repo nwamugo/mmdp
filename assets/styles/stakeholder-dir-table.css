@@ -331,7 +331,8 @@
 /* End of Page Dropdown */
 
 .footer__right_content :nth-child(3) span#current-page,
-.footer__right_content :nth-child(3) span#gap-current-page {
+.footer__right_content :nth-child(3) span#gap-current-page,
+.footer__right_content :nth-child(3) span#impact-factor-current-page {
   display: inline-block;
   width: 40px;
   height: 31px;
