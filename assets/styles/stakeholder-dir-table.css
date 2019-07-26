@@ -208,7 +208,7 @@ span {
 
 .col-5 {
   min-width: 25.476190476190474%;
-  max-width: 25.476190476190474%;
+  max-width: 30.476190476190474%;
   font-size: 16px;
 }
 
@@ -802,6 +802,14 @@ table.stakeholder__details__table .row__value {
   font-size: 16px;
 }
 
+#row-number {
+  color: #3faaca;
+}
+
+.matrix-page-of-text {
+  margin-left: 6%;
+}
+
 @media screen and (max-width: 1118px) {
   #partnership-report-button {
     margin-left: 0;
@@ -993,7 +1001,7 @@ table.stakeholder__details__table .row__value {
 }
 
 .header, .report-table-header {
-  width: 100%;
+  width: 102%;
   height: 88px;
   border: solid 1px #cae7f0;
   background-color: white;
