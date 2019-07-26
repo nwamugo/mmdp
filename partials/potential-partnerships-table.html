@@ -7,16 +7,16 @@
                     <input class = "check" name="collaboration" value="collaboration" type="checkbox" data-org="check-all-items" id="partnerships-check-all"/>
 
                 </label>
-                <div class="col-2 header-row">Thematic Pillar <i class="fas fa-angle-down fa-xs"></i></div>
-                <div class="col-3 header-row">Sub theme <i class="fas fa-angle-down fa-xs"></i></div>
-                <div class="col-4 header-row header-row-lga-potential-partnerships">LGA <i class="fas fa-angle-down fa-xs"></i></div>
+                <div class="col-2 header-row">Thematic Pillar <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
+                <div class="col-3 header-row">Sub theme <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
+                <div class="col-4 header-row header-row-lga-potential-partnerships">LGA <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
                 <div class="col-5 header-row organizations-header-row">Organizations with Potential Partnership <i class="fas fa-angle-down fa-xs fa-organizations-icon"></i></div>
             </header>
             <!--Rows will be loaded dynamically here-->
             <div id="partnership-report-data"></div>
 
             <!--Start Footer-->
-            <div class="table__footer">
+            <div class="table__footer_report">
                 <tr>
                     <td colspan="7">
                         <button id="partnerships-export" class="banner__button animated flashing slow delay-2s">
@@ -30,8 +30,8 @@
                             <ul id='partnership-entries-per-page' class='dropdown-content'>
                                 <!-- Dynamic display goes here -->
                             </ul>
-                            <span>Entries per page</span>
-                            <span>Page <span id="potential-current-page">1</span> of
+                            <span class="footer-page-entries">Entries per page</span>
+                            <span class="page-of-text">Page <span id="potential-current-page">1</span> of
                                 <span id="potential-total-page">1</span></span>
                             <button id="potential-previous-page" class="go-back">&#60;</button>
                             <button id="potential-next-page" class="go-forward">&#62;</button>

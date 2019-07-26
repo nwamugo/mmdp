@@ -99,9 +99,9 @@ $(document).ready(async function() {
         let options = '';
         while (n < 51) {
           if (n === 10) {
-            options += `<div class="selected">${n}</div>\n`;
+            options += `<div class="selected">${n} </div>\n`;
           } else {
-            options += `<div class="selected">${n}</div>\n`;
+            options += `<div class="selected">${n} </div>\n`;
           }
           n += 5;
         }

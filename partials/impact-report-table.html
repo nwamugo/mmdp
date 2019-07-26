@@ -2,17 +2,17 @@
     <!-- Impact factor table -->
     <section id="impact-factor-report-table" class="table">
         <section class="impact-factor-table-web">
-            <header class="table-row header impact-header">
+            <header class="table-row report-table-header impact-header">
                 <label class="report-col-1">
                     <input type="checkbox" name="check" class="check" data-org='check-all' id='check-all' />
                 </label>
                 <span class="impact-row-split">
-                    <div class="impact-table-header-col ">Organization <i class="fas fa-angle-down impact-factor-fa-icon"></i></div>
-                <div class="impact-table-header-col ">Focus Area <i class="fas fa-angle-down impact-factor-fa-icon"></i></div>
-                <div class="impact-table-header-col ">LGA <i class="fas fa-angle-down impact-factor-fa-icon"></i></div>
-                <div class="impact-table-header-col ">Sub theme <i class="fas fa-angle-down impact-factor-fa-icon"></i></div>
-                <div class="impact-table-header-col ">Thematic Pillar <i class="fas fa-angle-down impact-factor-fa-icon"></i></div>
-                <div class="impact-table-header-col ">Target % Completion <i class="fas fa-angle-down impact-factor-fa-icon"></i></div>
+                    <div class="impact-table-header-col ">Organization <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
+                <div class="impact-table-header-col ">Focus Area <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
+                <div class="impact-table-header-col ">LGA <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
+                <div class="impact-table-header-col ">Sub theme <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
+                <div class="impact-table-header-col ">Thematic Pillar <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
+                <div class="impact-table-header-col ">Target % Completion <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
                 </span>
 
             </header>
@@ -20,7 +20,7 @@
             <div id="impact-factor-data"></div>
 
             <!--Start Footer-->
-            <div class="table__footer">
+            <div class="table__footer_report">
                 <tr>
                     <td colspan="7">
                         <button id="impact-factor-export" class="banner__button animated flashing slow delay-2s">
@@ -34,8 +34,8 @@
                             <ul id='impact-factor-entries-per-page' class='dropdown-content'>
                                 <!-- Dynamic display goes here -->
                             </ul>
-                            <span>Entries per page</span>
-                            <span>Page <span id="impact-factor-current-page">1</span> of
+                            <span class="footer-page-entries">Entries per page</span>
+                            <span class="page-of-text">Page <span id="impact-factor-current-page">1</span> of
                                 <span id="impact-factor-total-page">1</span></span>
                             <button id="impact-factor-previous-page" class="go-back">&#60;</button>
                             <button id="impact-factor-next-page" class="go-forward">&#62;</button>

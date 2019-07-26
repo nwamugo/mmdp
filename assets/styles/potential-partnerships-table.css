@@ -274,6 +274,9 @@
 .fa-organizations-icon {
     margin-top: 0.38rem;
     margin-left: 0.3rem;
+    font-size: 1.15em;
+    line-height: .75em;
+    vertical-align: -.0667em;
 }
 
 @media only screen and (max-width: 1024px) {
