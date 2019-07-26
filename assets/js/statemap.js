@@ -2,6 +2,7 @@
 function getPoint(x, y) {
   const svg = document.querySelector('#svg-container').querySelector('svg');
   let p = svg.createSVGPoint();
+  
   p.x = x;
   p.y = y;
   const ctm = svg.getScreenCTM().inverse();
@@ -11,7 +12,7 @@ function getPoint(x, y) {
 
 // a function to get a random integer from an interval
 function randomIntFromInterval(mn, mx) {
-  return ~~(Math.random() * (mx - mn + 1) + mn);
+  return ~~(Math.random() * (mx - mn) + mx);
 }
 
 function getCoordinates(lgaId, count) {
@@ -20,38 +21,29 @@ function getCoordinates(lgaId, count) {
   let pillarIconCount = count;
 
   // path client rect
-  let cr = lgaPath.getBoundingClientRect();
+  let cr = lgaPath.getBoundingClientRect();  
 
   let n = 0; //a counter
 
-  for (let i = 0; i < 600; i++) {
+  for (let i = 0; i < 4; i++) {    
     // get a random point on the svg canvas
-    let x = randomIntFromInterval(cr.x, cr.x + cr.width);
-    let y = randomIntFromInterval(cr.y, cr.y + cr.height);
-    //elementFromPoint returns the topmost Element at the specified coordinates (relative to the viewport).
-    let elmt = document.elementFromPoint(x, y);
-    // if the point is in path
-
-    if (
-      elmt &&
-      elmt.className.baseVal === 'path' &&
-      elmt.id === lgaId.replace(/ +/g, '')
-    ) {
+    let x = randomIntFromInterval(cr.x, cr.x + cr.width * 0.3);
+    let y = randomIntFromInterval(cr.y, cr.y + cr.height * 0.3);    
+    
       //get the coordinates of the point on the svg
       let svgPoint = getPoint(x, y);
+      
       //draw a circle with the center on the svg point
       const lga = lgaId.replace(/ +/g, '');
       points.push({ x: svgPoint.x, y: svgPoint.y, lga });
 
       //increase the counter
       n++;
-    }
     // if you have already 4 points break the loop
     if (n === pillarIconCount) {
       break;
     }
   }
-
   return points;
 }
 
