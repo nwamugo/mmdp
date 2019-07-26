@@ -30,7 +30,6 @@ function getCoordinates(lgaId, count) {
     let x = randomIntFromInterval(cr.x, cr.x + cr.width * 0.3);
     let y = randomIntFromInterval(cr.y, cr.y + cr.height * 0.3);    
     
-    {
       //get the coordinates of the point on the svg
       let svgPoint = getPoint(x, y);
       
@@ -40,7 +39,6 @@ function getCoordinates(lgaId, count) {
 
       //increase the counter
       n++;
-    }
     // if you have already 4 points break the loop
     if (n === pillarIconCount) {
       break;
