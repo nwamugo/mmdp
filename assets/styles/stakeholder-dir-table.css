@@ -479,7 +479,8 @@ table.stakeholder__details__table .row__value {
 .partnership_filters,
 .subtheme_filters,
 .thematic_filters,
-.organisation_filters {
+.organisation_filters,
+.partnerships_table_filters{
   width: 100%;
   border-radius: 0px;
   background-color: #296d81;
@@ -493,12 +494,17 @@ table.stakeholder__details__table .row__value {
 .partnership_filters p,
 .subtheme_filters p,
 .thematic_filters p,
-.organisation_filters p {
+.organisation_filters p,
+.partnerships_table_filters p{
   font-family: Muli;
   font-style: normal;
   color: white;
   font-size: 16px;
   margin-left: 30px;
+}
+
+.partnerships_table_filters p{
+  padding-top: 10px;
 }
 .location_popup__header button {
   float: right;
@@ -509,7 +515,8 @@ table.stakeholder__details__table .row__value {
 .partnership_filters button.apply_filter__button,
 .subtheme_filters button.apply_filter__button,
 .thematic_filters button.apply_filter__button,
-.organisation_filters button.apply_filter__button {
+.organisation_filters button.apply_filter__button,
+.partnerships_table_filters button.apply_filter__button{
   color: white;
   background: #3faaca;
   margin-top: 5px;
@@ -527,13 +534,18 @@ table.stakeholder__details__table .row__value {
   margin-right: 10px;
   cursor: pointer;
 }
+
+.partnerships_table_filters button.apply_filter__button {
+  margin-top: -0.5%;
+}
 .location_filters button.clear_filter__button,
 .beneficiary_filters button.clear_filter__button,
 .amount_filters button.clear_filter__button,
 .partnership_filters button.clear_filter__button,
 .subtheme_filters button.clear_filter__button,
 .thematic_filters button.clear_filter__button,
-.organisation_filters button.clear_filter__button {
+.organisation_filters button.clear_filter__button,
+.partnerships_table_filters button.clear_filter__button{
   color: #3faaca;
   cursor: pointer;
   background: white;
@@ -550,6 +562,10 @@ table.stakeholder__details__table .row__value {
   border: #3faaca;
   float: right;
   margin-right: 35px;
+}
+
+.partnerships_table_filters button.clear_filter__button {
+  margin-top: -0.5%;
 }
 
 .location_popup__content input {
@@ -580,10 +596,15 @@ table.stakeholder__details__table .row__value {
 .amount_filter_data,
 .thematic_filter_data,
 .partnership_filter_data,
-.organisation_filter_data {
+.organisation_filter_data,
+.partnerships_table_filter_data{
   background-color: white;
   margin-top: -7.7%;
   height: 40%;
+}
+
+.partnerships_table_filter_data{
+  margin-top: 2.5%;
 }
 
 .beneficiary_filter_data {
@@ -700,7 +721,7 @@ table.stakeholder__details__table .row__value {
   box-shadow: 0px 0px 23px -2px #707070;
 }
 
-.organisation_subnav {
+.organisation_subnav, .partner_table_filter_subnav {
   display: none;
   position: absolute;
   width: 62.5%;

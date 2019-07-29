@@ -19,6 +19,15 @@ class Paginator {
     const data = this.tempData.length ? this.tempData : this.data;
     return data;
   }
+
+  updateTableData( updatedTableData ) {
+    this.data = updatedTableData;
+    this.tempData = [];
+    this.empData = false;
+    this.currentPage = 1;
+    this.totalPage = this.getTotalPage();
+  }
+
   setTempData(data = []) {
     this.tempData = data;
   }

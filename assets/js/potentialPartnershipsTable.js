@@ -1,4 +1,7 @@
-function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
+function createPotentialPartnershipsTable(
+    tableData,
+    stakeholderServicesArray,
+) {
   const keys = [
     'thematicPillar',
     'focusArea',
@@ -12,7 +15,7 @@ function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
 
   $('#potential-partnerships-table').on(
     'click',
-    'input[type="checkbox"]',
+    'input[type="checkbox"].check, input[type="checkbox"].check-all',
     function() {
       if (
         $(this).is(':checked') &&
@@ -56,10 +59,42 @@ function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
 
   const paginator = new Paginator(tableData, keys, table, selectedItems, entriesPerPage);
   paginator.potentialPartnershipsTable = true;
-  potentialPartnershipsTableData = paginator.initialPage();
+
+  const potentialPartnershipsTableData = paginator.initialPage();
 
   $('#partnership-report-data').html(potentialPartnershipsTableData);
   $('#partnership-table-mobile').html(potentialPartnershipsTableData);
+
+
+  // NOTE: Please note the order of the filterTableColumnKeys array
+  //    should match the order for your table columns from left to right
+  //    the filterDropdownOptionsParentSelectors should then follow the same order array
+
+  const filterTableColumnKeys = [
+    'thematicPillar',
+    'subTheme',
+    'lga',
+    'organizationName',
+  ];
+
+  const filterDropdownOptionsParentSelectors = [
+      '#thematicPillarFilterData',
+      '#subThemeFilterData',
+      '#lgaFilterData',
+      '#organizationNameFilterData',
+  ];
+
+  let columnKeysMap = new Map();
+  filterTableColumnKeys.map(
+      (columnKey)=>{
+        let currentColumnEntriesSet = new Set();
+        for (let tableRowIndex = 0; tableRowIndex < tableData.length; tableRowIndex++) {
+          currentColumnEntriesSet.add(tableData[tableRowIndex][columnKey]);
+        }
+        columnKeysMap.set(columnKey, currentColumnEntriesSet);
+      }
+  );
+
   let n = 5;
   let options = '';
   while (n < 51) {
@@ -90,7 +125,41 @@ function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
   );
   bindPotentialPartnershipModalJQuery(potentialPartnershipsModalData);
   window.potentialPartnershipsModalData = potentialPartnershipsModalData;
+
+  const noFilterResultsHtmlMessage = `
+    <main id="table" class="table-row body">
+      <p class="partnership-row">
+      No Results found for the selected column filters.
+      </p>
+    </main>`;
+  window.partnershipsTableHeaderFilter = new TableFilterHeader(
+    table,
+    'partnership-dropdown-icon',
+    tableData,
+    filterTableColumnKeys,
+    filterDropdownOptionsParentSelectors,
+    {
+      filterIconSelector: '.partnership-filter-icon',
+      filterCheckboxItemSelector: 'input[type="checkbox"].partnership-filter-checkbox',
+      filterCheckboxItemClass: 'partnership-filter-checkbox',
+      applyFiltersButtonSelector: '.partnership-table-apply-filter',
+      clearFiltersButtonSelector: '.partnership-table-clear-filter',
+      filterIconSiblingSelector: '.table-filter-container',
+      filterDropdownSubnavSelector:'.partner_table_filter_subnav',
+    },
+    columnKeysMap,
+    {
+      'tablePaginator': paginator,
+      'tableRootElementSelector': '#partnership-report-data' ,
+    },
+    noFilterResultsHtmlMessage,
+    {
+      'bindModalEventListener': bindPotentialPartnershipModalJQuery,
+      'currentTableModalData': potentialPartnershipsModalData,
+    }
+  );
 }
+
 $(document).ready(async function() {
   const dataForTable = await getPartnershipData();
   const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
@@ -123,6 +192,7 @@ $(document).ready(async function() {
         return item;
       });
       createPotentialPartnershipsTable(tableData, stakeholderServicesArray);
+
     }
   );
 });
