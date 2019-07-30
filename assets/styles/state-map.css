@@ -171,7 +171,7 @@
   margin-left: 183px;
 }
 
-@-moz-document url-prefix() { 
+@-moz-document url-prefix() {
   #report-map-pillars {
     margin-left: 146px;
   }
@@ -232,7 +232,12 @@
   left: 78.14rem;
   width: 14.625rem;
 }
-
+.modal-popup-section {
+  position: absolute;
+  top: 2.375rem;
+  left: 78.14rem;
+  width: 14.625rem;
+}
 /* hamburger icon */
 .map-hamburger {
   position: absolute;
@@ -241,9 +246,17 @@
   width: 2.625rem;
   cursor: pointer;
 }
-
+.modal-hamburger {
+  position: relative;
+  top: -32px;
+  right: 0;
+  width: 2.625rem;
+  cursor: pointer;
+}
 .map-hamburger:before,
-.map-hamburger:after {
+.map-hamburger:after,
+.modal-hamburger:before,
+.modal-hamburger:after {
   background-color: #bababa;
   border-radius: 0.125rem;
   content: '';
@@ -251,53 +264,66 @@
   height: 0.375rem;
 }
 
-.map-hamburger:before {
+.map-hamburger:before,
+.modal-hamburger:before {
   box-shadow: 0 10px 0 #bababa;
   margin-bottom: 0.875rem;
 }
 
-.map-hamburger:hover:before {
+.map-hamburger:hover:before,
+.modal-hamburger:hover:before {
   background-color: #ccc;
   box-shadow: 0 10px 0 #ccc;
 }
 
-.map-hamburger:hover:after {
+.map-hamburger:hover:after,
+.modal-hamburger:hover:after {
   background-color: #ccc;
 }
 
 /* The actual popup */
-.popup-menu {
+.popup-menu,
+.modal-popup-menu {
   width: 192px;
-  height: 128px;
   border-radius: 3px;
   border: solid 1px #979797;
   background-color: #fff;
   display: none;
   z-index: 10;
 }
+.popup-menu {
+  height: 128px;
+}
 
+.modal-popup-menu {
+  height: 110px;
+}
 /* Popup arrow */
-.popup-menu::after, .popup-menu::before {
+.popup-menu::after,
+.popup-menu::before,
+.modal-popup-menu::after,
+.modal-popup-menu::before {
   left: 100%;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
+  top: 50%;
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
 }
 
-
-.popup-menu::after {
-	border-left-color: #fff;
-	border-width: 11px;
-	margin-top: -30px;
+.popup-menu::after,
+.modal-popup-menu::after {
+  border-left-color: #fff;
+  border-width: 11px;
+  margin-top: -30px;
 }
 
-.popup-menu::before {
-	border-left-color: #979797;
-	border-width: 12px;
+.popup-menu::before,
+.modal-popup-menu::before {
+  border-left-color: #979797;
+  border-width: 12px;
   margin-top: -30.5px;
 }
 
@@ -310,8 +336,16 @@
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
 }
-
-.popup-upper {
+.modal-show {
+  position: absolute;
+  top: -3.4rem;
+  right: 15.3rem;
+  display: block;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+.popup-upper,
+.modal-popup-upper {
   height: 27px;
   opacity: 0.6;
   border-radius: 3px;
@@ -359,13 +393,21 @@
 
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* svg confirmation modal */
@@ -407,6 +449,6 @@
 .show-modal {
   opacity: 1;
   visibility: visible;
-  transform: scale(1.0);
+  transform: scale(1);
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }

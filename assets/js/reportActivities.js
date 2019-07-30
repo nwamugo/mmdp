@@ -1,9 +1,9 @@
 /* eslint-disable no-inner-declarations */
 /* eslint-disable no-undef */
-const queryNameFromUrl = window.location.search.substring(1).split("=")[1];
+const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
 const queryParam = queryNameFromUrl
   ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
-  : "Nigeria";
+  : 'Nigeria';
 
 async function fetchStakeholderInformation() {
   const stakeholderData = await fetch(
@@ -27,7 +27,7 @@ async function fetchStakeholderInformation() {
 
       let uniqueLgas = [...new Set(lgas)];
 
-      impactFactorRow.lga = uniqueLgas.join(", ");
+      impactFactorRow.lga = uniqueLgas.join(', ');
       impactFactorRow.subtheme =
         beneficiary.focusArea.subThemeName.subThemeName;
       impactFactorRow.pillar =
@@ -38,9 +38,9 @@ async function fetchStakeholderInformation() {
 
       if (focusAreaTarget > totalBeneficiaries) {
         impactFactorRow.targetCompletion =
-          (totalBeneficiaries / focusAreaTarget) * 100 + "%";
+          (totalBeneficiaries / focusAreaTarget) * 100 + '%';
       } else {
-        impactFactorRow.targetCompletion = 100 + "%";
+        impactFactorRow.targetCompletion = 100 + '%';
       }
 
       impactFactorData.push(impactFactorRow);
@@ -56,8 +56,8 @@ fetchStakeholderInformation();
 
 function getPoint(x, y) {
   const svg = document
-    .querySelector("#report-map-pillars")
-    .querySelector("svg");
+    .querySelector('#report-map-pillars')
+    .querySelector('svg');
   let pt = svg.createSVGPoint();
   pt.x = x;
   pt.y = y;
@@ -112,120 +112,120 @@ function getPotentialPartnershipsCountCoordinates(lgaId) {
 }
 
 function appendDefs(id, pillarType) {
-  const svgContainer = d3.select("#report-map-pillars").select("svg");
+  const svgContainer = d3.select('#report-map-pillars').select('svg');
   // append pillarMarker to the SVG container
   svgContainer
-    .append("defs")
-    .append("symbol")
-    .attr("id", "def" + id)
-    .attr("viewBox", "0 0 9 9")
-    .append("g")
-    .attr("fill", "none");
+    .append('defs')
+    .append('symbol')
+    .attr('id', 'def' + id)
+    .attr('viewBox', '0 0 9 9')
+    .append('g')
+    .attr('fill', 'none');
 
-  const parent = document.getElementById("def" + id);
+  const parent = document.getElementById('def' + id);
   const group = d3.select(parent);
 
   if (pillarType.length) {
-    if (pillarType.includes("Pillar 4")) {
+    if (pillarType.includes('Pillar 4')) {
       group
-        .append("rect")
-        .attr("width", 2)
-        .attr("height", 1)
-        .attr("rx", 0.2)
-        .attr("ry", 0.2)
-        .attr("fill", "#ed7d31");
+        .append('rect')
+        .attr('width', 2)
+        .attr('height', 1)
+        .attr('rx', 0.2)
+        .attr('ry', 0.2)
+        .attr('fill', '#ed7d31');
     }
-    if (pillarType.includes("Pillar 3")) {
+    if (pillarType.includes('Pillar 3')) {
       group
-        .append("rect")
-        .attr("width", 2)
-        .attr("height", 1)
-        .attr("x", 0)
-        .attr("y", 1)
-        .attr("rx", 0.2)
-        .attr("ry", 0.2)
-        .attr("fill", "#ffc000");
+        .append('rect')
+        .attr('width', 2)
+        .attr('height', 1)
+        .attr('x', 0)
+        .attr('y', 1)
+        .attr('rx', 0.2)
+        .attr('ry', 0.2)
+        .attr('fill', '#ffc000');
     }
-    if (pillarType.includes("Pillar 2")) {
+    if (pillarType.includes('Pillar 2')) {
       group
-        .append("rect")
-        .attr("width", 2)
-        .attr("height", 1)
-        .attr("fill", "#4472c4")
-        .attr("x", 0)
-        .attr("y", 2)
-        .attr("rx", 0.2)
-        .attr("ry", 0.2);
+        .append('rect')
+        .attr('width', 2)
+        .attr('height', 1)
+        .attr('fill', '#4472c4')
+        .attr('x', 0)
+        .attr('y', 2)
+        .attr('rx', 0.2)
+        .attr('ry', 0.2);
     }
-    if (pillarType.includes("Pillar 1")) {
+    if (pillarType.includes('Pillar 1')) {
       group
-        .append("rect")
-        .attr("width", 2)
-        .attr("height", 1)
-        .attr("rx", 0.2)
-        .attr("ry", 0.2)
-        .attr("x", 0)
-        .attr("y", 3)
-        .attr("fill", "#00b050");
+        .append('rect')
+        .attr('width', 2)
+        .attr('height', 1)
+        .attr('rx', 0.2)
+        .attr('ry', 0.2)
+        .attr('x', 0)
+        .attr('y', 3)
+        .attr('fill', '#00b050');
     }
   }
 }
 
 async function appendPotentialPartnershipsDefs(id, number, pillarType) {
-  const svgContainer = d3.select("#report-map-pillars").select("svg");
+  const svgContainer = d3.select('#report-map-pillars').select('svg');
   const lgaPath = document.getElementById(id);
 
   // append pillarMarker to the SVG container
   const defsContainer = svgContainer
-    .append("defs")
-    .append("symbol")
-    .attr("id", "defPotentialPartnerships" + id)
-    .attr("fill", "none")
-    .attr("fill-rule", "evenodd")
-    .attr("viewBox", "-10 -34 50 50");
+    .append('defs')
+    .append('symbol')
+    .attr('id', 'defPotentialPartnerships' + id)
+    .attr('fill', 'none')
+    .attr('fill-rule', 'evenodd')
+    .attr('viewBox', '-10 -34 50 50');
 
-  const parent = document.getElementById("defPotentialPartnerships" + id);
+  const parent = document.getElementById('defPotentialPartnerships' + id);
   const group = d3.select(parent);
 
   group
-    .append("image")
-    .attr("x", -2)
-    .attr("y", -12)
-    .attr("width", 36)
-    .attr("height", 36)
-    .style("cursor", "pointer")
+    .append('image')
+    .attr('x', -2)
+    .attr('y', -12)
+    .attr('width', 36)
+    .attr('height', 36)
+    .style('cursor', 'pointer')
     .attr(
-      "xlink:href",
-      "https://mmdp-img-assets.s3.amazonaws.com/assets/icons/hand-icon%402x.svg"
+      'xlink:href',
+      'https://mmdp-img-assets.s3.amazonaws.com/assets/icons/hand-icon%402x.svg'
     );
 
   group
-    .append("circle")
-    .attr("r", 7.914)
-    .attr("cy", -6.69)
-    .attr("cx", 15.8)
-    .style("cursor", "pointer")
-    .attr("fill", "#000");
+    .append('circle')
+    .attr('r', 7.914)
+    .attr('cy', -6.69)
+    .attr('cx', 15.8)
+    .style('cursor', 'pointer')
+    .attr('fill', '#000');
 
   group
-    .append("text")
-    .attr("fill", "#FFF")
-    .attr("font-size", 12)
-    .attr("letter-spacing", -0.148)
-    .attr("font-weight", "bold")
-    .append("tspan")
-    .attr("x", 12)
-    .attr("y", -4)
-    .attr("id", "tspan")
-    .style("cursor", "pointer")
+    .append('text')
+    .attr('fill', '#FFF')
+    .attr('font-size', 12)
+    .attr('letter-spacing', -0.148)
+    .attr('font-weight', 'bold')
+    .append('tspan')
+    .attr('x', 12)
+    .attr('y', -4)
+    .attr('id', 'tspan')
+    .style('cursor', 'pointer')
     .html(number);
 
-  group.on("click", function(e) {
-    $(document).on("click", function(e) {
+  group.on('click', function(e) {
+    $(document).on('click', function(e) {
       const mouseX = e.pageX;
       const mouseY = e.pageY;
-      if (e.target.nodeName === "use") {
-        $("#display-map")
+      if (e.target.nodeName === 'use') {
+        $('#display-map')
           .html(
             `${pillarType}
 <br />
@@ -235,15 +235,15 @@ ${number}
 <br />
 <a href="#table" id='${pillarType}' class="partnershipLink">View potential partnership / collaboration</a>`
           )
-          .addClass("display-map")
+          .addClass('display-map')
           .css({
-            display: "block",
+            display: 'block',
             top: mouseY - 180,
             left: mouseX - 160
           });
         function getFilteredTable() {
-          $(".partnershipLink").on("click", async function(e) {
-            if ($("#partnership-report-table").is(":visible")) {
+          $('.partnershipLink').on('click', async function(e) {
+            if ($('#partnership-report-table').is(':visible')) {
               const dataForTable = await getPartnershipData();
               const data = window.data;
 
@@ -262,7 +262,7 @@ ${number}
               const newTableData = filter(lgaName);
               window.partnershipsCsvTableData = newTableData;
               const tableData = newTableData.map(item => {
-                item["ppRowId"] = getPotentialPartnershipRowId(
+                item['ppRowId'] = getPotentialPartnershipRowId(
                   item.lga,
                   item.subThemeId,
                   item.focusAreaId,
@@ -280,41 +280,41 @@ ${number}
         }
         getFilteredTable();
       } else {
-        $(".display-map")
-          .html("")
-          .css({ display: "none" });
+        $('.display-map')
+          .html('')
+          .css({ display: 'none' });
       }
     });
   });
 }
 
 function addMarker(x, y, pillarId) {
-  const svgContainer = d3.select("#report-map-pillars").select("svg");
+  const svgContainer = d3.select('#report-map-pillars').select('svg');
   svgContainer
-    .append("use")
-    .attr("xlink:href", "#def" + pillarId)
-    .attr("id", "#use" + pillarId)
-    .attr("width", 0.2)
-    .attr("height", 0.2)
-    .attr("x", x + 0.02)
-    .attr("y", y - 0.1);
+    .append('use')
+    .attr('xlink:href', '#def' + pillarId)
+    .attr('id', '#use' + pillarId)
+    .attr('width', 0.2)
+    .attr('height', 0.2)
+    .attr('x', x + 0.02)
+    .attr('y', y - 0.1);
 }
 
 function addPotentialPartnershipsMarker(x, y, pillarId) {
-  const svgContainer = d3.select("#report-map-pillars").select("svg");
+  const svgContainer = d3.select('#report-map-pillars').select('svg');
   svgContainer
-    .append("use") // add
-    .attr("xlink:href", "#defPotentialPartnerships" + pillarId)
-    .attr("id", "use" + pillarId)
-    .attr("width", 0.1)
-    .attr("height", 0.1)
-    .attr("x", x - 0.02742495015)
-    .attr("y", y - 0.1);
+    .append('use') // add
+    .attr('xlink:href', '#defPotentialPartnerships' + pillarId)
+    .attr('id', 'use' + pillarId)
+    .attr('width', 0.1)
+    .attr('height', 0.1)
+    .attr('x', x - 0.02742495015)
+    .attr('y', y - 0.1);
 }
 
 function filteredLga(target, array = []) {
   return array.find(item => {
-    if (item.lgaName === "Igueben") return "Iguegben" === target;
+    if (item.lgaName === 'Igueben') return 'Iguegben' === target;
     return item.lgaName === target;
   });
 }
@@ -327,22 +327,22 @@ function getNumberOfServices(lgaServices, lgaName) {
   }
 }
 
-$(".popup").click(function() {
-  let popup = document.getElementById("map-hamburger-popup");
-  popup.classList.toggle("show");
+$('.popup').click(function() {
+  let popup = document.getElementById('map-hamburger-popup');
+  popup.classList.toggle('show');
 });
 
-$("body").on("click", function(event) {
-  if (event.target.className !== "map-hamburger popup") {
-    if (event.target.className !== "popup-upper") {
-      $(".popup-menu").removeClass("show");
+$('body').on('click', function(event) {
+  if (event.target.className !== 'map-hamburger popup') {
+    if (event.target.className !== 'popup-upper') {
+      $('.popup-menu').removeClass('show');
     }
   }
 });
 
 // download function of file
 function download(filename, url, filename2, url2) {
-  const elem = window.document.createElement("a");
+  const elem = window.document.createElement('a');
   elem.href = url;
   elem.download = filename;
   document.body.appendChild(elem);
@@ -356,22 +356,22 @@ function download(filename, url, filename2, url2) {
 }
 
 function toggleModal() {
-  const modal = $(".svg-download-modal")[0];
-  modal.classList.toggle("show-modal");
+  const modal = $('.svg-download-modal')[0];
+  modal.classList.toggle('show-modal');
 }
 
-$(".download-cancel").on("click", function() {
+$('.download-cancel').on('click', function() {
   return toggleModal();
 });
 
-$(window).on("click", function(event) {
-  if (event.target === $(".svg-download-modal")[0]) {
+$(window).on('click', function(event) {
+  if (event.target === $('.svg-download-modal')[0]) {
     return toggleModal();
   }
 });
 
 function downloadModal(fileName, mapGeneratedUrl, stateName, elemGeneratedUrl) {
-  $(".download-begin").on("click", function() {
+  $('.download-begin').on('click', function() {
     download(
       fileName,
       mapGeneratedUrl,
@@ -384,15 +384,15 @@ function downloadModal(fileName, mapGeneratedUrl, stateName, elemGeneratedUrl) {
 
 // create desirable file format
 function convert(fileName, type) {
-  const svgContainer = d3.select("#report-map-pillars").select("svg");
-  const svgNode = svgContainer["_groups"][0][0];
+  const svgContainer = d3.select('#report-map-pillars').select('svg');
+  const svgNode = svgContainer['_groups'][0][0];
   const mapData = new XMLSerializer().serializeToString(svgNode);
 
-  const legendNode = $("#map-legends")[0];
+  const legendNode = $('#map-legends')[0];
 
-  const mapCanvas = document.createElement("canvas");
-  const legendCanvas = document.createElement("canvas");
-  const jointCanvas = document.createElement("canvas");
+  const mapCanvas = document.createElement('canvas');
+  const legendCanvas = document.createElement('canvas');
+  const jointCanvas = document.createElement('canvas');
 
   const widthDimension4Map = 704;
   const heightDimension4Map = 600;
@@ -408,12 +408,12 @@ function convert(fileName, type) {
     onrendered: function(legendCanvas) {
       canvg(mapCanvas, mapData, {
         renderCallback: function() {
-          const mapDataUrl = mapCanvas.toDataURL("image/png");
-          const legendDataUrl = legendCanvas.toDataURL("image/png");
+          const mapDataUrl = mapCanvas.toDataURL('image/png');
+          const legendDataUrl = legendCanvas.toDataURL('image/png');
 
           const stateName = getTrimmedStateNameFromUrl(type);
-          if (type === "pdf") {
-            const pdf = new jsPDF("l", "px", "a4");
+          if (type === 'pdf') {
+            const pdf = new jsPDF('l', 'px', 'a4');
             pdf.setFontSize(18);
             pdf.text(
               `Gap Analysis and Collaboration Report - ${stateName} State`,
@@ -421,26 +421,26 @@ function convert(fileName, type) {
               20
             );
 
-            pdf.addImage(mapDataUrl, "PNG", 20, 30, 450, 400);
-            pdf.addImage(legendDataUrl, "PNG", 500, 360, 120, 80);
+            pdf.addImage(mapDataUrl, 'PNG', 20, 30, 450, 400);
+            pdf.addImage(legendDataUrl, 'PNG', 500, 360, 120, 80);
 
             pdf.save(fileName);
-          } else if (type === "svg") {
-            const elem = window.document.createElement("svg");
-            elem.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-            elem.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
-            elem.style.position = "fixed";
-            elem.style.top = "50%";
-            elem.style.left = "50%";
-            elem.style.transform = "translate(-5%, -18%)";
+          } else if (type === 'svg') {
+            const elem = window.document.createElement('svg');
+            elem.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            elem.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+            elem.style.position = 'fixed';
+            elem.style.top = '50%';
+            elem.style.left = '50%';
+            elem.style.transform = 'translate(-5%, -18%)';
 
             const svg = document.createElementNS(
-              "http://www.w3.org/2000/svg",
-              "image"
+              'http://www.w3.org/2000/svg',
+              'image'
             );
             svg.setAttributeNS(
-              "http://www.w3.org/1999/xlink",
-              "xlink:href",
+              'http://www.w3.org/1999/xlink',
+              'xlink:href',
               legendDataUrl
             );
 
@@ -448,10 +448,10 @@ function convert(fileName, type) {
             elem.appendChild(svg);
 
             const elemGeneratedUrl =
-              "data:image/svg+xml;charset=utf-8," +
+              'data:image/svg+xml;charset=utf-8,' +
               encodeURIComponent(elem.outerHTML);
             const mapGeneratedUrl =
-              "data:image/svg+xml;charset=utf-8," + encodeURIComponent(mapData);
+              'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(mapData);
             document.body.removeChild(elem);
 
             toggleModal();
@@ -470,7 +470,7 @@ function convert(fileName, type) {
                 return;
               }
 
-              const jointCanvasCtx = jointCanvas.getContext("2d");
+              const jointCanvasCtx = jointCanvas.getContext('2d');
               jointCanvas.width =
                 widthDimension4Legend + widthDimension4Map + 120;
               jointCanvas.height = heightDimension4Legend + heightDimension4Map;
@@ -485,7 +485,7 @@ function convert(fileName, type) {
               jointCanvasCtx.drawImage(legendImage, 790, 50, 220, 180);
 
               let jointCanvasDataUrl;
-              if (type === "jpg") {
+              if (type === 'jpg') {
                 const imageData = jointCanvasCtx.getImageData(
                   0,
                   0,
@@ -495,8 +495,8 @@ function convert(fileName, type) {
                 const compositeOperation =
                   jointCanvasCtx.globalCompositeOperation;
 
-                jointCanvasCtx.globalCompositeOperation = "destination-over";
-                jointCanvasCtx.fillStyle = "#fff";
+                jointCanvasCtx.globalCompositeOperation = 'destination-over';
+                jointCanvasCtx.fillStyle = '#fff';
                 jointCanvasCtx.fillRect(
                   0,
                   0,
@@ -504,7 +504,7 @@ function convert(fileName, type) {
                   jointCanvas.height
                 );
 
-                jointCanvasDataUrl = jointCanvas.toDataURL("image/jpeg");
+                jointCanvasDataUrl = jointCanvas.toDataURL('image/jpeg');
 
                 jointCanvasCtx.clearRect(
                   0,
@@ -515,7 +515,7 @@ function convert(fileName, type) {
                 jointCanvasCtx.putImageData(imageData, 0, 0);
                 jointCanvasCtx.globalCompositeOperation = compositeOperation;
               } else {
-                jointCanvasDataUrl = jointCanvas.toDataURL("image/png");
+                jointCanvasDataUrl = jointCanvas.toDataURL('image/png');
               }
               download(fileName, jointCanvasDataUrl);
             }
@@ -535,21 +535,20 @@ function convert(fileName, type) {
 }
 
 // download svg
-$("#save-as-png, #save-as-jpg, #save-as-pdf, #save-svg").click(function() {
-  const stateName = getTrimmedStateNameFromUrl("btn");
-
+$('#save-as-png, #save-as-jpg, #save-as-pdf, #save-svg').click(function() {
+  const stateName = getTrimmedStateNameFromUrl('btn');
   switch (this.id) {
-    case "save-as-png":
-      convert(`${stateName}-gac-report-map.png`, "png");
+    case 'save-as-png':
+      convert(`${stateName}-gac-report-map.png`, 'png');
       break;
-    case "save-as-jpg":
-      convert(`${stateName}-gac-report-map.jpg`, "jpg");
+    case 'save-as-jpg':
+      convert(`${stateName}-gac-report-map.jpg`, 'jpg');
       break;
-    case "save-as-pdf":
-      convert(`${stateName}-gac-report-map.pdf`, "pdf");
+    case 'save-as-pdf':
+      convert(`${stateName}-gac-report-map.pdf`, 'pdf');
       break;
-    case "save-svg":
-      convert(`${stateName}-gac-report-map.svg`, "svg");
+    case 'save-svg':
+      convert(`${stateName}-gac-report-map.svg`, 'svg');
       break;
     default:
       break;
@@ -557,22 +556,22 @@ $("#save-as-png, #save-as-jpg, #save-as-pdf, #save-svg").click(function() {
 });
 
 function getTrimmedStateNameFromUrl(type) {
-  const stateNameFromUrl = window.location.search.substring(1).split("=")[1];
+  const stateNameFromUrl = window.location.search.substring(1).split('=')[1];
   if (!stateNameFromUrl) return false;
   let stateName =
     stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
 
   switch (type) {
-    case "baseURL":
+    case 'baseURL':
       return stateName;
-    case "pdf":
-    case "png":
-    case "jpg":
-    case "svg":
-      return stateName.replace("%20", " ");
-    case "btn":
+    case 'pdf':
+    case 'png':
+    case 'jpg':
+    case 'svg':
+      return stateName.replace('%20', ' ');
+    case 'btn':
       stateName = stateNameFromUrl.toLowerCase();
-      return (stateName = stateName.replace("%20", "-"));
+      return (stateName = stateName.replace('%20', '-'));
     default:
       break;
   }
@@ -581,14 +580,14 @@ function getTrimmedStateNameFromUrl(type) {
 (function() {
   const baseURL = window.location.host;
   let MMDP_BASE_URL;
-  if (baseURL.includes("127.0.0.1") || baseURL.includes("localhost")) {
-    MMDP_BASE_URL = "http://localhost:3000";
+  if (baseURL.includes('127.0.0.1') || baseURL.includes('localhost')) {
+    MMDP_BASE_URL = 'http://localhost:3000';
   } else {
-    MMDP_BASE_URL = "http://cms-staging.mmdp.ng:3000";
+    MMDP_BASE_URL = 'http://cms-staging.mmdp.ng:3000';
   }
 
   async function loaded() {
-    const stateName = getTrimmedStateNameFromUrl("baseURL");
+    const stateName = getTrimmedStateNameFromUrl('baseURL');
     if (!stateName) {
       window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
     }
@@ -612,56 +611,56 @@ function getTrimmedStateNameFromUrl(type) {
         data,
         potentialPartnershipPerLGA
       );
-      $("#report-map-pillars").load(stateUrl, function(responseTxt, statusTxt) {
-        if (statusTxt === "success") {
+      $('#report-map-pillars').load(stateUrl, function(responseTxt, statusTxt) {
+        if (statusTxt === 'success') {
           const [, xmlPart, svgPart] = responseTxt.match(
             /([\s\S.]*)(<svg[\s\S]*<\/svg>)/
           );
-          $("#report-map-pillars").html(svgPart);
-          $("g#Nigeria_LGA_Boundary")
-            .parents("svg")
-            .addClass("banner__image animated fadeInLeft slow state-map__svg");
+          $('#report-map-pillars').html(svgPart);
+          $('g#Nigeria_LGA_Boundary')
+            .parents('svg')
+            .addClass('banner__image animated fadeInLeft slow state-map__svg');
           const lgsIds = responseTxt.match(/STL\d{6}/gm);
 
           lgsIds.map(lgsId => {
             const svgPath = document.querySelector(`[fme\\:id=${lgsId}]`);
 
-            const lgaName = svgPath.getAttribute("fme:lga_name");
+            const lgaName = svgPath.getAttribute('fme:lga_name');
             const numberOfServicesReport = getNumberOfServices(
               lgaServices,
               lgaName
             );
 
             if (numberOfServicesReport > 80) {
-              svgPath.setAttribute("fill", "#e72525");
+              svgPath.setAttribute('fill', '#e72525');
             } else if (
               numberOfServicesReport > 40 &&
               numberOfServicesReport <= 80
             ) {
-              svgPath.setAttribute("fill", "#e56466");
+              svgPath.setAttribute('fill', '#e56466');
             } else if (
               numberOfServicesReport >= 6 &&
               numberOfServicesReport <= 40
             ) {
-              svgPath.setAttribute("fill", "#e89090");
+              svgPath.setAttribute('fill', '#e89090');
             } else if (numberOfServicesReport <= 5) {
-              svgPath.setAttribute("fill", "#e7d9d9");
+              svgPath.setAttribute('fill', '#e7d9d9');
             } else {
-              svgPath.setAttribute("fill", "#e7d9d9");
+              svgPath.setAttribute('fill', '#e7d9d9');
             }
             svgPath.innerHTML = `<title>${lgaName}</title>`;
           });
 
-          document.querySelectorAll("path").forEach(lgaMap => {
+          document.querySelectorAll('path').forEach(lgaMap => {
             // select lga_name as the lgaId
-            let lgaId = d3.select(lgaMap).attr(":fme:lga_name");
-            lgaId = lgaId.replace(/\s+/g, " ");
+            let lgaId = d3.select(lgaMap).attr(':fme:lga_name');
+            lgaId = lgaId.replace(/\s+/g, ' ');
 
             lgaMap.innerHTML = `<title>${lgaId}</title>`;
             const lgaData = filteredLga(lgaId, thematicPillarCountPerLGA);
             if (lgaId && lgaData) {
-              lgaMap.setAttribute("id", lgaId);
-              lgaMap.setAttribute("class", "path");
+              lgaMap.setAttribute('id', lgaId);
+              lgaMap.setAttribute('class', 'path');
 
               const points = getPillarsCoordinates(lgaId);
               const lgaPotentialPartnershipData = filteredLga(
@@ -725,5 +724,5 @@ function getTrimmedStateNameFromUrl(type) {
     }
   }
 
-  document.addEventListener("DOMContentLoaded", loaded, false);
+  document.addEventListener('DOMContentLoaded', loaded, false);
 })();

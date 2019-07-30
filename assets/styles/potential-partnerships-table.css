@@ -1,324 +1,330 @@
 .table-row:hover {
-    background-color: aliceblue;
+  background-color: aliceblue;
 }
 
 .potential-partnerships-modal {
-    display: none;
-    position: absolute;
-    top: 1304px; /*1204px fits well*/
-    left: 0;
-    width: 100%;
-    height: 100%;
+  display: none;
+  position: absolute;
+  top: 1304px; /*1204px fits well*/
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .potential-partnerships-modal .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    width: 80%;
-    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
+  background-color: #fefefe;
+  margin: auto;
+  width: 80%;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
 }
 
 .potential-partnerships-modal .modal-header {
-    background-color: #296d81;
-    height: 43px;
+  background-color: #296d81;
+  height: 43px;
 }
 
-.modal-body{
-    overflow: auto;
-    height: 532px;
+.modal-body {
+  overflow: auto;
+  height: 532px;
 }
 
-.modal-body-potential-partnerships{
-    overflow: scroll;
-    height: 495px;
+.modal-body-potential-partnerships {
+  overflow: scroll;
+  height: 495px;
 }
 
 .modal-grid-container-partnerships {
-    display: grid;
-    grid-template-columns: 40% auto;
-    min-height: 100%;
+  display: grid;
+  grid-template-columns: 40% auto;
+  min-height: 100%;
 }
 
 .lga-grid-box {
-    background-color: #ffffff;
-    font-size: 30px;
-    margin:3px;
-    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+  font-size: 30px;
+  margin: 3px;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
 }
 
-.potential-partnerships-modal .lga-header{
-    background-color: #3faaca;
-    min-height: 92px;
-    display: grid;
-    grid-template-columns: 37% 63%;
+.potential-partnerships-modal .lga-header {
+  background-color: #3faaca;
+  min-height: 92px;
+  display: grid;
+  grid-template-columns: 37% 63%;
 }
 
-.potential-partnerships-modal .lga-header .lga-name{
-    flex: 2;
-    text-align: left;
-    padding-left: 21px;
+.potential-partnerships-modal .lga-header .lga-name {
+  flex: 2;
+  text-align: left;
+  padding-left: 21px;
 }
 
-.potential-partnerships-modal .lga-header .lga-stats{
-    flex: 3;
-    text-align: left;
-    color: #ffffff;
-    padding-left: 10px;
-    box-shadow: -2px 0 #d4d4d4;
+.potential-partnerships-modal .lga-header .lga-stats {
+  flex: 3;
+  text-align: left;
+  color: #ffffff;
+  padding-left: 10px;
+  box-shadow: -2px 0 #d4d4d4;
 }
 
-.potential-partnerships-modal .lga-header .lga-name p{
-    font-size: 27px;
-    color: #ffffff;
-    margin-top: 2.1rem;
-    font-weight: bold;
-    letter-spacing: 1px;
+.potential-partnerships-modal .lga-header .lga-name p {
+  font-size: 27px;
+  color: #ffffff;
+  margin-top: 2.1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
-.potential-partnerships-modal .lga-header .lga-stats p{
-    color: #ffffff;
-    font-size: 14px;
+.potential-partnerships-modal .lga-header .lga-stats p {
+  color: #ffffff;
+  font-size: 14px;
 }
 
 .potential-partnerships-modal .lga-body {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
-.potential-partnerships-modal .lga-body-top,.potential-partnerships-modal .lga-body-top-partnerships{
-    display: flex;
-    font-size: 14px;
+.potential-partnerships-modal .lga-body-top,
+.potential-partnerships-modal .lga-body-top-partnerships {
+  display: flex;
+  font-size: 14px;
 }
 
-.potential-partnerships-modal .lga-body-top-partnerships{
-    display: block;
-    flex-direction: row;
-    justify-content: space-between;
+.potential-partnerships-modal .lga-body-top-partnerships {
+  display: block;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.pillar-potential-partnerships, .sub-theme-potential-partnerships, .focus-area-potential-partnerships{
-    display: grid;
-    align-items: flex-start;
-    padding-right: 20px;
-    margin: 5px 0;
-    grid-template-columns: 37% 63%;
-    font-size: 16px;
+.pillar-potential-partnerships,
+.sub-theme-potential-partnerships,
+.focus-area-potential-partnerships {
+  display: grid;
+  align-items: flex-start;
+  padding-right: 20px;
+  margin: 5px 0;
+  grid-template-columns: 37% 63%;
+  font-size: 16px;
 }
 
 .pillar-potential-partnerships {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
 .pillar-image-container-potential-partnerships {
-    padding: 10px 20px;
+  padding: 10px 20px;
 }
 
-.pillar-image-potential-partnerships{
-    width: 32px;
-    height: 32px;
+.pillar-image-potential-partnerships {
+  width: 32px;
+  height: 32px;
 }
 
-.potential-partnerships-details-text, .text-container-potential-partnerships{
-    display: flex;
+.text-container-potential-partnerships {
+  display: flex;
 }
 
-.potential-partnerships-details-text{
-    padding-left: 7px;
+.potential-partnerships-details-text {
+  padding-left: 7px;
 }
 
-.organizations-container-potential-partnerships{
-    font-size: 14px;
-    display: grid;
-    grid-template-columns: auto auto;
+.organizations-container-potential-partnerships {
+  font-size: 14px;
+  display: grid;
+  grid-template-columns: auto auto;
 }
 
-.org-potential-partnership{
-    margin: 15px 10px 40px 0;
-    padding: 5px 15px 5px 0;
-    text-align: left;
+.org-potential-partnership {
+  margin: 15px 10px 40px 0;
+  padding: 5px 15px 5px 0;
+  text-align: left;
+}
+.org-potential-partnership:nth-child(8n + 8) {
+  margin-bottom: 260px;
 }
 
-.org-text-container-potential-partnerships{
-    padding: 5px 20px 0 20px;
+.org-text-container-potential-partnerships {
+  padding: 5px 20px 0 20px;
 }
 
-.org-details-list li{
-    background: url("../images/listItemBullet.svg") no-repeat left 8px;
-    padding-left: 1em;
+.org-details-list li {
+  background: url('../images/listItemBullet.svg') no-repeat left 8px;
+  padding-left: 1em;
 }
 
-.potential-partnerships-modal .lga-body-top img{
-    width: 35px;
+.potential-partnerships-modal .lga-body-top img {
+  width: 35px;
 }
 
-.title-text-potential-partnerships{
-    margin: 5px 15px 15px 15px;
-    text-align: center;
-    padding: 5px;
+.title-text-potential-partnerships {
+  margin: 5px 15px 15px 15px;
+  text-align: center;
+  padding: 5px;
 }
 
-.potential-partnerships-modal .lga-body-top .top-1{
-    flex: 1;
-    padding: 11px 11px 11px 21px;
-    display: flex;
+.potential-partnerships-modal .lga-body-top .top-1 {
+  flex: 1;
+  padding: 11px 11px 11px 21px;
+  display: flex;
 }
 
 .potential-partnerships-modal .lga-body-top .top-1 .top-1-image,
 .potential-partnerships-modal .lga-body-top .top-2 .top-2-image,
 .potential-partnerships-modal .lga-body-top .top-3 .top-3-image {
-    flex: 1;
+  flex: 1;
 }
 
 .potential-partnerships-modal .lga-body-top .top-1 .top-1-text,
 .potential-partnerships-modal .lga-body-top .top-2 .top-2-text {
-    flex: 2;
+  flex: 2;
 }
 
 .potential-partnerships-modal .lga-body-top .top-3 .top-3-text {
-    flex: 4;
+  flex: 4;
 }
 
-.potential-partnerships-modal .lga-body-top .top-1 span{
-    font-weight: bold;
+.potential-partnerships-modal .lga-body-top .top-1 span {
+  font-weight: bold;
 }
 
-.potential-partnerships-modal .lga-body-top .top-2{
-    flex: 1;
-    padding: 11px 11px 11px 21px;
-    display: flex;
+.potential-partnerships-modal .lga-body-top .top-2 {
+  flex: 1;
+  padding: 11px 11px 11px 21px;
+  display: flex;
 }
 
-.potential-partnerships-modal .lga-body-top .top-3{
-    flex: 2;
-    padding: 11px 11px 11px 21px;
-    display: flex;
+.potential-partnerships-modal .lga-body-top .top-3 {
+  flex: 2;
+  padding: 11px 11px 11px 21px;
+  display: flex;
 }
 
-.potential-partnerships-modal .lga-body-top .top-3 span{
-    font-weight: bold;
+.potential-partnerships-modal .lga-body-top .top-3 span {
+  font-weight: bold;
 }
 
 .potential-partnerships-modal .lga-body-bottom p {
-    margin-left: 21px;
-    font-size: 17px;
-    font-weight: bold;
-    margin-bottom: 0;
+  margin-left: 21px;
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 0;
 }
 
 .potential-partnerships-modal .lga-body-bottom li {
-    font-size: 14px;
-    list-style-type: disc;
-    margin-left: 42px;
+  font-size: 14px;
+  list-style-type: disc;
+  margin-left: 42px;
 }
 
 .modal-header .modal-header-navigation {
-    display: flex;
-    width: 120px;
-    margin-left: 70rem;
-    padding-top: 3px;
+  display: flex;
+  width: 120px;
+  margin-left: 70rem;
+  padding-top: 3px;
 }
 
-.hamburger{
-    margin-top: 10px 0 5px 0;
-    cursor: pointer;
+.hamburger {
+  margin-top: 10px 0 5px 0;
+  cursor: pointer;
 }
 
-.hamburger-line{
-    width: 35px;
-    height: 5px;
-    background-color: #f5f6fa;
-    margin: 6px 0;
-    flex: 1
+.hamburger-line {
+  width: 35px;
+  height: 5px;
+  background-color: #f5f6fa;
+  margin: 6px 0;
+  flex: 1;
 }
 
 .modal-header img {
-    flex: 1;
-    height: 36px;
-    padding-top: 3px;
-    cursor: pointer;
+  flex: 1;
+  height: 36px;
+  padding-top: 3px;
+  cursor: pointer;
 }
 
 .organization-title-partnerships-modal {
-    width: 227px;
-    height: 32px;
-    font-family: Muli;
-    font-size: 17px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.06;
-    letter-spacing: -0.52px;
-    padding: 5px 15px;
-    margin: auto 5px auto 4px;
-    color: #1a1f37;
+  width: 227px;
+  height: 32px;
+  font-family: Muli;
+  font-size: 17px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.06;
+  letter-spacing: -0.52px;
+  padding: 5px 15px;
+  margin: auto 5px auto 4px;
+  color: #1a1f37;
 }
 
 .partnership-row {
-    min-height: 75px;
+  min-height: 75px;
 }
-.organizations-col{
-    justify-content: flex-start !important;
+.organizations-col {
+  justify-content: flex-start !important;
 }
 
 .organizations-header-row {
-    margin-left: -1.3rem;
-    justify-content: flex-start !important;
-    font-size: 16px;
+  margin-left: -1.3rem;
+  justify-content: flex-start !important;
+  font-size: 16px;
 }
 
-@-moz-document url-prefix() { 
-    .organizations-header-row {
-        font-size: 14px;
-    }
+@-moz-document url-prefix() {
+  .organizations-header-row {
+    font-size: 14px;
   }
+}
 
 .fa-organizations-icon {
-    margin-top: 0.38rem;
-    margin-left: 0.3rem;
-    font-size: 1.15em;
-    line-height: .75em;
-    vertical-align: -.0667em;
+  margin-top: 0.38rem;
+  margin-left: 0.3rem;
+  font-size: 1.15em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
 }
 
 @media only screen and (max-width: 1024px) {
-    .organizations-header-row {
-        margin-left: 0;
-        justify-content: flex-start !important;
-        font-size: 16px;
-    }
+  .organizations-header-row {
+    margin-left: 0;
+    justify-content: flex-start !important;
+    font-size: 16px;
+  }
 
-    .fa-organizations-icon {
-        margin-top: 0.4rem;
-        margin-left: 0;
-    }
+  .fa-organizations-icon {
+    margin-top: 0.4rem;
+    margin-left: 0;
+  }
 }
 
 .hamburger-line-potential-partnerships {
-    width: 35px;
-    height: 5px;
-    background-color: #bababa;
-    margin: 6px 0;
-    flex: 1 1 0;
-    border-radius: 2px;
+  width: 35px;
+  height: 5px;
+  background-color: #bababa;
+  margin: 6px 0;
+  flex: 1 1 0;
+  border-radius: 2px;
 }
 
-.org-details-list{
-    margin: 0;
+.org-details-list {
+  margin: 0;
 }
 
 .header-row-lga-potential-partnerships {
-    margin-left: -0.9rem;
+  margin-left: -0.9rem;
 }
 
-.input-item-checkbox{
-    justify-content: flex-start;
-    width: 23px;
-    margin-left: 25px;
-    margin-right: 20px;
+.input-item-checkbox {
+  justify-content: flex-start;
+  width: 23px;
+  margin-left: 25px;
+  margin-right: 20px;
 }
 
-.input-header-checkbox{
-    justify-content: flex-start;
-    width: 23px;
-    margin-left: -30px;
-    margin-right: 20px;
+.input-header-checkbox {
+  justify-content: flex-start;
+  width: 23px;
+  margin-left: -30px;
+  margin-right: 20px;
 }
