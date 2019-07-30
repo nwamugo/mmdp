@@ -250,10 +250,32 @@
     </main>
 
     <section class="gap-analysis-modal">
+
+      <!-- Gap Analysis Modal Hamburger & Popup-->
+        <div class="gap-analysis-popup-section">
+          <div>
+            <div class="gap-analysis-popup-menu" >
+              <div class="popup-upper">
+                <span class="print-chart">Print Chart</span>
+              </div>
+              <div class="popup-lower">
+                <span id="save-gap-as-png" class="popup-btn">
+                  Download PNG image
+                </span>
+                <span id="save-gap-as-jpg" class="popup-btn">
+                  Download JPEG image
+                </span>
+                <span id="save-gap-as-pdf" class="popup-btn">
+                  Download PDF document
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       <div class="modal-content">
         <div class="modal-header">
           <div class="modal-header-navigation">
-            <div class="hamburger">
+            <div class="hamburger gap_analysis_download">
               <div class="hamburger-line"></div>
               <div class="hamburger-line"></div>
               <div class="hamburger-line"></div>
@@ -383,6 +405,7 @@
     <script type="text/javascript" src="assets/js/partnershipsCsv.js"></script>
     <script type="text/javascript" src="assets/js/impactFactorCsv.js"></script>
     <script tyoe="text/javascript" src="assets/js/filter.js"></script>
+    <script type="text/javascript" src="assets/js/gapAnalysisModalDownload.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.4/rgbcolor.min.js"
       crossorigin="anonymous"
@@ -396,6 +419,6 @@
       integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
   </body>
 </html>
