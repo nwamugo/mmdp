@@ -134,6 +134,11 @@ span {
   padding: 5px;
 }
 
+#gap_message {
+  display: none;
+  margin-left: 6%;
+}
+
 @media screen and (max-width: 1150px) {
   .search__messages {
     margin-left: 22%;

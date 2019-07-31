@@ -52,8 +52,9 @@ function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
     }
   );
   let table = 'potentialPartnerships';
+  let entriesPerPage = 10;
 
-  const paginator = new Paginator(tableData, keys, table, selectedItems);
+  const paginator = new Paginator(tableData, keys, table, selectedItems, entriesPerPage);
   paginator.potentialPartnershipsTable = true;
   potentialPartnershipsTableData = paginator.initialPage();
 
