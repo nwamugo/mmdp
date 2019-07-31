@@ -46,7 +46,10 @@ async function fetchStakeholderInformation() {
       impactFactorData.push(impactFactorRow);
     }
   }
-  createImpactFactorTable(impactFactorData);
+
+  createImpactFactorTable(impactFactorData, 10);
+
+  return impactFactorData;
 }
 
 fetchStakeholderInformation();
@@ -354,7 +357,7 @@ function download(filename, url, filename2, url2) {
 
 function toggleModal() {
   const modal = $(".svg-download-modal")[0];
-  modal.classList.toggle('show-modal');
+  modal.classList.toggle("show-modal");
 }
 
 $(".download-cancel").on("click", function() {
@@ -378,7 +381,6 @@ function downloadModal(fileName, mapGeneratedUrl, stateName, elemGeneratedUrl) {
     return toggleModal();
   });
 }
-
 
 // create desirable file format
 function convert(fileName, type) {
@@ -451,9 +453,14 @@ function convert(fileName, type) {
             const mapGeneratedUrl =
               "data:image/svg+xml;charset=utf-8," + encodeURIComponent(mapData);
             document.body.removeChild(elem);
-            
+
             toggleModal();
-            return downloadModal(fileName, mapGeneratedUrl, stateName, elemGeneratedUrl);
+            return downloadModal(
+              fileName,
+              mapGeneratedUrl,
+              stateName,
+              elemGeneratedUrl
+            );
           } else {
             let imageLoaded = 0;
 
