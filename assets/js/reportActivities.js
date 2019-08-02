@@ -1,16 +1,76 @@
-/* eslint-disable no-inner-declarations */
-/* eslint-disable no-undef */
-const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
-const queryParam = queryNameFromUrl
-  ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
-  : 'Nigeria';
+let variablesUsedByTwoFxn = {
+  svgArguments: []
+};
 
-$('#btn_search_impact').hide();
-$('#btn_search_gap').hide();
-$('#search__activities__gap').hide();
-$('#search__activities__impact').hide();
+const DOMStrings = {
+  bodyElem: "body",
+  popupClass: ".popup",
+  mapHamburgerID: "#map-hamburger-popup",
+  popupFeature: "#popup-feature",
+  cssShow: "show",
+  cssHamburgerDisplay: "hamburger-display",
+  cssShowModal: "show-modal",
+  cssCenter: "center-modal",
+  pngBtnID: "#save-as-png",
+  jpegBtnID: "#save-as-jpg",
+  pdfBtnID: "#save-as-pdf",
+  svgBtnID: "#save-svg",
+  popupMenuClass: ".popup-menu",
+  svgModalMessageID: "#svg-confirmation-message",
+  svgModalClass: ".svg-download-modal",
+  downloadConfirm: ".download-confirm",
+  downloadBeginClass: ".download-begin",
+  downloadCancelClass: ".download-cancel",
+  reportMapPillarsID: "#report-map-pillars",
+  mapLegendsID: "#map-legends"
+};
+const {
+  bodyElem,
+  popupClass,
+  mapHamburgerID,
+  popupFeature,
+  cssShow,
+  cssHamburgerDisplay,
+  cssShowModal,
+  cssCenter,
+  pngBtnID,
+  jpegBtnID,
+  pdfBtnID,
+  svgBtnID,
+  popupMenuClass,
+  svgModalMessageID,
+  svgModalClass,
+  downloadConfirm,
+  downloadBeginClass,
+  downloadCancelClass,
+  reportMapPillarsID,
+  mapLegendsID
+} = DOMStrings;
+
+function getTrimmedStateNameFromUrl(type) {
+  const stateNameFromUrl = window.location.search.substring(1).split("=")[1];
+  if (!stateNameFromUrl) return false;
+  let stateName =
+    stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
+
+  switch (type) {
+    case "baseURL":
+      return stateName;
+    case "pdf":
+    case "png":
+    case "jpg":
+    case "svg":
+      return stateName.replace("%20", " ");
+    case "btn":
+      stateName = stateNameFromUrl.toLowerCase();
+      return (stateName = stateName.replace("%20", "-"));
+    default:
+      break;
+  }
+}
 
 async function fetchStakeholderInformation() {
+  const queryParam = getTrimmedStateNameFromUrl("baseURL") || 'Nigeria';
   const stakeholderData = await fetch(
     `${MMDP_BASE_URL}/api/v1/location?state=${queryParam}&focusAreaName`
   );
@@ -60,9 +120,7 @@ async function fetchStakeholderInformation() {
 fetchStakeholderInformation();
 
 function getPoint(x, y) {
-  const svg = document
-    .querySelector('#report-map-pillars')
-    .querySelector('svg');
+  const svg = document.querySelector(reportMapPillarsID).querySelector("svg");
   let pt = svg.createSVGPoint();
   pt.x = x;
   pt.y = y;
@@ -117,7 +175,7 @@ function getPotentialPartnershipsCountCoordinates(lgaId) {
 }
 
 function appendDefs(id, pillarType) {
-  const svgContainer = d3.select('#report-map-pillars').select('svg');
+  const svgContainer = d3.select(reportMapPillarsID).select("svg");
   // append pillarMarker to the SVG container
   svgContainer
     .append('defs')
@@ -177,7 +235,7 @@ function appendDefs(id, pillarType) {
 }
 
 async function appendPotentialPartnershipsDefs(id, number, pillarType) {
-  const svgContainer = d3.select('#report-map-pillars').select('svg');
+  const svgContainer = d3.select(reportMapPillarsID).select("svg");
   const lgaPath = document.getElementById(id);
 
   // append pillarMarker to the SVG container
@@ -305,7 +363,7 @@ ${number}
 }
 
 function addMarker(x, y, pillarId) {
-  const svgContainer = d3.select('#report-map-pillars').select('svg');
+  const svgContainer = d3.select(reportMapPillarsID).select("svg");
   svgContainer
     .append('use')
     .attr('xlink:href', '#def' + pillarId)
@@ -317,7 +375,7 @@ function addMarker(x, y, pillarId) {
 }
 
 function addPotentialPartnershipsMarker(x, y, pillarId) {
-  const svgContainer = d3.select('#report-map-pillars').select('svg');
+  const svgContainer = d3.select(reportMapPillarsID).select("svg");
   svgContainer
     .append('use') // add
     .attr('xlink:href', '#defPotentialPartnerships' + pillarId)
@@ -343,22 +401,86 @@ function getNumberOfServices(lgaServices, lgaName) {
   }
 }
 
-$('.popup').click(function() {
-  let popup = document.getElementById('map-hamburger-popup');
-  popup.classList.toggle('show');
+// map hamburger icon
+$(popupClass).click(function() {
+  const popup = $(mapHamburgerID)[0];
+  popup.classList.toggle(cssShow);
 });
 
-$('body').on('click', function(event) {
-  if (event.target.className !== 'map-hamburger popup') {
-    if (event.target.className !== 'popup-upper') {
-      $('.popup-menu').removeClass('show');
+function showHamburger() {
+  const popup = $(popupFeature)[0];
+  popup.classList.add(cssHamburgerDisplay);
+}
+
+// map download buttons
+$(`${pngBtnID}, ${jpegBtnID}, ${pdfBtnID}, ${svgBtnID}`).on(
+  "click",
+  function() {
+    const stateName = getTrimmedStateNameFromUrl("btn");
+
+    switch (this.id) {
+      case pngBtnID.slice(1):
+        convert(`${stateName}-gac-report-map.png`, "png");
+        break;
+      case jpegBtnID.slice(1):
+        convert(`${stateName}-gac-report-map.jpg`, "jpg");
+        break;
+      case pdfBtnID.slice(1):
+        convert(`${stateName}-gac-report-map.pdf`, "pdf");
+        break;
+      case svgBtnID.slice(1):
+        convert(`${stateName}-gac-report-map.svg`, "svg");
+        break;
+      default:
+        break;
+    }
+  }
+);
+
+$(bodyElem).on("click", function(event) {
+  if (event.target.className !== "map-hamburger popup") {
+    if (event.target.className !== "popup-upper") {
+      $(popupMenuClass).removeClass(cssShow);
     }
   }
 });
 
+// svg download confirmation modal
+function insertHTML() {
+  const modalBlock = `
+  <p>
+  The requested operation will download two separate files.
+  </p>
+  <p>Kindly allow multiple downloads on your browser.</p>`;
+  $(svgModalMessageID).html(modalBlock);
+}
+
+function toggleModal() {
+  $(downloadConfirm)[0].classList.toggle(cssCenter);
+  $(svgModalClass)[0].classList.toggle(cssShowModal);
+}
+
+$(downloadBeginClass).on("click", function() {
+  const { svgArguments } = variablesUsedByTwoFxn;
+  if (!svgArguments[0] || svgArguments.length > 4)
+    return toastr.error(
+      "No resource selected. <br /> Please refresh page and try again"
+    );
+  download(svgArguments[0], svgArguments[1], svgArguments[2], svgArguments[3]);
+  return toggleModal();
+});
+
+$(window).on("click", function(event) {
+  if (event.target === $(svgModalClass)[0]) {
+    return toggleModal();
+  }
+});
+
+$(downloadCancelClass).on("click", toggleModal);
+
 // download function of file
 function download(filename, url, filename2, url2) {
-  const elem = window.document.createElement('a');
+  const elem = window.document.createElement("a");
   elem.href = url;
   elem.download = filename;
   document.body.appendChild(elem);
@@ -371,225 +493,162 @@ function download(filename, url, filename2, url2) {
   }
 }
 
-function toggleModal() {
-  const modal = $('.svg-download-modal')[0];
-  modal.classList.toggle('show-modal');
-}
-
-$('.download-cancel').on('click', function() {
-  return toggleModal();
-});
-
-$(window).on('click', function(event) {
-  if (event.target === $('.svg-download-modal')[0]) {
-    return toggleModal();
-  }
-});
-
-function downloadModal(fileName, mapGeneratedUrl, stateName, elemGeneratedUrl) {
-  $('.download-begin').on('click', function() {
-    download(
-      fileName,
-      mapGeneratedUrl,
-      `${stateName.toLowerCase()}-report-legend.svg`,
-      elemGeneratedUrl
-    );
-    return toggleModal();
-  });
-}
-
 // create desirable file format
 function convert(fileName, type) {
-  const svgContainer = d3.select('#report-map-pillars').select('svg');
-  const svgNode = svgContainer['_groups'][0][0];
+  const svgContainer = d3.select(reportMapPillarsID).select("svg");
+  const svgNode = svgContainer["_groups"][0][0];
   const mapData = new XMLSerializer().serializeToString(svgNode);
 
-  const legendNode = $('#map-legends')[0];
+  const legendNode = $(mapLegendsID)[0];
 
-  const mapCanvas = document.createElement('canvas');
-  const legendCanvas = document.createElement('canvas');
-  const jointCanvas = document.createElement('canvas');
+  const mapCanvas = document.createElement("canvas");
+  const jointCanvas = document.createElement("canvas");
 
-  const widthDimension4Map = 704;
-  const heightDimension4Map = 600;
+  const widthDimension4Map = (mapCanvas.width = 704);
+  const heightDimension4Map = (mapCanvas.height = 600);
   const widthDimension4Legend = 214;
   const heightDimension4Legend = 172;
 
-  mapCanvas.width = widthDimension4Map;
-  mapCanvas.height = heightDimension4Map;
-  legendCanvas.width = widthDimension4Legend;
-  legendCanvas.height = heightDimension4Legend;
-
-  return html2canvas(legendNode, {
-    onrendered: function(legendCanvas) {
-      canvg(mapCanvas, mapData, {
-        renderCallback: function() {
-          const mapDataUrl = mapCanvas.toDataURL('image/png');
-          const legendDataUrl = legendCanvas.toDataURL('image/png');
-
-          const stateName = getTrimmedStateNameFromUrl(type);
-          if (type === 'pdf') {
-            const pdf = new jsPDF('l', 'px', 'a4');
-            pdf.setFontSize(18);
-            pdf.text(
-              `Gap Analysis and Collaboration Report - ${stateName} State`,
-              20,
-              20
-            );
-
-            pdf.addImage(mapDataUrl, 'PNG', 20, 30, 450, 400);
-            pdf.addImage(legendDataUrl, 'PNG', 500, 360, 120, 80);
-
-            pdf.save(fileName);
-          } else if (type === 'svg') {
-            const elem = window.document.createElement('svg');
-            elem.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-            elem.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
-            elem.style.position = 'fixed';
-            elem.style.top = '50%';
-            elem.style.left = '50%';
-            elem.style.transform = 'translate(-5%, -18%)';
-
-            const svg = document.createElementNS(
-              'http://www.w3.org/2000/svg',
-              'image'
-            );
-            svg.setAttributeNS(
-              'http://www.w3.org/1999/xlink',
-              'xlink:href',
-              legendDataUrl
-            );
-
-            document.body.appendChild(elem);
-            elem.appendChild(svg);
-
-            const elemGeneratedUrl =
-              'data:image/svg+xml;charset=utf-8,' +
-              encodeURIComponent(elem.outerHTML);
-            const mapGeneratedUrl =
-              'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(mapData);
-            document.body.removeChild(elem);
-
-            toggleModal();
-            return downloadModal(
-              fileName,
-              mapGeneratedUrl,
-              stateName,
-              elemGeneratedUrl
-            );
-          } else {
-            let imageLoaded = 0;
-
-            function checkload(event) {
-              imageLoaded++;
-              if (imageLoaded < 2) {
-                return;
-              }
-
-              const jointCanvasCtx = jointCanvas.getContext('2d');
-              jointCanvas.width =
-                widthDimension4Legend + widthDimension4Map + 120;
-              jointCanvas.height = heightDimension4Legend + heightDimension4Map;
-
-              jointCanvasCtx.drawImage(
-                mapImage,
-                50,
-                50,
-                widthDimension4Map,
-                heightDimension4Map
-              );
-              jointCanvasCtx.drawImage(legendImage, 790, 50, 220, 180);
-
-              let jointCanvasDataUrl;
-              if (type === 'jpg') {
-                const imageData = jointCanvasCtx.getImageData(
-                  0,
-                  0,
-                  jointCanvas.width,
-                  jointCanvas.height
-                );
-                const compositeOperation =
-                  jointCanvasCtx.globalCompositeOperation;
-
-                jointCanvasCtx.globalCompositeOperation = 'destination-over';
-                jointCanvasCtx.fillStyle = '#fff';
-                jointCanvasCtx.fillRect(
-                  0,
-                  0,
-                  jointCanvas.width,
-                  jointCanvas.height
-                );
-
-                jointCanvasDataUrl = jointCanvas.toDataURL('image/jpeg');
-
-                jointCanvasCtx.clearRect(
-                  0,
-                  0,
-                  jointCanvas.width,
-                  jointCanvas.height
-                );
-                jointCanvasCtx.putImageData(imageData, 0, 0);
-                jointCanvasCtx.globalCompositeOperation = compositeOperation;
-              } else {
-                jointCanvasDataUrl = jointCanvas.toDataURL('image/png');
-              }
-              download(fileName, jointCanvasDataUrl);
-            }
-
-            const mapImage = new Image();
-            mapImage.onload = checkload;
-            mapImage.src = mapDataUrl;
-
-            const legendImage = new Image();
-            legendImage.onload = checkload;
-            legendImage.src = legendDataUrl;
-          }
-        }
-      });
-    }
-  });
+  html2canvas(legendNode)
+    .then(function(legendCanvas) {
+      try {
+        canvg(mapCanvas, mapData);
+        finalizeConversion(
+          mapData,
+          mapCanvas,
+          legendCanvas,
+          jointCanvas,
+          widthDimension4Map,
+          heightDimension4Map,
+          widthDimension4Legend,
+          heightDimension4Legend,
+          fileName,
+          type
+          );
+      } catch (error) {
+        toastr.error("Unable to download map. <br /> Please try again");
+      }
+    });
 }
 
-// download svg
-$('#save-as-png, #save-as-jpg, #save-as-pdf, #save-svg').click(function() {
-  const stateName = getTrimmedStateNameFromUrl('btn');
-  switch (this.id) {
-    case 'save-as-png':
-      convert(`${stateName}-gac-report-map.png`, 'png');
-      break;
-    case 'save-as-jpg':
-      convert(`${stateName}-gac-report-map.jpg`, 'jpg');
-      break;
-    case 'save-as-pdf':
-      convert(`${stateName}-gac-report-map.pdf`, 'pdf');
-      break;
-    case 'save-svg':
-      convert(`${stateName}-gac-report-map.svg`, 'svg');
-      break;
-    default:
-      break;
-  }
-});
+function finalizeConversion(
+  mapData,
+  mapCanvas,
+  legendCanvas,
+  jointCanvas,
+  widthDimension4Map,
+  heightDimension4Map,
+  widthDimension4Legend,
+  heightDimension4Legend,
+  fileName,
+  type
+) {
+  const mapDataUrl = mapCanvas.toDataURL("image/png");
+  const legendDataUrl = legendCanvas.toDataURL("image/png");
 
-function getTrimmedStateNameFromUrl(type) {
-  const stateNameFromUrl = window.location.search.substring(1).split('=')[1];
-  if (!stateNameFromUrl) return false;
-  let stateName =
-    stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
+  const stateName = getTrimmedStateNameFromUrl(type);
+  if (type === "pdf") {
+    const pdf = new jsPDF("l", "px", "a4");
+    pdf.setFontSize(18);
+    pdf.text(
+      `Gap Analysis and Collaboration Report - ${stateName} State`,
+      20,
+      20
+    );
 
-  switch (type) {
-    case 'baseURL':
-      return stateName;
-    case 'pdf':
-    case 'png':
-    case 'jpg':
-    case 'svg':
-      return stateName.replace('%20', ' ');
-    case 'btn':
-      stateName = stateNameFromUrl.toLowerCase();
-      return (stateName = stateName.replace('%20', '-'));
-    default:
-      break;
+    pdf.addImage(mapDataUrl, "PNG", 20, 30, 450, 400);
+    pdf.addImage(legendDataUrl, "PNG", 500, 360, 120, 80);
+
+    pdf.save(fileName);
+  } else if (type === "svg") {
+    const legendElem = window.document.createElement("svg");
+    legendElem.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    legendElem.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+    legendElem.style.position = "fixed";
+    legendElem.style.top = "50%";
+    legendElem.style.left = "50%";
+    legendElem.style.transform = "translate(-5%, -18%)";
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "image");
+    svg.setAttributeNS(
+      "http://www.w3.org/1999/xlink",
+      "xlink:href",
+      legendDataUrl
+    );
+
+    document.body.appendChild(legendElem);
+    legendElem.appendChild(svg);
+
+    const legendElemGeneratedUrl =
+      "data:image/svg+xml;charset=utf-8," +
+      encodeURIComponent(legendElem.outerHTML);
+    const mapGeneratedUrl =
+      "data:image/svg+xml;charset=utf-8," + encodeURIComponent(mapData);
+    document.body.removeChild(legendElem);
+
+    toggleModal();
+
+    variablesUsedByTwoFxn["svgArguments"] = [];
+    return variablesUsedByTwoFxn["svgArguments"].push(
+      fileName,
+      mapGeneratedUrl,
+      `${stateName.toLowerCase()}-report-legend.svg`,
+      legendElemGeneratedUrl
+    );
+  } else {
+    let imageLoaded = 0;
+
+    function checkload(event) {
+      imageLoaded++;
+      if (imageLoaded < 2) {
+        return;
+      }
+
+      const jointCanvasCtx = jointCanvas.getContext("2d");
+      jointCanvas.width = widthDimension4Legend + widthDimension4Map + 120;
+      jointCanvas.height = heightDimension4Legend + heightDimension4Map;
+
+      jointCanvasCtx.drawImage(
+        mapImage,
+        50,
+        50,
+        widthDimension4Map,
+        heightDimension4Map
+      );
+      jointCanvasCtx.drawImage(legendImage, 790, 50, 220, 180);
+
+      let jointCanvasDataUrl;
+      if (type === "jpg") {
+        const imageData = jointCanvasCtx.getImageData(
+          0,
+          0,
+          jointCanvas.width,
+          jointCanvas.height
+        );
+        const compositeOperation = jointCanvasCtx.globalCompositeOperation;
+
+        jointCanvasCtx.globalCompositeOperation = "destination-over";
+        jointCanvasCtx.fillStyle = "#fff";
+        jointCanvasCtx.fillRect(0, 0, jointCanvas.width, jointCanvas.height);
+
+        jointCanvasDataUrl = jointCanvas.toDataURL("image/jpeg");
+
+        jointCanvasCtx.clearRect(0, 0, jointCanvas.width, jointCanvas.height);
+        jointCanvasCtx.putImageData(imageData, 0, 0);
+        jointCanvasCtx.globalCompositeOperation = compositeOperation;
+      } else {
+        jointCanvasDataUrl = jointCanvas.toDataURL("image/png");
+      }
+      download(fileName, jointCanvasDataUrl);
+    }
+
+    const mapImage = new Image();
+    mapImage.onload = checkload;
+    mapImage.src = mapDataUrl;
+
+    const legendImage = new Image();
+    legendImage.onload = checkload;
+    legendImage.src = legendDataUrl;
   }
 }
 
@@ -627,15 +686,15 @@ function getTrimmedStateNameFromUrl(type) {
         data,
         potentialPartnershipPerLGA
       );
-      $('#report-map-pillars').load(stateUrl, function(responseTxt, statusTxt) {
-        if (statusTxt === 'success') {
+      $(reportMapPillarsID).load(stateUrl, function(responseTxt, statusTxt) {
+        if (statusTxt === "success") {
           const [, xmlPart, svgPart] = responseTxt.match(
             /([\s\S.]*)(<svg[\s\S]*<\/svg>)/
           );
-          $('#report-map-pillars').html(svgPart);
-          $('g#Nigeria_LGA_Boundary')
-            .parents('svg')
-            .addClass('banner__image animated fadeInLeft slow state-map__svg');
+          $(reportMapPillarsID).html(svgPart);
+          $("g#Nigeria_LGA_Boundary")
+            .parents("svg")
+            .addClass("banner__image animated fadeInLeft slow state-map__svg");
           const lgsIds = responseTxt.match(/STL\d{6}/gm);
 
           lgsIds.map(lgsId => {
@@ -726,6 +785,7 @@ function getTrimmedStateNameFromUrl(type) {
             }
           });
         }
+        showHamburger();
       });
       const backToStateBtn = document.getElementById('c-matrix-btn');
       backToStateBtn.addEventListener(
@@ -739,6 +799,7 @@ function getTrimmedStateNameFromUrl(type) {
         `http://${baseURL}/index-cordination-matrix.html`;
     }
   }
+  insertHTML();
 
   document.addEventListener('DOMContentLoaded', loaded, false);
 })();

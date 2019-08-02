@@ -31,6 +31,8 @@ class Paginator {
     }
     else if(this.table === 'gapAnalysis'){
       window.gapTableData = updatedTableData;
+    } else if (this.table === 'impactFactor') {
+      window.impactTableData = updatedTableData;
     }
   }
 

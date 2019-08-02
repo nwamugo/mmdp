@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-function createImpactFactorTable(data, rowsPerPage) {
+function createImpactFactorTable(tableData, rowsPerPage) {
   $(document).ready(async function() {
     const keys = [
       "organization",
@@ -10,13 +10,13 @@ function createImpactFactorTable(data, rowsPerPage) {
       "pillar",
       "targetCompletion"
     ];
-    const impactFactorData = data;
+    const impactFactorData = tableData;
     let selectedItems = [];
 
     /**
      * @description - Capture rows that are checked on the table
      */
-    $('#impact-factor-table').on('click', 'input[type="checkbox"]', function() {
+    $('#impact-factor-table-container').on('click', 'input[type="checkbox"].check, input[type="checkbox"].check-all', function() {
         // Check the checkbox in the header
         if ($(this).is(':checked') && $(this).attr('data-org') === 'impact-factor-check-all') {
             $('input[name="aaaaa"]').each(function() {
@@ -49,7 +49,8 @@ function createImpactFactorTable(data, rowsPerPage) {
       "/partials/impact-report-table.html",
       function() {
         let table = "impactFactor";
-        // Replace the impactFactorSampleData data with data from API endpoint
+        let rowsPerPage = 10;
+
         window.impactFactorTableData = impactFactorData;
         paginator = new Paginator(
           impactFactorData,
@@ -62,6 +63,42 @@ function createImpactFactorTable(data, rowsPerPage) {
         impactFactorTableData = paginator.initialPage();
         $("#impact-factor-data").html(impactFactorTableData);
         $("#impact-factor-mobile").html(impactFactorTableData);
+
+        // NOTE: Please note the order of the filterTableColumnKeys array
+        //    should match the order for your table columns from left to right
+        //    the filterDropdownOptionsParentSelectors should then follow the same order array
+
+        const filterTableColumnKeys = [
+          "organization",
+          "focusArea",
+          "lga",
+          "subtheme",
+          "pillar",
+          "targetCompletion"
+        ];
+
+        const filterDropdownOptionsParentSelectors = [
+          "#organizationFilterData",
+          "#focusAreaFilterData",
+          "#lgaFilterData",
+          "#subthemeFilterData",
+          "#pillarFilterData",
+          "#targetCompletionFilterData"
+        ];
+
+        let columnKeysMap = new Map();
+        filterTableColumnKeys.map(columnKey => {
+          let currentColumnEntriesSet = new Set();
+          for (
+            let tableRowIndex = 0;
+            tableRowIndex < tableData.length;
+            tableRowIndex++
+          ) {
+            currentColumnEntriesSet.add(tableData[tableRowIndex][columnKey]);
+          }
+          columnKeysMap.set(columnKey, currentColumnEntriesSet);
+        });
+
         let n = 5;
         let options = "";
         while (n < 51) {
@@ -88,10 +125,42 @@ function createImpactFactorTable(data, rowsPerPage) {
         });
         bindJQueryImpactFactor(selectedItems);
         window.impactFactorData = impactFactorData;
-      }
-    );
-  });
-}
+
+        // Create html string message displayed when the table filter has no results
+        const noFilterResultsHtmlMessage = `
+      <main id="table" class="table-row body">
+        <h6 class="impact-row">
+          <b>No Results found for the selected column filters.</b>
+        </h6>
+      </main>`;
+
+        // Create an instance of the TableFilterHeader class for the potential partnerships table
+        window.impactTableHeaderFilter = new TableFilterHeader(
+          table,
+          "impact-dropdown-icon",
+          tableData,
+          filterTableColumnKeys,
+          filterDropdownOptionsParentSelectors,
+          {
+            filterIconSelector: ".impact-filter-icon",
+            filterCheckboxItemSelector:
+              'input[type="checkbox"].impact-filter-checkbox',
+            filterCheckboxItemClass: "impact-filter-checkbox",
+            applyFiltersButtonSelector: ".impact-table-apply-filter",
+            clearFiltersButtonSelector: ".impact-table-clear-filter",
+            filterIconSiblingSelector: ".table-filter-container",
+            filterDropdownSubnavSelector: ".impact_table_filter_subnav"
+          },
+          columnKeysMap,
+          {
+            tablePaginator: paginator,
+            tableRootElementSelector: "#impact-factor-data"
+          },
+          noFilterResultsHtmlMessage,
+        );
+      });
+    });
+};
 
 async function loadSearchImpactFactorTable() {
   const impactFactorData = await fetchStakeholderInformation();

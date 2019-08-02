@@ -36,7 +36,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
     />
-   
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+
     <title>MMDP | Report</title>
   </head>
 
@@ -96,7 +100,7 @@
         <span id="display-map"> </span>
 
         <!-- Hamburger & Popup-->
-        <div class="popup-section">
+        <div id="popup-feature" class="popup-section">
           <div class="map-hamburger popup">
             <!-- the hamburger icon -->
           </div>
@@ -216,7 +220,7 @@
               No results. Could not find any Impact Factor related to your search
             </div>
         </section>
-      
+
 
         <!-- Toggle Button -->
         <section class="gap-analysis-toggle">
@@ -245,7 +249,7 @@
         <!-- Report Tables -->
         <div id="potential-partnerships-table-container"><div id="potential-partnerships-table"></div></div>
         <div id="gap-analysis-table"></div>
-        <div id="impact-factor-table"></div>
+        <div id="impact-factor-table-container"><div id="impact-factor-table"></div></div>
       </div>
     </main>
 
@@ -334,10 +338,9 @@
     </footer>
     <div class="svg-download-modal">
       <div class="download-confirm">
-        <p>
-          The requested operation will download two separate files.
-        </p>
-        <p>Kindly allow multiple downloads on your browser.</p>
+        <div id="svg-confirmation-message" class="download-message">
+          <!-- message will be loaded dynamically here -->
+        </div>
         <button class="btn download-begin">Download</button>
         <button class="btn download-cancel">Cancel</button>
       </div>
@@ -350,6 +353,7 @@
     ></script>
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script type="text/javascript" src="assets/js/utils.js"></script>
     <script type="text/javascript" src="assets/js/auth/utils.js"></script>
     <script
