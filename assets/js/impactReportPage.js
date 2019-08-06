@@ -14,6 +14,38 @@ function createImpactFactorTable(data, rowsPerPage) {
     const impactFactorData = data;
     let selectedItems = [];
 
+    /**
+     * @description - Capture rows that are checked on the table
+     */
+    $('#impact-factor-table').on('click', 'input[type="checkbox"]', function() {
+        // Check the checkbox in the header
+        if ($(this).is(':checked') && $(this).attr('data-org') === 'impact-factor-check-all') {
+            $('input[name="aaaaa"]').each(function() {
+                const selectedRow = $(this).attr('data-org');                                       
+                selectedItems.push(selectedRow.replace(/-/g, ' '));
+                this.checked = true;
+              });
+            // Check the individual check boxes
+        } else if ($(this).is(':checked') && $(this).attr('data-org') !== 'impact-factor-check-all') {
+                const selectedRow = $(this).attr('data-org');                   
+                selectedItems.push(selectedRow.replace(/-/g, ' '));
+            // Uncheck all checkboxes when header checkbox is unchecked
+        } else if ($(this).is(':not(:checked)') && $(this).attr('data-org') === 'impact-factor-check-all') {
+            $('input[name="aaaaa"]').each(function() {
+            this.checked = false;
+            });
+            selectedItems.length = 0;
+            // Uncheck an individual checkbox when all checkboxes have been checked with the header checkbox
+        } else if ($(this).is(':not(:checked)') && $(this).attr('data-org') !== 'impact-factor-check-all') {
+            var unSelectedRow = $(this).attr('data-org');  // Get the checked row
+            var rowsToDownload = selectedItems.filter(function(value, index, arr){  // Filter to get only the checked rows
+              return value !== unSelectedRow.replace(/-/g, ' ');
+            });
+            selectedItems.splice(0, selectedItems.length, ...rowsToDownload);  // Replace all the items in selectedItems with the content of rowsToDownload
+            $('#impact-factor-check-all').prop('checked', false); // Set impact-factor-check-all to false since all are not checked
+          }
+    });
+
     $("#impact-factor-table").load(
       "/partials/impact-report-table.html",
       function() {
@@ -55,6 +87,8 @@ function createImpactFactorTable(data, rowsPerPage) {
         $("#impact-factor-previous-page").click(function() {
           paginator.previousPage();
         });
+        bindJQueryImpactFactor(selectedItems);
+        window.impactFactorData = impactFactorData;
       }
     );
   });

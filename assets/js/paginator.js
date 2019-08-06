@@ -118,6 +118,7 @@ class Paginator {
         );
       } else if (this.table === "impactFactor") {
         $("#impact-factor-data").html(rows);
+        bindJQueryImpactFactor(this.selectedItems)
       }
     } else {
       $("tbody.table__body").html(rows);
