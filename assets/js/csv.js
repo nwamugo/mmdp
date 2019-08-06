@@ -97,8 +97,8 @@ bindJQuery = (table, selectedItems) => {
                 .toString()
                 .replace(/,/g, ''),
               focusAreasWithGaps: item.focusAreasWithGaps
-              .toString()
-              .replace(/,/g, '; ')
+                .toString()
+                .replace(/,/g, '; ')
             });
           }
           fileTitle = 'gapAnalysisReport';

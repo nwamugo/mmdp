@@ -14,15 +14,15 @@
   background-color: #fafeff;
 }
 
-.coordination-login__form input[type="submit"] {
+.coordination-login__form input[type='submit'] {
   width: 100%;
   background-color: #3faaca;
   margin-top: 1.5em;
   text-transform: none;
 }
 
-.coordination-login__form input[type="email"],
-.coordination-login__form input[type="password"] {
+.coordination-login__form input[type='email'],
+.coordination-login__form input[type='password'] {
   width: 95%;
   border-style: solid;
   border-color: #ecf5f8;
@@ -33,8 +33,8 @@
   margin-top: 0.5em;
 }
 
-input[type="email"]:not(.browser-default):focus:not([readonly]),
-input[type="password"]:not(.browser-default):focus:not([readonly]) {
+input[type='email']:not(.browser-default):focus:not([readonly]),
+input[type='password']:not(.browser-default):focus:not([readonly]) {
   box-shadow: 0 1px 0 0 #ecf5f8;
   border-radius: 3px;
   border-style: solid;
@@ -92,7 +92,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
   background-color: #43a0a5;
   padding: 0.3em;
   font-size: 0.9em;
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   position: absolute;
   border-radius: 5px;
   font-weight: bolder;
@@ -267,6 +267,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 
 .info_panel .info-panel-item-data {
   margin-top: 7px !important;
+  line-height: 1.5;
 }
 
 .info_panel .info-panel-item,
@@ -379,7 +380,7 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) {
 
 @media only screen and (min-width: 993px) {
   .row .col.l7 {
-      width: 44.333333%;
+    width: 44.333333%;
   }
 }
 
