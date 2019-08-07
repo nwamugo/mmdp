@@ -23,7 +23,7 @@
   height: 43px;
 }
 
-.modal-body{
+.modal-body {
   overflow: auto;
   height: 532px;
 }
@@ -36,29 +36,29 @@
 .lga-grid-box {
   background-color: #ffffff;
   font-size: 30px;
-  margin:3px;
+  margin: 3px;
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
 }
 
-.gap-analysis-modal .lga-header{
+.gap-analysis-modal .lga-header {
   background-color: #3faaca;
   min-height: 92px;
   display: flex;
 }
 
-.gap-analysis-modal .lga-header .lga-name{
+.gap-analysis-modal .lga-header .lga-name {
   flex: 2;
   text-align: left;
   padding-left: 21px;
 }
 
-.gap-analysis-modal .lga-header .lga-stats{
+.gap-analysis-modal .lga-header .lga-stats {
   flex: 3;
   text-align: left;
   color: #ffffff;
 }
 
-.gap-analysis-modal .lga-header .lga-name p{
+.gap-analysis-modal .lga-header .lga-name p {
   font-size: 27px;
   color: #ffffff;
   margin-top: 2.1rem;
@@ -66,7 +66,7 @@
   letter-spacing: 1px;
 }
 
-.gap-analysis-modal .lga-header .lga-stats p{
+.gap-analysis-modal .lga-header .lga-stats p {
   color: #ffffff;
   font-size: 14px;
 }
@@ -75,16 +75,16 @@
   background-color: #ffffff;
 }
 
-.gap-analysis-modal .lga-body-top{
+.gap-analysis-modal .lga-body-top {
   display: flex;
   font-size: 14px;
 }
 
-.gap-analysis-modal .lga-body-top img{
+.gap-analysis-modal .lga-body-top img {
   width: 35px;
 }
 
-.gap-analysis-modal .lga-body-top .top-1{
+.gap-analysis-modal .lga-body-top .top-1 {
   flex: 1;
   padding: 11px 11px 11px 21px;
   display: flex;
@@ -105,23 +105,23 @@
   flex: 4;
 }
 
-.gap-analysis-modal .lga-body-top .top-1 span{
+.gap-analysis-modal .lga-body-top .top-1 span {
   font-weight: bold;
 }
 
-.gap-analysis-modal .lga-body-top .top-2{
+.gap-analysis-modal .lga-body-top .top-2 {
   flex: 1;
   padding: 11px 11px 11px 21px;
   display: flex;
 }
 
-.gap-analysis-modal .lga-body-top .top-3{
+.gap-analysis-modal .lga-body-top .top-3 {
   flex: 2;
   padding: 11px 11px 11px 21px;
   display: flex;
 }
 
-.gap-analysis-modal .lga-body-top .top-3 span{
+.gap-analysis-modal .lga-body-top .top-3 span {
   font-weight: bold;
 }
 
@@ -145,17 +145,17 @@
   padding-top: 3px;
 }
 
-.hamburger{
+.hamburger {
   margin-top: 10px 0 5px 0;
   cursor: pointer;
 }
 
-.hamburger-line{
+.hamburger-line {
   width: 35px;
   height: 5px;
   background-color: #f5f6fa;
   margin: 6px 0;
-  flex: 1
+  flex: 1;
 }
 
 .modal-header img {
@@ -180,6 +180,14 @@
   font-weight: bold;
 }
 
-.gap-header{
+.gap-header {
   justify-content: flex-start;
+}
+
+#more,
+#less {
+  border: none;
+  background: none;
+  color: #3faaca;
+  cursor: pointer;
 }
