@@ -331,7 +331,8 @@
 
 .filter-data-option-items{
     display: flex;
-    justify-content: flex-start;
+    font-weight: normal;
+    justify-content: normal;
 }
 
 .partnership-table-filter-item{

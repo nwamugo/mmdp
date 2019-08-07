@@ -26,6 +26,12 @@ class Paginator {
     this.empData = false;
     this.currentPage = 1;
     this.totalPage = this.getTotalPage();
+    if(this.table === 'potentialPartnerships'){
+      window.partnershipsCsvTableData = updatedTableData;
+    }
+    else if(this.table === 'gapAnalysis'){
+      window.gapTableData = updatedTableData;
+    }
   }
 
   setTempData(data = []) {

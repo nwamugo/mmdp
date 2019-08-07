@@ -729,8 +729,17 @@ table.stakeholder__details__table .row__value {
   -webkit-box-shadow: 0px 0px 23px -2px #707070;
   -moz-box-shadow: 0px 0px 23px -2px #707070;
   box-shadow: 0px 0px 23px -2px #707070;
+  background-color: white;
 }
 
+.partner_table_filter_subnav {
+  position: absolute;
+  width: 79.5rem;
+  top: 73.1rem;
+  background-color: white;
+  left: 13rem;
+  z-index: 990;
+}
 /* ----------------------------------------------- */
 
 .table-row:hover {

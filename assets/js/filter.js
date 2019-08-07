@@ -1,18 +1,29 @@
-// Function that returns a single dropdown checkbox item
-// Useful for adding a specific Table column's filters based on current data in the table
-// Returns : String - html that represents a checkbox input for a specific column header
+/**
+* @description : Function that returns a single dropdown checkbox item
+ *    Useful for adding a specific Table column's filters based on current data in the table
+* @params :
+ *    tableName - String with the name of the table we are creating a filter for.
+ *    dropdownItemData - Object with the data item details. - { dataItem }
+ *    filterCheckboxClass - String with the class name for each checkbox input for a singular column header filter
+ *    columnKey - String containing the name of the current column header filter for which the checkbox inputs are
+ *        being generated.
+* @returns : String - html that represents a checkbox input for a specific column header */
 
-const appendFilterDropdownItem = function ( tableName, dropdownItemData, filterCheckboxClass, columnKey){
-  const dataItem = dropdownItemData.dataItem;
+const appendItemToFilterDropDown = function (
+  tableName,
+  { dataItem },
+  filterCheckboxClass,
+  columnHeader
+  ){
   // Set the table to create a dropdown item
   switch (tableName) {
     case 'potentialPartnerships':
-      return `<span class="partnership-table-filter-item">
-                      <label class="filter-options-checkbox-label">
-                      <input id="${columnKey}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox">
-                         ${dataItem}
-                      </label> &nbsp;
-               </span>`;
+      return`<span class="partnership-table-filter-item">
+           <label class="filter-options-checkbox-label">
+           <input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox">
+             ${dataItem}
+           </label>
+        </span>`;
 
     default:
       // Default item is set to the stakeholder table checkbox item
@@ -21,8 +32,10 @@ const appendFilterDropdownItem = function ( tableName, dropdownItemData, filterC
 };
 
 
-// Function that creates a HTML string representing all options/checkbox items for a single column
-// Returns:  Array -  Array of html strings that each represent all checkbox/option items for a single column in the table
+/**
+ * @description : Function that creates a HTML string representing all options/checkbox items for a single column
+ * @returns :  Array -  Array of html strings that each represent all checkbox/option items for a single column in the table
+ */
 
 const getItemsForFilterDropDownHtml = function(tableName, filterCheckboxClass , columnKeysMap){
   const columnFilterHtmlItems = [];
@@ -30,8 +43,8 @@ const getItemsForFilterDropDownHtml = function(tableName, filterCheckboxClass , 
       (columnEntriesSet, columnKey )=>{
         let singleColumnDropdownHtml = '';
         columnEntriesSet.forEach(
-            (currentDropdownItemValue, currentDropdownItemKey)=>{
-               singleColumnDropdownHtml += appendFilterDropdownItem(
+            (currentDropdownItemValue)=>{
+               singleColumnDropdownHtml += appendItemToFilterDropDown(
                    tableName,
                    {"dataItem": currentDropdownItemValue},
                    filterCheckboxClass,
@@ -45,15 +58,20 @@ const getItemsForFilterDropDownHtml = function(tableName, filterCheckboxClass , 
   return columnFilterHtmlItems;
 };
 
-// Function that appends the html string of all options/checkboxes to the current DOM
-// Returns: undefined
+
+/**
+ * @description : Function that appends the html string of all options/checkboxes to the current DOM
+ * @returns : undefined */
 
 const appendHtmlToParentItem = function(parentItemSelector, htmlStringData){
   $(parentItemSelector).html(htmlStringData);
 };
 
-// Original filter class definition
-// Returns:  Object - Instance of the Filter class with the associated methods & properties
+
+/**
+ * @description : Original filter class definition
+ * @returns : undefined */
+
 class Filter {
   displayDataInDropdown(dataArray, dataId){
     const processed = dataArray.reduce(
@@ -75,25 +93,27 @@ class Filter {
 // Returns - Object
 
 class TableFilterHeader extends Filter {
-  // Create table rows based on filtered table data.
 
-  // Constructor that takes various params:
-  // tableName: String - Current table the filter is created for
-  // iconElementClass: String - CSS Selector string for the dropdown filter icon
-  // tableData: Array - Array of all available table rows
-  // tableColumnKeys: Array - Array of all filter column keys
-  // filterElementClassNames: Object - Object containing strings for the filter element classes i.e
-  //    filterIconClass - Icon element for the dropdown filter icon
-  //    filterCheckboxItemClass - Element class for all filter option/checkbox items on the tables
-  // filterColumnMapsArray: Array - Array of Maps with Sets as values (I know it's a mouthful) i.e Array of all
-  //    filter dropdown data items (Set objects) for a particular column key ( the Map key)
-  // tablePaginatorData - Object - Object containing current table's paginator
-  //    it also has the selector for the root element of the data inserted by the paginator
-  // tableNoResultsHtmlMessage - String - A HTML string that display a no results message when there are no filtered
-  //    table results found
-  // tableModalData: Object - Object containing the table's modal data
-  //    bindModalEventListener - Function that contains the logic for adding the modal event lister for the table modal
-  //    currentTableModalData - Object containing the modal data used in the event listener function
+  /**
+   * @classdesc : Class that returns a single instance of a the TableFilterHeader class
+   * @params :
+   * tableName: String - Current table the filter is created for
+   * iconElementClass: String - CSS Selector string for the dropdown filter icon
+   * tableData: Array - Array of all available table rows
+   * tableColumnKys: Array - Array of all filter column keys
+   * filterElementClassNames: Object - Object containing strings for the filter element classes i.e
+   *    filterIconClass - Icon element for the dropdown filter icon
+   *    filterCheckboxItemClass - Element class for all filter option/checkbox items on the tables
+   * filterColumnMapsArray: Array - Array of Maps with Sets as values (I know it's a mouthful) i.e Array of all
+   *    filter dropdown data items (Set objects) for a particular column key ( the Map key)
+   * tablePaginatorData - Object - Object containing current table's paginator
+   *    it also has the selector for the root element of the data inserted by the paginator
+   * tableNoResultsHtmlMessage - String - A HTML string that display a no results message when there are no filtered
+   *    table results found
+   * tableModalData: Object - Object containing the table's modal data
+   *    bindModalEventListener - Function that contains the logic for adding the modal event lister for the table modal
+   *    currentTableModalData - Object containing the modal data used in the event listener function
+   * @returns : String - html that represents a checkbox input for a specific column header */
 
   constructor(
       tableName,
@@ -140,9 +160,10 @@ class TableFilterHeader extends Filter {
     );
   }
 
-  // Method that returns an error message when there are no search results found for the selected filters
-  // params: None
-  // Returns: undefined
+  /**
+  * @description Method that returns an error message when there are no search results found for the selected filters
+  * @params : None
+  * @returns : undefined */
 
   displayNoResultsFoundErrorMessage(){
     appendHtmlToParentItem(
@@ -151,12 +172,13 @@ class TableFilterHeader extends Filter {
     );
   }
 
-  // Method that refreshes the table data when the filters are applied or cleared
-  // params: None
-  // Returns: undefined
+/**
+ *@description  Method that refreshes the table data when the filters are applied or cleared
+  @params : None
+  @returns : undefined*/
 
   refreshTableData(){
-    this.tablePaginatorData.tablePaginator.updateTableData(this.getFilteredTableDataResults());
+    this.filteredTableDataResults.length ? this.tablePaginatorData.tablePaginator.updateTableData(this.filteredTableDataResults) : this.tablePaginatorData.tablePaginator.updateTableData(this.allTableData);
     appendHtmlToParentItem(
         this.tablePaginatorData.tableRootElementSelector,
         this.tablePaginatorData.tablePaginator.initialPage()
@@ -168,15 +190,15 @@ class TableFilterHeader extends Filter {
 
   }
 
-  /*
-  * Method to filter by requiring all column header filters to be present in each table row
-  * params:
+  /**
+  * @description Method to filter by requiring all column header filters to be present in each table row
+  * @params :
   *   currentSelectedDropdownItems: The set containing selected column header filter checked items
   *   currentColumnHeader: The name of the currently active column header filter
   *   columnHeaderCount: The count of the current iteration in the active column header filters
   *   totalActiveColumnHeaderFiltersCount: Number- The total number of active column header filters in the active column header filters map
   *   filteredResultSet: Set - The set of all table rows matching the active column header filters criteria
-  * Returns: Set Object - Set object with the filtered table row results
+  * @returns : Set Object - Set object with the filtered table row results
   *   for the current active column header being filtered
   * */
 
@@ -263,9 +285,10 @@ class TableFilterHeader extends Filter {
     return filteredResultsSet;
   }
 
-  // Method to return filtered table data based on ALL currently selected filters (combined) or ANY filter criteria
-  // params: None
-  // Returns: Array - Array of table rows ready to be added to the paginator
+/**
+ *@description Method to return filtered table data based on ALL currently selected filters (combined) or ANY filter criteria
+  @params : None
+  @returns : Array - Array of table rows ready to be added to the paginator*/
 
   filterTableData(){
     // create final results of all filtered data
@@ -294,6 +317,7 @@ class TableFilterHeader extends Filter {
             currentActiveColumnHeaderFilterCount +=1;
           });
         break;
+
       // Filter by records matching any of the currently selected filter criteria
       case 'any':
         activeFilterColumns.forEach(
@@ -309,6 +333,20 @@ class TableFilterHeader extends Filter {
             });
           });
         break;
+
+      case 'singleColumnHeaderFilter':
+        // returns final results of the currently selected column filter header only
+        this.previousFilteredTableResults = this.filteredTableDataResults;
+        filteredResultsSet = new Set();
+        const currentColumnValues = this.currentCheckedFilters.get(this.currentFilterName);
+
+        this.allTableData.forEach((currentTableRow)=>{
+          if(currentColumnValues.size && currentColumnValues.has(currentTableRow[this.currentFilterName])){
+            filteredResultsSet.add(currentTableRow);
+          }
+        });
+        this.filteredTableDataResults = Array.from(filteredResultsSet);
+        this.refreshTableData();
       //  Filter by combined criteria by default
       default:
         activeFilterColumns.forEach(
@@ -356,19 +394,11 @@ class TableFilterHeader extends Filter {
     }
     this.hideAllTableHeaderFilterDropdowns();
   }
-  
-  // Method to return out the filtered data based on the current table data and the currently active filters
-  // params: None
-  // Returns: undefined
 
-  getFilteredTableDataResults(){
-    // return the filtered table data
-    return this.filteredTableDataResults;
-  }
-
-  // Method to set the filtered table data directly
-  // params: None
-  // Returns: undefined
+/**
+ *@description  Method to set the filtered table data directly
+  @params : None
+  @returns : undefined*/
 
   setFilteredTableDataResults(updatedTableData){
     // set the filtered table data directly
@@ -383,21 +413,23 @@ class TableFilterHeader extends Filter {
     }
   }
 
-  // Method to set the filtered table data directly
-  // params: None
-  // Returns: undefined
+/**
+ *@description Method to set the filtered table data directly
+  @params : None
+  @returns : undefined*/
 
   resetFilteredTableDataResults(){
     // reset the filtered table data to all table data originally available
     this.hideAllTableHeaderFilterDropdowns();
-    this.filteredTableDataResults = this.allTableData;
+    this.filteredTableDataResults = [];
 
 
   }
 
-  // Method that clears all active filters for the current table
-  // params: None
-  // Returns: undefined
+/**
+ *@description  Method that clears all active filters for the current table
+  @params : None
+  @returns : undefined*/
 
   clearAllFilters(){
     this.tableColumnKeys.map(
@@ -408,38 +440,43 @@ class TableFilterHeader extends Filter {
     this.refreshTableData();
   }
 
-  // Method that hides all currently viewable filters  drpodowns for the current table
-  // params: None
-  // Returns: undefined
+/**
+ *@description Method that hides all currently viewable filters  drpodowns for the current table
+  @params : None
+  @returns : undefined*/
 
   hideAllTableHeaderFilterDropdowns(){
     const filterDropdownSubnavSelector = this.filterElementClassNames.filterDropdownSubnavSelector;
     $(filterDropdownSubnavSelector).hide();
   }
 
-  // Method to handle apply filters i.e when the user clicks 'Apply Filter' button to filter the data
-  // params: Event object
-  // Returns: undefined
+/**
+ *@description  Method to handle apply filters i.e when the user clicks 'Apply Filter' button to filter the data
+  @params : Event object
+  @Returns : undefined
+ */
 
   handleApplyFilters(e){
     e.data._this.filterTableData();
   }
 
 
-  // Method to handle clearFilters event listener i.e removes all filters on current table data
-  // params: Event object
-  // Returns: undefined
+/**
+ *@description  Method to handle clearFilters event listener i.e removes all filters on current table data
+  @params : Event object
+  @returns : undefined*/
 
   handleClearFilters(e){
     e.data._this.clearAllFilters();
     $(e.data._this.filterElementClassNames.filterCheckboxItemSelector).prop("checked", false);
   }
   
-  // Method to handle the click event on any table column filter options/checkbox item
-  //  this is where we confirm whether the current item is checked or unchecked
-  //  we then update the currentCheckedFilters Array accordingly (remove or append a new filter)
-  // params: Event object
-  // Returns: undefined
+/**
+ *@description Method to handle the click event on any table column filter options/checkbox item
+   this is where we confirm whether the current item is checked or unchecked
+   we then update the currentCheckedFilters Array accordingly (remove or append a new filter)
+  @params : Event object
+  @returns : undefined*/
 
   handleClickFilterItemCheckbox(e) {
     const selectedFilterCheckbox = $(this);
@@ -470,12 +507,13 @@ class TableFilterHeader extends Filter {
     }
   }
 
-  // Method to handle the click event on any table column filter dropdown icon
-  //   this is where we toggle the display of the current filter dropdown menu
-  //   we then update the currentFilterName string accordingly to reflect the currently selected filter
-  //   as well as toggle the visibility of the other filters
-  // params: Event object
-  // Returns: undefined
+/**
+ *@description  Method to handle the click event on any table column filter dropdown icon
+    this is where we toggle the display of the current filter dropdown menu
+    we then update the currentFilterName string accordingly to reflect the currently selected filter
+    as well as toggle the visibility of the other filters
+  @params : Event object
+  @returns : undefined*/
 
   handleClickFilterDropdownIcon(e){
     const filterIconSiblingSelector = e.data._this.filterElementClassNames.filterIconSiblingSelector;
@@ -484,7 +522,7 @@ class TableFilterHeader extends Filter {
 
     // If the currentFilterName is not set then set the current icon as the currentFilterName
     if( e.data._this.currentFilterName === '' || typeof e.data._this.currentFilterName !== "string" ){
-      $(this).siblings(filterIconSiblingSelector).find(filterDropdownSubnavSelector).toggle();
+      $(this).siblings(filterIconSiblingSelector).find(filterDropdownSubnavSelector).slideToggle();
       e.data._this.currentFilterName = $(this).attr('name');
     }
     // If the previously set filterName and the current selected icon's name don't match,
@@ -493,21 +531,22 @@ class TableFilterHeader extends Filter {
       $(`[name="${e.data._this.currentFilterName}"]${filterIconSelector}`)
           .siblings(filterIconSiblingSelector)
           .find(filterDropdownSubnavSelector)
-          .hide();
-      $(this).siblings(filterIconSiblingSelector).find(filterDropdownSubnavSelector).toggle();
+          .slideUp();
+      $(this).siblings(filterIconSiblingSelector).find(filterDropdownSubnavSelector).slideToggle();
       e.data._this.currentFilterName = $(this).attr('name');
     }
     // If the current and previous filter icon names are the same, just toggle the dropdown
     // no need to change the currentFilterName
     else if($(this).attr('name') === e.data._this.currentFilterName){
-      $(this).siblings(filterIconSiblingSelector).find(filterDropdownSubnavSelector).toggle();
+      $(this).siblings(filterIconSiblingSelector).find(filterDropdownSubnavSelector).slideToggle();
     }
   }
 
-  // Method to create the dropdown options for each filter based on the current table data
-  //    Appends the data to the current html page.
-  // params: None
-  // Returns: undefined
+/**
+ *@description  Method to create the dropdown options for each filter based on the current table data
+     Appends the data to the current html page.
+  @params : None
+  @returns : undefined*/
   createHtmlDropdownFilterElements(){
     const filterDropdownItems = getItemsForFilterDropDownHtml(
         this.tableName,
@@ -521,14 +560,15 @@ class TableFilterHeader extends Filter {
      );
   };
 
-  // Method to initialize all event listeners for our filter instance.
-  //   this is where we add listeners to our filter dropdown icons, filter checkbox items etc.
-  // params:
-  //    filterIconSelector - String - CSS selector string of the dropdown icon class for the table
-  //    filterCheckboxItemSelector - String - CSS selector string of the options/checkboxes for the table
-  //    applyFiltersButtonSelector - CSS selector string for the apply filter buttons of each filter
-  //    clearFiltersButtonSelector - CSS selector string for the clear filter buttons of each filter
-  // Returns - undefined
+/**
+ *@description  Method to initialize all event listeners for our filter instance.
+    this is where we add listeners to our filter dropdown icons, filter checkbox items etc.
+  @params :
+     filterIconSelector - String - CSS selector string of the dropdown icon class for the table
+     filterCheckboxItemSelector - String - CSS selector string of the options/checkboxes for the table
+     applyFiltersButtonSelector - CSS selector string for the apply filter buttons of each filter
+     clearFiltersButtonSelector - CSS selector string for the clear filter buttons of each filter
+  @returns : undefined*/
   initializeFilterElementListeners(
       filterIconSelector,
       filterCheckboxItemSelector,

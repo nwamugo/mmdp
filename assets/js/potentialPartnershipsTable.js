@@ -13,7 +13,7 @@ function createPotentialPartnershipsTable(
 
   let selectedItems = [];
 
-  $('#potential-partnerships-table').on(
+  $('#potential-partnerships-table-container').on(
     'click',
     'input[type="checkbox"].check, input[type="checkbox"].check-all',
     function() {
@@ -126,12 +126,15 @@ function createPotentialPartnershipsTable(
   bindPotentialPartnershipModalJQuery(potentialPartnershipsModalData);
   window.potentialPartnershipsModalData = potentialPartnershipsModalData;
 
+  // Create html string message displayed when the table filter has no results
   const noFilterResultsHtmlMessage = `
     <main id="table" class="table-row body">
-      <p class="partnership-row">
-      No Results found for the selected column filters.
-      </p>
+      <h6 class="partnership-row">
+        <b>No Results found for the selected column filters.</b>
+      </h6>
     </main>`;
+
+  // Create an instance of the TableFilterHeader class for the potential partnerships table
   window.partnershipsTableHeaderFilter = new TableFilterHeader(
     table,
     'partnership-dropdown-icon',
