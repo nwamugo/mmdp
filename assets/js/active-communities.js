@@ -74,11 +74,6 @@
     } catch (error) {}
   }
 
-  // a function to get a random integer from an interval
-  function randomIntFromInterval(mn, mx) {
-    return ~~(Math.random() * (mx - mn + 1) + mn);
-  }
-
   // a function to get the svg coordinates of a point on the svg canvas
   function getPoint(x, y) {
     var p = svg.createSVGPoint();
@@ -151,8 +146,8 @@
 
     for (let i = 0; i < 100; i++) {
       // get a random point on the svg canvas
-      let x = randomIntFromInterval(cr.x, cr.x + cr.width);
-      let y = randomIntFromInterval(cr.y, cr.y + cr.height);
+      let x = cr.x + cr.width * 0.26;
+      let y = cr.y + cr.height / 2;
 
       //elementFromPoint returns the topmost Element at the specified coordinates (relative to the viewport).
       let elmt = document.elementFromPoint(x, y);
