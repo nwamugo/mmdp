@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-let paginator;
 function createImpactFactorTable(data, rowsPerPage) {
   $(document).ready(async function() {
     const keys = [
