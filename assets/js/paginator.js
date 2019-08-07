@@ -1,17 +1,17 @@
 class Paginator {
-  constructor(data, columnKeys, table, selectedItems) {
+  constructor(data, columnKeys, table, selectedItems, entriesPerPage) {
     this.data = data;
     this.tempData = [];
     this.empData = false;
     this.currentPage = 1;
-    this.entriesPerPage = 10;
+    this.entriesPerPage = entriesPerPage;
     this.totalPage = this.getTotalPage();
     this.columnKeys = columnKeys;
     this.potentialPartnershipsTable = false;
     this.table = table;
     this.selectedItems = selectedItems;
   }
-  
+
   getData() {
     if (this.empData) {
       return this.tempData;
@@ -49,7 +49,7 @@ class Paginator {
   }
   initialPage() {
     const data = this.getData();
-    const paginatedData = data.slice(0, 10);
+    const paginatedData = data.slice(0, this.entriesPerPage);
     const rows = this.createTableRows(paginatedData);
 
     this.createTableBody(rows);
@@ -85,11 +85,11 @@ class Paginator {
     let tableRow;
     let tableRowData = getTableRows(data, keys);
     if (this.potentialPartnershipsTable) {
-      if (this.table === 'gapAnalysis') {
+      if (this.table === "gapAnalysis") {
         tableRow = tableRowData.gapAnalysisTableRows;
-      } else if (this.table === 'potentialPartnerships') {
+      } else if (this.table === "potentialPartnerships") {
         tableRow = tableRowData.potentialPartnershipsTableRows;
-      } else if (this.table === 'impactFactor' ){
+      } else if (this.table === "impactFactor") {
         tableRow = tableRowData.impactFactorTableRows;
       }
     } else {
@@ -106,20 +106,22 @@ class Paginator {
 
   createTableBody(rows) {
     if (this.potentialPartnershipsTable) {
-      if (this.table === 'gapAnalysis') {
-        $('#gap-analysis-data').html(rows);
+      if (this.table === "gapAnalysis") {
+        $("#gap-analysis-data").html(rows);
         bindGapAnalysisModalJQuery(window.focusAreaGaps);
         bindJQuery(this.table, this.selectedItems);
-      } else if (this.table === 'potentialPartnerships') {
-        $('#partnership-report-data').html(rows);
+      } else if (this.table === "potentialPartnerships") {
+        $("#partnership-report-data").html(rows);
         bindJQueryPartnerships(this.selectedItems);
-        bindPotentialPartnershipModalJQuery(window.potentialPartnershipsModalData);
-      } else if (this.table === 'impactFactor'){
-        $('#impact-factor-data').html(rows);
+        bindPotentialPartnershipModalJQuery(
+          window.potentialPartnershipsModalData
+        );
+      } else if (this.table === "impactFactor") {
+        $("#impact-factor-data").html(rows);
       }
     } else {
-        $('tbody.table__body').html(rows);
-        bindJQuery(this.table, this.selectedItems);
+      $("tbody.table__body").html(rows);
+      bindJQuery(this.table, this.selectedItems);
     }
   }
   updatePageOf() {
@@ -131,47 +133,47 @@ class Paginator {
       return;
     }
 
-    if (this.table === 'gapAnalysis') {
-      $('#gap-current-page').html(currentPage);
-      $('#gap-total-page').html(totalPage);
-    } else if (this.table === 'potentialPartnerships') {
-      $('#potential-current-page').html(currentPage);
-      $('#potential-total-page').html(totalPage);
-    } else if (this.table === 'impactFactor') {
-      $('#impact-factor-current-page').html(currentPage);
-      $('#impact-factor-total-page').html(totalPage);
+    if (this.table === "gapAnalysis") {
+      $("#gap-current-page").html(currentPage);
+      $("#gap-total-page").html(totalPage);
+    } else if (this.table === "potentialPartnerships") {
+      $("#potential-current-page").html(currentPage);
+      $("#potential-total-page").html(totalPage);
+    } else if (this.table === "impactFactor") {
+      $("#impact-factor-current-page").html(currentPage);
+      $("#impact-factor-total-page").html(totalPage);
     } else {
-      $('#current-page').html(currentPage);
-      $('#total-page').html(totalPage);
+      $("#current-page").html(currentPage);
+      $("#total-page").html(totalPage);
     }
-    if (this.table === 'gapAnalysis') {
+    if (this.table === "gapAnalysis") {
       currentPage === 1
-        ? $('#gap-previous-page').removeClass('active__nav')
-        : $('#gap-previous-page').addClass('active__nav');
+        ? $("#gap-previous-page").removeClass("active__nav")
+        : $("#gap-previous-page").addClass("active__nav");
       currentPage === totalPage
-        ? $('#gap-next-page').removeClass('active__nav')
-        : $('#gap-next-page').addClass('active__nav');
-    } else if (this.table === 'potentialPartnerships') {
+        ? $("#gap-next-page").removeClass("active__nav")
+        : $("#gap-next-page").addClass("active__nav");
+    } else if (this.table === "potentialPartnerships") {
       currentPage === 1
-        ? $('#potential-previous-page').removeClass('active__nav')
-        : $('#potential-previous-page').addClass('active__nav');
+        ? $("#potential-previous-page").removeClass("active__nav")
+        : $("#potential-previous-page").addClass("active__nav");
       currentPage === totalPage
-        ? $('#potential-next-page').removeClass('active__nav')
-        : $('#potential-next-page').addClass('active__nav');
-    } else if (this.table === 'impactFactor') {
+        ? $("#potential-next-page").removeClass("active__nav")
+        : $("#potential-next-page").addClass("active__nav");
+    } else if (this.table === "impactFactor") {
       currentPage === 1
-          ? $('#impact-factor-previous-page').removeClass('active__nav')
-          : $('#impact-factor-previous-page').addClass('active__nav');
+        ? $("#impact-factor-previous-page").removeClass("active__nav")
+        : $("#impact-factor-previous-page").addClass("active__nav");
       currentPage === totalPage
-          ? $('#impact-factor-next-page').removeClass('active__nav')
-          : $('#impact-factor-next-page').addClass('active__nav');
+        ? $("#impact-factor-next-page").removeClass("active__nav")
+        : $("#impact-factor-next-page").addClass("active__nav");
     } else {
       currentPage === 1
-        ? $('#previous-page').removeClass('active__nav')
-        : $('#previous-page').addClass('active__nav');
+        ? $("#previous-page").removeClass("active__nav")
+        : $("#previous-page").addClass("active__nav");
       currentPage === totalPage
-        ? $('#next-page').removeClass('active__nav')
-        : $('#next-page').addClass('active__nav');
+        ? $("#next-page").removeClass("active__nav")
+        : $("#next-page").addClass("active__nav");
     }
   }
 }
