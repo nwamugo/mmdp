@@ -712,6 +712,12 @@ function getTrimmedStateNameFromUrl(type) {
           });
         }
       });
+      const backToStateBtn = document.getElementById('c-matrix-btn');
+      backToStateBtn.addEventListener(
+        'click',
+        () =>
+          (window.location.href = `http://${baseURL}/state.html?state=${stateName}`)
+      );
     } catch (error) {
       window.location.href =
         `http://${baseURL}/state.html?state=${stateName}` ||
