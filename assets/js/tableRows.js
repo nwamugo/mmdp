@@ -68,10 +68,14 @@ getTableRows = (data, keys) => {
         <main class="table-row body">
         <label class="report-col-1">
         <div class="check-box">
-            <input type="checkbox" name="aaaaa" class="check">
+            <input
+            data-org=${data[
+              keys[0]
+            ].replace(/ /g, "")}
+            type="checkbox" name="aaaaa" class="check">
         </div>
         </label>
-        <span   class="impact-row-split">
+        <span class="impact-row-split">
           <div class="impact-table-col"> <div>${data[keys[0]]}</div></div>
           <div class="impact-table-col"> <div>${data[keys[1]]}</div></div>
           <div class="impact-table-col"><div>${data[keys[2]]}</div></div>
