@@ -319,10 +319,7 @@ span {
   letter-spacing: -0.3px;
   text-align: center;
   color: #1a1f37;
-}
-
-.footer__right_content :nth-child(3) {
-  margin: 0 26px 0 10px;
+  width: 420px;
 }
 
 /* Page Dropdown */
@@ -385,7 +382,7 @@ span {
 }
 
 .footer__right_content .go-back {
-  margin-right: 6px;
+  margin: 0 6px 0 30px;
 }
 
 .footer-page-entries {
