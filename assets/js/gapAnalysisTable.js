@@ -44,6 +44,20 @@ function loadGapAnalysisTable(paginator) {
   });
   bindGapAnalysisModalJQuery(focusAreaGaps);
   window.focusAreaGaps = focusAreaGaps;
+
+  $('.moreLess').click(function() {
+    const thisElement = $(this);
+    const truncate = thisElement.closest('.truncate-text');
+    const truncateText = '.truncate-text';
+    if (thisElement.hasClass('less')) {
+      truncate.prev(truncateText).toggle();
+      truncate.hide();
+    } else {
+      truncate.toggle();
+      truncate.next(truncateText).toggle();
+    }
+    return false;
+  });
 }
 
 $(document).ready(async function() {

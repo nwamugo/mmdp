@@ -73,20 +73,20 @@ const appendHtmlToParentItem = function(parentItemSelector, htmlStringData){
  * @returns : undefined */
 
 class Filter {
-  displayDataInDropdown(dataArray, dataId){
+  displayDataInDropdown(dataArray, dataId) {
     const processed = dataArray.reduce(
       (accum, dataItem, index) => {
         accum.temp += `<td><input name="${dataItem}" value="${dataItem}" class="checkBox" type="checkbox"/> &nbsp;${dataItem}</td>`;
         if (!((index + 1) % 5) || dataArray.length === index + 1) {
           accum.store.push(`\n            <tr> ${accum.temp}</tr>`);
-          accum.temp = "";
+          accum.temp = '';
         }
         return accum;
       },
-      { temp: "", store: [] }
+      { temp: '', store: [] }
     );
-    $(`${dataId} tbody`).html(processed.store.join(""));
-  };
+    $(`${dataId} tbody`).html(processed.store.join(''));
+  }
 }
 
 // Updated Table Filter Class definition
