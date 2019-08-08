@@ -7,10 +7,105 @@
                     <input class = "check" name="collaboration" value="collaboration" type="checkbox" data-org="check-all-items" id="partnerships-check-all"/>
 
                 </label>
-                <div class="col-2 header-row">Thematic Pillar <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                <div class="col-3 header-row">Sub theme <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                <div class="col-4 header-row header-row-lga-potential-partnerships">LGA <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                <div class="col-5 header-row organizations-header-row">Organizations with Potential Partnership <i class="fas fa-angle-down fa-xs fa-organizations-icon"></i></div>
+                <div class="col-2 header-row">Thematic Pillar <i name="thematicPillar" class ="fas fa-angle-down angle-down-fa-icon partnership-filter-icon"></i>
+                    <div class="table-filter-container">
+                        <div class="container">
+                            <div class="partner_table_filter_subnav fadeInDown" style="display: none;">
+                                <div class="partnerships_table_filters">
+                                    <p>
+                                        Thematic Pillar Filters
+                                        <button class="clear_filter__button partnership-table-clear-filter" >
+                                            Clear Filter
+                                        </button>
+                                        <button class="apply_filter__button partnership-table-apply-filter" >
+                                            Apply Filter
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="partnerships_table_filter_data">
+                                    <div id="thematicPillarFilterData" class="filter-data-option-items">
+                                        <!--  Load column filter checkbox items dynamically-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 header-row">Sub theme
+                    <i name="subTheme" class="fas fa-angle-down angle-down-fa-icon partnership-filter-icon"></i>
+                    <div class="table-filter-container">
+                        <div class="container">
+                            <div class="partner_table_filter_subnav fadeInDown" style="display: none;">
+                                <div class="partnerships_table_filters">
+                                    <p>
+                                        Sub-Theme Filters
+                                        <button class="clear_filter__button partnership-table-clear-filter" >
+                                            Clear Filter
+                                        </button>
+                                        <button class="apply_filter__button partnership-table-apply-filter" >
+                                            Apply Filter
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="partnerships_table_filter_data">
+                                    <div id="subThemeFilterData" class="filter-data-option-items">
+                                        <!--  Load column filter checkbox items dynamically-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 header-row header-row-lga-potential-partnerships">LGA
+                    <i name="lga" class="fas fa-angle-down angle-down-fa-icon partnership-filter-icon"></i>
+                    <div class="table-filter-container">
+                        <div class="container">
+                            <div class="partner_table_filter_subnav fadeInDown" style="display: none;">
+                                <div class="partnerships_table_filters">
+                                    <p>
+                                        LGA Filters
+                                        <button class="clear_filter__button partnership-table-clear-filter" >
+                                            Clear Filter
+                                        </button>
+                                        <button class="apply_filter__button partnership-table-apply-filter" >
+                                            Apply Filter
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="partnerships_table_filter_data">
+                                    <div id="lgaFilterData" class="filter-data-option-items">
+                                        <!--  Load column filter checkbox items dynamically-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 header-row organizations-header-row">Organizations with Potential Partnership
+                    <i name="organizationName" class="fas fa-angle-down fa-xs fa-organizations-icon partnership-filter-icon"></i>
+                    <div class="table-filter-container">
+                        <div class="container">
+                            <div class="partner_table_filter_subnav fadeInDown" style="display: none;">
+                                <div class="partnerships_table_filters">
+                                    <p>
+                                        Organizations with Potential Partnership Filters
+                                        <button name="organizationName" class="clear_filter__button partnership-table-clear-filter" >
+                                            Clear Filter
+                                        </button>
+                                        <button name="organizationName" class="apply_filter__button partnership-table-apply-filter" >
+                                            Apply Filter
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="partnerships_table_filter_data">
+                                    <div id="organizationNameFilterData" class="filter-data-option-items">
+                                        <!--  Load column filter checkbox items dynamically-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </header>
             <!--Rows will be loaded dynamically here-->
             <div id="partnership-report-data"></div>

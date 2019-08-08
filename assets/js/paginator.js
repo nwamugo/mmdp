@@ -19,6 +19,21 @@ class Paginator {
     const data = this.tempData.length ? this.tempData : this.data;
     return data;
   }
+
+  updateTableData( updatedTableData ) {
+    this.data = updatedTableData;
+    this.tempData = [];
+    this.empData = false;
+    this.currentPage = 1;
+    this.totalPage = this.getTotalPage();
+    if(this.table === 'potentialPartnerships'){
+      window.partnershipsCsvTableData = updatedTableData;
+    }
+    else if(this.table === 'gapAnalysis'){
+      window.gapTableData = updatedTableData;
+    }
+  }
+
   setTempData(data = []) {
     this.tempData = data;
   }

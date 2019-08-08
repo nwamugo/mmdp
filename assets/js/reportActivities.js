@@ -271,10 +271,21 @@ ${number}
                 return item;
               });
 
-              createPotentialPartnershipsTable(
-                tableData,
-                stakeholderServicesArray
-              );
+              // Check if we created a filter object for the Partnerships Table Data
+              // If so, use the current selected LGA based filter to to update the table data
+              if(window.partnershipsTableHeaderFilter){
+                window.partnershipsTableHeaderFilter.setFilteredTableDataResults(
+                    tableData
+                );
+                window.partnershipsTableHeaderFilter.refreshTableData();
+              }
+              // Otherwise create the potential partnerships table again
+              else{
+                createPotentialPartnershipsTable(
+                    tableData,
+                    stakeholderServicesArray
+                );
+              }
             }
           });
         }
