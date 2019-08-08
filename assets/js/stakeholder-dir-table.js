@@ -62,6 +62,8 @@ $(document).ready(async function() {
   keys[4] = param === "country" ? "stateLocation" : keys[4];
   let selectedItems = [];
 
+  let entriesPerPage = 10;
+
   $("#stakeholder-directory-table").on(
     "click",
     'input[type="checkbox"]',
@@ -170,7 +172,7 @@ $(document).ready(async function() {
         if (!filteredData || filteredData.length === 0) {
           $(".search__messages").css({ display: "block" });
         } else {
-          paginator = new Paginator(filteredData, keys, table, selectedItems);
+          paginator = new Paginator(filteredData, keys, table, selectedItems, entriesPerPage);
           loadStakeholderDetails(paginator);
         }
       }
@@ -184,7 +186,7 @@ $(document).ready(async function() {
     $("#stakeholder-directory-table").load(
       "/partials/stakeholder-directory-table.html",
       function() {
-        const paginator = new Paginator(tableData, keys, table, selectedItems);
+        const paginator = new Paginator(tableData, keys, table, selectedItems, entriesPerPage);
         loadStakeholderDetails(paginator);
       }
     );
