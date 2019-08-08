@@ -130,7 +130,8 @@
   async function loaded() {
     lgaName = getqueryName('lgaName');
     const lgaSpan = document.getElementById('lga-name');
-    lgaSpan.innerHTML = lgaName.replace('%20', ' ');
+    const spaceEncoding = /%20/gi;
+    lgaSpan.innerHTML = lgaName.replace(spaceEncoding, ' ');
     try {
       const responsePromise = await fetch(
         `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`
