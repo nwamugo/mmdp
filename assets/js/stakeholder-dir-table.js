@@ -245,51 +245,55 @@ $(document).ready(async function() {
         ".modal h5"
       ).html(`<div>${stakeholderName} <a href="#!" class="modal-close waves-effect waves-green btn-flat"
         >X</a></div><hr class="sh-hr">`);
-      const stakeholderDataJson = await response.json();
-      const stakeholderData = stakeholderDataJson.data[0];
-      const beneficiaryData = handleBeneficiaries(
-        stakeholderData.beneficiaries
-      );
-      const requiredDetails = {
-        "Year of Registration": stakeholderData.yearOfCacREG,
-        "RC Number": stakeholderData.cacRcNumber,
-        Category: stakeholderData.organisationTypeId.typeName,
-        "Founder Name": stakeholderData.founder,
-        "Founder's Phone Number": stakeholderData.phoneNumber,
-        Location: stakeholderData.beneficiaries[0].communities[0].lgaId.lgaName,
-        "Thematic Pillar (s)": beneficiaryData.thematicPillars,
-        "Sub Theme (s)": beneficiaryData.subThemes,
-        "Focus Area (s)": beneficiaryData.focusArea,
-        "Service (s)": beneficiaryData.beneficiaryService,
-        "Source (s) of Funding": beneficiaryData.fundingSources,
-        "Amount Invested till date": beneficiaryData.amountInvested,
-        "Local Communities": beneficiaryData.localCommunities,
-        "LGA of Operation": beneficiaryData.lgas,
-        "Partners (Local and International)": [
-          ...new Set(
-            stakeholderData.partnerships.map(
-              partner => partner.stakeholder2Id.organisationName
-            )
-          )
-        ].join(", "),
-        "Gender distribution of beneficiaries (in percentage) Male % Female%": `male: ${
-          beneficiaryData.malePercent
-        }%, female: ${beneficiaryData.femalePercent}%`,
-        "Total Number of Beneficiaries":
-          beneficiaryData.totalNumberOfBeneficiaries,
-        "Beneficiary Type": beneficiaryData.beneficiaryTypes,
-        "Target Audience (s)": beneficiaryData.targetAudience,
-        "Number of Staff": stakeholderData.staffStrengthRangeId
-          ? stakeholderData.staffStrengthRangeId.staffStrength
-          : "",
-        "Number of Volunteers": stakeholderData.volunteersCount
-      };
+        const stakeholderDataJson = await response.json();
+        const stakeholderData = stakeholderDataJson.data[0];
+        const beneficiaryData = handleBeneficiaries(
+          stakeholderData.beneficiaries
+        );
 
-      let shDetailsTableData = "";
-      const keys = Object.keys(requiredDetails);
-      while (keys.length > 0) {
-        const rowKeys = keys.splice(0, 3);
-        const newRow = `
+        let maleDistribution = stakeholderData.beneficiaries[0].beneficiaryTypes[0].noOfMaleBeneficiaries
+
+        let femaleDistribution = stakeholderData.beneficiaries[0].beneficiaryTypes[0].noOfFemaleBeneficiaries
+        
+        const requiredDetails = {          
+          'Year of Registration': stakeholderData.yearOfCacREG,
+          'RC Number': stakeholderData.cacRcNumber,
+          Category: stakeholderData.organisationTypeId.typeName,
+          'Founder Name': stakeholderData.founder,
+          "Founder's Phone Number": stakeholderData.phoneNumber,
+          Location:
+            stakeholderData.beneficiaries[0].communities[0].lgaId.lgaName,
+          'Thematic Pillar (s)': beneficiaryData.thematicPillars,
+          'Sub Theme (s)': beneficiaryData.subThemes,
+          'Focus Area (s)': beneficiaryData.focusArea,
+          'Service (s)': beneficiaryData.beneficiaryService,
+          'Source (s) of Funding': beneficiaryData.fundingSources,
+          'Amount Invested till date': beneficiaryData.amountInvested,
+          'Local Communities': beneficiaryData.localCommunities,
+          'LGA of Operation': beneficiaryData.lgas,
+          'Partners (Local and International)': [
+            ...new Set(
+              stakeholderData.partnerships.map(
+                partner => partner.stakeholder2Id.organisationName
+              )
+            )
+          ].join(', '),
+          'Gender distribution of beneficiaries (in percentage) Male % Female%': `male: ${Math.round((maleDistribution)/ (maleDistribution + femaleDistribution) * 100)}%, female: ${Math.round((femaleDistribution)/ (maleDistribution + femaleDistribution) * 100)}%`,
+          'Total Number of Beneficiaries':
+            beneficiaryData.totalNumberOfBeneficiaries,
+          'Beneficiary Type': beneficiaryData.beneficiaryTypes,
+          'Target Audience (s)': beneficiaryData.targetAudience,
+          'Number of Staff': stakeholderData.staffStrengthRangeId
+            ? stakeholderData.staffStrengthRangeId.staffStrength
+            : '',
+          'Number of Volunteers': stakeholderData.volunteersCount
+        };
+
+        let shDetailsTableData = '';
+        const keys = Object.keys(requiredDetails);
+        while (keys.length > 0) {
+          const rowKeys = keys.splice(0, 3);
+          const newRow = `
           <tr>
               <td>
                 <div class="row__title">${rowKeys[0]}</div>
