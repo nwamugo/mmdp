@@ -241,7 +241,7 @@
             <img class="cancel-modal" src="/assets/images/cancel.svg" />
           </div>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="modal-body">
           <div class="modal-grid-container">
             <!-- LGA displays go here -->
           </div>
@@ -249,14 +249,35 @@
       </div>
     </section>
 
-    <section class="potential-partnerships-modal" style="display:none;">
+    <section
+      class="potential-partnerships-modal"
+      id="potential-partnerships-modal"
+      style="display:none;"
+    >
       <div class="modal-content">
         <div class="modal-header">
           <div class="modal-header-navigation">
-            <div class="hamburger">
-              <div class="hamburger-line-potential-partnerships"></div>
-              <div class="hamburger-line-potential-partnerships"></div>
-              <div class="hamburger-line-potential-partnerships"></div>
+            <div class="modal-popup-section">
+              <div class="modal-hamburger modal-popup">
+                <!-- the hamburger icon -->
+              </div>
+
+              <div class="modal-popup-menu" id="modal-hamburger-popup">
+                <div class="modal-popup-upper">
+                  <span class="print-chart">Print Chart</span>
+                </div>
+                <div class="popup-lower">
+                  <button id="modal-save-as-png" class="popup-btn">
+                    Download PNG image
+                  </button>
+                  <button id="modal-save-as-jpg" class="popup-btn">
+                    Download JPEG image
+                  </button>
+                  <button id="modal-save-as-pdf" class="popup-btn">
+                    Download PDF document
+                  </button>
+                </div>
+              </div>
             </div>
             <img class="cancel-modal" src="/assets/images/cancel.svg" />
           </div>
@@ -301,6 +322,11 @@
     <script
       type="text/javascript"
       src="assets/js/reportActivities.js"
+      charset="utf-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="assets/js/tableModalsDownload.js"
       charset="utf-8"
     ></script>
     <script type="text/javascript" src="assets/js/paginator.js"></script>
