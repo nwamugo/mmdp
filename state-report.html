@@ -36,6 +36,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
     />
+   
     <title>MMDP | Report</title>
   </head>
 
@@ -185,18 +186,37 @@
 
         <!-- Search Stakeholders Activities -->
         <section class="section search__activities__section">
-          <input id="search__impact__factor" />
+          <input id="search__activities__impact" />
           <button
-            id="btn_search"
+            id="btn_search_impact"
             class="banner__button animated flashing slow delay-2s"
           >
             Search
           </button>
+
+          <input id="search__activities__gap" />
+          <button
+            id="btn_search_gap"
+            class="banner__button animated flashing slow delay-2s"
+          >
+            Search
+          </button>
+
+          <input id="search__activities__partnership" />
+          <button
+            id="btn_search_partner"
+            class="banner__button animated flashing slow delay-2s"
+          >
+            Search
+          </button>
+
+
           <div class="search__messages" id="gap_message">No results. The system couldn’t find any gap analysis data related to your search.</div>
+          <div class="search__messages" id="impact_message">
+              No results. Could not find any Impact Factor related to your search
+            </div>
         </section>
-        <div class="search__messages">
-          No results. Could not find any Impact Factor related to your search
-        </div>
+      
 
         <!-- Toggle Button -->
         <section class="gap-analysis-toggle">

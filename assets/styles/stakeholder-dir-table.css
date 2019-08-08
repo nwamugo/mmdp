@@ -134,7 +134,8 @@ span {
   padding: 5px;
 }
 
-#gap_message {
+#gap_message,
+#impact_message {
   display: none;
   margin-left: 6%;
 }
@@ -953,6 +954,8 @@ table.stakeholder__details__table .row__value {
   font-weight: bold;
   font-size: 16px;
 }
+
+
 
 @media screen and (max-width: 1118px) {
   #partnership-report-button {

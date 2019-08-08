@@ -5,6 +5,11 @@ const queryParam = queryNameFromUrl
   ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
   : 'Nigeria';
 
+$('#btn_search_impact').hide();
+$('#btn_search_gap').hide();
+$('#search__activities__gap').hide();
+$('#search__activities__impact').hide();
+
 async function fetchStakeholderInformation() {
   const stakeholderData = await fetch(
     `${MMDP_BASE_URL}/api/v1/location?state=${queryParam}&focusAreaName`
