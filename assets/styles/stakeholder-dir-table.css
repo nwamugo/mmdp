@@ -489,6 +489,11 @@ table.stakeholder__details__table .row__value {
   margin-top: -1.5%;
   height: 40px;
 }
+
+.partnerships_table_filters{
+  margin-top: -0.95rem !important;
+}
+
 .location_filters p,
 .beneficiary_filters p,
 .amount_filters p,
@@ -604,8 +609,9 @@ table.stakeholder__details__table .row__value {
   height: 40%;
 }
 
-.partnerships_table_filter_data{
-  margin-top: 2.5%;
+.partnerships_table_filter_data {
+  margin: 0.6rem 0;
+  padding-left: 1.25rem;
 }
 
 .beneficiary_filter_data {
@@ -736,10 +742,11 @@ table.stakeholder__details__table .row__value {
 .partner_table_filter_subnav {
   position: absolute;
   width: 79.5rem;
-  top: 73.1rem;
+  top: 73.02rem;
   background-color: white;
   left: 13rem;
   z-index: 990;
+  overflow: auto;
 }
 /* ----------------------------------------------- */
 
