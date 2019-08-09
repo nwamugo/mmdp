@@ -214,13 +214,14 @@
             Search
           </button>
 
-
-          <div class="search__messages" id="gap_message">No results. The system couldn’t find any gap analysis data related to your search.</div>
+          <div class="search__messages" id="gap_message">
+            No results. The system couldn’t find any gap analysis data related
+            to your search.
+          </div>
           <div class="search__messages" id="impact_message">
-              No results. Could not find any Impact Factor related to your search
-            </div>
+            No results. Could not find any Impact Factor related to your search
+          </div>
         </section>
-
 
         <!-- Toggle Button -->
         <section class="gap-analysis-toggle">
@@ -247,35 +248,41 @@
         <!-- stakeholder toggle button -->
 
         <!-- Report Tables -->
-        <div id="potential-partnerships-table-container"><div id="potential-partnerships-table"></div></div>
-        <div id="gap-analysis-table"></div>
-        <div id="impact-factor-table-container"><div id="impact-factor-table"></div></div>
+        <div id="potential-partnerships-table-container">
+          <div id="potential-partnerships-table"></div>
+        </div>
+
+        <div id="impact-factor-table-container">
+          <div id="impact-factor-table"></div>
+        </div>
+        <div id="gap-analysis-table-container">
+          <div id="gap-analysis-table"></div>
+        </div>
       </div>
     </main>
 
     <section class="gap-analysis-modal">
-
       <!-- Gap Analysis Modal Hamburger & Popup-->
-        <div class="gap-analysis-popup-section">
-          <div>
-            <div class="gap-analysis-popup-menu" >
-              <div class="popup-upper">
-                <span class="print-chart">Print Chart</span>
-              </div>
-              <div class="popup-lower">
-                <span id="save-gap-as-png" class="popup-btn">
-                  Download PNG image
-                </span>
-                <span id="save-gap-as-jpg" class="popup-btn">
-                  Download JPEG image
-                </span>
-                <span id="save-gap-as-pdf" class="popup-btn">
-                  Download PDF document
-                </span>
-              </div>
+      <div class="gap-analysis-popup-section">
+        <div>
+          <div class="gap-analysis-popup-menu">
+            <div class="popup-upper">
+              <span class="print-chart">Print Chart</span>
+            </div>
+            <div class="popup-lower">
+              <span id="save-gap-as-png" class="popup-btn">
+                Download PNG image
+              </span>
+              <span id="save-gap-as-jpg" class="popup-btn">
+                Download JPEG image
+              </span>
+              <span id="save-gap-as-pdf" class="popup-btn">
+                Download PDF document
+              </span>
             </div>
           </div>
         </div>
+      </div>
       <div class="modal-content">
         <div class="modal-header">
           <div class="modal-header-navigation">
@@ -377,6 +384,7 @@
     ></script>
     <script type="text/javascript" src="assets/js/paginator.js"></script>
     <script type="text/javascript" src="assets/js/tableRows.js"></script>
+    <script type="text/javascript" src="assets/js/filter.js"></script>
     <script
       type="text/javascript"
       src="assets/js/beneficiary-handlers.js"
@@ -391,7 +399,10 @@
     ></script>
     <script type="text/javascript" src="assets/js/gapAnalysisUtils.js"></script>
     <script type="text/javascript" src="assets/js/gapAnalysisTable.js"></script>
-    <script type="text/javascript" src="assets/js/filterGapAnalysis.js"></script>
+    <script
+      type="text/javascript"
+      src="assets/js/filterGapAnalysis.js"
+    ></script>
     <script type="text/javascript" src="assets/js/impactReportPage.js"></script>
     <script
       type="text/javascript"
@@ -409,7 +420,10 @@
     <script type="text/javascript" src="assets/js/partnershipsCsv.js"></script>
     <script type="text/javascript" src="assets/js/impactFactorCsv.js"></script>
     <script tyoe="text/javascript" src="assets/js/filter.js"></script>
-    <script type="text/javascript" src="assets/js/gapAnalysisModalDownload.js"></script>
+    <script
+      type="text/javascript"
+      src="assets/js/gapAnalysisModalDownload.js"
+    ></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.4/rgbcolor.min.js"
       crossorigin="anonymous"

@@ -6,10 +6,106 @@
                 <label class="report-col-1">
                     <input type="checkbox" name="check" class="check" data-org='check-all' id='check-all' />
                 </label>
-                <div class="report-col-2 header-row">Thematic Pillar <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                <div class="report-col-3 header-row">Sub theme <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                <div class="report-col-4 header-row">LGA with gaps <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                <div class="report-col-5 header-row">Number of Focus Areas with gaps <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
+                <div class="report-col-2 header-row">Thematic Pillar <i name="pillar" class="fas fa-angle-down angle-down-fa-icon partnership-filter-icon" id="dropdown__icon_"></i>
+                    <div class="table-filter-container">
+                        <div class="container">
+                            <div class="partner_table_filter_subnav fadeInDown" style="display: none;">
+                                <div class="thematic_filters partnerships_table_filters">
+                                    <p>
+                                        Thematic Pillars Filters
+                                        <button class="clear_filter__button gap-analysis-table-clear-filter" >
+                                            Clear Filter
+                                        </button>
+                                        <button class="apply_filter__button gap-analysis-table-apply-filter" >
+                                            Apply Filter
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="report_thematic_filter_data partnerships_table_filter_data">
+                                    <div id="thematic_data" class="filter-data-option-items">
+                                        <!-- Filter dropdown checkboxes will be loaded dynamically here-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="report-col-3 header-row">Sub theme<i name="subtheme" class="fas fa-angle-down angle-down-fa-icon partnership-filter-icon" id="dropdown__icon_"></i>
+                    <div class="table-filter-container">
+                        <div class="container">
+                            <div class="partner_table_filter_subnav fadeInDown" style="display: none;">
+                                <div class="subtheme_filters partnerships_table_filters">
+                                    <p>
+                                        Sub-Theme Filters
+                                        <button class="clear_filter__button gap-analysis-table-clear-filter" >
+                                            Clear Filter
+                                        </button>
+                                        <button class="apply_filter__button gap-analysis-table-apply-filter" >
+                                            Apply Filter
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="report_thematic_filter_data partnerships_table_filter_data">
+                                    <div id="subtheme_data" class="filter-data-option-items">
+                                        <!-- Filter dropdown checkboxes will be loaded dynamically here-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="report-col-4 header-row">LGA with gaps <i name="LgasWithGaps" class="fas fa-angle-down angle-down-fa-icon partnership-filter-icon" id="dropdown__icon_"></i>
+                    <div class="table-filter-container">
+                        <div class="container">
+                            <div class="partner_table_filter_subnav fadeInDown" style="display: none;">
+                                <div class="lga_gap_filters partnerships_table_filters">
+                                    <p>
+                                        LGA with gaps Filters
+                                        <button class="clear_filter__button gap-analysis-table-clear-filter" >
+                                            Clear Filter
+                                        </button>
+                                        <button class="apply_filter__button gap-analysis-table-apply-filter" >
+                                            Apply Filter
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="report_thematic_filter_data partnerships_table_filter_data">
+                                    <div id="lga_gap_data" class="filter-data-option-items">
+                                        <!-- Filter dropdown checkboxes will be loaded dynamically here-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="report-col-4 header-row">Number of Focus Areas with gaps <i name="focusAreasWithGapsCount" class="fas fa-angle-down angle-down-fa-icon partnership-filter-icon" id="dropdown__icon_"></i>
+                    <div class="table-filter-container">
+                        <div class="container">
+                            <div class="partner_table_filter_subnav fadeInDown" style="display: none;">
+                                <div class="gap_count_filters partnerships_table_filters">
+                                    <p>
+                                        Number of Focus Areas With Gaps Filters
+                                        <button class="clear_filter__button gap-analysis-table-clear-filter" >
+                                            Clear Filter
+                                        </button>
+                                        <button class="apply_filter__button gap-analysis-table-apply-filter" >
+                                            Apply Filter
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="report_thematic_filter_data partnerships_table_filter_data">
+                                    <div id="gap_count_data" class="filter-data-option-items">
+                                        <!-- Filter dropdown checkboxes will be loaded dynamically here-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </header>
             <!--Rows will be loaded dynamically here-->
             <div id="gap-analysis-data"></div>
@@ -53,7 +149,7 @@
             <div id="modal__body">
                 <table id="stakeholder__details__table" class="stakeholder__details__table">
                     <tbody>
-                        <!--Table rows will be loaded dynamically here-->
+                    <!--Table rows will be loaded dynamically here-->
                     </tbody>
                 </table>
                 <img class="mmdp__bg__img" src="./assets/images/common/group-2@3x.png" />

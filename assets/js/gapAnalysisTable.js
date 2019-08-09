@@ -13,10 +13,50 @@ let entriesPerPage = 10;
 
 function loadGapAnalysisTable(paginator) {
   paginator.potentialPartnershipsTable = true;
-  potentialPartnershipsTableData = paginator.initialPage();
+  const gapAnalysisTableData = paginator.initialPage();
 
-  $('#gap-analysis-data').html(potentialPartnershipsTableData);
-  $('#gap-analysis-table-mobile').html(potentialPartnershipsTableData);
+  // Table Filter Header Instance
+  const filterTableColumnHeaders = [
+    'pillar',
+    'subtheme',
+    'LgasWithGaps',
+    'focusAreasWithGapsCount',
+  ];
+
+  const filterDropdownOptionsParentSelectors = [
+    '#thematic_data',
+    '#subtheme_data',
+    '#lga_gap_data',
+    '#gap_count_data',
+  ];
+
+
+
+  let columnKeysMap = new Map();
+  filterTableColumnHeaders.forEach(columnHeader => {
+    let currentColumnEntriesSet = new Set();
+    for (
+      let tableRowIndex = 0;
+      tableRowIndex < gapReport.length;
+      tableRowIndex++
+    ) {
+      currentColumnEntriesSet.add(gapReport[tableRowIndex][columnHeader]);
+    }
+    columnKeysMap.set(columnHeader, currentColumnEntriesSet);
+  });
+
+
+
+  // Create html string message displayed when the table filter has no results
+  const noFilterResultsHtmlMessage = `
+        <main class="table-row body">
+          <h6 >
+            <b>No Gap Analysis Results found for the selected column filters.</b>
+           </h6>
+        </main>`;
+
+  $('#gap-analysis-data').html(gapAnalysisTableData);
+  $('#gap-analysis-table-mobile').html(gapAnalysisTableData);
   let n = 5;
   let options = '';
   while (n < 51) {
@@ -45,6 +85,35 @@ function loadGapAnalysisTable(paginator) {
   bindGapAnalysisModalJQuery(focusAreaGaps);
   window.focusAreaGaps = focusAreaGaps;
 
+  // Create an instance of the TableFilterHeader class for the potential partnerships table
+  window.gapAnalysisTableFilterHeader = new TableFilterHeader(
+    table,
+    'dropdown__icon_',
+    gapReport,
+    filterTableColumnHeaders,
+    filterDropdownOptionsParentSelectors,
+    {
+      filterIconSelector: '.dropdown__icon_',
+      filterCheckboxItemSelector:
+        'input[type="checkbox"].gap-analysis-filter-checkbox',
+      filterCheckboxItemClass: 'gap-analysis-filter-checkbox',
+      applyFiltersButtonSelector: '.gap-analysis-table-apply-filter',
+      clearFiltersButtonSelector: '.gap-analysis-table-clear-filter',
+      filterIconSiblingSelector: '.table-filter-container',
+      filterDropdownSubnavSelector: '.partner_table_filter_subnav',
+    },
+    columnKeysMap,
+    {
+      tablePaginator: paginator,
+      tableRootElementSelector: '#gap-analysis-data',
+    },
+    noFilterResultsHtmlMessage,
+    {
+      bindModalEventListener: bindGapAnalysisModalJQuery,
+      currentTableModalData: focusAreaGaps,
+    }
+  );
+
   $('.moreLess').click(function() {
     const thisElement = $(this);
     const truncate = thisElement.closest('.truncate-text');
@@ -68,10 +137,10 @@ $(document).ready(async function() {
   );
   const data = await gapAnalysisReportData.json();
 
-  $('#gap-analysis-table').on('click', 'input[type="checkbox"]', function() {
+  $('#gap-analysis-table-container').on('click', 'input[type="checkbox"].check, input[type="checkbox"].check-all', function() {
     if ($(this).is(':checked') && $(this).attr('data-org') !== 'check-all') {
       var strinn = $(this).attr('data-org');
-      selectedItems.push(strinn.replace(/-/g, ' '));
+      strinn && selectedItems.push(strinn.replace(/-/g, ' '));
     } else if (
       $(this).is(':checked') &&
       $(this).attr('data-org') === 'check-all'
@@ -134,7 +203,7 @@ $(document).ready(async function() {
 
         pillarObject = {
           ...row,
-          ...modalRow
+          ...modalRow,
         };
         gapReport.push(row);
         focusAreaGaps.push(pillarObject);
