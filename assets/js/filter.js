@@ -19,18 +19,23 @@ const appendItemToFilterDropDown = function (
   switch (tableName) {
     case 'potentialPartnerships':
       return`<span class="partnership-table-filter-item">
+      <label class="filter-options-checkbox-label">
+           <input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox">
+             ${dataItem}
+           </label>
+        </span>`;
+    case "impactFactor":
+      return `<span class="impact-table-filter-item">
            <label class="filter-options-checkbox-label">
            <input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox">
              ${dataItem}
            </label>
         </span>`;
-
     default:
       // Default item is set to the stakeholder table checkbox item
       return `<td><input name="${dataItem}" value="${dataItem}" class="checkBox" type="checkbox"/> &nbsp;${dataItem}</td>`;
   }
 };
-
 
 /**
  * @description : Function that creates a HTML string representing all options/checkbox items for a single column
@@ -93,7 +98,6 @@ class Filter {
 // Returns - Object
 
 class TableFilterHeader extends Filter {
-
   /**
    * @classdesc : Class that returns a single instance of a the TableFilterHeader class
    * @params :
@@ -290,7 +294,7 @@ class TableFilterHeader extends Filter {
   @params : None
   @returns : Array - Array of table rows ready to be added to the paginator*/
 
-  filterTableData(){
+  filterTableData() {
     // create final results of all filtered data
     this.previousFilteredTableResults = this.filteredTableDataResults;
     let filteredResultsSet = new Set();
@@ -386,7 +390,7 @@ class TableFilterHeader extends Filter {
     }
 
     // If there are no active filters
-    if(!activeFilterColumns.size){
+    if (!activeFilterColumns.size) {
       // reset the filter's table to display all table data
       this.resetFilteredTableDataResults();
       // refresh the table to display all records
@@ -400,7 +404,7 @@ class TableFilterHeader extends Filter {
   @params : None
   @returns : undefined*/
 
-  setFilteredTableDataResults(updatedTableData){
+  setFilteredTableDataResults(updatedTableData) {
     // set the filtered table data directly
     this.hideAllTableHeaderFilterDropdowns();
     this.clearAllFilters();
@@ -422,8 +426,6 @@ class TableFilterHeader extends Filter {
     // reset the filtered table data to all table data originally available
     this.hideAllTableHeaderFilterDropdowns();
     this.filteredTableDataResults = [];
-
-
   }
 
 /**

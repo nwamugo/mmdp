@@ -481,7 +481,8 @@ table.stakeholder__details__table .row__value {
 .subtheme_filters,
 .thematic_filters,
 .organisation_filters,
-.partnerships_table_filters{
+.partnerships_table_filters,
+.impact_table_filters {
   width: 100%;
   border-radius: 0px;
   background-color: #296d81;
@@ -501,7 +502,8 @@ table.stakeholder__details__table .row__value {
 .subtheme_filters p,
 .thematic_filters p,
 .organisation_filters p,
-.partnerships_table_filters p{
+.partnerships_table_filters p,
+.impact_table_filters p {
   font-family: Muli;
   font-style: normal;
   color: white;
@@ -509,12 +511,15 @@ table.stakeholder__details__table .row__value {
   margin-left: 30px;
 }
 
-.partnerships_table_filters p{
+.partnerships_table_filters p,
+.impact_table_filters p {
   padding-top: 10px;
 }
+
 .location_popup__header button {
   float: right;
 }
+
 .location_filters button.apply_filter__button,
 .beneficiary_filters button.apply_filter__button,
 .amount_filters button.apply_filter__button,
@@ -522,7 +527,8 @@ table.stakeholder__details__table .row__value {
 .subtheme_filters button.apply_filter__button,
 .thematic_filters button.apply_filter__button,
 .organisation_filters button.apply_filter__button,
-.partnerships_table_filters button.apply_filter__button{
+.partnerships_table_filters button.apply_filter__button,
+.impact_table_filters button.apply_filter__button {
   color: white;
   background: #3faaca;
   margin-top: 5px;
@@ -541,9 +547,12 @@ table.stakeholder__details__table .row__value {
   cursor: pointer;
 }
 
-.partnerships_table_filters button.apply_filter__button {
+.partnerships_table_filters button.apply_filter__button,
+.impact_table_filters button.apply_filter__button,
+.partnerships_table_filters button.clear_filter__button {
   margin-top: -0.5%;
 }
+
 .location_filters button.clear_filter__button,
 .beneficiary_filters button.clear_filter__button,
 .amount_filters button.clear_filter__button,
@@ -551,7 +560,8 @@ table.stakeholder__details__table .row__value {
 .subtheme_filters button.clear_filter__button,
 .thematic_filters button.clear_filter__button,
 .organisation_filters button.clear_filter__button,
-.partnerships_table_filters button.clear_filter__button{
+.partnerships_table_filters button.clear_filter__button,
+.impact_table_filters button.clear_filter__button {
   color: #3faaca;
   cursor: pointer;
   background: white;
@@ -570,7 +580,7 @@ table.stakeholder__details__table .row__value {
   margin-right: 35px;
 }
 
-.partnerships_table_filters button.clear_filter__button {
+.impact_table_filters button.clear_filter__button {
   margin-top: -0.5%;
 }
 
@@ -603,13 +613,15 @@ table.stakeholder__details__table .row__value {
 .thematic_filter_data,
 .partnership_filter_data,
 .organisation_filter_data,
-.partnerships_table_filter_data{
+.partnerships_table_filter_data,
+.impact_table_filter_data {
   background-color: white;
   margin-top: -7.7%;
   height: 40%;
 }
 
-.partnerships_table_filter_data {
+.partnerships_table_filter_data ,
+.impact_table_filter_data {
   margin: 0.6rem 0;
   padding-left: 1.25rem;
 }
@@ -728,7 +740,9 @@ table.stakeholder__details__table .row__value {
   box-shadow: 0px 0px 23px -2px #707070;
 }
 
-.organisation_subnav, .partner_table_filter_subnav {
+.organisation_subnav,
+.partner_table_filter_subnav,
+.impact_table_filter_subnav {
   display: none;
   position: absolute;
   width: 62.5%;
@@ -736,7 +750,16 @@ table.stakeholder__details__table .row__value {
   -webkit-box-shadow: 0px 0px 23px -2px #707070;
   -moz-box-shadow: 0px 0px 23px -2px #707070;
   box-shadow: 0px 0px 23px -2px #707070;
+  background-color: #fff;
+}
+
+.impact_table_filter_subnav {
+  position: absolute;
+  width: 79.5rem;
+  top: 73.1rem;
   background-color: white;
+  left: 13rem;
+  z-index: 990;
 }
 
 .partner_table_filter_subnav {
@@ -1160,4 +1183,11 @@ table.stakeholder__details__table .row__value {
   .gap-analysis-button {
     font-size: 9px;
   }
+}
+
+#btn_search_impact,
+#btn_search_gap,
+#search__activities__gap,
+#search__activities__impact {
+  display: none;
 }

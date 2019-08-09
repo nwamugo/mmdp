@@ -231,6 +231,7 @@
   top: 2.375rem;
   left: 78.14rem;
   width: 14.625rem;
+  display: none;
 }
 .modal-popup-section {
   position: absolute;
@@ -325,6 +326,10 @@
   border-left-color: #979797;
   border-width: 12px;
   margin-top: -30.5px;
+}
+
+.hamburger-display {
+  display: block;
 }
 
 /* Toggle this class - hide and show the popup */
@@ -427,7 +432,7 @@
 .download-confirm {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: -50%;
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 1rem 1.5rem;
@@ -451,4 +456,8 @@
   visibility: visible;
   transform: scale(1);
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.center-modal {
+  left: 50%;
 }

@@ -1,68 +1,312 @@
 <main>
-    <!-- Impact factor table -->
-    <section id="impact-factor-report-table" class="table">
-        <section class="impact-factor-table-web">
-            <header class="table-row report-table-header impact-header">
-                <label class="report-col-1">
-                    <input type="checkbox" name="check" class="check" data-org='impact-factor-check-all' id='impact-factor-check-all' />
-                </label>
-                <span class="impact-row-split">
-                    <div class="impact-table-header-col ">Organization <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                <div class="impact-table-header-col ">Focus Area <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                <div class="impact-table-header-col ">LGA <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                <div class="impact-table-header-col ">Sub theme <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                <div class="impact-table-header-col ">Thematic Pillar <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                <div class="impact-table-header-col ">Target % Completion <i class="fas fa-angle-down angle-down-fa-icon"></i></div>
-                </span>
-
-            </header>
-            <!--Rows will be loaded dynamically here-->
-            <div id="impact-factor-data"></div>
-
-            <!--Start Footer-->
-            <div class="table__footer_report">
-                <tr>
-                    <td colspan="7">
-                        <button id="impact-factor-export" class="banner__button animated flashing slow delay-2s">
-                            <img src="/assets/images/stakeholder-dir/cloud-computing.svg" />Export CSV
-                        </button>
-                        <span class="footer__right_content">
-                            <!-- Dropdown Trigger -->
-                            <a class='impact-factor-dropdown-trigger' data-target='impact-factor-entries-per-page'><span id="impact-factor-row-number">10 </span><i class="fas fa-caret-down"></i><a>
-
-                            <!-- Dropdown Structure -->
-                            <ul id='impact-factor-entries-per-page' class='dropdown-content'>
-                                <!-- Dynamic display goes here -->
-                            </ul>
-                            <span class="footer-page-entries">Entries per page</span>
-                            <span class="page-of-text">Page <span id="impact-factor-current-page">1</span> of
-                                <span id="impact-factor-total-page">1</span></span>
-                            <button id="impact-factor-previous-page" class="go-back">&#60;</button>
-                            <button id="impact-factor-next-page" class="go-forward">&#62;</button>
-                        </span>
-                    </td>
-                </tr>
+  <!-- Impact factor table -->
+  <section id="impact-factor-report-table" class="table">
+    <section class="impact-factor-table-web">
+      <header class="table-row report-table-header impact-header">
+        <label class="report-col-1">
+          <input
+            type="checkbox"
+            name="check"
+            class="check"
+            data-org="impact-factor-check-all"
+            id="impact-factor-check-all"
+          />
+        </label>
+        <span class="impact-row-split">
+          <div class="impact-table-header-col">
+            Organization
+            <i name="organization"
+              class="fas fa-angle-down angle-down-fa-icon impact-filter-icon"
+            ></i>
+            <div class="table-filter-container">
+              <div class="container">
+                <div
+                  class="impact_table_filter_subnav fadeInDown"
+                  style="display: none;"
+                >
+                  <div class="impact_table_filters">
+                    <p>
+                      Organization Filters
+                      <button
+                        class="clear_filter__button impact-table-clear-filter"
+                      >
+                        Clear Filter
+                      </button>
+                      <button
+                        class="apply_filter__button impact-table-apply-filter"
+                      >
+                        Apply Filter
+                      </button>
+                    </p>
+                  </div>
+                  <div class="impact_table_filter_data">
+                    <div
+                      id="organizationFilterData"
+                      class="filter-data-option-items"
+                    >
+                      <!--  Load column filter checkbox items dynamically-->
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </section>
-        <section id="impact-factor-table-mobile" class="impact-factor-table-mobile">
-            <!-- Mobile Table rows come here -->
-        </section>
+          </div>
+          <div class="impact-table-header-col ">
+            Focus Area
+            <i name="focusArea"
+              class="fas fa-angle-down angle-down-fa-icon impact-filter-icon"
+            ></i>
+            <div class="table-filter-container">
+              <div class="container">
+                <div
+                  class="impact_table_filter_subnav fadeInDown"
+                  style="display: none;"
+                >
+                  <div class="impact_table_filters">
+                    <p>
+                      Focus Area Filters
+                      <button
+                        class="clear_filter__button impact-table-clear-filter"
+                      >
+                        Clear Filter
+                      </button>
+                      <button
+                        class="apply_filter__button impact-table-apply-filter"
+                      >
+                        Apply Filter
+                      </button>
+                    </p>
+                  </div>
+                  <div class="impact_table_filter_data">
+                    <div
+                      id="focusAreaFilterData"
+                      class="filter-data-option-items"
+                    >
+                      <!--  Load column filter checkbox items dynamically-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="impact-table-header-col ">
+            LGA
+            <i name="lga"
+              class="fas fa-angle-down angle-down-fa-icon impact-filter-icon"
+            ></i>
+            <div class="table-filter-container">
+              <div class="container">
+                <div
+                  class="impact_table_filter_subnav fadeInDown"
+                  style="display: none;"
+                >
+                  <div class="impact_table_filters">
+                    <p>
+                      LGA Filters
+                      <button
+                        class="clear_filter__button impact-table-clear-filter"
+                      >
+                        Clear Filter
+                      </button>
+                      <button
+                        class="apply_filter__button impact-table-apply-filter"
+                      >
+                        Apply Filter
+                      </button>
+                    </p>
+                  </div>
+                  <div class="impact_table_filter_data">
+                    <div id="lgaFilterData" class="filter-data-option-items">
+                      <!--  Load column filter checkbox items dynamically-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="impact-table-header-col ">
+            Sub theme
+            <i name="subtheme"
+              class="fas fa-angle-down angle-down-fa-icon impact-filter-icon"
+            ></i>
+            <div class="table-filter-container">
+              <div class="container">
+                <div
+                  class="impact_table_filter_subnav fadeInDown"
+                  style="display: none;"
+                >
+                  <div class="impact_table_filters">
+                    <p>
+                      Sub theme Filters
+                      <button
+                        class="clear_filter__button impact-table-clear-filter"
+                      >
+                        Clear Filter
+                      </button>
+                      <button
+                        class="apply_filter__button impact-table-apply-filter"
+                      >
+                        Apply Filter
+                      </button>
+                    </p>
+                  </div>
+                  <div class="impact_table_filter_data">
+                    <div
+                      id="subthemeFilterData"
+                      class="filter-data-option-items"
+                    >
+                      <!--  Load column filter checkbox items dynamically-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="impact-table-header-col ">
+            Thematic Pillar
+            <i name="pillar"
+              class="fas fa-angle-down angle-down-fa-icon impact-filter-icon"
+            ></i>
+            <div class="table-filter-container">
+              <div class="container">
+                <div
+                  class="impact_table_filter_subnav fadeInDown"
+                  style="display: none;"
+                >
+                  <div class="impact_table_filters">
+                    <p>
+                      Thematic Pillar Filters
+                      <button
+                        class="clear_filter__button impact-table-clear-filter"
+                      >
+                        Clear Filter
+                      </button>
+                      <button
+                        class="apply_filter__button impact-table-apply-filter"
+                      >
+                        Apply Filter
+                      </button>
+                    </p>
+                  </div>
+                  <div class="impact_table_filter_data">
+                    <div
+                      id="pillarFilterData"
+                      class="filter-data-option-items"
+                    >
+                      <!--  Load column filter checkbox items dynamically-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="impact-table-header-col ">
+            Target % Completion
+            <i name="targetCompletion"
+              class="fas fa-angle-down angle-down-fa-icon impact-filter-icon"
+            ></i>
+            <div class="table-filter-container">
+              <div class="container">
+                <div
+                  class="impact_table_filter_subnav fadeInDown"
+                  style="display: none;"
+                >
+                  <div class="impact_table_filters">
+                    <p>
+                      Target Completion Filters
+                      <button
+                        class="clear_filter__button impact-table-clear-filter"
+                      >
+                        Clear Filter
+                      </button>
+                      <button
+                        class="apply_filter__button impact-table-apply-filter"
+                      >
+                        Apply Filter
+                      </button>
+                    </p>
+                  </div>
+                  <div class="impact_table_filter_data">
+                    <div
+                      id="targetCompletionFilterData"
+                      class="filter-data-option-items"
+                    >
+                      <!--  Load column filter checkbox items dynamically-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </span>
+      </header>
+      <!--Rows will be loaded dynamically here-->
+      <div id="impact-factor-data"></div>
+
+      <!--Start Footer-->
+      <div class="table__footer_report">
+        <tr>
+          <td colspan="7">
+            <button
+              id="impact-factor-export"
+              class="banner__button animated flashing slow delay-2s"
+            >
+              <img
+                src="/assets/images/stakeholder-dir/cloud-computing.svg"
+              />Export CSV
+            </button>
+            <span class="footer__right_content">
+              <!-- Dropdown Trigger -->
+              <a
+                class="impact-factor-dropdown-trigger"
+                data-target="impact-factor-entries-per-page"
+              >
+                <span id="impact-factor-row-number">10</span
+                ><i class="fas fa-caret-down"></i>
+              </a>
+
+              <!-- Dropdown Structure -->
+              <ul id="impact-factor-entries-per-page" class="dropdown-content">
+                <!-- Dynamic display goes here -->
+              </ul>
+              <span class="footer-page-entries">Entries per page</span>
+              <span class="page-of-text"
+                >Page <span id="impact-factor-current-page">1</span> of
+                <span id="impact-factor-total-page">1</span></span
+              >
+              <button id="impact-factor-previous-page" class="go-back">
+                &#60;
+              </button>
+              <button id="impact-factor-next-page" class="go-forward">
+                &#62;
+              </button>
+            </span>
+          </td>
+        </tr>
+      </div>
     </section>
+    <section id="impact-factor-table-mobile" class="impact-factor-table-mobile">
+      <!-- Mobile Table rows come here -->
+    </section>
+  </section>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h5>
+        <!-- Content will be loaded dynamically here -->
+      </h5>
+      <div id="modal__body">
+        <table id="impact__details__table" class="impact__details__table">
+          <tbody>
+            <!--Table rows will be loaded dynamically here-->
+          </tbody>
+        </table>
+        <img
+          class="mmdp__bg__img"
+          src="./assets/images/common/group-2@3x.png"
+        />
+      </div>
     </div>
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <h5>
-                <!-- Content will be loaded dynamically here -->
-            </h5>
-            <div id="modal__body">
-                <table id="impact__details__table" class="impact__details__table">
-                    <tbody>
-                    <!--Table rows will be loaded dynamically here-->
-                    </tbody>
-                </table>
-                <img class="mmdp__bg__img" src="./assets/images/common/group-2@3x.png" />
-            </div>
-        </div>
-    </div>
+  </div>
 </main>
