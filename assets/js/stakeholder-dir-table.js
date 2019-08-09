@@ -147,7 +147,7 @@ $(document).ready(async function() {
         .val()
         .trim() === ""
     ) {
-      $(".search__messages").css({ display: "none" });
+      $("#stakeholder_message").css({ display: "none" });
       loadStakeholderTable();
     }
   });
@@ -170,7 +170,7 @@ $(document).ready(async function() {
             .includes(search.trim().toLowerCase())
         );
         if (!filteredData || filteredData.length === 0) {
-          $(".search__messages").css({ display: "block" });
+          $("#stakeholder_message").css({ display: "block" });
         } else {
           paginator = new Paginator(filteredData, keys, table, selectedItems, entriesPerPage);
           loadStakeholderDetails(paginator);

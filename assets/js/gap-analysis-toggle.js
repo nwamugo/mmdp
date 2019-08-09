@@ -26,47 +26,62 @@ const impactRefactorHeader = `<div class="thematic-pillars__title">
                           </div>`;
 
 $(document).ready(async function() {
-  $("#gap-analysis-report-button").click(() => {
-    $("#partnership-report-button").addClass("disable"); // set the partnership report button to disabled
-    $("#impact-factor-report-button").addClass("disable"); // set the impact factor button to disabled
-    $("#gap-analysis-report-button").removeClass("disable"); // enable the gap analysis button
-    $("#gap-analysis-report-table").show(); // Show the gap analysis table
-    $("#partnership-report-table").hide(); // Hide the partnerships table
-    $("#impact-factor-table").hide(); // Hide the impact factor table
-    $("#search__impact__factor").val("");
-    $(".search__messages").hide();
-    $("#thematic-pillars__heading").html(gapAnalysisHeader); // Set the header for the table
-    if (!paginator.data.length) {
-      loadTable(gapReport);
-    }
+  $('#gap-analysis-report-button').click(() => {
+    $('#partnership-report-button').addClass('disable'); // set the partnership report button to disabled
+    $('#impact-factor-report-button').addClass('disable'); // set the impact factor button to disabled
+    $('#gap-analysis-report-button').removeClass('disable'); // enable the gap analysis button
+    $('#gap-analysis-report-table').show(); // Show the gap analysis table
+    $('#search__activities__gap').show(); //show gap analysis search field
+    $('#btn_search_gap').show(); //show gap analysis search button
+    $('#search__activities__impact').hide(); //hide impact search
+    $('#btn_search_impact').hide(); //hide impact button
+    $('#search__activities__partnership').hide(); //hide partner search
+    $('#btn_search_partner').hide(); //hide partner button
+    $('#partnership-report-table').hide(); // Hide the partnerships table
+    $('#impact-factor-table').hide(); // Hide the impact factor table
+    $('#search__activities__impact').val('');
+    $('#impact_message').hide();
+    $('#thematic-pillars__heading').html(gapAnalysisHeader); // Set the header for the table
+    loadGapTable(gapReport);
   });
 
-  $("#partnership-report-button").click(() => {
-    $("#gap-analysis-report-button").addClass("disable"); // set the gap analysis button to disabled
-    $("#impact-factor-report-button").addClass("disable"); // set the impact factor button to disabled
-    $("#partnership-report-button").removeClass("disable");
-    $("#partnership-report-table").show();
-    $("#gap-analysis-report-table").hide();
-    $("#impact-factor-table").hide(); // Hide the impact factor table
-    $("#search__impact__factor").val("");
-    $(".search__messages").hide();
-    $("#thematic-pillars__heading").html(partnershipHeader);
+  $('#partnership-report-button').click(() => {
+    $('#gap-analysis-report-button').addClass('disable'); // set the gap analysis button to disabled
+    $('#impact-factor-report-button').addClass('disable'); // set the impact factor button to disabled
+    $('#partnership-report-button').removeClass('disable');
+    $('#partnership-report-table').show();
+    $('#gap-analysis-report-table').hide();
+    $('#impact-factor-table').hide(); // Hide the impact factor table
+    $('#search__activities__gap').hide(); //hide gap analysis search field
+    $('#btn_search_gap').hide(); //hide gap analysis search button
+    $('#search__activities__impact').hide(); //hide impact search
+    $('#btn_search_impact').hide(); //hide impact button
+    $('#search__activities__partnership').show(); //show partner search
+    $('#btn_search_partner').show(); //show partner button
+    $('#search__activities__gap').val('');
+    $('#search__activities_impact').val('');
+    $('#impact_message').hide();
+    $('#thematic-pillars__heading').html(partnershipHeader);
     $('#gap_message').hide();
     $('#search__activities').val('');
   });
 
-  $("#impact-factor-report-button").click(() => {
-    $("#gap-analysis-report-button").addClass("disable");
-    $("#partnership-report-button").addClass("disable"); // set the partnership report button to disabled
-    $("#impact-factor-report-button").removeClass("disable");
-    $("#impact-factor-table").show();
-    $("#gap-analysis-report-table").hide();
-    $("#partnership-report-table").hide();
-    $("#thematic-pillars__heading").html(impactRefactorHeader);
+  $('#impact-factor-report-button').click(() => {
+    $('#gap-analysis-report-button').addClass('disable');
+    $('#partnership-report-button').addClass('disable'); // set the partnership report button to disabled
+    $('#impact-factor-report-button').removeClass('disable');
+    $('#impact-factor-table').show();
+    $('#gap-analysis-report-table').hide();
+    $('#partnership-report-table').hide();
+    $('#search__activities__gap').hide();
+    $('#btn_search_gap').hide(); //hide gap analysis search button
+    $('#search__activities__impact').show(); //show impact search
+    $('#btn_search_impact').show(); //show impact button
+    $('#search__activities__partnership').hide(); //hide partner search
+    $('#btn_search_partner').hide(); //hide partner button
+    $('#thematic-pillars__heading').html(impactRefactorHeader);
     $('#gap_message').hide();
-    $('#search__activities').val('');
-    if (!paginator.data.length) {
-      loadTable();
-    }
+    $('#search__activities__gap').val('');
+    loadTable();
   });
 });

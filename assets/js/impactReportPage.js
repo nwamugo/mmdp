@@ -100,7 +100,7 @@ async function loadSearchImpactFactorTable() {
   $("#impact-factor-table").load(
     "/partials/impact-report-table.html",
     function() {
-      const searchValue = $("#search__impact__factor").val();
+      const searchValue = $("#search__activities__impact").val();
       const search = searchValue.replace(/\s+/g, " ");
       const filteredData = impactFactorData.filter(
         item =>
@@ -127,12 +127,12 @@ async function loadSearchImpactFactorTable() {
       );
       if (!filteredData || filteredData.length === 0) {
         if ($("#impact-factor-table").is(":visible")) {
-          $(".search__messages").css({ display: "block" });
+          $("#impact_message").css({ display: "block" });
           createImpactFactorTable(notFound);
         }
       } else {
         createImpactFactorTable(filteredData, rowsPerPage);
-        $(".search__messages").css({ display: "none" });
+        $("#impact_message").css({ display: "none" });
       }
     }
   );
@@ -151,9 +151,9 @@ async function loadTable() {
 /**
  * @description - Search onclicking search button
  */
-$("#btn_search").click(function() {
+$("#btn_search_impact").click(function() {
   if (
-    $("#search__impact__factor")
+    $("#search__activities__impact")
       .val()
       .trim() === ""
   ) {
@@ -163,11 +163,11 @@ $("#btn_search").click(function() {
   }
 });
 
-$("#search__impact__factor").keypress(function(e) {
+$("#search__activities__impact").keypress(function(e) {
   var key = e.which;
   if (key == 13) {
     if (
-      $("#search__impact__factor")
+      $("#search__activities__impact")
         .val()
         .trim() === ""
     ) {
@@ -181,13 +181,13 @@ $("#search__impact__factor").keypress(function(e) {
 /**
  * @description - Load full table when search field is cleared
  */
-$("#search__impact__factor").keyup(function() {
+$("#search__activities__impact").keyup(function() {
   if (
-    $("#search__impact__factor")
+    $("#search__activities__impact")
       .val()
       .trim() === ""
   ) {
-    $(".search__messages").css({ display: "none" });
+    $("#impact_message").css({ display: "none" });
     loadTable();
   }
 });
