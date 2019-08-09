@@ -223,17 +223,24 @@
   padding-top: 3px;
 }
 
-.hamburger {
-  margin-top: 10px 0 5px 0;
-  cursor: pointer;
+@media only screen and (min-width: 1880px) {
+    .modal-header .modal-header-navigation {
+        margin-left: 93rem;
+    }
 }
 
-.hamburger-line {
-  width: 35px;
-  height: 5px;
-  background-color: #f5f6fa;
-  margin: 6px 0;
-  flex: 1;
+.hamburger{
+    margin-top: 10px 0 5px 0;
+    cursor: pointer;
+}
+
+.hamburger-line{
+    width: 35px;
+    height: 5px;
+    background-color: #bababa;
+    margin: 6px 0;
+    flex: 1;
+    border-radius: 2px;
 }
 
 .modal-header img {

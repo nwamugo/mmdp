@@ -40,7 +40,11 @@
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
 }
 
-.gap-analysis-modal .lga-header {
+.single-lga-grid-box {
+  width: 68%;
+}
+
+.gap-analysis-modal .lga-header{
   background-color: #3faaca;
   min-height: 92px;
   display: flex;
@@ -58,8 +62,8 @@
   color: #ffffff;
 }
 
-.gap-analysis-modal .lga-header .lga-name p {
-  font-size: 27px;
+.gap-analysis-modal .lga-header .lga-name p{
+  font-size: 29px;
   color: #ffffff;
   margin-top: 2.1rem;
   font-weight: bold;
@@ -132,6 +136,10 @@
   margin-bottom: 0;
 }
 
+.gap-analysis-modal .lga-body-bottom ul {
+  margin-top: 0;
+}
+
 .gap-analysis-modal .lga-body-bottom li {
   font-size: 14px;
   list-style-type: disc;
@@ -191,3 +199,56 @@
   color: #3faaca;
   cursor: pointer;
 }
+/* Modal Download */
+.gap-analysis-popup-section {
+  position: absolute;
+  top: -1.3rem;
+  left: 67.5rem;
+  width: 11.625rem;
+}
+
+/* The actual popup */
+.gap-analysis-popup-menu {
+  width: 192px;
+  height: 110px;
+  border-radius: 3px;
+  border: solid 1px #979797;
+  background-color: #fff;
+  display: none;
+  z-index: 10;
+}
+
+/* Popup arrow */
+.gap-analysis-popup-menu::after, .gap-analysis-popup-menu::before {
+  left: 98.3%;
+	top: 56%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+@-moz-document url-prefix() { 
+  .gap-analysis-popup-menu::after, .gap-analysis-popup-menu::before {
+    left: 109%;
+  }
+}
+
+.gap-analysis-popup-menu::after {
+	border-left-color: #fff;
+	border-width: 11px;
+	margin-top: -30px;
+}
+
+.gap-analysis-popup-menu::before {
+	border-left-color: #979797;
+	border-width: 12px;
+  margin-top: -30.5px;
+}
+
+.canvas-needed-properties{
+  overflow: visible !important;
+ }
+ 
