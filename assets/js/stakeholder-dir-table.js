@@ -278,7 +278,7 @@ $(document).ready(async function() {
               )
             )
           ].join(', '),
-          'Gender distribution of beneficiaries (in percentage) Male % Female%': `male: ${Math.round((maleDistribution)/ (maleDistribution + femaleDistribution) * 100)}%, female: ${Math.round((femaleDistribution)/ (maleDistribution + femaleDistribution) * 100)}%`,
+          'Gender distribution of beneficiaries (in percentage)': `Male: ${Math.round((maleDistribution)/ (maleDistribution + femaleDistribution) * 100)}%, Female: ${Math.round((femaleDistribution)/ (maleDistribution + femaleDistribution) * 100)}%`,
           'Total Number of Beneficiaries':
             beneficiaryData.totalNumberOfBeneficiaries,
           'Beneficiary Type': beneficiaryData.beneficiaryTypes,
