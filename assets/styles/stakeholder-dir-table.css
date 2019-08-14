@@ -688,6 +688,7 @@ table.stakeholder__details__table .row__value {
   height: 100%;
   padding-left: 30px;
   width: 100%;
+  max-height: 11em;
 }
 
 #data #checkBox,
