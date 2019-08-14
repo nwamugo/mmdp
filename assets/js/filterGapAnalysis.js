@@ -3,6 +3,8 @@ function loadGapTable(data) {
   window.gapTableData = data;
   let rowsPerPage = $('#gap-analysis-row-number').text();
   paginator = new Paginator(data, keys, table, selectedItems, rowsPerPage);
+  // Clear any active gap analysis column filter headers that have been applied
+  window.gapAnalysisTableFilterHeader ? window.gapAnalysisTableFilterHeader.clearAllFilters() : undefined;
   loadGapAnalysisTable(paginator);
 }
 
@@ -13,6 +15,8 @@ $(document).ready(async function() {
   function loadFilteredTable(tableData) {
     const searchValue = $('#search__activities__gap').val();
     const search = searchValue.replace(/\s+/g, ' ');
+    // Clear any active gap analysis column filter headers that have been applied
+    window.gapAnalysisTableFilterHeader ? window.gapAnalysisTableFilterHeader.clearAllFilters() : undefined;
     const filteredData = tableData.filter(
       gapRow =>
         gapRow.subtheme
