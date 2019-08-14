@@ -1,7 +1,77 @@
-function createPotentialPartnershipsTable(
-    tableData,
-    stakeholderServicesArray,
-) {
+/**
+ *@description Method that shows the number of filtered options on the partnership/collaboration table header
+  @params : columnHeaderOptionsCount
+  @returns : undefined*/
+function setFilteredOptionsCountOnPartnershipTable(columnHeaderOptionsCount) {
+  let thematicPillar = $('#thematicPillar').attr('id');
+  let subTheme = $('#subTheme').attr('id');
+  let lga = $('#lga').attr('id');
+  let organizationName = $('#organizationName').attr('id');
+  for (let item in columnHeaderOptionsCount) {
+    if (columnHeaderOptionsCount[item] !== 0) {
+      if (item === thematicPillar) {
+        $(
+          '<span class="selected-options-count selected-thematic-pillars">' +
+            columnHeaderOptionsCount[item] +
+            '</span>'
+        ).appendTo('#selectedThematicPillarsCount');
+      } else if (item === subTheme) {
+        $(
+          '<span class="selected-options-count selected-sub-themes">' +
+            columnHeaderOptionsCount[item] +
+            '</span>'
+        ).appendTo('#selectedSubThemesCount');
+      } else if (item === lga) {
+        $(
+          '<span class="selected-options-count selected-lgas">' +
+            columnHeaderOptionsCount[item] +
+            '</span>'
+        ).appendTo('#selectedLgasCount');
+      } else if (item === organizationName) {
+        $(
+          '<span class="selected-options-count selected-organizations">' +
+            columnHeaderOptionsCount[item] +
+            '</span>'
+        ).appendTo('#selectedOrganizationsCount');
+      }
+    }
+  }
+}
+
+/**
+ *@description Method that removes each of the filtered options count depending on the clicked button
+  @params : targetButton
+  @returns : undefined*/
+function removeEachFilteredOptionsCountOnPartnershipTable(targetButton) {
+  if (targetButton === 'clearThematicPillars') {
+    $('.header-row')
+      .find('.selected-thematic-pillars')
+      .remove();
+  } else if (targetButton === 'clearSubThemes') {
+    $('.header-row')
+      .find('.selected-sub-themes')
+      .remove();
+  } else if (targetButton === 'clearLgas') {
+    $('.header-row')
+      .find('.selected-lgas')
+      .remove();
+  } else if (targetButton === 'clearOrganizations') {
+    $('.header-row')
+      .find('.selected-organizations')
+      .remove();
+  }
+}
+/**
+ *@description Do some clean up: Method that removes all the filtered options count collectively on the partnership/collaboration table header
+  @params : none
+  @returns : undefined*/
+function removeAllFilteredOptionsCountOnPartnershipTable() {
+  $('.header-row')
+    .find('.selected-options-count')
+    .remove();
+}
+
+function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
   const keys = [
     'thematicPillar',
     'focusArea',
@@ -55,16 +125,22 @@ function createPotentialPartnershipsTable(
     }
   );
   let table = 'potentialPartnerships';
+  window.table = table;
   let entriesPerPage = 10;
 
-  const paginator = new Paginator(tableData, keys, table, selectedItems, entriesPerPage);
+  const paginator = new Paginator(
+    tableData,
+    keys,
+    table,
+    selectedItems,
+    entriesPerPage
+  );
   paginator.potentialPartnershipsTable = true;
 
   const potentialPartnershipsTableData = paginator.initialPage();
 
   $('#partnership-report-data').html(potentialPartnershipsTableData);
   $('#partnership-table-mobile').html(potentialPartnershipsTableData);
-
 
   // NOTE: Please note the order of the filterTableColumnKeys array
   //    should match the order for your table columns from left to right
@@ -74,26 +150,28 @@ function createPotentialPartnershipsTable(
     'thematicPillar',
     'subTheme',
     'lga',
-    'organizationName',
+    'organizationName'
   ];
 
   const filterDropdownOptionsParentSelectors = [
-      '#thematicPillarFilterData',
-      '#subThemeFilterData',
-      '#lgaFilterData',
-      '#organizationNameFilterData',
+    '#thematicPillarFilterData',
+    '#subThemeFilterData',
+    '#lgaFilterData',
+    '#organizationNameFilterData'
   ];
 
   let columnKeysMap = new Map();
-  filterTableColumnKeys.map(
-      (columnKey)=>{
-        let currentColumnEntriesSet = new Set();
-        for (let tableRowIndex = 0; tableRowIndex < tableData.length; tableRowIndex++) {
-          currentColumnEntriesSet.add(tableData[tableRowIndex][columnKey]);
-        }
-        columnKeysMap.set(columnKey, currentColumnEntriesSet);
-      }
-  );
+  filterTableColumnKeys.map(columnKey => {
+    let currentColumnEntriesSet = new Set();
+    for (
+      let tableRowIndex = 0;
+      tableRowIndex < tableData.length;
+      tableRowIndex++
+    ) {
+      currentColumnEntriesSet.add(tableData[tableRowIndex][columnKey]);
+    }
+    columnKeysMap.set(columnKey, currentColumnEntriesSet);
+  });
 
   let n = 5;
   let options = '';
@@ -128,11 +206,11 @@ function createPotentialPartnershipsTable(
 
   // Create html string message displayed when the table filter has no results
   const noFilterResultsHtmlMessage = `
-    <main id="table" class="table-row body">
-      <h6 class="partnership-row">
-        <b>No Results found for the selected column filters.</b>
-      </h6>
-    </main>`;
+  <main id="table" class="table-row body">
+    <h6 class="partnership-row">
+      <b>No Results found for the selected column filters.</b>
+    </h6>
+  </main>`;
 
   // Create an instance of the TableFilterHeader class for the potential partnerships table
   window.partnershipsTableHeaderFilter = new TableFilterHeader(
@@ -143,22 +221,23 @@ function createPotentialPartnershipsTable(
     filterDropdownOptionsParentSelectors,
     {
       filterIconSelector: '.partnership-filter-icon',
-      filterCheckboxItemSelector: 'input[type="checkbox"].partnership-filter-checkbox',
+      filterCheckboxItemSelector:
+        'input[type="checkbox"].partnership-filter-checkbox',
       filterCheckboxItemClass: 'partnership-filter-checkbox',
       applyFiltersButtonSelector: '.partnership-table-apply-filter',
       clearFiltersButtonSelector: '.partnership-table-clear-filter',
       filterIconSiblingSelector: '.table-filter-container',
-      filterDropdownSubnavSelector:'.partner_table_filter_subnav',
+      filterDropdownSubnavSelector: '.partner_table_filter_subnav'
     },
     columnKeysMap,
     {
-      'tablePaginator': paginator,
-      'tableRootElementSelector': '#partnership-report-data' ,
+      tablePaginator: paginator,
+      tableRootElementSelector: '#partnership-report-data'
     },
     noFilterResultsHtmlMessage,
     {
-      'bindModalEventListener': bindPotentialPartnershipModalJQuery,
-      'currentTableModalData': potentialPartnershipsModalData,
+      bindModalEventListener: bindPotentialPartnershipModalJQuery,
+      currentTableModalData: potentialPartnershipsModalData
     }
   );
 }
@@ -195,7 +274,6 @@ $(document).ready(async function() {
         return item;
       });
       createPotentialPartnershipsTable(tableData, stakeholderServicesArray);
-
     }
   );
 });

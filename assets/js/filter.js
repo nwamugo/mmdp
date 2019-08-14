@@ -333,6 +333,50 @@ class TableFilterHeader extends Filter {
     //  return the filtered result set after the final filter criteria is compared
     return filteredResultsSet;
   }
+  /**
+ *@description Method that shows the number of filtered options on the partnership/collaboration table header
+  @params : columnHeaderOptionsCount
+  @returns : undefined*/
+  setFilteredOptionsCountOnPartnershipTable(
+    currentSelectedDropdownItemsCount,
+    currentColumnHeader
+  ) {
+    if (currentColumnHeader === 'thematicPillar') {
+      $(
+        '<span class="selected-options-count selected-thematic-pillars">' +
+          currentSelectedDropdownItemsCount +
+          '</span>'
+      ).appendTo('#selectedThematicPillarsCount');
+    } else if (currentColumnHeader === 'subTheme') {
+      $(
+        '<span class="selected-options-count selected-sub-themes">' +
+          currentSelectedDropdownItemsCount +
+          '</span>'
+      ).appendTo('#selectedSubThemesCount');
+    } else if (currentColumnHeader === 'lga') {
+      $(
+        '<span class="selected-options-count selected-lgas">' +
+          currentSelectedDropdownItemsCount +
+          '</span>'
+      ).appendTo('#selectedLgasCount');
+    } else if (currentColumnHeader === 'organizationName') {
+      $(
+        '<span class="selected-options-count selected-organizations">' +
+          currentSelectedDropdownItemsCount +
+          '</span>'
+      ).appendTo('#selectedOrganizationsCount');
+    }
+  }
+
+  /**
+ *@description Do some clean up: Method that removes all the filtered options count collectively on the partnership/collaboration table header
+  @params : none
+  @returns : undefined*/
+  removeAllFilteredOptionsCountOnPartnershipTable() {
+    $('.header-row')
+      .find('.selected-options-count')
+      .remove();
+  }
 
   /**
  *@description Method to return filtered table data based on ALL currently selected filters (combined) or ANY filter criteria
@@ -359,6 +403,7 @@ class TableFilterHeader extends Filter {
       // Filter by ensuring all selected filter data is required for each row
       case 'combined':
         let currentActiveColumnHeaderFilterCount = 1;
+        this.removeAllFilteredOptionsCountOnPartnershipTable();
         activeFilterColumns.forEach(
           (currentSelectedDropdownItems, currentColumnHeader) => {
             filteredResultsSet = this.filterByAllActiveColumnHeaderFilters(
@@ -368,6 +413,13 @@ class TableFilterHeader extends Filter {
               activeFilterColumns.size,
               filteredResultsSet
             );
+            let currentSelectedDropdownItemsCount =
+              currentSelectedDropdownItems.size;
+            this.setFilteredOptionsCountOnPartnershipTable(
+              currentSelectedDropdownItemsCount,
+              currentColumnHeader
+            );
+
             currentActiveColumnHeaderFilterCount += 1;
           }
         );
@@ -528,7 +580,6 @@ class TableFilterHeader extends Filter {
   handleApplyFilters(e) {
     e.data._this.filterTableData();
   }
-
   /**
  *@description  Method to handle clearFilters event listener i.e removes all filters on current table data
   @params : Event object
@@ -540,6 +591,9 @@ class TableFilterHeader extends Filter {
       'checked',
       false
     );
+    if (window.table === 'potentialPartnerships') {
+      removeAllFilteredOptionsCountOnPartnershipTable();
+    }
   }
 
   /**
