@@ -80,7 +80,7 @@ function createImpactFactorTable(tableData, rowsPerPage) {
         const filterDropdownOptionsParentSelectors = [
           "#organizationFilterData",
           "#focusAreaFilterData",
-          "#lgaFilterData",
+          "#impactFactorLgaFilterData",
           "#subthemeFilterData",
           "#pillarFilterData",
           "#targetCompletionFilterData"
