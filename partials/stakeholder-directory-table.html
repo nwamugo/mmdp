@@ -5,8 +5,13 @@
     <thead>
       <tr class="filter">
         <th class="organisation__name">
+          <span class="count-container org">
+            <div id="organisationNameCount" class="filter-count">
+              <!-- Dynamically add count -->
+            </div>
+          </span>
           <input name="organisation__name" value="aaaaa" type="checkbox" data-org="check-all-stakeholder" id="check-all-stakeholder"/>
-          <div>
+          <div class="org-name">
             Organisation Name
             <i name="organisationName" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
             <div class="stakeholder-filter-container">
@@ -35,7 +40,12 @@
           </div>
         </th>
         <th>
-          Thematic Pillars
+          <span class="count-container">
+            <div id="thematicPillarCount" class="filter-count">
+              <!-- Dynamically add count -->
+              </div>
+              Thematic Pillars
+          </span>
           <i name="thematicPillar" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
           <div class="stakeholder-filter-container">
             <div class="container">
@@ -62,7 +72,12 @@
 
       </th>
       <th>
-        Sub-Themes
+        <span class="count-container">
+          <div id="subThemeCount" class="filter-count">
+            <!-- Dynamically add count -->
+          </div>
+          Sub-Themes
+        </span>
         <i name="subTheme" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
         <div class="stakeholder-filter-container">
           <div class="container">
@@ -89,7 +104,12 @@
 
       </th>
       <th>
-        Partnership
+        <span class="count-container">
+          <div id="partnershipCount" class="filter-count">
+            <!-- Dynamically add count -->
+          </div>
+          Partnership
+        </span>
         <i name="partnership" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
         <div class="stakeholder-filter-container">
           <div class="container">
@@ -116,8 +136,13 @@
 
       </th>
       <th class="location__dropdown">
-        Location
-        <i name="location" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
+        <span class="count-container">
+          <div id="locationCount" class="filter-count">
+            <!-- Dynamically add count -->
+          </div>
+          Location
+        </span>
+        <i name="stateLocation" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
         <div class="stakeholder-filter-container">
           <div class="container">
               <div class="stakeholder_table_filter_subnav fadeInDown" style="display: none;">
@@ -143,7 +168,12 @@
 
       </th>
       <th>
-        Beneficiary Count
+        <span class="count-container">
+          <div id="beneficiaryCountCount" class="filter-count">
+            <!-- Dynamically add count -->
+          </div>
+          Beneficiary Count
+        </span>
         <i name="beneficiaryCount" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
         <div class="stakeholder-filter-container">
           <div class="container">
@@ -170,7 +200,12 @@
 
       </th>
       <th>
-        Amount Invested
+        <span class="count-container">
+          <div id="amountInvestedCount" class="filter-count">
+            <!-- Dynamically add count -->
+          </div>
+          Amount Invested
+        </span>
         <i name="amountInvested" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
         <div class="stakeholder-filter-container">
           <div class="container">
@@ -314,8 +349,8 @@
 
   <div class="responsive_table__footer">
           <a href="report.html"><button class="reportBtn" id="reportBtn">Report</button></a>
-          
-          <span class="footer__right_content">   
+
+          <span class="footer__right_content">
           <span class="matrix-page-of-text"
           >Page <span id="current-page">1</span> of
             <span id="total-page">1</span></span>

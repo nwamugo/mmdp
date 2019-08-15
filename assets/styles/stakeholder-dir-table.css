@@ -24,7 +24,7 @@ span {
   line-height: 2.07;
   letter-spacing: -0.3px;
   color: #1a1f37;
-  height: 104px;
+  height: 92px;
   border: solid 1px #d9eaef;
   cursor: pointer;
   z-index: 7;
@@ -42,9 +42,9 @@ span {
 .stakeholder__dir__table tr td,
 .stakeholder__dir__table tr th {
   width: 218px;
-  padding: 15px 14px;
-  vertical-align: top;
+  padding: 1px 14px;
   font-weight: 100;
+  vertical-align: baseline;
 }
 
 .stakeholder__dir__table tr th {
@@ -53,7 +53,8 @@ span {
 
 .stakeholder__dir__table tr th.organisation__name {
   vertical-align: middle;
-  margin-top: 14px;
+  align-items: baseline;
+  margin-top: -4px;
 }
 
 .stakeholder__dir__table .organisation__name {
@@ -70,7 +71,8 @@ span {
   height: 16px;
   width: 16px;
   margin-right: 8px;
-  margin-top: 7px;
+  margin-top: 37px;
+
 }
 
 .search__activities__section {
@@ -468,13 +470,7 @@ table.stakeholder__details__table .row__value {
   object-fit: contain;
   opacity: 0.04;
 }
-.stakeholder__dir__table thead tr i {
-  margin-left: 0.5rem;
-  margin-top: 0.5rem;
-  color: #3faaca;
-  cursor: pointer;
-  white-space: nowrap;
-}
+
 .location_filters,
 .beneficiary_filters,
 .amount_filters,
@@ -793,6 +789,19 @@ table.stakeholder__details__table .row__value {
   z-index: 990;
   overflow: auto;
 }
+
+@-moz-document url-prefix() {
+  .stakeholder_table_filter_subnav {
+    top: 84rem;
+  }
+}
+
+@media not all and (min-resolution:.001dpcm)
+{ @supports (-webkit-appearance:none) {
+  .stakeholder_table_filter_subnav {
+    top: 74.5rem;
+  }
+}}
 
 .stakeholder-filter-error td {
   text-align: center;
@@ -1219,4 +1228,129 @@ table.stakeholder__details__table .row__value {
 #search__activities__gap,
 #search__activities__impact {
   display: none;
+}
+
+/* Filter Count Styles */
+
+.filter-count {
+  position: absolute;
+  top: -21px;
+  width: 1.6rem;
+  background-color: #3faaca;
+  height: 1.6rem;
+  border-radius: 50%;
+  margin-left: 122px;
+}
+
+#organisationNameCount,
+#thematicPillarCount,
+#subThemeCount,
+#partnershipCount,
+#locationCount,
+#beneficiaryCountCount,
+#amountInvestedCount {
+  display: none;
+}
+
+#organisationNameCount {
+  margin-left: 147px;
+  top: -1rem;
+}
+
+#thematicPillarCount {
+  margin-left: 101px;
+}
+
+#subThemeCount {
+  margin-left: 82px;
+}
+
+#partnershipCount {
+  margin-left: 74px;
+}
+
+#locationCount {
+  margin-left: 55px;
+}
+
+#beneficiaryCountCount {
+  margin-left: 112px;
+}
+
+#amountInvestedCount {
+  margin-left: 107px;
+}
+
+@media not all and (min-resolution:.001dpcm)
+{ @supports (-webkit-appearance:none) {
+  #organisationNameCount {
+    margin-left: 150px;
+  }
+
+  #thematicPillarCount {
+    margin-left: 116px;
+  }
+
+  #subThemeCount {
+    margin-left: 96px;
+  }
+
+  #partnershipCount {
+    margin-left: 89px;
+  }
+
+  #locationCount {
+    margin-left: 70px;
+  }
+
+  #beneficiaryCountCount {
+    margin-left: 129px;
+  }
+
+  #amountInvestedCount {
+    margin-left: 125px;
+  }
+}}
+
+.filter-count p {
+  margin: 0 auto;
+  color: #ffffff;
+  width: 9px;
+}
+
+.column-filter {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.row__{
+  position: relative;
+  height: 4rem;
+}
+
+.stakeholder__dir__table thead tr i {
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  color: #3faaca;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.stakeholder__name {
+  margin-top: 33px;
+}
+
+.org-name {
+  margin-top: 14px;
+}
+
+.count-container {
+  position: relative;
+}
+
+.org {
+  top: -20px;
 }

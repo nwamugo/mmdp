@@ -17,14 +17,14 @@ const appendItemToFilterDropDown = function(
 ) {
   // Set the table to create a dropdown item
   switch (tableName) {
-    case 'potentialPartnerships':
+    case "potentialPartnerships":
       return `<span class="partnership-table-filter-item">
       <label class="filter-options-checkbox-label">
            <input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox">
              ${dataItem}
            </label>
         </span>`;
-    case 'impactFactor':
+    case "impactFactor":
       return `<span class="impact-table-filter-item">
            <label class="filter-options-checkbox-label">
            <input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox">
@@ -32,7 +32,7 @@ const appendItemToFilterDropDown = function(
            </label>
         </span>`;
 
-    case 'gapAnalysis':
+    case "gapAnalysis":
       return `<span class="gap-analysis-table-filter-item">
            <label class="filter-options-checkbox-label">
            <input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox">
@@ -93,7 +93,7 @@ const getItemsForFilterDropDownHtml = function(
 ) {
   const columnFilterHtmlItems = [];
   columnKeysMap.forEach((columnEntriesSet, columnKey) => {
-    let singleColumnDropdownHtml = '';
+    let singleColumnDropdownHtml = "";
     columnEntriesSet.forEach(currentDropdownItemValue => {
       singleColumnDropdownHtml += appendItemToFilterDropDown(
         tableName,
@@ -126,13 +126,13 @@ class Filter {
         accum.temp += `<td><input name="${dataItem}" value="${dataItem}" class="checkBox" type="checkbox"/> &nbsp;${dataItem}</td>`;
         if (!((index + 1) % 5) || dataArray.length === index + 1) {
           accum.store.push(`\n            <tr> ${accum.temp}</tr>`);
-          accum.temp = '';
+          accum.temp = "";
         }
         return accum;
       },
-      { temp: '', store: [] }
+      { temp: "", store: [] }
     );
-    $(`${dataId} tbody`).html(processed.store.join(''));
+    $(`${dataId} tbody`).html(processed.store.join(""));
   }
 }
 
@@ -176,8 +176,8 @@ class TableFilterHeader extends Filter {
     tableModalData
   ) {
     super();
-    this.tableName = tableName || ''; //name of the table for which we have created a filter instance
-    this.currentFilterName = ''; // current filter that has been selected
+    this.tableName = tableName || ""; //name of the table for which we have created a filter instance
+    this.currentFilterName = ""; // current filter that has been selected
     this.currentCheckedFilters = new Map(); // Map object with all currently active filters
     this.previousFilteredTableResults = []; // array of current table row items
     this.allTableData = tableData; //
@@ -187,7 +187,7 @@ class TableFilterHeader extends Filter {
     this.filterElementClassNames = filterElementClassNames;
     this.filterDropdownOptionsParentSelectors = filterDropdownOptionsParentSelectors;
     this.tablePaginatorData = tablePaginatorData;
-    this.tableFilterMode = 'combined';
+    this.tableFilterMode = "combined";
     this.tableNoResultsHtmlMessage = tableNoResultsHtmlMessage;
     this.tableModalData = tableModalData;
 
@@ -302,13 +302,13 @@ class TableFilterHeader extends Filter {
       this.allTableData.forEach(currentTableRow => {
         // if the table row meets the current column header filter criteria
         if (
-          currentSelectedDropdownItems.has(currentTableRow[currentColumnHeader])
+          currentSelectedDropdownItems.has(currentTableRow[currentColumnHeader]) ||
+          currentSelectedDropdownItems.has(Number(currentTableRow[currentColumnHeader]))
         ) {
           // add it to the filtered results to be returned
           filteredResultsSet.add(currentTableRow);
         }
       });
-
       return filteredResultsSet;
     }
 
@@ -390,30 +390,75 @@ class TableFilterHeader extends Filter {
     currentSelectedDropdownItemsCount,
     currentColumnHeader
   ) {
-    if (currentColumnHeader === 'thematicPillar') {
+    if (currentColumnHeader === "thematicPillar") {
       $(
         '<span class="selected-options-count selected-thematic-pillars">' +
           currentSelectedDropdownItemsCount +
-          '</span>'
-      ).appendTo('#selectedThematicPillarsCount');
-    } else if (currentColumnHeader === 'subTheme') {
+          "</span>"
+      ).appendTo("#selectedThematicPillarsCount");
+    } else if (currentColumnHeader === "subTheme") {
       $(
         '<span class="selected-options-count selected-sub-themes">' +
           currentSelectedDropdownItemsCount +
-          '</span>'
-      ).appendTo('#selectedSubThemesCount');
-    } else if (currentColumnHeader === 'lga') {
+          "</span>"
+      ).appendTo("#selectedSubThemesCount");
+    } else if (currentColumnHeader === "lga") {
       $(
         '<span class="selected-options-count selected-lgas">' +
           currentSelectedDropdownItemsCount +
-          '</span>'
-      ).appendTo('#selectedLgasCount');
-    } else if (currentColumnHeader === 'organizationName') {
+          "</span>"
+      ).appendTo("#selectedLgasCount");
+    } else if (currentColumnHeader === "organizationName") {
       $(
         '<span class="selected-options-count selected-organizations">' +
           currentSelectedDropdownItemsCount +
-          '</span>'
-      ).appendTo('#selectedOrganizationsCount');
+          "</span>"
+      ).appendTo("#selectedOrganizationsCount");
+    }
+  }
+
+  setFilteredOptionsCountOnStakeholderTable(count, header) {
+    if(header === 'organisationName') {
+      $('#organisationNameCount p').remove()
+      $('#organisationNameCount')
+      .append(`<p>${count}</p>`)
+      .css('display', 'block')
+
+    } else if(header === 'thematicPillars') {
+      $('#thematicPillarCount p').remove()
+      $('#thematicPillarCount')
+      .append(`<p>${count}</p>`)
+      .css('display', 'block')
+
+    } else if(header === 'subThemes') {
+      $('#subThemeCount p').remove()
+      $('#subThemeCount')
+      .append(`<p>${count}</p>`)
+      .css('display', 'block')
+
+    } else if(header === 'partnership') {
+      $('#partnershipCount p').remove()
+      $('#partnershipCount')
+      .append(`<p>${count}</p>`)
+      .css('display', 'block')
+
+    } else if(header === 'stateLocation' || header === 'location') {
+      $('#locationCount p').remove()
+      $('#locationCount')
+      .append(`<p>${count}</p>`)
+      .css('display', 'block')
+
+    } else if(header === 'beneficiaryCount') {
+      $('#beneficiaryCountCount p').remove()
+      $('#beneficiaryCountCount')
+      .append(`<p>${count}</p>`)
+      .css('display', 'block')
+
+    } else if(header === 'amountInvested') {
+      $('#amountInvestedCount p').remove()
+      $('#amountInvestedCount')
+      .append(`<p>${count}</p>`)
+      .css('display', 'block')
     }
   }
 
@@ -422,8 +467,8 @@ class TableFilterHeader extends Filter {
   @params : none
   @returns : undefined*/
   removeAllFilteredOptionsCountOnPartnershipTable() {
-    $('.header-row')
-      .find('.selected-options-count')
+    $(".header-row")
+      .find(".selected-options-count")
       .remove();
   }
 
@@ -450,7 +495,7 @@ class TableFilterHeader extends Filter {
 
     switch (this.tableFilterMode) {
       // Filter by ensuring all selected filter data is required for each row
-      case 'combined':
+      case "combined":
         let currentActiveColumnHeaderFilterCount = 1;
         // Clear all filter counts being displayed
         removeAllFilteredOptionsCountOnStateReportTable(this.filterElementClassNames.filterCountSpanClass);
@@ -481,13 +526,18 @@ class TableFilterHeader extends Filter {
                 this.filterCountClassesMap.get(currentColumnHeader)
                 );
             }
+            this.setFilteredOptionsCountOnStakeholderTable(
+              currentSelectedDropdownItems.size,
+              currentColumnHeader
+            );
+
             currentActiveColumnHeaderFilterCount += 1;
           }
         );
         break;
 
       // Filter by records matching any of the currently selected filter criteria
-      case 'any':
+      case "any":
         activeFilterColumns.forEach(
           (currentSelectedDropdownItems, currentColumnHeader) => {
             // iterate over each table row item
@@ -506,7 +556,7 @@ class TableFilterHeader extends Filter {
         );
         break;
 
-      case 'singleColumnHeaderFilter':
+      case "singleColumnHeaderFilter":
         // returns final results of the currently selected column filter header only
         this.previousFilteredTableResults = this.filteredTableDataResults;
         filteredResultsSet = new Set();
@@ -652,12 +702,20 @@ class TableFilterHeader extends Filter {
   @returns : undefined*/
 
   handleClearFilters(e) {
+    $(`#organisationNameCount,
+       #thematicPillarCount,
+       #subThemeCount,
+       #partnershipCount,
+       #locationCount,
+       #beneficiaryCountCount,
+       #amountInvestedCount`)
+      .css('display', 'none');
     e.data._this.clearAllFilters();
     $(e.data._this.filterElementClassNames.filterCheckboxItemSelector).prop(
-      'checked',
+      "checked",
       false
     );
-    if (window.table === 'potentialPartnerships') {
+    if (window.table === "potentialPartnerships") {
       removeAllFilteredOptionsCountOnPartnershipTable();
     }
   }
@@ -671,11 +729,11 @@ class TableFilterHeader extends Filter {
 
   handleClickFilterItemCheckbox(e) {
     const selectedFilterCheckbox = $(this);
-    const selectedItemColumnKey = selectedFilterCheckbox.attr('id');
-    let selectedItemValue = selectedFilterCheckbox.attr('value');
+    const selectedItemColumnKey = selectedFilterCheckbox.attr("id");
+    let selectedItemValue = selectedFilterCheckbox.attr("value");
     selectedItemValue = parseInt(selectedItemValue) || selectedItemValue;
     // If we have just checked this item
-    if (selectedFilterCheckbox.is(':checked')) {
+    if (selectedFilterCheckbox.is(":checked")) {
       const hasItemInCurrentFilters = e.data._this.currentCheckedFilters
         .get(selectedItemColumnKey)
         .has(selectedItemValue);
@@ -687,7 +745,7 @@ class TableFilterHeader extends Filter {
       }
     }
 
-    if (selectedFilterCheckbox.is(':not(:checked)')) {
+    if (selectedFilterCheckbox.is(":not(:checked)")) {
       const hasItemInCurrentFilters = e.data._this.currentCheckedFilters
         .get(selectedItemColumnKey)
         .has(selectedItemValue);
@@ -718,18 +776,18 @@ class TableFilterHeader extends Filter {
 
     // If the currentFilterName is not set then set the current icon as the currentFilterName
     if (
-      e.data._this.currentFilterName === '' ||
-      typeof e.data._this.currentFilterName !== 'string'
+      e.data._this.currentFilterName === "" ||
+      typeof e.data._this.currentFilterName !== "string"
     ) {
       $(this)
         .siblings(filterIconSiblingSelector)
         .find(filterDropdownSubnavSelector)
         .slideToggle();
-      e.data._this.currentFilterName = $(this).attr('name');
+      e.data._this.currentFilterName = $(this).attr("name");
     }
     // If the previously set filterName and the current selected icon's name don't match,
     // Hide the previous dropdown item and show the newly selected dropdown
-    else if ($(this).attr('name') !== e.data._this.currentFilterName) {
+    else if ($(this).attr("name") !== e.data._this.currentFilterName) {
       $(`[name="${e.data._this.currentFilterName}"]${filterIconSelector}`)
         .siblings(filterIconSiblingSelector)
         .find(filterDropdownSubnavSelector)
@@ -738,11 +796,11 @@ class TableFilterHeader extends Filter {
         .siblings(filterIconSiblingSelector)
         .find(filterDropdownSubnavSelector)
         .slideToggle();
-      e.data._this.currentFilterName = $(this).attr('name');
+      e.data._this.currentFilterName = $(this).attr("name");
     }
     // If the current and previous filter icon names are the same, just toggle the dropdown
     // no need to change the currentFilterName
-    else if ($(this).attr('name') === e.data._this.currentFilterName) {
+    else if ($(this).attr("name") === e.data._this.currentFilterName) {
       $(this)
         .siblings(filterIconSiblingSelector)
         .find(filterDropdownSubnavSelector)

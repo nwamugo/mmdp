@@ -338,16 +338,30 @@ $(document).ready(async function() {
    * @description - Function to load and instantiate the dopdown filter class
    */
   function loadDropdownFilter(paginator) {
-    const filterStakeholderTableColumnKeys = [
-      'organisationName',
-      'thematicPillars',
-      'subThemes',
-      'partnership',
-      'location',
-      'beneficiaryCount',
-      'amountInvested'
-    ];
 
+    let filterStakeholderTableColumnKeys;
+    if (window.location.pathname === '/state.html') {
+      filterStakeholderTableColumnKeys = [
+        'organisationName',
+        'thematicPillars',
+        'subThemes',
+        'partnership',
+        'location',
+        'beneficiaryCount',
+        'amountInvested'
+      ];
+    } else {
+      filterStakeholderTableColumnKeys = [
+        'organisationName',
+        'thematicPillars',
+        'subThemes',
+        'partnership',
+        'stateLocation',
+        'beneficiaryCount',
+        'amountInvested'
+      ];
+    }
+    
     const filterStakeholderDropdownSelectors = [
       '#organisationNameStakeholderFilterData',
       '#thematicPillarStakeholderFilterData',
