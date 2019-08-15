@@ -547,12 +547,6 @@ table.stakeholder__details__table .row__value {
   cursor: pointer;
 }
 
-.partnerships_table_filters button.apply_filter__button,
-.impact_table_filters button.apply_filter__button,
-.partnerships_table_filters button.clear_filter__button {
-  margin-top: -0.5%;
-}
-
 .location_filters button.clear_filter__button,
 .beneficiary_filters button.clear_filter__button,
 .amount_filters button.clear_filter__button,
@@ -580,7 +574,10 @@ table.stakeholder__details__table .row__value {
   margin-right: 35px;
 }
 
-.impact_table_filters button.clear_filter__button {
+.partnerships_table_filters button.apply_filter__button,
+.impact_table_filters button.apply_filter__button,
+.partnerships_table_filters button.clear_filter__button,
+.impact_table_filters button.clear_filter__button{
   margin-top: -0.5%;
 }
 
