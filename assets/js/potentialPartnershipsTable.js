@@ -1,3 +1,6 @@
+let partnershipTableData;
+let stakeholderServicesArray;
+
 /**
  *@description Method that shows the number of filtered options on the partnership/collaboration table header
   @params : columnHeaderOptionsCount
@@ -212,34 +215,37 @@ function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
     </h6>
   </main>`;
 
-  // Create an instance of the TableFilterHeader class for the potential partnerships table
-  window.partnershipsTableHeaderFilter = new TableFilterHeader(
-    table,
-    'partnership-dropdown-icon',
-    tableData,
-    filterTableColumnKeys,
-    filterDropdownOptionsParentSelectors,
-    {
-      filterIconSelector: '.partnership-filter-icon',
-      filterCheckboxItemSelector:
-        'input[type="checkbox"].partnership-filter-checkbox',
-      filterCheckboxItemClass: 'partnership-filter-checkbox',
-      applyFiltersButtonSelector: '.partnership-table-apply-filter',
-      clearFiltersButtonSelector: '.partnership-table-clear-filter',
-      filterIconSiblingSelector: '.table-filter-container',
-      filterDropdownSubnavSelector: '.partner_table_filter_subnav'
-    },
-    columnKeysMap,
-    {
-      tablePaginator: paginator,
-      tableRootElementSelector: '#partnership-report-data'
-    },
-    noFilterResultsHtmlMessage,
-    {
-      bindModalEventListener: bindPotentialPartnershipModalJQuery,
-      currentTableModalData: potentialPartnershipsModalData
-    }
-  );
+  if(!window.partnershipsTableHeaderFilter){
+    // Create an instance of the TableFilterHeader class for the potential partnerships table
+    window.partnershipsTableHeaderFilter = new TableFilterHeader(
+      table,
+      'partnership-dropdown-icon',
+      tableData,
+      filterTableColumnKeys,
+      filterDropdownOptionsParentSelectors,
+      {
+        filterIconSelector: '.partnership-filter-icon',
+        filterCheckboxItemSelector: 'input[type="checkbox"].partnership-filter-checkbox',
+        filterCheckboxItemClass: 'partnership-filter-checkbox',
+        applyFiltersButtonSelector: '.partnership-table-apply-filter',
+        clearFiltersButtonSelector: '.partnership-table-clear-filter',
+        filterIconSiblingSelector: '.table-filter-container',
+        filterDropdownSubnavSelector:'.partner_table_filter_subnav',
+      },
+      columnKeysMap,
+      {
+        'tablePaginator': paginator,
+        'tableRootElementSelector': '#partnership-report-data' ,
+      },
+      noFilterResultsHtmlMessage,
+      {
+        'bindModalEventListener': bindPotentialPartnershipModalJQuery,
+        'currentTableModalData': potentialPartnershipsModalData,
+      }
+    );
+  }
+
+  
 }
 
 $(document).ready(async function() {
@@ -257,14 +263,14 @@ $(document).ready(async function() {
     '/partials/potential-partnerships-table.html',
     function() {
       let arr = getLgas(data);
-      let stakeholderServicesArray = getStakeholderServicesArray([
+      stakeholderServicesArray= getStakeholderServicesArray([
         data.filteredStakeholders
       ]);
 
       window.partnershipsCsvTableData = dataForTable;
       // add id for row to each item in this map of potential partnerships
       let potentialPartners = potentialPartnershipsByLga(arr);
-      const tableData = potentialPartners.map(item => {
+      partnershipTableData = potentialPartners.map(item => {
         item['ppRowId'] = getPotentialPartnershipRowId(
           item.lga,
           item.subThemeId,
@@ -273,7 +279,8 @@ $(document).ready(async function() {
         );
         return item;
       });
-      createPotentialPartnershipsTable(tableData, stakeholderServicesArray);
+      createPotentialPartnershipsTable(partnershipTableData, stakeholderServicesArray);
+
     }
   );
 });

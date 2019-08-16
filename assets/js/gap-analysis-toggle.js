@@ -41,6 +41,8 @@ $(document).ready(async function() {
     $('#impact-factor-table').hide(); // Hide the impact factor table
     $('#search__activities__impact').val('');
     $('#impact_message').hide();
+    $('#search__activities__partnership').val('');
+    $('#partner_message').hide();
     $('#thematic-pillars__heading').html(gapAnalysisHeader); // Set the header for the table
     loadGapTable(gapReport);
   });
@@ -64,6 +66,7 @@ $(document).ready(async function() {
     $('#thematic-pillars__heading').html(partnershipHeader);
     $('#gap_message').hide();
     $('#search__activities').val('');
+    createPotentialPartnershipsTable(partnershipTableData, stakeholderServicesArray);
   });
 
   $('#impact-factor-report-button').click(() => {
@@ -82,6 +85,8 @@ $(document).ready(async function() {
     $('#thematic-pillars__heading').html(impactRefactorHeader);
     $('#gap_message').hide();
     $('#search__activities__gap').val('');
+    $('#search__activities__partnership').val('');
+    $('#partner_message').hide();
     loadTable();
   });
 });

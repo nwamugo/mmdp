@@ -135,9 +135,10 @@ span {
 }
 
 #gap_message,
-#impact_message {
-  display: none;
-  margin-left: 6%;
+#impact_message,
+#partner_message {
+  margin-left: 25%;
+  padding-bottom: 10px;
 }
 
 @media screen and (max-width: 1150px) {
