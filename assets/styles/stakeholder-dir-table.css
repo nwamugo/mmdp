@@ -479,8 +479,9 @@ table.stakeholder__details__table .row__value {
 .thematic_filters,
 .organisation_filters,
 .partnerships_table_filters,
-.impact_table_filters,
-.stakeholder_table_filters {
+.stakeholder_table_filters,
+.gap_analysis_table_filters,
+.impact_table_filters {
   width: 100%;
   border-radius: 0px;
   background-color: #296d81;
@@ -489,7 +490,9 @@ table.stakeholder__details__table .row__value {
   height: 40px;
 }
 
-.partnerships_table_filters{
+.partnerships_table_filters,
+.gap_analysis_table_filters,
+.impact_table_filters {
   margin-top: -0.95rem !important;
 }
 
@@ -511,6 +514,7 @@ table.stakeholder__details__table .row__value {
 .thematic_filters p,
 .organisation_filters p,
 .partnerships_table_filters p,
+.gap_analysis_table_filters p,
 .impact_table_filters p {
   font-family: Muli;
   font-style: normal;
@@ -520,6 +524,7 @@ table.stakeholder__details__table .row__value {
 }
 
 .partnerships_table_filters p,
+.gap_analysis_table_filters p,
 .impact_table_filters p {
   padding-top: 10px;
 }
@@ -536,8 +541,9 @@ table.stakeholder__details__table .row__value {
 .thematic_filters button.apply_filter__button,
 .organisation_filters button.apply_filter__button,
 .partnerships_table_filters button.apply_filter__button,
-.impact_table_filters button.apply_filter__button,
-.stakeholder_table_filters button.apply_filter__button {
+.stakeholder_table_filters button.apply_filter__button,
+.gap_analysis_table_filters button.apply_filter__button,
+.impact_table_filters button.apply_filter__button {
   color: white;
   background: #3faaca;
   font-family: Muli;
@@ -563,8 +569,9 @@ table.stakeholder__details__table .row__value {
 .thematic_filters button.clear_filter__button,
 .organisation_filters button.clear_filter__button,
 .partnerships_table_filters button.clear_filter__button,
-.impact_table_filters button.clear_filter__button,
-.stakeholder_table_filters button.clear_filter__button {
+.stakeholder_table_filters button.clear_filter__button,
+.gap_analysis_table_filters button.clear_filter__button,
+.impact_table_filters button.clear_filter__button {
   color: #3faaca;
   cursor: pointer;
   background: white;
@@ -583,8 +590,10 @@ table.stakeholder__details__table .row__value {
 }
 
 .partnerships_table_filters button.apply_filter__button,
+.gap_analysis_table_filters button.apply_filter__button,
 .impact_table_filters button.apply_filter__button,
 .partnerships_table_filters button.clear_filter__button,
+.gap_analysis_table_filters button.clear_filter__button,
 .impact_table_filters button.clear_filter__button{
   margin-top: -0.5%;
 }
@@ -619,13 +628,15 @@ table.stakeholder__details__table .row__value {
 .partnership_filter_data,
 .organisation_filter_data,
 .partnerships_table_filter_data,
+.gap_analysis_table_filter_data,
 .impact_table_filter_data {
   background-color: white;
   margin-top: -7.7%;
   height: 40%;
 }
 
-.partnerships_table_filter_data ,
+.partnerships_table_filter_data,
+.gap_analysis_table_filter_data,
 .impact_table_filter_data {
   margin: 0.6rem 0;
   padding-left: 1.25rem;
@@ -749,6 +760,7 @@ table.stakeholder__details__table .row__value {
 .organisation_subnav,
 .stakeholder_table_filter_subnav,
 .partner_table_filter_subnav,
+.gap_analysis_table_filter_subnav,
 .impact_table_filter_subnav {
   display: none;
   position: absolute;
@@ -770,7 +782,8 @@ table.stakeholder__details__table .row__value {
 }
 
 .partner_table_filter_subnav,
-.stakeholder_table_filter_subnav {
+.stakeholder_table_filter_subnav,
+.gap_analysis_table_filter_subnav {
   position: absolute;
   width: 79.5rem;
   top: 73.02rem;
@@ -867,7 +880,8 @@ table.stakeholder__details__table .row__value {
   border: 2px solid #cae7f0;
 }
 
-.partnership-table-web .fas {
+.partnership-table-web .fas,
+.gap-analysis-table-web .fas {
   color: #3faaca;
 }
 
@@ -923,7 +937,8 @@ table.stakeholder__details__table .row__value {
 }
 
 @media screen and (max-width: 840px) {
-  .partnership-table-web {
+  .partnership-table-web,
+  .gap-analysis-table-web {
     display: none;
   }
 
@@ -1032,7 +1047,8 @@ table.stakeholder__details__table .row__value {
 }
 
 @media screen and (max-width: 840px) {
-  .partnership-table-web {
+  .partnership-table-web,
+  .gap-analysis-table-web {
     display: none;
   }
 
@@ -1114,10 +1130,6 @@ table.stakeholder__details__table .row__value {
   height: 88px;
   border: solid 1px #cae7f0;
   background-color: white;
-}
-
-.report-table-header {
-  width: 102%;
 }
 
 @-moz-document url-prefix() {

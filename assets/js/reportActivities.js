@@ -24,6 +24,8 @@ const DOMStrings = {
   reportMapPillarsID: "#report-map-pillars",
   mapLegendsID: "#map-legends"
 };
+
+// destructure the DOMStrings object
 const {
   bodyElem,
   popupClass,
@@ -68,56 +70,6 @@ function getTrimmedStateNameFromUrl(type) {
       break;
   }
 }
-
-async function fetchStakeholderInformation() {
-  const queryParam = getTrimmedStateNameFromUrl("baseURL") || 'Nigeria';
-  const stakeholderData = await fetch(
-    `${MMDP_BASE_URL}/api/v1/location?state=${queryParam}&focusAreaName`
-  );
-
-  window.data = await stakeholderData.json();
-  let impactFactorData = [];
-  for (const item of window.data.filteredStakeholders) {
-    for (const beneficiary of item.beneficiaries) {
-      let impactFactorRow = {};
-      impactFactorRow.organization = item.organisationName;
-      impactFactorRow.focusArea =
-        beneficiary.focusArea.focusAreaName.focusAreaName;
-
-      let lgas = [];
-      for (const community of beneficiary.communities) {
-        lgaName = community.lgaId.lgaName;
-        lgas.push(lgaName);
-      }
-
-      let uniqueLgas = [...new Set(lgas)];
-
-      impactFactorRow.lga = uniqueLgas.join(', ');
-      impactFactorRow.subtheme =
-        beneficiary.focusArea.subThemeName.subThemeName;
-      impactFactorRow.pillar =
-        beneficiary.focusArea.thematicPillarName.pillarName;
-
-      const focusAreaTarget = beneficiary.focusArea.target;
-      const totalBeneficiaries = beneficiary.totalNumberOfBeneficiaries;
-
-      if (focusAreaTarget > totalBeneficiaries) {
-        impactFactorRow.targetCompletion =
-          (totalBeneficiaries / focusAreaTarget) * 100 + '%';
-      } else {
-        impactFactorRow.targetCompletion = 100 + '%';
-      }
-
-      impactFactorData.push(impactFactorRow);
-    }
-  }
-
-  createImpactFactorTable(impactFactorData, 10);
-
-  return impactFactorData;
-}
-
-fetchStakeholderInformation();
 
 function getPoint(x, y) {
   const svg = document.querySelector(reportMapPillarsID).querySelector("svg");
@@ -308,7 +260,7 @@ ${number}
           $('.partnershipLink').on('click', async function(e) {
             if ($('#partnership-report-table').is(':visible')) {
               const dataForTable = await getPartnershipData();
-              const data = window.data;
+              const data = window.stakeholderData;
 
               let stakeholderServicesArray = getStakeholderServicesArray([
                 data.filteredStakeholders
@@ -344,10 +296,7 @@ ${number}
               }
               // Otherwise create the potential partnerships table again
               else{
-                createPotentialPartnershipsTable(
-                    tableData,
-                    stakeholderServicesArray
-                );
+                createPotentialPartnershipsTable(tableData);
               }
             }
           });
@@ -660,30 +609,31 @@ function finalizeConversion(
   } else {
     MMDP_BASE_URL = 'http://cms-staging.mmdp.ng:3000';
   }
-
+  
   async function loaded() {
     const stateName = getTrimmedStateNameFromUrl('baseURL');
     if (!stateName) {
       window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
     }
-
+  
     try {
-      const lgaPillarPromise = await fetch(
+      const stakeholderDataResponse = await fetch(
         `${MMDP_BASE_URL}/api/v1/location?state=${stateName}&focusAreaName`
-      );
-      const responsePromise = await fetch(
-        `${MMDP_BASE_URL}/api/v1/state-map/${stateName}`
-      );
-      const response = await responsePromise.json();
-      const data = await lgaPillarPromise.json();
-
-      const { thematicPillarCountPerLGA, potentialPartnershipPerLGA } = data;
+        );
+        const responsePromise = await fetch(
+          `${MMDP_BASE_URL}/api/v1/state-map/${stateName}`
+          );
+          const response = await responsePromise.json();
+          window.stakeholderData = await stakeholderDataResponse.json();
+  
+  
+      const { thematicPillarCountPerLGA, potentialPartnershipPerLGA } = window.stakeholderData;
       const { stateUrl, lgaServices } = response.data;
       if (!stateUrl) {
         window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
       }
       const potentialPartnerships = getPotentialPartnershipsForLGAs(
-        data,
+        window.stakeholderData,
         potentialPartnershipPerLGA
       );
       $(reportMapPillarsID).load(stateUrl, function(responseTxt, statusTxt) {
@@ -696,16 +646,16 @@ function finalizeConversion(
             .parents("svg")
             .addClass("banner__image animated fadeInLeft slow state-map__svg");
           const lgsIds = responseTxt.match(/STL\d{6}/gm);
-
+  
           lgsIds.map(lgsId => {
             const svgPath = document.querySelector(`[fme\\:id=${lgsId}]`);
-
+  
             const lgaName = svgPath.getAttribute('fme:lga_name');
             const numberOfServicesReport = getNumberOfServices(
               lgaServices,
               lgaName
             );
-
+  
             if (numberOfServicesReport > 80) {
               svgPath.setAttribute('fill', '#e72525');
             } else if (
@@ -725,24 +675,24 @@ function finalizeConversion(
             }
             svgPath.innerHTML = `<title>${lgaName}</title>`;
           });
-
+  
           document.querySelectorAll('path').forEach(lgaMap => {
             // select lga_name as the lgaId
             let lgaId = d3.select(lgaMap).attr(':fme:lga_name');
             lgaId = lgaId.replace(/\s+/g, ' ');
-
+  
             lgaMap.innerHTML = `<title>${lgaId}</title>`;
             const lgaData = filteredLga(lgaId, thematicPillarCountPerLGA);
             if (lgaId && lgaData) {
               lgaMap.setAttribute('id', lgaId);
               lgaMap.setAttribute('class', 'path');
-
+  
               const points = getPillarsCoordinates(lgaId);
               const lgaPotentialPartnershipData = filteredLga(
                 lgaId,
                 potentialPartnerships
               );
-
+  
               if (
                 lgaId &&
                 lgaData &&
@@ -774,7 +724,7 @@ function finalizeConversion(
                   }
                 }
               }
-
+  
               if (points.length > 0) {
                 for (let i = 0; i <= points.length - 1; i++) {
                   const eachPillar = lgaData.pillars.map(item => item.name);
@@ -787,6 +737,9 @@ function finalizeConversion(
         }
         showHamburger();
       });
+      insertHTML();
+      makingThePotentialPartnershipTable();
+      window.impactFactorTableData = getImpactFactorTableData();
       const backToStateBtn = document.getElementById('c-matrix-btn');
       backToStateBtn.addEventListener(
         'click',
@@ -799,7 +752,5 @@ function finalizeConversion(
         `http://${baseURL}/index-cordination-matrix.html`;
     }
   }
-  insertHTML();
-
   document.addEventListener('DOMContentLoaded', loaded, false);
 })();

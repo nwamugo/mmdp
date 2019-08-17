@@ -1,5 +1,6 @@
 let partnershipTableData;
 let stakeholderServicesArray;
+let partnershipPaginator;
 
 /**
  *@description Method that shows the number of filtered options on the partnership/collaboration table header
@@ -74,7 +75,11 @@ function removeAllFilteredOptionsCountOnPartnershipTable() {
     .remove();
 }
 
-function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
+
+function createPotentialPartnershipsTable(
+    tableData,
+    action
+) {
   const keys = [
     'thematicPillar',
     'focusArea',
@@ -131,16 +136,19 @@ function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
   window.table = table;
   let entriesPerPage = 10;
 
-  const paginator = new Paginator(
-    tableData,
-    keys,
-    table,
-    selectedItems,
-    entriesPerPage
-  );
-  paginator.potentialPartnershipsTable = true;
+  if (!partnershipPaginator || action === 'partnershipSearch' || window.partnershipSearchStatus) {
+    partnershipPaginator = new Paginator(
+      tableData,
+      keys,
+      table,
+      selectedItems,
+      entriesPerPage
+    );
+  }
+  if (action !== 'partnershipSearch') window.partnershipSearchStatus = false;
+  partnershipPaginator.potentialPartnershipsTable = true;
 
-  const potentialPartnershipsTableData = paginator.initialPage();
+  const potentialPartnershipsTableData = partnershipPaginator.initialPage();
 
   $('#partnership-report-data').html(potentialPartnershipsTableData);
   $('#partnership-table-mobile').html(potentialPartnershipsTableData);
@@ -192,14 +200,14 @@ function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
   $('.selected').click(function() {
     const text = $(this).text();
     $('#partnership-row-number').text(text);
-    paginator.entriesPerPage = $('#partnership-row-number').text();
-    paginator.refreshTableBody();
+    partnershipPaginator.entriesPerPage = $('#partnership-row-number').text();
+    partnershipPaginator.refreshTableBody();
   });
   $('#potential-next-page').click(function() {
-    paginator.nextPage();
+    partnershipPaginator.nextPage();
   });
   $('#potential-previous-page').click(function() {
-    paginator.previousPage();
+    partnershipPaginator.previousPage();
   });
   const potentialPartnershipsModalData = getPartnershipDetailsByFocusArea(
     stakeholderServicesArray
@@ -231,10 +239,11 @@ function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
         clearFiltersButtonSelector: '.partnership-table-clear-filter',
         filterIconSiblingSelector: '.table-filter-container',
         filterDropdownSubnavSelector:'.partner_table_filter_subnav',
+        itemSpanClass: '.pp-table-filter-item',
       },
       columnKeysMap,
       {
-        'tablePaginator': paginator,
+        'tablePaginator': partnershipPaginator,
         'tableRootElementSelector': '#partnership-report-data' ,
       },
       noFilterResultsHtmlMessage,
@@ -244,29 +253,21 @@ function createPotentialPartnershipsTable(tableData, stakeholderServicesArray) {
       }
     );
   }
-
-  
 }
+  
 
-$(document).ready(async function() {
+
+async function makingThePotentialPartnershipTable() {  
   const dataForTable = await getPartnershipData();
-  const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
-  const queryParam = queryNameFromUrl
-    ? queryNameFromUrl.charAt(0).toUpperCase() + queryNameFromUrl.slice(1)
-    : 'Nigeria';
-  const stakeholderData = await fetch(
-    `${MMDP_BASE_URL}/api/v1/location?state=${queryParam}&focusAreaName`
-  );
-  const data = await stakeholderData.json();
 
   $('#potential-partnerships-table').load(
     '/partials/potential-partnerships-table.html',
     function() {
-      let arr = getLgas(data);
-      stakeholderServicesArray= getStakeholderServicesArray([
-        data.filteredStakeholders
+      const arr = getLgas(window.stakeholderData);
+      stakeholderServicesArray = getStakeholderServicesArray([
+        window.stakeholderData.filteredStakeholders
       ]);
-
+    
       window.partnershipsCsvTableData = dataForTable;
       // add id for row to each item in this map of potential partnerships
       let potentialPartners = potentialPartnershipsByLga(arr);
@@ -279,8 +280,8 @@ $(document).ready(async function() {
         );
         return item;
       });
-      createPotentialPartnershipsTable(partnershipTableData, stakeholderServicesArray);
-
+      
+      createPotentialPartnershipsTable(partnershipTableData);
     }
   );
-});
+};

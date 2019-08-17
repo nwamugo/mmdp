@@ -408,6 +408,7 @@ $(document).ready(async function() {
         clearFiltersButtonSelector: '.stakeholder-table-clear-filter',
         filterIconSiblingSelector: '.stakeholder-filter-container',
         filterDropdownSubnavSelector:'.stakeholder_table_filter_subnav',
+        itemSpanClass: '.sh-table-filter-item',
       },
       stakeholderColumnKeysMap,
       {

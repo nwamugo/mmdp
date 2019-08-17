@@ -11,38 +11,28 @@
 
 const appendItemToFilterDropDown = function(
   tableName,
-  { dataItem },
+  dataItem,
   filterCheckboxClass,
-  columnHeader
+  columnHeader,
+  idUniqueGuarantor
 ) {
+  const prefix = {
+    'stakeholder': "sh",
+    'potentialPartnerships': "pp",
+    'gapAnalysis': "ga",
+    'impactFactor': "if"
+  };
   // Set the table to create a dropdown item
-  switch (tableName) {
-    case "potentialPartnerships":
-      return `<span class="partnership-table-filter-item">
-      <label class="filter-options-checkbox-label">
-           <input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox">
-             ${dataItem}
-           </label>
-        </span>`;
-    case "impactFactor":
-      return `<span class="impact-table-filter-item">
-           <label class="filter-options-checkbox-label">
-           <input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox">
-             ${dataItem}
-           </label>
-        </span>`;
-
-    case "gapAnalysis":
-      return `<span class="gap-analysis-table-filter-item">
-           <label class="filter-options-checkbox-label">
-           <input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox">
-             ${dataItem}
-           </label>
-        </span>`;
-
-    default:
-      // Default item is set to the stakeholder table checkbox item
-      return `<td><input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox"/> &nbsp;${dataItem}</td>`;
+  if (prefix[tableName] === "sh") {
+    // Default item is set to the stakeholder table dropdown item
+    return `<td id="${prefix[tableName]}-filter-item__${dataItem}__${idUniqueGuarantor}" class="${prefix[tableName]}-table-filter-item"><input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox"/> &nbsp;${dataItem}</td>`;
+  } else {
+    return `<span id="${prefix[tableName]}-filter-item__${dataItem}__${idUniqueGuarantor}" class="${prefix[tableName]}-table-filter-item">
+    <label class="filter-options-checkbox-label">
+          <input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox">
+            ${dataItem}
+          </label>
+      </span>`;
   }
 };
 
@@ -92,17 +82,20 @@ const getItemsForFilterDropDownHtml = function(
   columnKeysMap
 ) {
   const columnFilterHtmlItems = [];
+  let idUniqueGuarantor = 0;
   columnKeysMap.forEach((columnEntriesSet, columnKey) => {
     let singleColumnDropdownHtml = "";
     columnEntriesSet.forEach(currentDropdownItemValue => {
       singleColumnDropdownHtml += appendItemToFilterDropDown(
         tableName,
-        { dataItem: currentDropdownItemValue },
+        currentDropdownItemValue,
         filterCheckboxClass,
-        columnKey
+        columnKey,
+        idUniqueGuarantor
       );
     });
     columnFilterHtmlItems.push(singleColumnDropdownHtml);
+    idUniqueGuarantor++;
   });
   return columnFilterHtmlItems;
 };
@@ -146,13 +139,13 @@ class TableFilterHeader extends Filter {
    * tableName: String - Current table the filter is created for
    * iconElementClass: String - CSS Selector string for the dropdown filter icon
    * tableData: Array - Array of all available table rows
-   * tableColumnKys: Array - Array of all filter column keys
+   * tableColumnKeys: Array - Array of all filter column keys
    * filterElementClassNames: Object - Object containing strings for the filter element classes i.e
    *    filterIconClass - Icon element for the dropdown filter icon
    *    filterCheckboxItemClass - Element class for all filter option/checkbox items on the tables
    *    filterCountSpanClass - Element class for all filter count elements displaying the count of the currently selected filter
    *    filterCountIconCustomClassesArray - Array of classes for all filter count elements per row. Used to position the count accordingly
-   * filterColumnMapsArray: Array - Array of Maps with Sets as values (I know it's a mouthful) i.e Array of all
+   * filterColumnMap: Array - Array of Maps with Sets as values (I know it's a mouthful) i.e Array of all
    *    filter dropdown data items (Set objects) for a particular column key ( the Map key)
    * tablePaginatorData - Object - Object containing current table's paginator
    *    it also has the selector for the root element of the data inserted by the paginator
@@ -170,7 +163,7 @@ class TableFilterHeader extends Filter {
     tableColumnKeys,
     filterDropdownOptionsParentSelectors,
     filterElementClassNames,
-    filterColumnMapsArray,
+    filterColumnMap,
     tablePaginatorData,
     tableNoResultsHtmlMessage,
     tableModalData
@@ -178,11 +171,12 @@ class TableFilterHeader extends Filter {
     super();
     this.tableName = tableName || ""; //name of the table for which we have created a filter instance
     this.currentFilterName = ""; // current filter that has been selected
+    this.lastRecordedFilterName = ""; // filter name that was replaced by the most current filter name
     this.currentCheckedFilters = new Map(); // Map object with all currently active filters
-    this.previousFilteredTableResults = []; // array of current table row items
+    this.previousFilteredTableResults = [];
     this.allTableData = tableData; //
     this.tableColumnKeys = tableColumnKeys; // array of the necessary table columns to allow filters
-    this.allTableFilters = filterColumnMapsArray;
+    this.allTableFilters = filterColumnMap;
     this.filteredTableDataResults = [];
     this.filterElementClassNames = filterElementClassNames;
     this.filterDropdownOptionsParentSelectors = filterDropdownOptionsParentSelectors;
@@ -190,16 +184,17 @@ class TableFilterHeader extends Filter {
     this.tableFilterMode = "combined";
     this.tableNoResultsHtmlMessage = tableNoResultsHtmlMessage;
     this.tableModalData = tableModalData;
+    this.checkboxTouched = false; // tracks if any checkbox was checked or unchecked in the respective dropdown
 
-    tableColumnKeys.map(columnItem => {
-      this.currentCheckedFilters.set(columnItem, new Set());
+    tableColumnKeys.forEach(columnHeader => {
+      this.currentCheckedFilters.set(columnHeader, new Set());
     });
     // Check if we added custom classes to be used on each active filter column count in a table
     if(this.filterElementClassNames.filterCountIconCustomClassesArray){
       const filterCountClassesMap = new Map();
       let columnHeaderIndex = 0;
       // Create a new map with the column header name as the key and it's custom class as the value
-      filterColumnMapsArray.forEach((columnHeaderValues, columnHeader)=>{
+      filterColumnMap.forEach((columnHeaderValues, columnHeader)=>{
         const currentColumnCountClass = this.filterElementClassNames.filterCountIconCustomClassesArray[columnHeaderIndex];
         filterCountClassesMap.set(columnHeader, currentColumnCountClass);
         columnHeaderIndex += 1;
@@ -209,7 +204,6 @@ class TableFilterHeader extends Filter {
 
     // Create the dropdown checkbox options for all current table columns
     this.createHtmlDropdownFilterElements();
-
     // Initiate all the event listeners for our filter html element classes
     this.initializeFilterElementListeners(
       this.filterElementClassNames.filterIconSelector,
@@ -254,6 +248,44 @@ class TableFilterHeader extends Filter {
         this.tableModalData.currentTableModalData
       );
     }
+
+    if (this.filteredTableDataResults.length) {
+      let columnHeaderCount = 0;
+      this.allTableFilters.forEach((columnFiltersSet, columnHeader) => {
+        if (columnHeader !== this.lastRecordedFilterName) {
+          columnFiltersSet.forEach(filterItem => {
+            $(this.filterElementClassNames.itemSpanClass).each(function() {
+              if (this.id.substring(1).split("__")[1] === `${filterItem}`) {
+                if (
+                  this.id.substring(1).split("__")[2] === `${columnHeaderCount}`
+                ) {
+                  $(`[id^='${this.id}']`).show();
+                }
+              }
+            });
+            if (
+              !this.filteredTableDataResults.some(
+                row => row[columnHeader] === filterItem
+              )
+            ) {
+              $(this.filterElementClassNames.itemSpanClass).each(function() {
+                if (this.id.substring(1).split("__")[1] === `${filterItem}`) {
+                  if (
+                    this.id.substring(1).split("__")[2] ===
+                    `${columnHeaderCount}`
+                  ) {
+                    $(`[id^='${this.id}']`).hide();
+                  }
+                }
+              });
+            }
+          });
+        }
+        columnHeaderCount++;
+      });
+    } else {
+      $(this.filterElementClassNames.itemSpanClass).show();
+    }
   }
 
   /**
@@ -262,7 +294,7 @@ class TableFilterHeader extends Filter {
    *   currentSelectedDropdownItems: The set containing selected column header filter checked items
    *   currentColumnHeader: The name of the currently active column header filter
    *   columnHeaderCount: The count of the current iteration in the active column header filters
-   *   totalActiveColumnHeaderFiltersCount: Number- The total number of active column header filters in the active column header filters map
+   *   numberOfActiveFilterColumns: Number- The total number of active column header filters in the active column header filters map
    *   filteredResultSet: Set - The set of all table rows matching the active column header filters criteria
    * @returns : Set Object - Set object with the filtered table row results
    *   for the current active column header being filtered
@@ -272,7 +304,7 @@ class TableFilterHeader extends Filter {
     currentSelectedDropdownItems,
     currentColumnHeader,
     currentActiveColumnHeaderFilterCount,
-    totalActiveColumnHeaderFiltersCount,
+    numberOfActiveFilterColumns,
     filteredResultsSet
   ) {
     // If we have no table rows that have matched the criteria yet
@@ -282,7 +314,7 @@ class TableFilterHeader extends Filter {
     if (
       filteredResultsSet.size === 0 &&
       currentActiveColumnHeaderFilterCount < 2 &&
-      totalActiveColumnHeaderFiltersCount > 1
+      numberOfActiveFilterColumns > 1
     ) {
       // iterate over each table row item
       this.allTableData.forEach(currentTableRow => {
@@ -297,7 +329,7 @@ class TableFilterHeader extends Filter {
     }
     // If there's only one column header filter in the map then just compare the table to the criteria
     //  then return the filteredResultsSet
-    else if (totalActiveColumnHeaderFiltersCount === 1) {
+    else if (numberOfActiveFilterColumns === 1) {
       // iterate over each table row item
       this.allTableData.forEach(currentTableRow => {
         // if the table row meets the current column header filter criteria
@@ -319,7 +351,7 @@ class TableFilterHeader extends Filter {
       filteredResultsSet.size === 0 &&
       (currentActiveColumnHeaderFilterCount > 1 &&
         currentActiveColumnHeaderFilterCount ===
-          totalActiveColumnHeaderFiltersCount)
+        numberOfActiveFilterColumns)
     ) {
       this.displayNoResultsFoundErrorMessage();
       return filteredResultsSet;
@@ -329,7 +361,7 @@ class TableFilterHeader extends Filter {
     // and we're not yet on the last active column header filter in the map
     else if (
       filteredResultsSet.size !== 0 &&
-      currentActiveColumnHeaderFilterCount < totalActiveColumnHeaderFiltersCount
+      currentActiveColumnHeaderFilterCount < numberOfActiveFilterColumns
     ) {
       this.allTableData.forEach(currentTableRow => {
         // check if currently added table rows meet the criteria in this active column header filter
@@ -351,13 +383,14 @@ class TableFilterHeader extends Filter {
     else if (
       filteredResultsSet.size !== 0 &&
       currentActiveColumnHeaderFilterCount ===
-        totalActiveColumnHeaderFiltersCount
+        numberOfActiveFilterColumns
     ) {
       this.allTableData.forEach(currentTableRow => {
         // check if currently added table rows meet the criteria in this active column header filter
         if (
           !currentSelectedDropdownItems.has(
-            currentTableRow[currentColumnHeader]
+            parseInt(currentTableRow[currentColumnHeader]) ||
+              currentTableRow[currentColumnHeader]
           ) &&
           filteredResultsSet.has(currentTableRow)
         ) {
@@ -372,7 +405,7 @@ class TableFilterHeader extends Filter {
         filteredResultsSet.size === 0 &&
         (currentActiveColumnHeaderFilterCount > 1 &&
           currentActiveColumnHeaderFilterCount ===
-            totalActiveColumnHeaderFiltersCount)
+            numberOfActiveFilterColumns)
       ) {
         this.displayNoResultsFoundErrorMessage();
         return filteredResultsSet;
@@ -421,44 +454,44 @@ class TableFilterHeader extends Filter {
     if(header === 'organisationName') {
       $('#organisationNameCount p').remove()
       $('#organisationNameCount')
-      .append(`<p>${count}</p>`)
-      .css('display', 'block')
+        .append(`<p>${count}</p>`)
+        .css('display', 'block')
 
     } else if(header === 'thematicPillars') {
       $('#thematicPillarCount p').remove()
       $('#thematicPillarCount')
-      .append(`<p>${count}</p>`)
-      .css('display', 'block')
+        .append(`<p>${count}</p>`)
+        .css('display', 'block')
 
     } else if(header === 'subThemes') {
       $('#subThemeCount p').remove()
       $('#subThemeCount')
-      .append(`<p>${count}</p>`)
-      .css('display', 'block')
+        .append(`<p>${count}</p>`)
+        .css('display', 'block')
 
     } else if(header === 'partnership') {
       $('#partnershipCount p').remove()
       $('#partnershipCount')
-      .append(`<p>${count}</p>`)
-      .css('display', 'block')
+        .append(`<p>${count}</p>`)
+        .css('display', 'block')
 
     } else if(header === 'stateLocation' || header === 'location') {
       $('#locationCount p').remove()
       $('#locationCount')
-      .append(`<p>${count}</p>`)
-      .css('display', 'block')
+        .append(`<p>${count}</p>`)
+        .css('display', 'block')
 
     } else if(header === 'beneficiaryCount') {
       $('#beneficiaryCountCount p').remove()
       $('#beneficiaryCountCount')
-      .append(`<p>${count}</p>`)
-      .css('display', 'block')
+        .append(`<p>${count}</p>`)
+        .css('display', 'block')
 
     } else if(header === 'amountInvested') {
       $('#amountInvestedCount p').remove()
       $('#amountInvestedCount')
-      .append(`<p>${count}</p>`)
-      .css('display', 'block')
+        .append(`<p>${count}</p>`)
+        .css('display', 'block')
     }
   }
 
@@ -473,7 +506,7 @@ class TableFilterHeader extends Filter {
   }
 
   /**
- *@description Method to return filtered table data based on ALL currently selected filters (combined) or ANY filter criteria
+ *@description Method to return filtered table data based on all currently COMBINED selected filters or ANY filter criteria
   @params : None
   @returns : Array - Array of table rows ready to be added to the paginator*/
 
@@ -482,6 +515,8 @@ class TableFilterHeader extends Filter {
     this.previousFilteredTableResults = this.filteredTableDataResults;
     let filteredResultsSet = new Set();
     const activeFilterColumns = new Map();
+    this.checkboxTouched = false;
+
     this.currentCheckedFilters.forEach(
       (currentSelectedDropdownItemsSet, currentColumnKey) => {
         if (currentSelectedDropdownItemsSet.size) {
@@ -493,99 +528,69 @@ class TableFilterHeader extends Filter {
       }
     );
 
-    switch (this.tableFilterMode) {
-      // Filter by ensuring all selected filter data is required for each row
-      case "combined":
-        let currentActiveColumnHeaderFilterCount = 1;
-        // Clear all filter counts being displayed
-        removeAllFilteredOptionsCountOnStateReportTable(this.filterElementClassNames.filterCountSpanClass);
-        this.removeAllFilteredOptionsCountOnPartnershipTable();
-        activeFilterColumns.forEach(
-          (currentSelectedDropdownItems, currentColumnHeader) => {
-            filteredResultsSet = this.filterByAllActiveColumnHeaderFilters(
-              currentSelectedDropdownItems,
-              currentColumnHeader,
-              currentActiveColumnHeaderFilterCount,
-              activeFilterColumns.size,
-              filteredResultsSet
-            );
-            let currentSelectedDropdownItemsCount =
-              currentSelectedDropdownItems.size;
-            this.setFilteredOptionsCountOnPartnershipTable(
-              currentSelectedDropdownItemsCount,
-              currentColumnHeader
-            );
-
-            // If we have a map with the custom class for each column's active filter count
-            if (this.filterCountClassesMap){
-              // Append the active filter count accordingly for the each column header filter
-              setFilteredOptionsCountOnStateReportTable(
-                this.filterElementClassNames.filterCountSpanClass,
+    if (activeFilterColumns.size) {
+      switch (this.tableFilterMode) {
+        // Filter by ensuring all selected filter data is required for each row
+        case "combined":
+          let currentActiveColumnHeaderFilterCount = 1;
+          // Clear all filter counts being displayed
+          removeAllFilteredOptionsCountOnStateReportTable(this.filterElementClassNames.filterCountSpanClass);
+          this.removeAllFilteredOptionsCountOnPartnershipTable();
+          if (this.tableName === "stakeholder") {
+            $(`#organisationNameCount,
+        #thematicPillarCount,
+        #subThemeCount,
+        #partnershipCount,
+        #locationCount,
+        #beneficiaryCountCount,
+        #amountInvestedCount`).css("display", "none");
+          }
+          activeFilterColumns.forEach(
+            (currentSelectedDropdownItems, currentColumnHeader) => {
+              filteredResultsSet = this.filterByAllActiveColumnHeaderFilters(
+                currentSelectedDropdownItems,
                 currentColumnHeader,
-                currentSelectedDropdownItems.size,
-                this.filterCountClassesMap.get(currentColumnHeader)
+                currentActiveColumnHeaderFilterCount,
+                activeFilterColumns.size,
+                filteredResultsSet
+              );
+              let currentSelectedDropdownItemsCount =
+                currentSelectedDropdownItems.size;
+              this.setFilteredOptionsCountOnPartnershipTable(
+                currentSelectedDropdownItemsCount,
+                currentColumnHeader
+              );
+
+              // If we have a map with the custom class for each column's active filter count
+              if (this.filterCountClassesMap){
+                // Append the active filter count accordingly for the each column header filter
+                setFilteredOptionsCountOnStateReportTable(
+                  this.filterElementClassNames.filterCountSpanClass,
+                  currentColumnHeader,
+                  currentSelectedDropdownItems.size,
+                  this.filterCountClassesMap.get(currentColumnHeader)
                 );
-            }
-            this.setFilteredOptionsCountOnStakeholderTable(
-              currentSelectedDropdownItems.size,
-              currentColumnHeader
-            );
-
-            currentActiveColumnHeaderFilterCount += 1;
-          }
-        );
-        break;
-
-      // Filter by records matching any of the currently selected filter criteria
-      case "any":
-        activeFilterColumns.forEach(
-          (currentSelectedDropdownItems, currentColumnHeader) => {
-            // iterate over each table row item
-            this.allTableData.forEach(currentTableRow => {
-              // if the table row meets the current column header filter criteria
-              if (
-                currentSelectedDropdownItems.has(
-                  currentTableRow[currentColumnHeader]
-                )
-              ) {
-                // add it to the filtered results to be returned
-                filteredResultsSet.add(currentTableRow);
               }
-            });
-          }
-        );
-        break;
+              this.setFilteredOptionsCountOnStakeholderTable(
+                currentSelectedDropdownItems.size,
+                currentColumnHeader
+              );
 
-      case "singleColumnHeaderFilter":
-        // returns final results of the currently selected column filter header only
-        this.previousFilteredTableResults = this.filteredTableDataResults;
-        filteredResultsSet = new Set();
-        const currentColumnValues = this.currentCheckedFilters.get(
-          this.currentFilterName
-        );
+              currentActiveColumnHeaderFilterCount += 1;
+            }
+          );
+          break;
 
-        this.allTableData.forEach(currentTableRow => {
-          if (
-            currentColumnValues.size &&
-            currentColumnValues.has(currentTableRow[this.currentFilterName])
-          ) {
-            filteredResultsSet.add(currentTableRow);
-          }
-        });
-        this.filteredTableDataResults = Array.from(filteredResultsSet);
-        this.refreshTableData();
-      //  Filter by combined criteria by default
-      default:
-        activeFilterColumns.forEach(
-          (currentSelectedDropdownItems, currentColumnKey) => {
-            // If we have no table row items that have matched the criteria yet
-            if (filteredResultsSet.size === 0) {
+        // Filter by records matching any of the currently selected filter criteria
+        case "any":
+          activeFilterColumns.forEach(
+            (currentSelectedDropdownItems, currentColumnHeader) => {
               // iterate over each table row item
               this.allTableData.forEach(currentTableRow => {
                 // if the table row meets the current column header filter criteria
                 if (
                   currentSelectedDropdownItems.has(
-                    currentTableRow[currentColumnKey]
+                    currentTableRow[currentColumnHeader]
                   )
                 ) {
                   // add it to the filtered results to be returned
@@ -593,24 +598,66 @@ class TableFilterHeader extends Filter {
                 }
               });
             }
-            // If we have table row items added to our filtered results so far
-            else if (filteredResultsSet.size !== 0) {
-              this.allTableData.forEach(currentTableRow => {
-                // check if currently added table row items meet the criteria in the next active column header filter
-                if (
-                  !currentSelectedDropdownItems.has(
-                    currentTableRow[currentColumnKey]
-                  ) &&
-                  filteredResultsSet.has(currentTableRow)
-                ) {
-                  //  remove the tableRow from the filteredResultSet
-                  //  if it only matched previous column header filter criteria and not the current criteria
-                  filteredResultsSet.delete(currentTableRow);
-                }
-              });
+          );
+          break;
+
+        case "singleColumnHeaderFilter":
+          // returns final results of the currently selected column filter header only
+          this.previousFilteredTableResults = this.filteredTableDataResults;
+          filteredResultsSet = new Set();
+          const currentColumnValues = this.currentCheckedFilters.get(
+            this.lastRecordedFilterName
+          );
+
+          this.allTableData.forEach(currentTableRow => {
+            if (
+              currentColumnValues.size &&
+              currentColumnValues.has(currentTableRow[this.lastRecordedFilterName])
+            ) {
+              filteredResultsSet.add(currentTableRow);
             }
-          }
-        );
+          });
+          this.filteredTableDataResults = Array.from(filteredResultsSet);
+          this.refreshTableData();
+        //  Filter by combined criteria by default
+        default:
+
+          activeFilterColumns.forEach(
+            (currentSelectedDropdownItems, currentColumnKey) => {
+              // If we have no table row items that have matched the criteria yet
+              if (filteredResultsSet.size === 0) {
+                // iterate over each table row item
+                this.allTableData.forEach(currentTableRow => {
+                  // if the table row meets the current column header filter criteria
+                  if (
+                    currentSelectedDropdownItems.has(
+                      currentTableRow[currentColumnKey]
+                    )
+                  ) {
+                    // add it to the filtered results to be returned
+                    filteredResultsSet.add(currentTableRow);
+                  }
+                });
+              }
+              // If we have table row items added to our filtered results so far
+              else if (filteredResultsSet.size !== 0) {
+                this.allTableData.forEach(currentTableRow => {
+                  // check if currently added table row items meet the criteria in the next active column header filter
+                  if (
+                    !currentSelectedDropdownItems.has(
+                      currentTableRow[currentColumnKey]
+                    ) &&
+                    filteredResultsSet.has(currentTableRow)
+                  ) {
+                    //  remove the tableRow from the filteredResultSet
+                    //  if it only matched previous column header filter criteria and not the current criteria
+                    filteredResultsSet.delete(currentTableRow);
+                  }
+                });
+              }
+            }
+          );
+      }
     }
 
     // If there are results matching the criteria return them and update the table
@@ -622,10 +669,7 @@ class TableFilterHeader extends Filter {
 
     // If there are no active filters
     if (!activeFilterColumns.size) {
-      // reset the filter's table to display all table data
-      this.resetFilteredTableDataResults();
-      // refresh the table to display all records
-      this.refreshTableData();
+      this.clearAllFilters();
     }
     this.hideAllTableHeaderFilterDropdowns();
   }
@@ -664,14 +708,30 @@ class TableFilterHeader extends Filter {
   @returns : undefined*/
 
   clearAllFilters() {
-    this.tableColumnKeys.map(columnItem => {
-      this.currentCheckedFilters.set(columnItem, new Set());
+    this.checkboxTouched = false;
+    this.currentCheckedFilters.forEach((columnFilterItems, columnHeader) => {
+      columnFilterItems.clear();
     });
     // If there were any column header filter counts being displayed
     if(this.filterElementClassNames.filterCountSpanClass){
       // Remove them as the filters have been cleared
       removeAllFilteredOptionsCountOnStateReportTable(this.filterElementClassNames.filterCountSpanClass);
     }
+    if (this.tableName !== "stakeholder") {
+      removeAllFilteredOptionsCountOnPartnershipTable();
+    } else {
+      $(`#organisationNameCount,
+       #thematicPillarCount,
+       #subThemeCount,
+       #partnershipCount,
+       #locationCount,
+       #beneficiaryCountCount,
+       #amountInvestedCount`).css("display", "none");
+    }
+    $(this.filterElementClassNames.filterCheckboxItemSelector).prop(
+      "checked",
+      false
+    );
     this.resetFilteredTableDataResults();
     this.refreshTableData();
   }
@@ -702,14 +762,6 @@ class TableFilterHeader extends Filter {
   @returns : undefined*/
 
   handleClearFilters(e) {
-    $(`#organisationNameCount,
-       #thematicPillarCount,
-       #subThemeCount,
-       #partnershipCount,
-       #locationCount,
-       #beneficiaryCountCount,
-       #amountInvestedCount`)
-      .css('display', 'none');
     e.data._this.clearAllFilters();
     $(e.data._this.filterElementClassNames.filterCheckboxItemSelector).prop(
       "checked",
@@ -728,40 +780,30 @@ class TableFilterHeader extends Filter {
   @returns : undefined*/
 
   handleClickFilterItemCheckbox(e) {
+    e.data._this.checkboxTouched = true;
     const selectedFilterCheckbox = $(this);
     const selectedItemColumnKey = selectedFilterCheckbox.attr("id");
     let selectedItemValue = selectedFilterCheckbox.attr("value");
     selectedItemValue = parseInt(selectedItemValue) || selectedItemValue;
-    // If we have just checked this item
-    if (selectedFilterCheckbox.is(":checked")) {
-      const hasItemInCurrentFilters = e.data._this.currentCheckedFilters
-        .get(selectedItemColumnKey)
-        .has(selectedItemValue);
 
-      if (!hasItemInCurrentFilters) {
-        e.data._this.currentCheckedFilters
-          .get(selectedItemColumnKey)
-          .add(selectedItemValue);
-      }
+    // If we have just checked this item
+    if (selectedFilterCheckbox.is(':checked')) {
+      e.data._this.currentCheckedFilters
+        .get(selectedItemColumnKey)
+        .add(selectedItemValue);
     }
 
-    if (selectedFilterCheckbox.is(":not(:checked)")) {
-      const hasItemInCurrentFilters = e.data._this.currentCheckedFilters
+    if (selectedFilterCheckbox.is(':not(:checked)')) {
+      e.data._this.currentCheckedFilters
         .get(selectedItemColumnKey)
-        .has(selectedItemValue);
-
-      if (hasItemInCurrentFilters) {
-        e.data._this.currentCheckedFilters
-          .get(selectedItemColumnKey)
-          .delete(selectedItemValue);
-      }
+        .delete(selectedItemValue);
     }
   }
 
   /**
  *@description  Method to handle the click event on any table column filter dropdown icon
     this is where we toggle the display of the current filter dropdown menu
-    we then update the currentFilterName string accordingly to reflect the currently selected filter
+    we then update the lastRecordedFilterName string accordingly to reflect the last active filter
     as well as toggle the visibility of the other filters
   @params : Event object
   @returns : undefined*/
@@ -784,11 +826,17 @@ class TableFilterHeader extends Filter {
         .find(filterDropdownSubnavSelector)
         .slideToggle();
       e.data._this.currentFilterName = $(this).attr("name");
+      e.data._this.lastRecordedFilterName = e.data._this.currentFilterName;
     }
     // If the previously set filterName and the current selected icon's name don't match,
     // Hide the previous dropdown item and show the newly selected dropdown
-    else if ($(this).attr("name") !== e.data._this.currentFilterName) {
-      $(`[name="${e.data._this.currentFilterName}"]${filterIconSelector}`)
+    else if ($(this).attr('name') !== e.data._this.currentFilterName) {
+      e.data._this.lastRecordedFilterName = e.data._this.currentFilterName;
+      e.data._this.currentFilterName = $(this).attr("name");
+      if (e.data._this.checkboxTouched) {
+        e.data._this.filterTableData();
+      }
+      $(`[name="${e.data._this.lastRecordedFilterName}"]${filterIconSelector}`)
         .siblings(filterIconSiblingSelector)
         .find(filterDropdownSubnavSelector)
         .slideUp();
@@ -796,15 +844,19 @@ class TableFilterHeader extends Filter {
         .siblings(filterIconSiblingSelector)
         .find(filterDropdownSubnavSelector)
         .slideToggle();
-      e.data._this.currentFilterName = $(this).attr("name");
     }
     // If the current and previous filter icon names are the same, just toggle the dropdown
     // no need to change the currentFilterName
-    else if ($(this).attr("name") === e.data._this.currentFilterName) {
-      $(this)
-        .siblings(filterIconSiblingSelector)
-        .find(filterDropdownSubnavSelector)
-        .slideToggle();
+    else if ($(this).attr('name') === e.data._this.currentFilterName) {
+      e.data._this.lastRecordedFilterName = e.data._this.currentFilterName;
+      if (e.data._this.checkboxTouched) {
+        e.data._this.filterTableData();
+      } else if (!e.data._this.checkboxTouched) {
+        $(this)
+          .siblings(filterIconSiblingSelector)
+          .find(filterDropdownSubnavSelector)
+          .slideToggle();
+      }
     }
   }
 
@@ -819,7 +871,7 @@ class TableFilterHeader extends Filter {
       this.filterElementClassNames.filterCheckboxItemClass,
       this.allTableFilters
     );
-    this.filterDropdownOptionsParentSelectors.map(
+    this.filterDropdownOptionsParentSelectors.forEach(
       (singleDropdownParentSelector, parentSelectorIndex) => {
         appendHtmlToParentItem(
           singleDropdownParentSelector,

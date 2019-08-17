@@ -5,15 +5,15 @@ const focusAreaGaps = [];
 const keys = ['pillar', 'subtheme', 'LgasWithGaps', 'focusAreasWithGapsCount'];
 
 let table = 'gapAnalysis';
-let paginator;
+let gapPaginator;
 
 let selectedItems = [];
 
 let entriesPerPage = 10;
 
-function loadGapAnalysisTable(paginator) {
-  paginator.potentialPartnershipsTable = true;
-  const gapAnalysisTableData = paginator.initialPage();
+function loadGapAnalysisTable(gapPaginator) {
+  gapPaginator.potentialPartnershipsTable = true;
+  const gapAnalysisTableData = gapPaginator.initialPage();
 
   // Table Filter Header Instance
   const filterTableColumnHeaders = [
@@ -69,53 +69,56 @@ function loadGapAnalysisTable(paginator) {
   $('.selected').click(function() {
     const text = $(this).text();
     $('#gap-analysis-row-number').text(text);
-    paginator.entriesPerPage = $('#gap-analysis-row-number').text();
-    paginator.refreshTableBody();
+    gapPaginator.entriesPerPage = $('#gap-analysis-row-number').text();
+    gapPaginator.refreshTableBody();
   });
   $('#gap-next-page').click(function() {
-    paginator.nextPage();
+    gapPaginator.nextPage();
   });
   $('#gap-previous-page').click(function() {
-    paginator.previousPage();
+    gapPaginator.previousPage();
   });
   bindGapAnalysisModalJQuery(focusAreaGaps);
   window.focusAreaGaps = focusAreaGaps;
 
-  // Create an instance of the TableFilterHeader class for the potential partnerships table
-  window.gapAnalysisTableFilterHeader = new TableFilterHeader(
-    table,
-    'dropdown__icon_',
-    gapReport,
-    filterTableColumnHeaders,
-    filterDropdownOptionsParentSelectors,
-    {
-      filterIconSelector: '.dropdown__icon_',
-      filterCheckboxItemSelector:
-        'input[type="checkbox"].gap-analysis-filter-checkbox',
-      filterCheckboxItemClass: 'gap-analysis-filter-checkbox',
-      filterCountSpanClass:'active-column-filters-count',
-      filterCountIconCustomClassesArray: [
-        'gap-thematic-pillar-filter-count',
-        'gap-sub-theme-filter-count',
-        'gap-lga-with-gaps-filter-count',
-        'gap-focus-area-gaps-filter-count'
-      ],
-      applyFiltersButtonSelector: '.gap-analysis-table-apply-filter',
-      clearFiltersButtonSelector: '.gap-analysis-table-clear-filter',
-      filterIconSiblingSelector: '.table-filter-container',
-      filterDropdownSubnavSelector: '.partner_table_filter_subnav'
-    },
-    columnKeysMap,
-    {
-      tablePaginator: paginator,
-      tableRootElementSelector: '#gap-analysis-data'
-    },
-    noFilterResultsHtmlMessage,
-    {
-      bindModalEventListener: bindGapAnalysisModalJQuery,
-      currentTableModalData: focusAreaGaps
-    }
-  );
+  if(!window.gapAnalysisTableFilterHeader){
+    // Create an instance of the TableFilterHeader class for the potential partnerships table
+    window.gapAnalysisTableFilterHeader = new TableFilterHeader(
+      table,
+      'gap-analysis-dropdown-icon',
+      gapReport,
+      filterTableColumnHeaders,
+      filterDropdownOptionsParentSelectors,
+      {
+        filterIconSelector: '.gap-analysis-filter-icon',
+        filterCheckboxItemSelector:
+          'input[type="checkbox"].gap-analysis-filter-checkbox',
+        filterCheckboxItemClass: 'gap-analysis-filter-checkbox',
+        filterCountSpanClass:'active-column-filters-count',
+        filterCountIconCustomClassesArray: [
+          'gap-thematic-pillar-filter-count',
+          'gap-sub-theme-filter-count',
+          'gap-lga-with-gaps-filter-count',
+          'gap-focus-area-gaps-filter-count'
+        ],
+        applyFiltersButtonSelector: '.gap-analysis-table-apply-filter',
+        clearFiltersButtonSelector: '.gap-analysis-table-clear-filter',
+        filterIconSiblingSelector: '.table-filter-container',
+        filterDropdownSubnavSelector: '.gap_analysis_table_filter_subnav',
+        itemSpanClass: '.ga-table-filter-item',
+      },
+      columnKeysMap,
+      {
+        tablePaginator: gapPaginator,
+        tableRootElementSelector: '#gap-analysis-data'
+      },
+      noFilterResultsHtmlMessage,
+      {
+        bindModalEventListener: bindGapAnalysisModalJQuery,
+        currentTableModalData: focusAreaGaps
+      }
+    );
+  }
 }
 
 $(document).ready(async function() {
@@ -220,13 +223,12 @@ $(document).ready(async function() {
 
   $('#gap-analysis-table').load(url, function() {
     window.gapTableData = gapReport;
-    paginator = new Paginator(
+    gapPaginator = new Paginator(
       gapReport,
       keys,
       table,
       selectedItems,
       entriesPerPage
     );
-    loadGapAnalysisTable(paginator);
   });
 });
