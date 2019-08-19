@@ -172,18 +172,14 @@ $(document).ready(async function() {
         if (!filteredData || filteredData.length === 0) {
           $('#stakeholder_message').css({ display: 'block' });
         } else {
-          paginator = new Paginator(
-            filteredData,
-            keys,
-            table,
-            selectedItems,
-            entriesPerPage
-          );
+          const paginator = new Paginator(filteredData, keys, table, selectedItems, entriesPerPage);
+          loadDropdownFilter(paginator);
           loadStakeholderDetails(paginator);
         }
       }
     );
   }
+
 
   /**
    * @description - Load the stakeholder table
@@ -192,35 +188,18 @@ $(document).ready(async function() {
     $('#stakeholder-directory-table').load(
       '/partials/stakeholder-directory-table.html',
       function() {
-        const paginator = new Paginator(
-          tableData,
-          keys,
-          table,
-          selectedItems,
-          entriesPerPage
-        );
+        const paginator = new Paginator(tableData, keys, table, selectedItems, entriesPerPage);
+        loadDropdownFilter(paginator);
         loadStakeholderDetails(paginator);
       }
     );
   }
 
+
   /**
    * @description - Every other operation that is to be done on the stakeholder table and rows
    */
   function loadStakeholderDetails(paginator) {
-    fetchLocations();
-    filter.displayDataInDropdown(
-      [...new Set(beneficiaryCount)],
-      '#beneficiary_count_data'
-    );
-    filter.displayDataInDropdown(
-      [...new Set(organisationName)],
-      '#organisation_data'
-    );
-    fetchAmountInvested();
-    fetchSubtheme();
-    fetchThematicPillars();
-    filter.displayDataInDropdown([...new Set(allCount)], '#partnership_data');
     paginator.initialPage();
     let n = 5;
     let options = '';
@@ -249,6 +228,11 @@ $(document).ready(async function() {
     });
     $('.modal').modal();
 
+
+    /**
+     * @description - Load Modal on row click
+     * @param {string} stakeholderName
+     */
     async function getSHDetails(stakeholderName) {
       const response = await fetch(
         `${MMDP_BASE_URL}/api/v1/stakeholders-directory?organisationName=${stakeholderName}`
@@ -348,241 +332,68 @@ $(document).ready(async function() {
     window.getSHDetails = getSHDetails;
   }
 
-  // uncheck checkboxes
-  function uncheckCheckboxes() {
-    if ($('table tr .checkBox').is(':checked')) {
-      checkBoxValues = [];
-    }
-    $('table tr .checkBox').prop('checked', false);
-  }
+  /**
+   *
+   * @description - Function to load and instantiate the dopdown filter class
+   */
+  function loadDropdownFilter(paginator) {
+    const filterStakeholderTableColumnKeys = [
+      'organisationName',
+      'thematicPillars',
+      'subThemes',
+      'partnership',
+      'location',
+      'beneficiaryCount',
+      'amountInvested'
+    ];
 
-  //close dropdown
-  function closeDropdown() {
-    $("[id*='dropdown__icon_']").each(function(i, e) {
-      $(this)
-        .next('.container')
-        .find('.subnav')
-        .slideUp();
+    const filterStakeholderDropdownSelectors = [
+      '#organisationNameStakeholderFilterData',
+      '#thematicPillarStakeholderFilterData',
+      '#subThemeStakeholderFilterData',
+      '#partnershipStakeholderFilterData',
+      '#locationStakeholderFilterData',
+      '#beneficiaryCountStakeholderFilterData',
+      '#amountInvestedStakeholderFilterData'
+  ];
 
-      $(this)
-        .next('.container')
-        .find('.amount_subnav')
-        .slideUp();
-
-      $(this)
-        .next('.container')
-        .find('.beneficiary_subnav')
-        .slideUp();
-
-      $(this)
-        .next('.container')
-        .find('.subtheme_subnav')
-        .slideUp();
-
-      $(this)
-        .next('.container')
-        .find('.thematic_subnav')
-        .slideUp();
-
-      $(this)
-        .next('.container')
-        .find('.partnership_subnav')
-        .slideUp();
-
-      $(this)
-        .next('.container')
-        .find('.organisation_subnav')
-        .slideUp();
-    });
-  }
-
-  // camel case the dropdown names
-  function camelize(text) {
-    return text.replace(/^([A-Z])|[\s-_]+(\w)/g, function(
-      match,
-      p1,
-      p2,
-      offset
-    ) {
-      if (p2) return p2.toUpperCase();
-      return p1.toLowerCase();
-    });
-  }
-
-  // toggle dropdown arrow
-  let dropdownName;
-  $('div').on('click', 'table tr #dropdown__icon_', function() {
-    dropdownName = camelize($.trim(this.previousSibling.nodeValue));
-    if (param === 'country' && dropdownName === 'location') {
-      dropdownName = 'stateLocation';
-    }
-    $(this)
-      .next('.container')
-      .find('.subnav')
-      .slideToggle();
-
-    $(this)
-      .next('.container')
-      .find('.amount_subnav')
-      .slideToggle();
-
-    $(this)
-      .next('.container')
-      .find('.beneficiary_subnav')
-      .slideToggle();
-
-    $(this)
-      .next('.container')
-      .find('.subtheme_subnav')
-      .slideToggle();
-
-    $(this)
-      .next('.container')
-      .find('.thematic_subnav')
-      .slideToggle();
-
-    $(this)
-      .next('.container')
-      .find('.partnership_subnav')
-      .slideToggle();
-
-    $(this)
-      .next('.container')
-      .find('.organisation_subnav')
-      .slideToggle();
-  });
-
-  function fetchLocations() {
-    lgasArray = window.variable;
-    let stateArray = [];
-    if (!lgasArray) {
-      client(`state`).then(res => {
-        res
-          .json()
-          .then(res => {
-            statesArray = res.data.data;
-            for (let i = 0; i < statesArray.length; i++) {
-              stateArray.push(statesArray[i].stateName);
-            }
-            filter.displayDataInDropdown(stateArray, '#data');
-          })
-          .catch(err => {
-            throw err;
-          });
-      });
-      return;
-    }
-    filter.displayDataInDropdown(lgasArray, '#data');
-  }
-
-  function fetchAmountInvested() {
-    let amountsInvestedArray = [];
-    client(`amount-invested`).then(res => {
-      res
-        .json()
-        .then(res => {
-          amountInvestedArray = res.data;
-          for (let i = 0; i < amountInvestedArray.length; i++) {
-            amountsInvestedArray.push(
-              amountInvestedArray[i].amountInvestedRange
-            );
+  let stakeholderColumnKeysMap = new Map();
+  filterStakeholderTableColumnKeys.map(
+        (columnKey)=>{
+          let stakeholderCurrentColumnEntriesSet = new Set();
+          for (let tableRowIndex = 0; tableRowIndex < tableData.length; tableRowIndex++) {
+            stakeholderCurrentColumnEntriesSet.add(tableData[tableRowIndex][columnKey]);
           }
-          filter.displayDataInDropdown(amountsInvestedArray, '#data_amount');
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-  }
+          stakeholderColumnKeysMap.set(columnKey, stakeholderCurrentColumnEntriesSet);
+        }
+    );
 
-  function fetchThematicPillars() {
-    let thematicPillars = [];
-    client(`thematic-pillars`).then(res => {
-      res
-        .json()
-        .then(res => {
-          let thematicData = res.data.data;
-          for (let i = 0; i < thematicData.length; i++) {
-            thematicPillars.push(thematicData[i].pillarTitle);
-          }
-          filter.displayDataInDropdown(thematicPillars, '#thematic_data');
-        })
-        .catch(err => {
-          return err;
-        });
-    });
-  }
+  const noFilterResultsHtmlMessage = `
+    <tr class="stakeholder-filter-error">
+      <td colspan="7">No Results found for the selected column filters.</ colspan="7">
+    </tr>`;
 
-  function fetchSubtheme() {
-    let subthemeArray = [];
-    client(`sub-theme`).then(res => {
-      res
-        .json()
-        .then(res => {
-          subthemesArray = res.data.data;
-          for (let i = 0; i < subthemesArray.length; i++) {
-            subthemeArray.push(subthemesArray[i].subThemeName);
-          }
-          filter.displayDataInDropdown(subthemeArray, '#data_subtheme');
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-  }
-
-  // get checkbox values
-  let checkBoxValues = [];
-  $('div').on('change', 'table tr .checkBox', function() {
-    if (!isNaN($(this).val())) {
-      checkBoxValues.push(parseInt($(this).val()));
-      console.log(checkBoxValues, '>>>1');
-    } else if ($(this).is(':checked')) {
-      checkBoxValues.push($(this).val());
-      console.log(checkBoxValues, '>>>2');
-    } else {
-      checkBoxValues = checkBoxValues.filter(loc => loc != $(this).val());
-      console.log(checkBoxValues, '>>>3');
-    }
-    console.log(checkBoxValues.length, '>>>4');
-  });
-
-  function filterData() {
-    for (let i = 0; i < tableData.length; i++) {
-      const filterName = tableData[i][dropdownName];
-      applyFilterData(filterName, i);
-    }
-  }
-
-  // clear filter button on click
-  $('div').on('click', 'table tr #clearFilter', function() {
-    uncheckCheckboxes();
-    closeDropdown();
-    filterData();
-  });
-
-  // apply filters button on click
-  $('div').on('click', 'table tr #applyFilter', function() {
-    filterData();
-    uncheckCheckboxes();
-    closeDropdown();
-  });
-
-  // function to display apply filter data
-  function applyFilterData(filterByName, index) {
-    if (
-      checkBoxValues.length > 0 &&
-      $.inArray(filterByName, checkBoxValues) === -1
-    ) {
-      $(`#stakeholder td#${tableData[index].id}`)
-        .parent()
-        .hide();
-    } else {
-      $(`#stakeholder td#${tableData[index].id}`)
-        .parent()
-        .show();
-    }
-
-    closeDropdown();
+    window.stakeholderTableHeaderFilter = new TableFilterHeader(
+      table,
+      'stakeholder-dropdown-icon',
+      tableData,
+      filterStakeholderTableColumnKeys,
+      filterStakeholderDropdownSelectors,
+      {
+        filterIconSelector: '.stakeholder-filter-icon',
+        filterCheckboxItemSelector: 'input[type="checkbox"].stakeholder-filter-checkbox',
+        filterCheckboxItemClass: 'stakeholder-filter-checkbox',
+        applyFiltersButtonSelector: '.stakeholder-table-apply-filter',
+        clearFiltersButtonSelector: '.stakeholder-table-clear-filter',
+        filterIconSiblingSelector: '.stakeholder-filter-container',
+        filterDropdownSubnavSelector:'.stakeholder_table_filter_subnav',
+      },
+      stakeholderColumnKeysMap,
+      {
+        'tablePaginator': paginator,
+        'tableRootElementSelector': '#activities__table__body' ,
+      },
+      noFilterResultsHtmlMessage
+    );
   }
 });

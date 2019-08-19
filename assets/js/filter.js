@@ -42,7 +42,7 @@ const appendItemToFilterDropDown = function(
 
     default:
       // Default item is set to the stakeholder table checkbox item
-      return `<td><input name="${dataItem}" value="${dataItem}" class="checkBox" type="checkbox"/> &nbsp;${dataItem}</td>`;
+      return `<td><input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox"/> &nbsp;${dataItem}</td>`;
   }
 };
 

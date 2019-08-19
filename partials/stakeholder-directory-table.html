@@ -7,190 +7,193 @@
           <input name="organisation__name" value="aaaaa" type="checkbox" data-org="check-all-stakeholder" id="check-all-stakeholder"/>
           <div>
             Organisation Name
-            <i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i>
-            <div class="container">
-              <div class="organisation_subnav">
-                <div class="organisation_filters">
-                  <p>
-                    Organisation Filters
-                    <button class="clear_filter__button" id="clearFilter">
-                      Clear Filter
-                    </button>
-                    <button class="apply_filter__button" id="applyFilter">
-                      Apply Filter
-                    </button>
-                  </p>
-                </div>
-                <div class="organisation_filter_data">
-                  <table id="organisation_data">
-                    <tbody>
-                      <!--Table rows will be loaded dynamically here-->
-                    </tbody>
-                  </table>
-                </div>
+            <i name="organisationName" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
+            <div class="stakeholder-filter-container">
+              <div class="container">
+                  <div class="stakeholder_table_filter_subnav fadeInDown" style="display: none;">
+                      <div class="stakeholder_table_filters">
+                          <p>
+                              Organisation Name Filters
+                              <button class="clear_filter__button stakeholder-table-clear-filter" >
+                                  Clear Filter
+                              </button>
+                              <button class="apply_filter__button stakeholder-table-apply-filter" >
+                                  Apply Filter
+                              </button>
+                          </p>
+                      </div>
+                      <div class="stakeholder_table_filter_data">
+                          <div id="organisationNameStakeholderFilterData" class="filter-data-option-items">
+                              <!--  Load column filter checkbox items dynamically-->
+                          </div>
+                      </div>
+                  </div>
               </div>
-            </div>
+          </div>
+
           </div>
         </th>
         <th>
-          Thematic Pillars<i
-            class="fas fa-angle-down fa-xs"
-            id="dropdown__icon_"
-          ></i>
+          Thematic Pillars
+          <i name="thematicPillar" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
+          <div class="stakeholder-filter-container">
+            <div class="container">
+                <div class="stakeholder_table_filter_subnav fadeInDown" style="display: none;">
+                    <div class="stakeholder_table_filters">
+                        <p>
+                            Thematic Pillar Filters
+                            <button class="clear_filter__button stakeholder-table-clear-filter" >
+                                Clear Filter
+                            </button>
+                            <button class="apply_filter__button stakeholder-table-apply-filter" >
+                                Apply Filter
+                            </button>
+                        </p>
+                    </div>
+                    <div class="stakeholder_table_filter_data">
+                        <div id="thematicPillarStakeholderFilterData" class="filter-data-option-items">
+                            <!--  Load column filter checkbox items dynamically-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      </th>
+      <th>
+        Sub-Themes
+        <i name="subTheme" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
+        <div class="stakeholder-filter-container">
           <div class="container">
-            <div class="thematic_subnav">
-              <div class="thematic_filters">
-                <p>
-                  Thematic Pillars Filters
-                  <button class="clear_filter__button" id="clearFilter">
-                    Clear Filter
-                  </button>
-                  <button class="apply_filter__button" id="applyFilter">
-                    Apply Filter
-                  </button>
-                </p>
+              <div class="stakeholder_table_filter_subnav fadeInDown" style="display: none;">
+                  <div class="stakeholder_table_filters">
+                      <p>
+                          Sub-Theme Filters
+                          <button class="clear_filter__button stakeholder-table-clear-filter" >
+                              Clear Filter
+                          </button>
+                          <button class="apply_filter__button stakeholder-table-apply-filter" >
+                              Apply Filter
+                          </button>
+                      </p>
+                  </div>
+                  <div class="stakeholder_table_filter_data">
+                      <div id="subThemeStakeholderFilterData" class="filter-data-option-items">
+                          <!--  Load column filter checkbox items dynamically-->
+                      </div>
+                  </div>
               </div>
-              <div class="thematic_filter_data">
-                <table id="thematic_data">
-                  <tbody>
-                  <!--Table rows will be loaded dynamically here-->
-                  </tbody>
-                </table>
-              </div>
-            </div>
           </div>
+      </div>
+
       </th>
       <th>
-        Sub-Themes<i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i>
-        <div class="container">
-          <div class="subtheme_subnav">
-            <div class="subtheme_filters">
-              <p>
-                Sub-Theme Filters
-                <button class="clear_filter__button" id="clearFilter">
-                  Clear Filter
-                </button>
-                <button class="apply_filter__button" id="applyFilter">
-                  Apply Filter
-                </button>
-              </p>
-            </div>
-            <div class="subtheme_filter_data">
-              <table id="data_subtheme">
-                <tbody>
-                <!--Table rows will be loaded dynamically here-->
-                </tbody>
-              </table>
-            </div>
+        Partnership
+        <i name="partnership" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
+        <div class="stakeholder-filter-container">
+          <div class="container">
+              <div class="stakeholder_table_filter_subnav fadeInDown" style="display: none;">
+                  <div class="stakeholder_table_filters">
+                      <p>
+                          Partnership Filters
+                          <button class="clear_filter__button stakeholder-table-clear-filter" >
+                              Clear Filter
+                          </button>
+                          <button class="apply_filter__button stakeholder-table-apply-filter" >
+                              Apply Filter
+                          </button>
+                      </p>
+                  </div>
+                  <div class="stakeholder_table_filter_data">
+                      <div id="partnershipStakeholderFilterData" class="filter-data-option-items">
+                          <!--  Load column filter checkbox items dynamically-->
+                      </div>
+                  </div>
+              </div>
           </div>
-        </div>
-      </th>
-      <th>
-        Partnership<i
-              class="fas fa-angle-down fa-xs"
-              id="dropdown__icon_"
-      ></i>
-        <div class="container">
-          <div class="partnership_subnav">
-            <div class="partnership_filters">
-              <p>
-                Partnership Filters
-                <button class="clear_filter__button" id="clearFilter">
-                  Clear Filter
-                </button>
-                <button class="apply_filter__button" id="applyFilter">
-                  Apply Filter
-                </button>
-              </p>
-            </div>
-            <div class="partnership_filter_data">
-              <table id="partnership_data">
-                <tbody>
-                <!--Table rows will be loaded dynamically here-->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+      </div>
+
       </th>
       <th class="location__dropdown">
-        Location<i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i>
-        <div class="container">
-          <div class="subnav">
-            <div class="location_filters">
-              <p>
-                Location Filters
-                <button class="clear_filter__button" id="clearFilter">
-                  Clear Filter
-                </button>
-                <button class="apply_filter__button" id="applyFilter">
-                  Apply Filter
-                </button>
-              </p>
-            </div>
-            <div class="location_filter_data">
-              <table id="data">
-                <tbody>
-                <!--Table rows will be loaded dynamically here-->
-                </tbody>
-              </table>
-            </div>
+        Location
+        <i name="location" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
+        <div class="stakeholder-filter-container">
+          <div class="container">
+              <div class="stakeholder_table_filter_subnav fadeInDown" style="display: none;">
+                  <div class="stakeholder_table_filters">
+                      <p>
+                          Location Filters
+                          <button class="clear_filter__button stakeholder-table-clear-filter" >
+                              Clear Filter
+                          </button>
+                          <button class="apply_filter__button stakeholder-table-apply-filter" >
+                              Apply Filter
+                          </button>
+                      </p>
+                  </div>
+                  <div class="stakeholder_table_filter_data">
+                      <div id="locationStakeholderFilterData" class="filter-data-option-items">
+                          <!--  Load column filter checkbox items dynamically-->
+                      </div>
+                  </div>
+              </div>
           </div>
-        </div>
+      </div>
+
       </th>
       <th>
-        Beneficiary Count<i
-              class="fas fa-angle-down fa-xs"
-              id="dropdown__icon_"
-      ></i>
-        <div class="container">
-          <div class="beneficiary_subnav">
-            <div class="beneficiary_filters">
-              <p>
-                Beneficiary Count Filters
-                <button class="clear_filter__button" id="clearFilter">
-                  Clear Filter
-                </button>
-                <button class="apply_filter__button" id="applyFilter">
-                  Apply Filter
-                </button>
-              </p>
-            </div>
-            <div class="beneficiary_filter_data">
-              <table id="beneficiary_count_data">
-                <tbody>
-                <!--Table rows will be loaded dynamically here-->
-                </tbody>
-              </table>
-            </div>
+        Beneficiary Count
+        <i name="beneficiaryCount" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
+        <div class="stakeholder-filter-container">
+          <div class="container">
+              <div class="stakeholder_table_filter_subnav fadeInDown" style="display: none;">
+                  <div class="stakeholder_table_filters">
+                      <p>
+                          Beneficiary Count Filters
+                          <button class="clear_filter__button stakeholder-table-clear-filter" >
+                              Clear Filter
+                          </button>
+                          <button class="apply_filter__button stakeholder-table-apply-filter" >
+                              Apply Filter
+                          </button>
+                      </p>
+                  </div>
+                  <div class="stakeholder_table_filter_data">
+                      <div id="beneficiaryCountStakeholderFilterData" class="filter-data-option-items">
+                          <!--  Load column filter checkbox items dynamically-->
+                      </div>
+                  </div>
+              </div>
           </div>
-        </div>
+      </div>
+
       </th>
       <th>
         Amount Invested
-        <i class="fas fa-angle-down fa-xs" id="dropdown__icon_"></i>
-        <div class="container">
-          <div class="amount_subnav">
-            <div class="amount_filters">
-              <p>
-                Amount Invested Filters
-                <button class="clear_filter__button" id="clearFilter">
-                  Clear Filter
-                </button>
-                <button class="apply_filter__button" id="applyFilter">
-                  Apply Filter
-                </button>
-              </p>
-            </div>
-            <div class="amount_filter_data">
-              <table id="data_amount">
-                <tbody>
-                <!--Table rows will be loaded dynamically here-->
-                </tbody>
-              </table>
-            </div>
+        <i name="amountInvested" class="fas fa-angle-down fa-xs stakeholder-filter-icon"></i>
+        <div class="stakeholder-filter-container">
+          <div class="container">
+              <div class="stakeholder_table_filter_subnav fadeInDown" style="display: none;">
+                  <div class="stakeholder_table_filters">
+                      <p>
+                          Amount Invested Filters
+                          <button class="clear_filter__button stakeholder-table-clear-filter" >
+                              Clear Filter
+                          </button>
+                          <button class="apply_filter__button stakeholder-table-apply-filter" >
+                              Apply Filter
+                          </button>
+                      </p>
+                  </div>
+                  <div class="stakeholder_table_filter_data">
+                      <div id="amountInvestedStakeholderFilterData" class="filter-data-option-items">
+                          <!--  Load column filter checkbox items dynamically-->
+                      </div>
+                  </div>
+              </div>
           </div>
-        </div>
+      </div>
+
       </th>
     </tr>
     </thead>
@@ -217,7 +220,7 @@
           <ul id='entries-per-page' class='dropdown-content'>
             <!-- Dynamic display goes here -->
           </ul>
-    
+
           <span>Entries per page</span>
           <span class="matrix-page-of-text"
           >Page <span id="current-page">1</span> of
