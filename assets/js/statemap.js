@@ -2,7 +2,7 @@
 function getPoint(x, y) {
   const svg = document.querySelector('#svg-container').querySelector('svg');
   let p = svg.createSVGPoint();
-  
+
   p.x = x;
   p.y = y;
   const ctm = svg.getScreenCTM().inverse();
@@ -21,24 +21,24 @@ function getCoordinates(lgaId, count) {
   let pillarIconCount = count;
 
   // path client rect
-  let cr = lgaPath.getBoundingClientRect();  
+  let cr = lgaPath.getBoundingClientRect();
 
   let n = 0; //a counter
 
-  for (let i = 0; i < 4; i++) {    
+  for (let i = 0; i < 4; i++) {
     // get a random point on the svg canvas
     let x = randomIntFromInterval(cr.x, cr.x + cr.width * 0.3);
-    let y = randomIntFromInterval(cr.y, cr.y + cr.height * 0.3);    
-    
-      //get the coordinates of the point on the svg
-      let svgPoint = getPoint(x, y);
-      
-      //draw a circle with the center on the svg point
-      const lga = lgaId.replace(/ +/g, '');
-      points.push({ x: svgPoint.x, y: svgPoint.y, lga });
+    let y = randomIntFromInterval(cr.y, cr.y + cr.height * 0.3);
 
-      //increase the counter
-      n++;
+    //get the coordinates of the point on the svg
+    let svgPoint = getPoint(x, y);
+
+    //draw a circle with the center on the svg point
+    const lga = lgaId.replace(/ +/g, '');
+    points.push({ x: svgPoint.x, y: svgPoint.y, lga });
+
+    //increase the counter
+    n++;
     // if you have already 4 points break the loop
     if (n === pillarIconCount) {
       break;
@@ -243,7 +243,7 @@ function filteredLga(target, array = []) {
                     lgaMap.innerHTML = `<title>${lgaId}</title>`;
 
                     lgaMap.addEventListener(
-                      "click",
+                      'click',
                       () => handleMapClick(lgaId),
                       false
                     );
@@ -297,9 +297,9 @@ function filteredLga(target, array = []) {
           });
         }
       });
-      const stateReportBtn = document.getElementById('state-report-btn');
-      stateReportBtn.addEventListener(
+      $(document).on(
         'click',
+        '#state-report-btn, #state-report-btn-sm',
         () =>
           (window.location.href = `http://${baseURL}/state-report.html?state=${stateName}`)
       );

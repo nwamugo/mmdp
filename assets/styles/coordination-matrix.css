@@ -522,10 +522,10 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     margin-top: -75px;
     height: 40px;
     padding: 2%;
-    margin-left: -400px;
+    margin-left: -700px;
   }
 
-  .banner .tap {
+  .banner tap {
     margin-left: 95px;
     margin-top: -30px;
   }
@@ -712,7 +712,8 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     border-bottom: 1px solid rgba(195, 194, 194, 0.27);
   }
 
-  .fa-chevron-down {
+  .fa-chevron-down,
+  .fa-times {
     font-size: 30px;
     color: #3faaca;
   }
@@ -728,6 +729,7 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
 
   .icon-filter {
     position: absolute;
+    top: 0;
     right: 0;
     bottom: 8px;
   }

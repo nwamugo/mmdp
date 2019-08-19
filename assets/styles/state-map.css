@@ -52,6 +52,11 @@
   margin-top: 40px;
 }
 
+.state__map .map__legend__sm,
+.state__map .report-button-sm {
+  display: none;
+}
+
 .report__map__legend__container {
   height: 135px;
 }
@@ -333,7 +338,7 @@
 }
 
 /* Toggle this class - hide and show the popup */
-.show {
+.popup-menu.show {
   position: absolute;
   top: -1.9rem;
   left: 0rem;
@@ -460,4 +465,125 @@
 
 .center-modal {
   left: 50%;
+}
+
+/* medium screen */
+@media screen and (max-width: 999px) {
+  .banner {
+    background: none;
+  }
+  .state__map {
+    background-color: #fff !important;
+    margin: 0 !important;
+  }
+  .section__pillars {
+    background-color: rgba(87, 179, 207, 0.1) !important;
+  }
+  .state__map .banner__desc__heading {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+  }
+  .state__map .state-matrix-welcome-msg {
+    font-size: 14px;
+    color: #000;
+    padding-bottom: 15px;
+  }
+  .state__map .map__legend__lg,
+  .state__map .report-button-lg {
+    display: none;
+  }
+  .report-button-sm {
+    display: block;
+  }
+  .report-button-sm #state-report-btn-sm {
+    margin: 15px 0;
+    width: 100px;
+    height: 40px;
+    background-color: #3faaca;
+    border-radius: 3px;
+    color: #ffffff;
+    font-stretch: normal;
+    letter-spacing: -0.3px;
+    cursor: pointer;
+  }
+  .state__map .map__legend__sm {
+    text-align: left;
+    display: inline-block;
+    width: 100%;
+    padding-left: 15px;
+    margin: -25px 0 0 0;
+  }
+  .state__map .map__legend__sm .map__legend {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+  }
+  .state__map .map__legend__sm .map__legend span {
+    display: inline-block;
+    margin-left: -15px;
+  }
+  .state__map .map__legend__sm .one:before,
+  .state__map .map__legend__sm .two:before,
+  .state__map .map__legend__sm .three:before,
+  .state__map .map__legend__sm .four:before {
+    width: 20px;
+    height: 20px;
+    margin: 5px 0 0 0;
+    vertical-align: bottom;
+  }
+  .state__map .banner__images {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .state__map .banner__images svg {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+  .state__map .hide-pillar-icons {
+    position: initial;
+    margin-top: 0px;
+    width: 100%;
+  }
+
+  .state__map .pillar-icons {
+    margin: -150px 0 0 0;
+    width: 100%;
+    padding: 15px;
+    text-align: right;
+  }
+  .state__map .pillar-icons .span-text {
+    font-size: 14px;
+    font-weight: normal;
+  }
+  .state__map .links__container {
+    position: relative;
+    padding: 15px;
+    margin: 30px 0 -50px 0;
+    font-size: 14px;
+  }
+  .state__map .links__container .nav__links {
+    margin: 0 !important;
+  }
+  .state__map + .section__pillars {
+    display: block;
+    margin: 0px;
+  }
+  .state__map .banner__row .banner__desc {
+    order: initial;
+    width: 100%;
+    margin: 0px auto;
+  }
+  .section__pillars #search__activities {
+    background-color: #fff;
+    font-size: 14px;
+    margin-left: -15px;
+  }
+
+  .stakeholder__dir__table .btn-accordion-table {
+    background-color: #fff;
+  }
 }

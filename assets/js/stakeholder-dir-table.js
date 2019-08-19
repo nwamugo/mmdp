@@ -165,14 +165,19 @@ $(document).ready(async function() {
         if (!filteredData || filteredData.length === 0) {
           $('#stakeholder_message').css({ display: 'block' });
         } else {
-          const paginator = new Paginator(filteredData, keys, table, selectedItems, entriesPerPage);
+          const paginator = new Paginator(
+            filteredData,
+            keys,
+            table,
+            selectedItems,
+            entriesPerPage
+          );
           loadDropdownFilter(paginator);
           loadStakeholderDetails(paginator);
         }
       }
     );
   }
-
 
   /**
    * @description - Load the stakeholder table
@@ -181,13 +186,18 @@ $(document).ready(async function() {
     $('#stakeholder-directory-table').load(
       '/partials/stakeholder-directory-table.html',
       function() {
-        const paginator = new Paginator(tableData, keys, table, selectedItems, entriesPerPage);
+        const paginator = new Paginator(
+          tableData,
+          keys,
+          table,
+          selectedItems,
+          entriesPerPage
+        );
         loadDropdownFilter(paginator);
         loadStakeholderDetails(paginator);
       }
     );
   }
-
 
   /**
    * @description - Every other operation that is to be done on the stakeholder table and rows
@@ -226,7 +236,6 @@ $(document).ready(async function() {
       paginator.previousPage();
     });
     $('.modal').modal();
-
 
     /**
      * @description - Load Modal on row click
@@ -330,22 +339,27 @@ $(document).ready(async function() {
     }
     window.getSHDetails = getSHDetails;
     let tableColumnKeys = [
-      "thematicPillars",
-      "subThemes",
-      "partnership",
-      "location",
-      "beneficiaryCount",
-      "amountInvested"
+      'thematicPillars',
+      'subThemes',
+      'partnership',
+      'location',
+      'beneficiaryCount',
+      'amountInvested'
     ];
-    tableColumnKeys[3] = ($(window).width() <= 600) ? "stateLocation" : tableColumnKeys[3];
+
+    if ($(window).width() <= 600  && window.location.pathname === '/state.html') {
+      tableColumnKeys[3] = 'location';
+    } else {
+      tableColumnKeys[3] = 'stateLocation';
+    }
 
     const responsiveFilterDropdownOptionsParentSelectors = [
-      "#responsiveStakeholderThematicPillars",
-      "#responsiveStakeholderSubThemes",
-      "#responsiveStakeholderPartnership",
-      "#responsiveStakeholderLocation",
-      "#responsiveStakeholderBeneficiaryCount",
-      "#responsiveStakeholderAmountInvested"
+      '#responsiveStakeholderThematicPillars',
+      '#responsiveStakeholderSubThemes',
+      '#responsiveStakeholderPartnership',
+      '#responsiveStakeholderLocation',
+      '#responsiveStakeholderBeneficiaryCount',
+      '#responsiveStakeholderAmountInvested'
     ];
 
     // Create html string message displayed when the table filter has no results
@@ -375,10 +389,10 @@ $(document).ready(async function() {
         itemSpanClass: '.sh-table-filter-item'
       },
       {
-        'tablePaginator': paginator,
-        'tableRootElementSelector': '.table-sm' ,
+        tablePaginator: paginator,
+        tableRootElementSelector: '.table-sm'
       },
-      noFilterResultsHtmlMessage,
+      noFilterResultsHtmlMessage
     );
   }
 
@@ -387,7 +401,6 @@ $(document).ready(async function() {
    * @description - Function to load and instantiate the dopdown filter class
    */
   function loadDropdownFilter(paginator) {
-
     let filterStakeholderTableColumnKeys;
     if (window.location.pathname === '/state.html' || window.location.pathname === '/active-communities.html') {
       filterStakeholderTableColumnKeys = [
@@ -410,7 +423,7 @@ $(document).ready(async function() {
         'amountInvested'
       ];
     }
-    
+
     const filterStakeholderDropdownSelectors = [
       '#organisationNameStakeholderFilterData',
       '#thematicPillarStakeholderFilterData',
@@ -419,20 +432,27 @@ $(document).ready(async function() {
       '#locationStakeholderFilterData',
       '#beneficiaryCountStakeholderFilterData',
       '#amountInvestedStakeholderFilterData'
-  ];
+    ];
 
-  let stakeholderColumnKeysMap = new Map();
-  filterStakeholderTableColumnKeys.map(
-        (columnKey)=>{
-          let stakeholderCurrentColumnEntriesSet = new Set();
-          for (let tableRowIndex = 0; tableRowIndex < tableData.length; tableRowIndex++) {
-            stakeholderCurrentColumnEntriesSet.add(tableData[tableRowIndex][columnKey]);
-          }
-          stakeholderColumnKeysMap.set(columnKey, stakeholderCurrentColumnEntriesSet);
-        }
-    );
+    let stakeholderColumnKeysMap = new Map();
+    filterStakeholderTableColumnKeys.map(columnKey => {
+      let stakeholderCurrentColumnEntriesSet = new Set();
+      for (
+        let tableRowIndex = 0;
+        tableRowIndex < tableData.length;
+        tableRowIndex++
+      ) {
+        stakeholderCurrentColumnEntriesSet.add(
+          tableData[tableRowIndex][columnKey]
+        );
+      }
+      stakeholderColumnKeysMap.set(
+        columnKey,
+        stakeholderCurrentColumnEntriesSet
+      );
+    });
 
-  const noFilterResultsHtmlMessage = `
+    const noFilterResultsHtmlMessage = `
     <tr class="stakeholder-filter-error">
       <td colspan="7">No Results found for the selected column filters.</td>
     </tr>`;
@@ -444,7 +464,8 @@ $(document).ready(async function() {
       filterStakeholderDropdownSelectors,
       {
         filterIconSelector: '.stakeholder-filter-icon',
-        filterCheckboxItemSelector: 'input[type="checkbox"].stakeholder-filter-checkbox',
+        filterCheckboxItemSelector:
+          'input[type="checkbox"].stakeholder-filter-checkbox',
         filterCheckboxItemClass: 'stakeholder-filter-checkbox',
         applyFiltersButtonSelector: '.stakeholder-table-apply-filter',
         clearFiltersButtonSelector: '.stakeholder-table-clear-filter',
@@ -454,8 +475,8 @@ $(document).ready(async function() {
       },
       stakeholderColumnKeysMap,
       {
-        'tablePaginator': paginator,
-        'tableRootElementSelector': '#activities__table__body' ,
+        tablePaginator: paginator,
+        tableRootElementSelector: '#activities__table__body'
       },
       noFilterResultsHtmlMessage
     );

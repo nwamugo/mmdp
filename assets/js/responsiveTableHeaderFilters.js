@@ -210,8 +210,7 @@ class ResponsiveTableFilterHeader extends TableFilterHeader {
       e.data._this.filterElementClassNames.tableFiltersPanelSelector;
     $(this)
       .parent()
-      .find(tableFiltersPanelSelector)
-      .slideToggle();
+      .find(tableFiltersPanelSelector);
   }
 
   /**

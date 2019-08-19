@@ -98,11 +98,14 @@ getTableRows = (data, keys) => {
     stakeholderDirMobileTable: `
     <div>
     <button class="btn-single-table-card dummy" id="${data['id']}">
-       <span class="title">${data[keys[0]]}</span>
+       <span class="title">${
+         data[keys[0]]
+       } <span class="icon"><i class="fas fa-chevron-down"></i></span></span>
        <span class="d-flex">
-         <div class="d-flex-div">Thematic Pillar(s)<br>${data[keys[1]]}</div>
-         <div>Beneficiary Count<br>${data[keys[5]]}</div>
-          <span class="icon"><i class="fas fa-chevron-down"></i></span>
+         <div class="d-flex-div"><b>Thematic Pillar(s)</b><br>${
+           data[keys[1]]
+         }</div>
+         <div><b>Beneficiary Count</b><br>${data[keys[5]]}</div>
        </span>
     </button>
     <div class="panel" id="${data['id']}">
