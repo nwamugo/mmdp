@@ -20,17 +20,15 @@ function loadGapAnalysisTable(paginator) {
     'pillar',
     'subtheme',
     'LgasWithGaps',
-    'focusAreasWithGapsCount',
+    'focusAreasWithGapsCount'
   ];
 
   const filterDropdownOptionsParentSelectors = [
     '#thematic_data',
     '#subtheme_data',
     '#lga_gap_data',
-    '#gap_count_data',
+    '#gap_count_data'
   ];
-
-
 
   let columnKeysMap = new Map();
   filterTableColumnHeaders.forEach(columnHeader => {
@@ -44,8 +42,6 @@ function loadGapAnalysisTable(paginator) {
     }
     columnKeysMap.set(columnHeader, currentColumnEntriesSet);
   });
-
-
 
   // Create html string message displayed when the table filter has no results
   const noFilterResultsHtmlMessage = `
@@ -100,21 +96,68 @@ function loadGapAnalysisTable(paginator) {
       applyFiltersButtonSelector: '.gap-analysis-table-apply-filter',
       clearFiltersButtonSelector: '.gap-analysis-table-clear-filter',
       filterIconSiblingSelector: '.table-filter-container',
-      filterDropdownSubnavSelector: '.partner_table_filter_subnav',
+      filterDropdownSubnavSelector: '.partner_table_filter_subnav'
     },
     columnKeysMap,
     {
       tablePaginator: paginator,
-      tableRootElementSelector: '#gap-analysis-data',
+      tableRootElementSelector: '#gap-analysis-data'
     },
     noFilterResultsHtmlMessage,
     {
       bindModalEventListener: bindGapAnalysisModalJQuery,
-      currentTableModalData: focusAreaGaps,
+      currentTableModalData: focusAreaGaps
+    }
+  );
+}
+
+$(document).ready(async function() {
+  const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
+
+  const gapAnalysisReportData = await fetch(
+    `${MMDP_BASE_URL}/api/v1/gapAnalysis/${queryNameFromUrl}`
+  );
+  const data = await gapAnalysisReportData.json();
+
+  $('#gap-analysis-table-container').on(
+    'click',
+    'input[type="checkbox"].check, input[type="checkbox"].check-all',
+    function() {
+      if ($(this).is(':checked') && $(this).attr('data-org') !== 'check-all') {
+        var strinn = $(this).attr('data-org');
+        strinn && selectedItems.push(strinn.replace(/-/g, ' '));
+      } else if (
+        $(this).is(':checked') &&
+        $(this).attr('data-org') === 'check-all'
+      ) {
+        $('input[name="aaaaa"]').each(function() {
+          var strinn = this.id;
+          selectedItems.push(strinn.replace(/-/g, ' '));
+          this.checked = true;
+        });
+      } else if (
+        $(this).is(':not(:checked)') &&
+        $(this).attr('data-org') !== 'check-all'
+      ) {
+        var strinn = $(this).attr('data-org');
+        var filtered = selectedItems.filter(function(value, index, arr) {
+          return value !== strinn.replace(/-/g, ' ');
+        });
+        selectedItems.splice(0, selectedItems.length, ...filtered);
+        $('#check-all').prop('checked', false);
+      } else if (
+        $(this).is(':not(:checked)') &&
+        $(this).attr('data-org') === 'check-all'
+      ) {
+        $('input[name="aaaaa"]').each(function() {
+          this.checked = false;
+        });
+        selectedItems.length = 0;
+      }
     }
   );
 
-  $('.moreLess').click(function() {
+  $('#gap-analysis-table-container').on('click', '.moreLess', function() {
     const thisElement = $(this);
     const truncate = thisElement.closest('.truncate-text');
     const truncateText = '.truncate-text';
@@ -126,49 +169,6 @@ function loadGapAnalysisTable(paginator) {
       truncate.next(truncateText).toggle();
     }
     return false;
-  });
-}
-
-$(document).ready(async function() {
-  const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
-
-  const gapAnalysisReportData = await fetch(
-    `${MMDP_BASE_URL}/api/v1/gapAnalysis/${queryNameFromUrl}`
-  );
-  const data = await gapAnalysisReportData.json();
-
-  $('#gap-analysis-table-container').on('click', 'input[type="checkbox"].check, input[type="checkbox"].check-all', function() {
-    if ($(this).is(':checked') && $(this).attr('data-org') !== 'check-all') {
-      var strinn = $(this).attr('data-org');
-      strinn && selectedItems.push(strinn.replace(/-/g, ' '));
-    } else if (
-      $(this).is(':checked') &&
-      $(this).attr('data-org') === 'check-all'
-    ) {
-      $('input[name="aaaaa"]').each(function() {
-        var strinn = this.id;
-        selectedItems.push(strinn.replace(/-/g, ' '));
-        this.checked = true;
-      });
-    } else if (
-      $(this).is(':not(:checked)') &&
-      $(this).attr('data-org') !== 'check-all'
-    ) {
-      var strinn = $(this).attr('data-org');
-      var filtered = selectedItems.filter(function(value, index, arr) {
-        return value !== strinn.replace(/-/g, ' ');
-      });
-      selectedItems.splice(0, selectedItems.length, ...filtered);
-      $('#check-all').prop('checked', false);
-    } else if (
-      $(this).is(':not(:checked)') &&
-      $(this).attr('data-org') === 'check-all'
-    ) {
-      $('input[name="aaaaa"]').each(function() {
-        this.checked = false;
-      });
-      selectedItems.length = 0;
-    }
   });
 
   for (const report of data.report) {
@@ -203,7 +203,7 @@ $(document).ready(async function() {
 
         pillarObject = {
           ...row,
-          ...modalRow,
+          ...modalRow
         };
         gapReport.push(row);
         focusAreaGaps.push(pillarObject);
