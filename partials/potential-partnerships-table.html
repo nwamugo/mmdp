@@ -7,14 +7,14 @@
                     <input class = "check" name="collaboration" value="collaboration" type="checkbox" data-org="check-all-items" id="partnerships-check-all"/>
 
                 </label>
-                <div class="col-2 header-row">Thematic Pillar <i name="thematicPillar" class ="fas fa-angle-down angle-down-fa-icon partnership-filter-icon"></i>
+                <div class="col-2 header-row"><span id="selectedThematicPillarsCount"></span>Thematic Pillar <i name="thematicPillar" class ="fas fa-angle-down angle-down-fa-icon partnership-filter-icon"></i>
                     <div class="table-filter-container">
                         <div class="container">
                             <div class="partner_table_filter_subnav fadeInDown" style="display: none;">
                                 <div class="partnerships_table_filters">
                                     <p>
                                         Thematic Pillar Filters
-                                        <button class="clear_filter__button partnership-table-clear-filter" >
+                                        <button id="clearThematicPillars" class="clear_filter__button partnership-table-clear-filter" >
                                             Clear Filter
                                         </button>
                                         <button class="apply_filter__button partnership-table-apply-filter" >
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3 header-row">Sub theme
+                <div class="col-3 header-row"><span id="selectedSubThemesCount"></span>Sub theme
                     <i name="subTheme" class="fas fa-angle-down angle-down-fa-icon partnership-filter-icon"></i>
                     <div class="table-filter-container">
                         <div class="container">
@@ -39,7 +39,7 @@
                                 <div class="partnerships_table_filters">
                                     <p>
                                         Sub-Theme Filters
-                                        <button class="clear_filter__button partnership-table-clear-filter" >
+                                        <button id="clearSubThemes" class="clear_filter__button partnership-table-clear-filter" >
                                             Clear Filter
                                         </button>
                                         <button class="apply_filter__button partnership-table-apply-filter" >
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4 header-row header-row-lga-potential-partnerships">LGA
+                <div class="col-4 header-row header-row-lga-potential-partnerships"><span id="selectedLgasCount"></span>LGA
                     <i name="lga" class="fas fa-angle-down angle-down-fa-icon partnership-filter-icon"></i>
                     <div class="table-filter-container">
                         <div class="container">
@@ -64,7 +64,7 @@
                                 <div class="partnerships_table_filters">
                                     <p>
                                         LGA Filters
-                                        <button class="clear_filter__button partnership-table-clear-filter" >
+                                        <button  id="clearLgas" class="clear_filter__button partnership-table-clear-filter" >
                                             Clear Filter
                                         </button>
                                         <button class="apply_filter__button partnership-table-apply-filter" >
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-5 header-row organizations-header-row">Organizations with Potential Partnership
+                <div class="col-5 header-row organizations-header-row"><span id="selectedOrganizationsCount"></span>Organizations with Potential Partnership
                     <i name="organizationName" class="fas fa-angle-down fa-xs fa-organizations-icon partnership-filter-icon"></i>
                     <div class="table-filter-container">
                         <div class="container">
@@ -89,7 +89,7 @@
                                 <div class="partnerships_table_filters">
                                     <p>
                                         Organizations with Potential Partnership Filters
-                                        <button name="organizationName" class="clear_filter__button partnership-table-clear-filter" >
+                                        <button id="clearOrganizations" name="organizationName" class="clear_filter__button partnership-table-clear-filter" >
                                             Clear Filter
                                         </button>
                                         <button name="organizationName" class="apply_filter__button partnership-table-apply-filter" >

@@ -354,3 +354,26 @@
   color: inherit;
   font-weight: inherit;
 }
+
+.selected-options-count {
+  display: block;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background: #3faaca;
+  color: #fff;
+  text-align: center;
+  padding: 1px;
+  font-size: 14px;
+  margin-top: -24px;
+}
+.selected-organizations {
+  margin-left: 92%;
+}
+.selected-thematic-pillars,
+.selected-sub-themes {
+  margin-left: 30%;
+}
+.selected-lgas {
+  margin-left: 9%;
+}
