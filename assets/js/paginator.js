@@ -97,6 +97,7 @@ class Paginator {
       return rows;
     }
   }
+
   createTableRow(data) {
     const keys = this.columnKeys;
 
@@ -111,7 +112,11 @@ class Paginator {
         tableRow = tableRowData.impactFactorTableRows;
       }
     } else {
-      tableRow = tableRowData.stakeholderDirectoryTableRows;
+      if ($(window).width() <= 600) {
+        tableRow = tableRowData.stakeholderDirMobileTable;
+      } else {
+        tableRow = tableRowData.stakeholderDirectoryTableRows;
+      }
     }
     return tableRow;
   }
@@ -139,7 +144,8 @@ class Paginator {
         bindJQueryImpactFactor(this.selectedItems);
       }
     } else {
-      $('tbody.table__body').html(rows);
+      $(window).width() > 600 ? $("tbody.table__body").html(rows) : $(".table-sm").html(rows)
+      createButtons();
       bindJQuery(this.table, this.selectedItems);
     }
   }
