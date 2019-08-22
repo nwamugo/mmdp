@@ -44,6 +44,7 @@ span {
   width: 218px;
   padding: 15px 14px;
   vertical-align: top;
+  font-weight: 100;
 }
 
 .stakeholder__dir__table tr th {
@@ -481,7 +482,8 @@ table.stakeholder__details__table .row__value {
 .thematic_filters,
 .organisation_filters,
 .partnerships_table_filters,
-.impact_table_filters {
+.impact_table_filters,
+.stakeholder_table_filters {
   width: 100%;
   border-radius: 0px;
   background-color: #296d81;
@@ -492,6 +494,16 @@ table.stakeholder__details__table .row__value {
 
 .partnerships_table_filters{
   margin-top: -0.95rem !important;
+}
+
+.stakeholder_table_filters {
+  height: 3.3rem;
+}
+
+
+.stakeholder_table_filters p {
+  color: #ffffff;
+  padding: 1rem 0 0 1rem;
 }
 
 .location_filters p,
@@ -527,10 +539,10 @@ table.stakeholder__details__table .row__value {
 .thematic_filters button.apply_filter__button,
 .organisation_filters button.apply_filter__button,
 .partnerships_table_filters button.apply_filter__button,
-.impact_table_filters button.apply_filter__button {
+.impact_table_filters button.apply_filter__button,
+.stakeholder_table_filters button.apply_filter__button {
   color: white;
   background: #3faaca;
-  margin-top: 5px;
   font-family: Muli;
   font-size: 12px;
   font-weight: bold;
@@ -554,11 +566,11 @@ table.stakeholder__details__table .row__value {
 .thematic_filters button.clear_filter__button,
 .organisation_filters button.clear_filter__button,
 .partnerships_table_filters button.clear_filter__button,
-.impact_table_filters button.clear_filter__button {
+.impact_table_filters button.clear_filter__button,
+.stakeholder_table_filters button.clear_filter__button {
   color: #3faaca;
   cursor: pointer;
   background: white;
-  margin-top: 5px;
   font-family: Muli;
   font-size: 12px;
   font-weight: bold;
@@ -738,6 +750,7 @@ table.stakeholder__details__table .row__value {
 }
 
 .organisation_subnav,
+.stakeholder_table_filter_subnav,
 .partner_table_filter_subnav,
 .impact_table_filter_subnav {
   display: none;
@@ -759,7 +772,8 @@ table.stakeholder__details__table .row__value {
   z-index: 990;
 }
 
-.partner_table_filter_subnav {
+.partner_table_filter_subnav,
+.stakeholder_table_filter_subnav {
   position: absolute;
   width: 79.5rem;
   top: 73.02rem;
@@ -767,6 +781,23 @@ table.stakeholder__details__table .row__value {
   left: 13rem;
   z-index: 990;
   overflow: auto;
+}
+
+.stakeholder_table_filter_subnav {
+  position: absolute;
+  width: 87.5rem;
+  top: 76rem;
+  background-color: white;
+  left: 8rem;
+  z-index: 990;
+  overflow: auto;
+}
+
+.stakeholder-filter-error td {
+  text-align: center;
+  vertical-align: middle !important;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 /* ----------------------------------------------- */
 
