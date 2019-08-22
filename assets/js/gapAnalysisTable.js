@@ -93,6 +93,13 @@ function loadGapAnalysisTable(paginator) {
       filterCheckboxItemSelector:
         'input[type="checkbox"].gap-analysis-filter-checkbox',
       filterCheckboxItemClass: 'gap-analysis-filter-checkbox',
+      filterCountSpanClass:'active-column-filters-count',
+      filterCountIconCustomClassesArray: [
+        'gap-thematic-pillar-filter-count',
+        'gap-sub-theme-filter-count',
+        'gap-lga-with-gaps-filter-count',
+        'gap-focus-area-gaps-filter-count'
+      ],
       applyFiltersButtonSelector: '.gap-analysis-table-apply-filter',
       clearFiltersButtonSelector: '.gap-analysis-table-clear-filter',
       filterIconSiblingSelector: '.table-filter-container',

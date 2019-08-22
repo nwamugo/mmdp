@@ -251,4 +251,41 @@
 .canvas-needed-properties{
   overflow: visible !important;
  }
- 
+
+.active-column-filters-count {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background: #3faaca;
+  color: #fff;
+  text-align: center;
+  padding: 1px;
+  font-size: 14px;
+  margin-top: -24px;
+  display: block;
+}
+
+.hide{
+  display: none !important;
+}
+
+.active-column-filters-count{
+  position: absolute;
+  margin-top: -2.7rem;
+  padding-top: 0.15rem;
+}
+
+.gap-thematic-pillar-filter-count{
+  margin-left: 6.4rem;
+}
+
+.gap-sub-theme-filter-count{
+  margin-left: 4.5rem;
+}
+.gap-lga-with-gaps-filter-count {
+  margin-left: 6.35rem;
+}
+
+.gap-focus-area-gaps-filter-count {
+  margin-left: 14.9rem;
+}

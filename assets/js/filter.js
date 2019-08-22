@@ -47,6 +47,41 @@ const appendItemToFilterDropDown = function(
 };
 
 /**
+ *@description Method that shows the number of filtered options on the partnership/collaboration table header
+ @params :  countElementClass - String with the name of the class used on the count span element
+            columnHeader - String with the name of the current column we are adding the count to.
+            columnHeaderFiltersCount - Number of checkbox items active in the current column filter
+            customFilterElementClass - String with the name of the class used to position the filter correctly for each
+                                      column
+ @returns : undefined*/
+function setFilteredOptionsCountOnStateReportTable(
+  countElementClass,
+  columnHeader,
+  columnHeaderFiltersCount,
+  customFilterElementClass) {
+  // If we have a custom filter class
+  if(customFilterElementClass){
+    // Add it so we can position the filter correctly
+    $(`span[name="${columnHeader}"].${countElementClass}`)
+      .removeClass('hide')
+      .addClass(customFilterElementClass);
+  }
+  // Add the count value to the appropriate element
+  $(`span[name="${columnHeader}"].${countElementClass}`)
+    .text(columnHeaderFiltersCount);
+}
+
+/**
+ *@description  Method that removes all the filtered options count collectively on the partnership/collaboration table header
+ @params : countElementClass - String indicating which class to search for and hide the count
+ @returns : undefined*/
+function removeAllFilteredOptionsCountOnStateReportTable(countElementClass) {
+  $('.header-row')
+    .find(`.${countElementClass}`)
+    .addClass('hide');
+}
+
+/**
  * @description : Function that creates a HTML string representing all options/checkbox items for a single column
  * @returns :  Array -  Array of html strings that each represent all checkbox/option items for a single column in the table
  */
@@ -115,6 +150,8 @@ class TableFilterHeader extends Filter {
    * filterElementClassNames: Object - Object containing strings for the filter element classes i.e
    *    filterIconClass - Icon element for the dropdown filter icon
    *    filterCheckboxItemClass - Element class for all filter option/checkbox items on the tables
+   *    filterCountSpanClass - Element class for all filter count elements displaying the count of the currently selected filter
+   *    filterCountIconCustomClassesArray - Array of classes for all filter count elements per row. Used to position the count accordingly
    * filterColumnMapsArray: Array - Array of Maps with Sets as values (I know it's a mouthful) i.e Array of all
    *    filter dropdown data items (Set objects) for a particular column key ( the Map key)
    * tablePaginatorData - Object - Object containing current table's paginator
@@ -157,6 +194,18 @@ class TableFilterHeader extends Filter {
     tableColumnKeys.map(columnItem => {
       this.currentCheckedFilters.set(columnItem, new Set());
     });
+    // Check if we added custom classes to be used on each active filter column count in a table
+    if(this.filterElementClassNames.filterCountIconCustomClassesArray){
+      const filterCountClassesMap = new Map();
+      let columnHeaderIndex = 0;
+      // Create a new map with the column header name as the key and it's custom class as the value
+      filterColumnMapsArray.forEach((columnHeaderValues, columnHeader)=>{
+        const currentColumnCountClass = this.filterElementClassNames.filterCountIconCustomClassesArray[columnHeaderIndex];
+        filterCountClassesMap.set(columnHeader, currentColumnCountClass);
+        columnHeaderIndex += 1;
+      });
+      this.filterCountClassesMap = filterCountClassesMap;
+    }
 
     // Create the dropdown checkbox options for all current table columns
     this.createHtmlDropdownFilterElements();
@@ -403,6 +452,8 @@ class TableFilterHeader extends Filter {
       // Filter by ensuring all selected filter data is required for each row
       case 'combined':
         let currentActiveColumnHeaderFilterCount = 1;
+        // Clear all filter counts being displayed
+        removeAllFilteredOptionsCountOnStateReportTable(this.filterElementClassNames.filterCountSpanClass);
         this.removeAllFilteredOptionsCountOnPartnershipTable();
         activeFilterColumns.forEach(
           (currentSelectedDropdownItems, currentColumnHeader) => {
@@ -420,6 +471,16 @@ class TableFilterHeader extends Filter {
               currentColumnHeader
             );
 
+            // If we have a map with the custom class for each column's active filter count
+            if (this.filterCountClassesMap){
+              // Append the active filter count accordingly for the each column header filter
+              setFilteredOptionsCountOnStateReportTable(
+                this.filterElementClassNames.filterCountSpanClass,
+                currentColumnHeader,
+                currentSelectedDropdownItems.size,
+                this.filterCountClassesMap.get(currentColumnHeader)
+                );
+            }
             currentActiveColumnHeaderFilterCount += 1;
           }
         );
@@ -556,6 +617,11 @@ class TableFilterHeader extends Filter {
     this.tableColumnKeys.map(columnItem => {
       this.currentCheckedFilters.set(columnItem, new Set());
     });
+    // If there were any column header filter counts being displayed
+    if(this.filterElementClassNames.filterCountSpanClass){
+      // Remove them as the filters have been cleared
+      removeAllFilteredOptionsCountOnStateReportTable(this.filterElementClassNames.filterCountSpanClass);
+    }
     this.resetFilteredTableDataResults();
     this.refreshTableData();
   }
