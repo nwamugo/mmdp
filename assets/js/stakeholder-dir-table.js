@@ -227,6 +227,12 @@ $(document).ready(async function() {
     $('#previous-page').click(function() {
       paginator.previousPage();
     });
+    $('#responsive-next-page').click(function() {
+      paginator.nextPage();
+    });
+    $('#responsive-previous-page').click(function() {
+      paginator.previousPage();
+    });
     $('.modal').modal();
 
 

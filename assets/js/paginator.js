@@ -168,8 +168,8 @@ class Paginator {
       $('#impact-factor-current-page').html(currentPage);
       $('#impact-factor-total-page').html(totalPage);
     } else {
-      $('#current-page').html(currentPage);
-      $('#total-page').html(totalPage);
+      $(window).width() > 600 ? $('#current-page').html(currentPage) : $('#responsive-current-page').html(currentPage)
+      $(window).width() > 600 ? $('#total-page').html(totalPage) : $('#responsive-total-page').html(totalPage)
     }
     if (this.table === 'gapAnalysis') {
       currentPage === 1
@@ -193,12 +193,22 @@ class Paginator {
         ? $('#impact-factor-next-page').removeClass('active__nav')
         : $('#impact-factor-next-page').addClass('active__nav');
     } else {
-      currentPage === 1
-        ? $('#previous-page').removeClass('active__nav')
-        : $('#previous-page').addClass('active__nav');
-      currentPage === totalPage
-        ? $('#next-page').removeClass('active__nav')
-        : $('#next-page').addClass('active__nav');
+      if ($(window).width() <= 600) {
+        currentPage === 1
+          ? $('#responsive-previous-page').removeClass('active__nav')
+          : $('#responsive-previous-page').addClass('active__nav');
+        currentPage === totalPage
+          ? $('#responsive-next-page').removeClass('active__nav')
+          : $('#responsive-next-page').addClass('active__nav');
+      } else {
+        currentPage === 1
+          ? $('#previous-page').removeClass('active__nav')
+          : $('#previous-page').addClass('active__nav');
+        currentPage === totalPage
+          ? $('#next-page').removeClass('active__nav')
+          : $('#next-page').addClass('active__nav');
+      }
+      
     }
   }
 }
