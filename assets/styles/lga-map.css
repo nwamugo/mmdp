@@ -51,7 +51,7 @@
 }
 
 .map__legend:before {
-  content: '';
+  content: "";
   height: 34px;
   width: 34px;
   display: inline-block;
@@ -143,7 +143,7 @@
   background-color: #ffffff;
   padding: 10px;
   font-size: 2.9em;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -173,4 +173,9 @@
   line-height: 1.29;
   letter-spacing: -0.3px;
   color: #1a1f37;
+}
+
+#hide-active-div,
+#lga-report-button {
+  display: none;
 }

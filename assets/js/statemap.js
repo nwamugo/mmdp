@@ -126,7 +126,7 @@ function filteredLga(target, array = []) {
     }
   }
   function handleMapClick(lgaName, stateName) {
-    window.location.href = `http://${baseURL}/lga.html?lga=${lgaName}&state=${stateName}`;
+    window.location.href = `http://${baseURL}/active-communities.html?lga=${lgaName}&state=${stateName}`;
   }
   async function loaded() {
     const stateNameFromUrl = window.location.search.substring(1).split('=')[1];
