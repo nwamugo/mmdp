@@ -41,7 +41,7 @@
         <div class="row banner__row">
           <!-- Left hand side -->
           <div
-            class="col l5 banner__desc animated fadeInLeft delay-1s lga__position"
+            class="col l5 banner__desc delay-1s lga__position"
           >
             <div class="banner__lga__heading">
               Welcome to <span id="lga-name"></span>
@@ -57,7 +57,7 @@
             </div>
             <!-- Report Button-->
             <a href="#">
-              <button class="banner__button animated flashing slow delay-2s">
+              <button class="banner__button animated flashing slow delay-2s" id="lga-report-button">
                 Report
               </button>
             </a>
@@ -65,15 +65,19 @@
           <!-- Right hand side - Map -->
           <div
             id="svg-container"
-            class="col l7 banner__images right-align hide-on-small-only animated fadeInLeft slow"
+            class="col l7 banner__images right-align hide-on-small-only"
           >
             <!-- SVG content will be loaded dynamically here -->
           </div>
         </div>
         <!-- Footer links -->
-        <div class="row absolute__position links__container">
+        <div class="row absolute__position links__container" >
           <a class="nav__links left__align" href="#" id="back-state"></a>
-          <a class="nav__links right__align" href="#" id="hide-active"
+          <a class="nav__links right__align" href="#" id="show-active-div"
+            >Show Active Communities</a
+          >
+          <a class="nav__links left__align" href="#" id="back-state"></a>
+          <a class="nav__links right__align" href="#" id="hide-active-div"
             >Hide Active Communities</a
           >
         </div>
