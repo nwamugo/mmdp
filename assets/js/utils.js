@@ -142,3 +142,13 @@ function getqueryName(name, index = '') {
     return splitArray[parseInt(index)];
   }
 }
+
+// a function to get a random integer from an interval
+function randomIntFromInterval(mn, mx) {
+  return ~~(Math.random() * (mx - mn) + mn);
+}
+
+// a function to check if the gine coordinate is in fill
+function isPointInFill(svgPoint, path) {
+  return (path.node().isPointInFill(svgPoint))
+}

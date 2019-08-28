@@ -181,15 +181,20 @@
 
     for (let i = 0; i < 100; i++) {
       // get a random point on the svg canvas
-      let x = cr.x + cr.width * 0.26;
-      let y = cr.y + cr.height / 2;
+      let x = randomIntFromInterval(cr.x, cr.x + cr.width)
+      let y = randomIntFromInterval(cr.y, cr.y + cr.height)
 
       //elementFromPoint returns the topmost Element at the specified coordinates (relative to the viewport).
       let elmt = document.elementFromPoint(x, y);
-      // if the point is in path
-      if (elmt && elmt.className.baseVal === 'path' && elmt.id === 'thePath') {
-        //get the coordinates of the point on the svg
-        let svgPoint = getPoint(x, y);
+      //get the coordinates of the point on the svg
+      let svgPoint = getPoint(x, y);
+      let path = d3.select("path")
+      // check if point is in fill
+      let isInFill = isPointInFill(svgPoint, path);
+
+      // if the point is in path fill
+      if (elmt && elmt.className.baseVal === 'path' && elmt.id === 'thePath' && isInFill) {
+        
         //draw a circle with the center on the svg point
 
         points.push({
@@ -199,7 +204,7 @@
           //increase the counter
           n++;
       }
-      // if you have allready 6 points break the loop
+      // if you have allready n points break the loop
       if (n == circlesLength) {
         break;
       }
@@ -240,8 +245,6 @@
       const hideMe = document.getElementById('remove');
       $('#show-active-div').click(function() {
         $('#show-active-div').hide();
-        $('#lga-report-button').show();
-        $('.red-marker').show();
         $('g').hide();
         $('#hide-active-div').toggle();
 
@@ -337,11 +340,22 @@
             drawCircle(
               {
                 communityName: myStringArray[i],
+                fill: 'rgba(255,0,0,0.5)',
+                class: 'red-marker',
+                cx: points[i].cx,
+                cy: points[i].cy,
+                r: 0.006,
+              },
+              svg
+            );
+            drawCircle(
+              {
+                communityName: myStringArray[i],
                 fill: 'red',
                 class: 'red-marker',
                 cx: points[i].cx,
                 cy: points[i].cy,
-                r: 0.004
+                r: 0.003,
               },
               svg
             );
