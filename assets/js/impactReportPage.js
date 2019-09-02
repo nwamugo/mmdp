@@ -49,6 +49,15 @@ function getImpactFactorTableData() {
       impactFactorTableData.push(impactFactorRow);
     }
   }
+  impactFactorTableData.sort((a, b) =>
+    a.pillar > b.pillar
+      ? 1
+      : a.pillar === b.pillar
+      ? a.organization > b.organization
+        ? 1
+        : -1
+      : -1
+  );
   return impactFactorTableData;
 }
 
