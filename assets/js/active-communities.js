@@ -44,6 +44,19 @@
         focusAreasCount
       } = data;
 
+      let services = [];
+      let focusAreas = [];
+      const uniqueFocusAreas = new Set();
+      for (const stakeholder of data.filteredStakeholders){
+        for (const beneficiary of stakeholder.beneficiaries){
+          let focusAreaName = beneficiary.focusArea.focusAreaName.focusAreaName;
+          uniqueFocusAreas.add(focusAreaName);
+          services.push(beneficiary.serviceName);
+        }
+      }
+
+      let servicesCount = services.length
+
       const communities = data.filteredStakeholders.map(community => {
         return community.beneficiaries[0].communities;
       });
@@ -55,15 +68,22 @@
       const commName = commArray.map(name => {
         return name.communityId.communityName;
       });
-      var uniqueNames = [];
+
+      let uniqueNames = [];
       $.each(commName, function(i, el) {
         if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
       });
+
       counts.push(
+        focusAreasCount,
+        servicesCount,
+        [...uniqueFocusAreas],
+        services,
+        'Focus Areas',
+        'Services',
         beneficiaryServicesCount,
         stakeholderCount,
-        focusAreasCount,
-        uniqueNames
+        uniqueNames,
       );
 
       return counts;
@@ -102,10 +122,66 @@
     }
   }
 
-  async function drawSvg(o, parent, number) {
+ 
+  function createPopupList(list) {
+    let unorderedList = document.createElement('ol');
+    for (const item of list) {
+      let listItem = document.createElement('li');
+      let span = document.createElement('span');
+      span.innerHTML = item;
+      listItem.innerHTML = span.outerHTML;
+      unorderedList.appendChild(listItem);
+    }
+    return unorderedList;
+  }
+
+  function showPopup(menu, icon) {
+    //get the position of the placeholder element
+    let rect = $(icon)[0].getBoundingClientRect();
+    //show the menu directly over the placeholder
+    $(menu).css({
+      position: 'fixed',
+      zIndex: 5000,
+      display: 'block',
+      left: `${rect.x - 50}px`,
+      top: `${rect.y - 100}px`
+    });
+    $('#popup .top-bar b').css({
+      fontSize: '17px',
+      textAlign: 'left'
+    });
+    $('#popup .top-bar ol li').css({
+      fontSize: '14px',
+      textAlign: 'left'
+    });
+    $(window).scroll(function(e) {
+      rect = $(icon)[0].getBoundingClientRect();
+      if($(menu).css('display') === 'block') {
+        $(menu).css({
+          position: 'fixed',
+          zIndex: 5000,
+          display: 'block',
+          left: `${rect.x - 50}px`,
+          top: `${rect.y - 100}px`
+        });
+      }
+    });
+    $(window).click(function(e) {
+      const { nodeName } = $(e.target)[0];
+      if (nodeName !== 'circle' && nodeName !== 'text') {
+        $(menu).css({
+          display: 'none'
+        });
+      }
+    });
+  }
+
+  async function drawSvg(o, parent, number, list, title) {
     var circle = document.createElementNS(SVG_NS, 'circle');
     var group = document.createElementNS(SVG_NS, 'g');
     var text = document.createElementNS(SVG_NS, 'text');
+    var popupContent = document.createElement('div');
+    var popupTitle = document.createElement('b');
 
     const textAttributes = {
       'text-anchor': 'middle',
@@ -119,7 +195,6 @@
       x: o.cx,
       y: o.cy + 0.012
     };
-
     setAttributes(circle, o);
     setAttributes(text, textAttributes);
 
@@ -127,6 +202,20 @@
 
     group.appendChild(circle);
     group.appendChild(text);
+    group.style.cursor = 'pointer';
+
+    popupTitle.innerHTML = title;
+    var popupList = createPopupList(list);
+
+    popupContent.appendChild(popupTitle);
+    popupContent.appendChild(popupList);
+
+    var popUp = document.getElementById('popup');
+    group.addEventListener("click", function(e){
+        $('#myPopup').html(popupContent);
+        showPopup(popUp, this);
+    });
+    
     parent.appendChild(group);
     return circle;
   }
@@ -287,7 +376,9 @@
                 r: 0.02
               },
               svg,
-              counts[i]
+              counts[i],
+              counts[i + 2],
+              counts[i + 4],
             );
           }
         }

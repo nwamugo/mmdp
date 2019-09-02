@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="assets/styles/animations.css?version=1" />
     <link rel="stylesheet" href="assets/styles/lga-map.css" />
     <link rel="stylesheet" href="assets/styles/stakeholder-dir-table.css" />
+    <link rel="stylesheet" href="assets/styles/show-pop-up-lga-map.css" />
+    
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
@@ -50,6 +52,13 @@
               This map shows the stakeholder activities in this local
               government, it’s subthemes and services.
             </div>
+           
+            <!-- Focus area/services pop up -->
+            <div id="popup">
+            <div class="top-bar" id="myPopup"></div>
+            <div class="bottom-bar"></div>
+            </div>
+          
             <!-- Legend -->
             <div class="map__legend__container">
               <span class="map__legend one">Focus areas</span>
@@ -156,6 +165,7 @@
     <script type="text/javascript" src="assets/js/matrix-header.js"></script>
     <script type="text/javascript" src="assets/js/cms/utils.js"></script>
     <script type="text/javascript" src="assets/js/auth/utils.js"></script>
+    <script type="text/javascript" src="assets/js/createButtons.js"></script>
     <script type="text/javascript" src="assets/js/paginator.js"></script>
     <script type="text/javascript" src="assets/js/tableRows.js"></script>
     <script type="text/javascript" src="assets/js/filter.js"></script>
