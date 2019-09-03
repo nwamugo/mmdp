@@ -1,8 +1,6 @@
 const bindJQueryImpactFactor = selectedItems => {
   $(document).ready(async function() {
 
-    const impactFactorData = window.impactFactorData
-
     function download(selectedItems) {
       const headers = {
         organization: 'Organization',
@@ -13,7 +11,7 @@ const bindJQueryImpactFactor = selectedItems => {
         targetCompletion: 'Target Completion'
       };
 
-      let allRows = impactFactorData;
+      let allRows = window.impactFactorTableData;
 
       let rowsToDownload = [];
 

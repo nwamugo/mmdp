@@ -1,14 +1,18 @@
 // load full table
-function loadGapTable(data) {
+function loadGapTable(data, action) {
   window.gapTableData = data;
   let rowsPerPage = $('#gap-analysis-row-number').text();
-  paginator = new Paginator(data, keys, table, selectedItems, rowsPerPage);
+  if (!gapPaginator || action === 'gapSearch' || window.gapSearchStatus) {
+    gapPaginator = new Paginator(data, keys, table, selectedItems, rowsPerPage);
+  }
   // Clear any active gap analysis column filter headers that have been applied
   window.gapAnalysisTableFilterHeader ? window.gapAnalysisTableFilterHeader.clearAllFilters() : undefined;
-  loadGapAnalysisTable(paginator);
+  loadGapAnalysisTable(gapPaginator);
+  if (action !== 'gapSearch') window.gapSearchStatus = false;
 }
 
 let noData = [];
+const gapAction = 'gapSearch';
 
 $(document).ready(async function() {
   // load filtered data
@@ -68,24 +72,30 @@ $(document).ready(async function() {
     );
     if (!filteredData || filteredData.length === 0) { 
       $('#gap_message').css({ display: 'block' });
-      loadGapTable(noData);
+      loadGapTable(noData, gapAction);
     } else {
-      loadGapTable(filteredData);
+      loadGapTable(filteredData, gapAction);
     }
   }
 
   // search on click
   $('#btn_search_gap').click(function() {
-    $('#gap_message').css({ display: 'none' });
-    loadFilteredTable(gapReport);
+    if ($('#search__activities__gap').val().trim() !== '') {
+      window.gapSearchStatus = true;
+      $('#gap_message').css({ display: 'none' });
+      loadFilteredTable(gapReport);
+    }
   });
 
   // search on enter
   $('#search__activities__gap').keypress(function(e) {
     var key = e.which;
     if (key == 13) {
-      $('#gap_message').css({ display: 'none' });
-      loadFilteredTable(gapReport);
+      if ($('#search__activities__gap').val().trim() !== '') {
+        window.gapSearchStatus = true;
+        $('#gap_message').css({ display: 'none' });
+        loadFilteredTable(gapReport);
+      }
     }
   });
 
@@ -96,8 +106,9 @@ $(document).ready(async function() {
         .val()
         .trim() === ''
     ) {
+      window.gapSearchStatus = false;
       $('#gap_message').css({ display: 'none' });
-      loadGapTable(gapReport);
+      loadGapTable(gapReport, gapAction);
     }
   });
 });

@@ -44,8 +44,11 @@ $(document).ready(async function() {
     $('#search__activities__partnership').val('');
     $('#partner_message').hide();
     $('#thematic-pillars__heading').html(gapAnalysisHeader); // Set the header for the table
+    $('#gap-previous-page').unbind();
+    $('#gap-next-page').unbind(); // Remove all event handlers for all #gap-next-page element
     window.partnershipsTableHeaderFilter ? window.partnershipsTableHeaderFilter.clearAllFilters() : undefined;
-    window.impactTableHeaderFilter ? window.impactTableHeaderFilter.clearAllFilters() : undefined ;
+    window.gapAnalysisTableFilterHeader ? window.gapAnalysisTableFilterHeader.clearAllFilters() : undefined;
+    window.impactFactorTableFilterHeader ? window.impactFactorTableFilterHeader.clearAllFilters() : undefined ;
     loadGapTable(gapReport);
   });
 
@@ -68,9 +71,12 @@ $(document).ready(async function() {
     $('#thematic-pillars__heading').html(partnershipHeader);
     $('#gap_message').hide();
     $('#search__activities').val('');
-    createPotentialPartnershipsTable(partnershipTableData, stakeholderServicesArray);
+    $('#potential-previous-page').unbind();
+    $('#potential-next-page').unbind();
+    window.partnershipsTableHeaderFilter ? window.partnershipsTableHeaderFilter.clearAllFilters() : undefined;
     window.gapAnalysisTableFilterHeader ? window.gapAnalysisTableFilterHeader.clearAllFilters() : undefined;
-    window.impactTableHeaderFilter ? window.impactTableHeaderFilter.clearAllFilters() : undefined ;
+    window.impactFactorTableFilterHeader ? window.impactFactorTableFilterHeader.clearAllFilters() : undefined ;
+    createPotentialPartnershipsTable(partnershipTableData);
   });
 
   $('#impact-factor-report-button').click(() => {
@@ -91,8 +97,11 @@ $(document).ready(async function() {
     $('#search__activities__gap').val('');
     $('#search__activities__partnership').val('');
     $('#partner_message').hide();
+    $('#impact-factor-previous-page').unbind();
+    $('#impact-factor-next-page').unbind();
+    window.partnershipsTableHeaderFilter ? window.partnershipsTableHeaderFilter.clearAllFilters() : undefined;
     window.gapAnalysisTableFilterHeader ? window.gapAnalysisTableFilterHeader.clearAllFilters() : undefined;
-    window.partnershipsTableHeaderFilter ? window.impactTableHeaderFilter.clearAllFilters() : undefined ;
-    loadTable();
+    window.impactFactorTableFilterHeader ? window.impactFactorTableFilterHeader.clearAllFilters() : undefined;
+    loadImpactFactorTable(window.impactFactorTableData);
   });
 });

@@ -1,3 +1,5 @@
+const partnershipAction = 'partnershipSearch';
+
 $(document).ready(async function() {
   // load filtered data
   function loadFilteredTable(partnershipTableData) {
@@ -54,24 +56,30 @@ $(document).ready(async function() {
     );
     if (!filteredPartnerData || filteredPartnerData.length === 0) { 
       $('#partner_message').css({ display: 'block' });
-      createPotentialPartnershipsTable(noData)
+      createPotentialPartnershipsTable(noData, partnershipAction)
     } else {
-      createPotentialPartnershipsTable(filteredPartnerData, stakeholderServicesArray);
+      createPotentialPartnershipsTable(filteredPartnerData, partnershipAction);
     }
   }
 
   // search on click
   $('#btn_search_partner').click(function() {
-    $('#partner_message').css({ display: 'none' });
-    loadFilteredTable(partnershipTableData);
+    if ($('#search__activities__partnership').val().trim() !== '') {
+      window.partnershipSearchStatus = true;
+      $('#partner_message').css({ display: 'none' });
+      loadFilteredTable(partnershipTableData);
+    }
   });
 
   // search on enter
   $('#search__activities__partnership').keypress(function(e) {
     var key = e.which;
     if (key == 13) {
-      $('#partner_message').css({ display: 'none' });
-      loadFilteredTable(partnershipTableData);
+      if ($('#search__activities__partnership').val().trim() !== '') {
+        window.partnershipSearchStatus = true;
+        $('#partner_message').css({ display: 'none' });
+        loadFilteredTable(partnershipTableData);
+      }
     }
   });
 
@@ -82,8 +90,9 @@ $(document).ready(async function() {
         .val()
         .trim() === ''
     ) {
+      window.partnershipSearchStatus = false;
       $('#partner_message').css({ display: 'none' });
-      createPotentialPartnershipsTable(partnershipTableData, stakeholderServicesArray);
+      createPotentialPartnershipsTable(partnershipTableData, partnershipAction);
     }
   });
 });
