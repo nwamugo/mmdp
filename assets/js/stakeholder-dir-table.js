@@ -346,7 +346,7 @@ $(document).ready(async function() {
   function loadDropdownFilter(paginator) {
 
     let filterStakeholderTableColumnKeys;
-    if (window.location.pathname === '/state.html') {
+    if (window.location.pathname === '/state.html' || window.location.pathname === '/active-communities.html') {
       filterStakeholderTableColumnKeys = [
         'organisationName',
         'thematicPillars',

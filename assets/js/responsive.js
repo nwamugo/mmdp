@@ -4,7 +4,7 @@ responsiveTable = () => {
     $(".table-sm, .responsive_table__footer").show();
   } else {
     $(".table-sm, .responsive_table__footer").hide();
-    $(".table-lg").show();
+    $(".table-lg").show().css({display: 'block'});
   }
 }
 
