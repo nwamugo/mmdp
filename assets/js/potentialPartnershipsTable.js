@@ -280,6 +280,7 @@ async function makingThePotentialPartnershipTable() {
         );
         return item;
       });
+      partnershipTableData.sort((a, b) => (a.thematicPillar > b.thematicPillar) ? 1 : (a.thematicPillar === b.thematicPillar) ? ((a.lga > b.lga) ? 1 : -1) : -1 )
       
       createPotentialPartnershipsTable(partnershipTableData);
     }
