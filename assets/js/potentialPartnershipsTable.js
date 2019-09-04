@@ -227,7 +227,6 @@ function createPotentialPartnershipsTable(
     // Create an instance of the TableFilterHeader class for the potential partnerships table
     window.partnershipsTableHeaderFilter = new TableFilterHeader(
       table,
-      'partnership-dropdown-icon',
       tableData,
       filterTableColumnKeys,
       filterDropdownOptionsParentSelectors,

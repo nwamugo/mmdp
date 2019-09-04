@@ -8,7 +8,6 @@ $(document).ready(async function() {
     'beneficiaryCount',
     'amountInvested'
   ];
-  const filter = new Filter();
 
   const queryNameFromUrl = window.location.search.substring(1).split('=')[1];
   const queryParam = queryNameFromUrl
@@ -51,11 +50,8 @@ $(document).ready(async function() {
 
   // neededData
   const tableData = handleStakeholdersData(data.filteredStakeholders);
-  const beneficiaryCount = tableData.map(item => item.beneficiaryCount);
-  const organisationName = tableData.map(item => item.organisationName);
 
-  const allCount = tableData.map(item => item.partnership);
-
+  tableData.sort((a, b) => (a.thematicPillars > b.thematicPillars) ? 1 : (a.thematicPillars === b.thematicPillars) ? ((a.organisationName > b.organisationName) ? 1 : -1) : -1);
   window.tableData = tableData;
   table = 'stakeholder';
 
@@ -333,6 +329,57 @@ $(document).ready(async function() {
       $('.stakeholder__details__table tbody').html(shDetailsTableData);
     }
     window.getSHDetails = getSHDetails;
+    let tableColumnKeys = [
+      "thematicPillars",
+      "subThemes",
+      "partnership",
+      "location",
+      "beneficiaryCount",
+      "amountInvested"
+    ];
+    tableColumnKeys[3] = ($(window).width() <= 600) ? "stateLocation" : tableColumnKeys[3];
+
+    const responsiveFilterDropdownOptionsParentSelectors = [
+      "#responsiveStakeholderThematicPillars",
+      "#responsiveStakeholderSubThemes",
+      "#responsiveStakeholderPartnership",
+      "#responsiveStakeholderLocation",
+      "#responsiveStakeholderBeneficiaryCount",
+      "#responsiveStakeholderAmountInvested"
+    ];
+
+    // Create html string message displayed when the table filter has no results
+    const noFilterResultsHtmlMessage = `
+    <span id="" class="">
+      <h6 class="">
+        <b>No Results found for the selected column filters.</b>
+      </h6>
+    </span>`;
+
+    window.responsiveStakeholderTableFilter = new ResponsiveTableFilterHeader(
+      table,
+      tableData,
+      tableColumnKeys,
+      responsiveFilterDropdownOptionsParentSelectors,
+      {
+        filterIconSelector: '.btn-accordion-table',
+        tableFiltersPanelSelector: '.responsive-filters-panel',
+        singleFilterButtonSelector: '.dropbtn',
+        singleFilterPanelSelector: '.responsive-dropdown-content',
+        singleFilterActiveClass: 'show',
+        singleFilterInactiveClass: 'dropdown-content',
+        filterCheckboxItemSelector: 'input[type="checkbox"].checkedBox',
+        filterCheckboxItemClass: 'checkedBox',
+        applyFiltersButtonSelector: '.applyFilter_btn',
+        clearFiltersButtonSelector: '.clearFilter_btn',
+        itemSpanClass: '.sh-table-filter-item'
+      },
+      {
+        'tablePaginator': paginator,
+        'tableRootElementSelector': '.table-sm' ,
+      },
+      noFilterResultsHtmlMessage,
+    );
   }
 
   /**
@@ -392,7 +439,6 @@ $(document).ready(async function() {
 
     window.stakeholderTableHeaderFilter = new TableFilterHeader(
       table,
-      'stakeholder-dropdown-icon',
       tableData,
       filterStakeholderTableColumnKeys,
       filterStakeholderDropdownSelectors,

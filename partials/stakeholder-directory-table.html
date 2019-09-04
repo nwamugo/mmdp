@@ -241,20 +241,22 @@
   <!-- small table display -->
   <section id="stakeholder">
   <div>
-      <button class="btn-accordion-table">Add or Edit filters</button>
-        <div class="panel">
+      <button class="btn-accordion-table">Add or Edit filters
+        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+      </button>
+        <div class="panel responsive-filters-panel">
           <div class="c-flex">
-            <span class="e-flex">Thematic Pillar(s)</span>
+            <span class="e-flex">Thematic Pillars</span>
             <div class="dropdown">
-              <button class="dropbtn">All</button>
-                <div id="myDropdown" class="dropdown-content">
-                  <div class='filter'>
-                    <input type="checkbox" id="coding" name="interest" value="coding">
-                    <label for="coding">1: Coding</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="music" name="interest" value="music">
-                    <label for="music">2: Music</label>
+              <button class="dropbtn" name="thematicPillars">
+                All
+                <span class="icon-filter"><i class="fas fa-chevron-down chevron-filter"></i></span>
+                </button>
+                <div id="myDropdown" class="responsive-dropdown-content dropdown-content">
+                  <div id='responsiveStakeholderThematicPillars'>
+                    <div id='filterbody'>
+                        <!-- dynamic table loads here -->
+                    </div>
                   </div>
               </div>
             </div>
@@ -262,89 +264,98 @@
           <div class="c-flex">
             <span class="e-flex">Sub-Themes</span>
             <div class="dropdown">
-              <button class="dropbtn">All</button>
-              <div id="myDropdown" class="dropdown-content">
-                  <div class='filter'>
-                    <input type="checkbox" id="coding" name="interest" value="coding">
-                    <label for="coding">1: Coding</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="music" name="interest" value="music">
-                    <label for="music">2: Music</label>
-                  </div>
+              <button class="dropbtn" name="subThemes">
+                All
+                <span class="icon-filter"><i class="fas fa-chevron-down chevron-filter"></i></span>
+                </button>
+              <div id="myDropdown" class="responsive-dropdown-content dropdown-content">
+                <div id='responsiveStakeholderSubThemes'>
+                    <div id='filterbody'>
+                        <!-- dynamic table loads here -->
+                    </div>
+                </div>
               </div>
             </div>
           </div>
            <div class="c-flex">
             <span class="e-flex">Partnership</span>
             <div class="dropdown">
-              <button class="dropbtn">All</button>
-              <div id="myDropdown" class="dropdown-content">
-                  <div class='filter'>
-                    <input type="checkbox" id="coding" name="interest" value="coding">
-                    <label for="coding">1: Coding</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="music" name="interest" value="music">
-                    <label for="music">2: Music</label>
-                  </div>
+              <button class="dropbtn" name="partnership">
+                All
+                <span class="icon-filter"><i class="fas fa-chevron-down chevron-filter"></i></span>
+                </button>
+              <div id="myDropdown" class="responsive-dropdown-content dropdown-content">
+                  <div id='responsiveStakeholderPartnership'>
+                    <div id='filterbody'>
+                        <!-- dynamic table loads here -->
+                    </div>
+                </div>
               </div>
             </div>
           </div>
           <div class="c-flex">
             <span class="e-flex">Location</span>
             <div class="dropdown">
-              <button class="dropbtn">All</button>
-               <div id="myDropdown" class="dropdown-content">
-                  <div class='filter'>
-                    <input type="checkbox" id="coding" name="interest" value="coding">
-                    <label for="coding">1: Coding</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="music" name="interest" value="music">
-                    <label for="music">2: Music</label>
-                  </div>
+              <button class="dropbtn" name="location">
+                All
+                <span class="icon-filter"><i class="fas fa-chevron-down chevron-filter"></i></span>
+                </button>
+               <div id="myDropdown" class="responsive-dropdown-content dropdown-content">
+                  <div id='responsiveStakeholderLocation'>
+                    <div id='filterbody'>
+                        <!-- dynamic table loads here -->
+                    </div>
+                </div>
               </div>
             </div>
             </div>
            <div class="c-flex">
-            <span class="e-flex">Beneficiary Count</span>
+            <span class="e-flex">Beneficiary count</span>
             <div class="dropdown">
-              <button class="dropbtn">All</button>
-              <div id="myDropdown" class="dropdown-content">
-                  <div class='filter'>
-                    <input type="checkbox" id="coding" name="interest" value="coding">
-                    <label for="coding">1: Coding</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="music" name="interest" value="music">
-                    <label for="music">2: Music</label>
-                  </div>
+              <button class="dropbtn" name="beneficiaryCount">
+                All
+                <span class="icon-filter"><i class="fas fa-chevron-down chevron-filter"></i></span>
+                </button>
+              <div id="myDropdown" class="responsive-dropdown-content dropdown-content">
+                  <div id='responsiveStakeholderBeneficiaryCount'>
+                    <div id='filterbody'>
+                        <!-- dynamic table loads here -->
+                    </div>
+                </div>
               </div>
             </div>
             </div>
           <div class="c-flex">
             <span class="e-flex">Amount Invested</span>
             <div class="dropdown">
-              <button class="dropbtn">All</button>
-               <div id="myDropdown" class="dropdown-content">
-                  <div class='filter'>
-                    <input type="checkbox" id="coding" name="interest" value="coding">
-                    <label for="coding">1: Coding</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="music" name="interest" value="music">
-                    <label for="music">2: Music</label>
-                  </div>
+              <button class="dropbtn" name="amountInvested">
+                All
+                <span class="icon-filter"><i class="fas fa-chevron-down chevron-filter"></i></span>
+                </button>
+               <div id="myDropdown" class="responsive-dropdown-content dropdown-content">
+                  <div id='responsiveStakeholderAmountInvested'>
+                    <div id='filterbody'>
+                        <!-- dynamic table loads here -->
+                    </div>
+                </div>
               </div>
             </div>
           </div>
+           <div class="filter_buttons">
+             <div>
+              <button class="applyFilter_btn">Apply filters</button>
+             </div>
+             <div>
+              <button class="clearFilter_btn">Clear filters</button>
+             </div>
+           </div>
         </div>
   </div>
+ 
   <br><br>
-  <section class="table-sm">
-    <!-- dynamically display small table -->
-  </section>
+  <div id="stakeholder-mobile-table-container">
+    <section class="table-sm"></section>
+  </div>
   </section>
 
   <div class="responsive_table__footer">
@@ -393,13 +404,3 @@
 
 <script type="text/javascript" src="/assets/js/csv.js"></script>
 <script type="text/javascript" src="/assets/js/responsive.js"></script>
-<script>
-$(document).ready(function(){
-  $(".dropbtn").each(function(index, elem) {
-  	$(elem).click(function(event){
-      var dropdown = $(event.target).next();
-	    dropdown.toggleClass("dropdown-content").toggleClass("show");
-	  });
-  });
-});
-</script>

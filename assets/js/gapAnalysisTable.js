@@ -85,7 +85,6 @@ function loadGapAnalysisTable(gapPaginator) {
     // Create an instance of the TableFilterHeader class for the potential partnerships table
     window.gapAnalysisTableFilterHeader = new TableFilterHeader(
       table,
-      'gap-analysis-dropdown-icon',
       gapReport,
       filterTableColumnHeaders,
       filterDropdownOptionsParentSelectors,
