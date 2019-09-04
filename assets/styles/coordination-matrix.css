@@ -669,6 +669,10 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     z-index: 1;
   }
 
+  /* .checkedBox{
+    width: 20px;
+  } */
+
   .dropdown-content a {
     color: black;
     padding: 12px 16px;
