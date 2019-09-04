@@ -524,7 +524,7 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     margin-top: -75px;
     height: 40px;
     padding: 2%;
-    margin-left: -700px;
+    margin-left: -400px;
   }
 
   .banner .tap {
