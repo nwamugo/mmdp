@@ -152,10 +152,6 @@ $(document).ready(async function() {
     }
   });
 
-  // Should always load the default table on page load
-  loadStakeholderTable();
-  $(window).resize(() => loadStakeholderTable());
-
   /**
    * @description - Load the stakeholder table when filtered with search value
    */
@@ -391,7 +387,7 @@ $(document).ready(async function() {
 
   const noFilterResultsHtmlMessage = `
     <tr class="stakeholder-filter-error">
-      <td colspan="7">No Results found for the selected column filters.</ colspan="7">
+      <td colspan="7">No Results found for the selected column filters.</td>
     </tr>`;
 
     window.stakeholderTableHeaderFilter = new TableFilterHeader(
@@ -407,7 +403,7 @@ $(document).ready(async function() {
         applyFiltersButtonSelector: '.stakeholder-table-apply-filter',
         clearFiltersButtonSelector: '.stakeholder-table-clear-filter',
         filterIconSiblingSelector: '.stakeholder-filter-container',
-        filterDropdownSubnavSelector:'.stakeholder_table_filter_subnav',
+        filterDropdownSubnavSelector: '.stakeholder_table_filter_subnav',
         itemSpanClass: '.sh-table-filter-item',
       },
       stakeholderColumnKeysMap,
@@ -417,5 +413,15 @@ $(document).ready(async function() {
       },
       noFilterResultsHtmlMessage
     );
+    // Add the class that fixes the css styling issues on the state page stakeholder table
+    (window.location.pathname === "/state.html")
+      ? $('.stakeholder_table_filter_subnav').addClass('state_stakeholder_table_filter_subnav')
+      : false;
+
+
   }
+
+  // Should always load the default table on page load
+  loadStakeholderTable();
+  $(window).resize(() => loadStakeholderTable());
 });

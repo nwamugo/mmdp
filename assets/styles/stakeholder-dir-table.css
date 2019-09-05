@@ -793,7 +793,7 @@ table.stakeholder__details__table .row__value {
   overflow: auto;
 }
 
-.stakeholder_table_filter_subnav {
+.stakeholder_table_filter_subnav,.state_stakeholder_table_filter_subnav {
   position: absolute;
   width: 87.5rem;
   top: 76rem;
@@ -803,9 +803,21 @@ table.stakeholder__details__table .row__value {
   overflow: auto;
 }
 
+.state_stakeholder_table_filter_subnav{
+  width: 89.7rem;
+  top: 74rem;
+  left: 7rem;
+}
+
 @-moz-document url-prefix() {
   .stakeholder_table_filter_subnav {
     top: 84rem;
+  }
+  .state_stakeholder_table_filter_subnav{
+    top: 82.3rem;
+    width: 89rem;
+    left: 7.4rem;
+
   }
 }
 
