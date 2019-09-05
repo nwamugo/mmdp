@@ -134,7 +134,6 @@ function loadTable(impactPaginator) {
     // Create an instance of the TableFilterHeader class for the potential partnerships table
     window.impactFactorTableFilterHeader = new TableFilterHeader(
       impactFactorTableName,
-      "impact-dropdown-icon",
       window.impactFactorTableData,
       impactFactorTableColumnKeys,
       filterDropdownOptionsParentSelectors,

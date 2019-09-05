@@ -14,7 +14,8 @@ const appendItemToFilterDropDown = function(
   dataItem,
   filterCheckboxClass,
   columnHeader,
-  idUniqueGuarantor
+  idUniqueGuarantor,
+  indexCounter,
 ) {
   const prefix = {
     'stakeholder': "sh",
@@ -24,8 +25,18 @@ const appendItemToFilterDropDown = function(
   };
   // Set the table to create a dropdown item
   if (prefix[tableName] === "sh") {
+    if($(window).width() <= 600){
+        return `
+        <div id="${prefix[tableName]}-filter-item__${dataItem}__${idUniqueGuarantor}" class="${prefix[tableName]}-table-filter-item">
+        <label>
+          <input type="checkbox" class="${filterCheckboxClass} " id="${columnHeader}" name="${dataItem}" value="${dataItem}">
+           ${dataItem}
+        </label>
+        </div>
+        `;
+      }
     // Default item is set to the stakeholder table dropdown item
-    return `<td id="${prefix[tableName]}-filter-item__${dataItem}__${idUniqueGuarantor}" class="${prefix[tableName]}-table-filter-item"><input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox"/> &nbsp;${dataItem}</td>`;
+   return `<td id="${prefix[tableName]}-filter-item__${dataItem}__${idUniqueGuarantor}" class="${prefix[tableName]}-table-filter-item"><input id="${columnHeader}" name="${dataItem}" value="${dataItem}" class="checkBox ${filterCheckboxClass}" type="checkbox"/> &nbsp;${dataItem}</td>`;
   } else {
     return `<span id="${prefix[tableName]}-filter-item__${dataItem}__${idUniqueGuarantor}" class="${prefix[tableName]}-table-filter-item">
     <label class="filter-options-checkbox-label">
@@ -35,6 +46,42 @@ const appendItemToFilterDropDown = function(
       </span>`;
   }
 };
+
+
+/**
+ *@description Method that shows the number of filtered options on the partnership/collaboration table header
+ @params :  countElementClass - String with the name of the class used on the count span element
+ columnHeader - String with the name of the current column we are adding the count to.
+ columnHeaderFiltersCount - Number of checkbox items active in the current column filter
+ customFilterElementClass - String with the name of the class used to position the filter correctly for each
+ column
+ @returns : undefined*/
+function setFilteredOptionsCountOnStateReportTable(
+  countElementClass,
+  columnHeader,
+  columnHeaderFiltersCount,
+  customFilterElementClass) {
+  // If we have a custom filter class
+  if(customFilterElementClass){
+    // Add it so we can position the filter correctly
+    $(`span[name="${columnHeader}"].${countElementClass}`)
+      .removeClass('hide')
+      .addClass(customFilterElementClass);
+  }
+  // Add the count value to the appropriate element
+  $(`span[name="${columnHeader}"].${countElementClass}`)
+    .text(columnHeaderFiltersCount);
+}
+
+/**
+ *@description  Method that removes all the filtered options count collectively on the partnership/collaboration table header
+ @params : countElementClass - String indicating which class to search for and hide the count
+ @returns : undefined*/
+function removeAllFilteredOptionsCountOnStateReportTable(countElementClass) {
+  $('.header-row')
+    .find(`.${countElementClass}`)
+    .addClass('hide');
+}
 
 /**
  *@description Method that shows the number of filtered options on the partnership/collaboration table header
@@ -85,14 +132,17 @@ const getItemsForFilterDropDownHtml = function(
   let idUniqueGuarantor = 0;
   columnKeysMap.forEach((columnEntriesSet, columnKey) => {
     let singleColumnDropdownHtml = "";
+    let indexCounter = 0;
     columnEntriesSet.forEach(currentDropdownItemValue => {
       singleColumnDropdownHtml += appendItemToFilterDropDown(
         tableName,
         currentDropdownItemValue,
         filterCheckboxClass,
         columnKey,
-        idUniqueGuarantor
+        idUniqueGuarantor,
+        indexCounter
       );
+      indexCounter++;
     });
     columnFilterHtmlItems.push(singleColumnDropdownHtml);
     idUniqueGuarantor++;
@@ -137,7 +187,6 @@ class TableFilterHeader extends Filter {
    * @classdesc : Class that returns a single instance of a the TableFilterHeader class
    * @params :
    * tableName: String - Current table the filter is created for
-   * iconElementClass: String - CSS Selector string for the dropdown filter icon
    * tableData: Array - Array of all available table rows
    * tableColumnKeys: Array - Array of all filter column keys
    * filterElementClassNames: Object - Object containing strings for the filter element classes i.e
@@ -158,7 +207,6 @@ class TableFilterHeader extends Filter {
 
   constructor(
     tableName,
-    iconElementClass,
     tableData,
     tableColumnKeys,
     filterDropdownOptionsParentSelectors,
@@ -259,7 +307,7 @@ class TableFilterHeader extends Filter {
                 if (
                   this.id.substring(1).split("__")[2] === `${columnHeaderCount}`
                 ) {
-                  $(`[id^='${this.id}']`).show();
+                  $(`[id^="${this.id}"]`).show();
                 }
               }
             });
@@ -274,7 +322,7 @@ class TableFilterHeader extends Filter {
                     this.id.substring(1).split("__")[2] ===
                     `${columnHeaderCount}`
                   ) {
-                    $(`[id^='${this.id}']`).hide();
+                    $(`[id^="${this.id}"]`).hide();
                   }
                 }
               });
@@ -776,8 +824,8 @@ class TableFilterHeader extends Filter {
  *@description Method to handle the click event on any table column filter options/checkbox item
    this is where we confirm whether the current item is checked or unchecked
    we then update the currentCheckedFilters Array accordingly (remove or append a new filter)
-  @params : Event object
-  @returns : undefined*/
+   @params : Event object
+   @returns : undefined*/
 
   handleClickFilterItemCheckbox(e) {
     e.data._this.checkboxTouched = true;
