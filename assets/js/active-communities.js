@@ -45,7 +45,6 @@
       } = data;
 
       let services = [];
-      let focusAreas = [];
       const uniqueFocusAreas = new Set();
       for (const stakeholder of data.filteredStakeholders){
         for (const beneficiary of stakeholder.beneficiaries){
@@ -74,6 +73,8 @@
         if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
       });
 
+      counts['uniqueNames'] = uniqueNames;
+
       counts.push(
         focusAreasCount,
         servicesCount,
@@ -83,7 +84,6 @@
         'Services',
         beneficiaryServicesCount,
         stakeholderCount,
-        uniqueNames,
       );
 
       return counts;
@@ -416,7 +416,7 @@
         // add markers
         let servicesCount = await fetchCount();
         if (servicesCount) {
-          var myStringArray = servicesCount[3];
+          var myStringArray = servicesCount['uniqueNames'];
           var arrayLength = myStringArray.length;
           for (var i = 0; i < arrayLength; i++) {
             communityName = myStringArray[i];
