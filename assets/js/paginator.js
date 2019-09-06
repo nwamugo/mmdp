@@ -20,16 +20,15 @@ class Paginator {
     return data;
   }
 
-  updateTableData( updatedTableData ) {
+  updateTableData(updatedTableData) {
     this.data = updatedTableData;
     this.tempData = [];
     this.empData = false;
     this.currentPage = 1;
     this.totalPage = this.getTotalPage();
-    if(this.table === 'potentialPartnerships'){
+    if (this.table === 'potentialPartnerships') {
       window.partnershipsCsvTableData = updatedTableData;
-    }
-    else if(this.table === 'gapAnalysis'){
+    } else if (this.table === 'gapAnalysis') {
       window.gapTableData = updatedTableData;
     } else if (this.table === 'impactFactor') {
       window.impactTableData = updatedTableData;
@@ -104,7 +103,7 @@ class Paginator {
     let tableRow;
     let tableRowData = getTableRows(data, keys);
     if (this.potentialPartnershipsTable) {
-      if (this.table === "gapAnalysis") {
+      if (this.table === 'gapAnalysis') {
         tableRow = tableRowData.gapAnalysisTableRows;
       } else if (this.table === 'potentialPartnerships') {
         tableRow = tableRowData.potentialPartnershipsTableRows;
@@ -129,12 +128,12 @@ class Paginator {
 
   createTableBody(rows) {
     if (this.potentialPartnershipsTable) {
-      if (this.table === "gapAnalysis") {
-        $("#gap-analysis-data").html(rows);
+      if (this.table === 'gapAnalysis') {
+        $('#gap-analysis-data').html(rows);
         bindGapAnalysisModalJQuery(window.focusAreaGaps);
         bindJQuery(this.table, this.selectedItems);
       } else if (this.table === 'potentialPartnerships') {
-        $("#partnership-report-data").html(rows);
+        $('#partnership-report-data').html(rows);
         bindJQueryPartnerships(this.selectedItems);
         bindPotentialPartnershipModalJQuery(
           window.potentialPartnershipsModalData
@@ -144,7 +143,9 @@ class Paginator {
         bindJQueryImpactFactor(this.selectedItems);
       }
     } else {
-      $(window).width() > 600 ? $("tbody.table__body").html(rows) : $(".table-sm").html(rows);
+      $(window).width() > 600
+        ? $('tbody.table__body').html(rows)
+        : $('.table-sm').html(rows);
       createButtons();
       bindJQuery(this.table, this.selectedItems);
     }
@@ -168,20 +169,24 @@ class Paginator {
       $('#impact-factor-current-page').html(currentPage);
       $('#impact-factor-total-page').html(totalPage);
     } else {
-      $(window).width() > 600 ? $('#current-page').html(currentPage) : $('#responsive-current-page').html(currentPage)
-      $(window).width() > 600 ? $('#total-page').html(totalPage) : $('#responsive-total-page').html(totalPage)
+      $(window).width() > 600
+        ? $('#current-page').html(currentPage)
+        : $('#responsive-current-page').html(currentPage);
+      $(window).width() > 600
+        ? $('#total-page').html(totalPage)
+        : $('#responsive-total-page').html(totalPage);
     }
-    if (this.table === "gapAnalysis") {
+    if (this.table === 'gapAnalysis') {
       currentPage === 1
-        ? $("#gap-previous-page").removeClass("active__nav")
-        : $("#gap-previous-page").addClass("active__nav");
+        ? $('#gap-previous-page').removeClass('active__nav')
+        : $('#gap-previous-page').addClass('active__nav');
       currentPage === totalPage
-        ? $("#gap-next-page").removeClass("active__nav")
-        : $("#gap-next-page").addClass("active__nav");
-    } else if (this.table === "potentialPartnerships") {
+        ? $('#gap-next-page').removeClass('active__nav')
+        : $('#gap-next-page').addClass('active__nav');
+    } else if (this.table === 'potentialPartnerships') {
       currentPage === 1
-        ? $("#potential-previous-page").removeClass("active__nav")
-        : $("#potential-previous-page").addClass("active__nav");
+        ? $('#potential-previous-page').removeClass('active__nav')
+        : $('#potential-previous-page').addClass('active__nav');
       currentPage === totalPage
         ? $('#potential-next-page').removeClass('active__nav')
         : $('#potential-next-page').addClass('active__nav');
@@ -208,7 +213,6 @@ class Paginator {
           ? $('#next-page').removeClass('active__nav')
           : $('#next-page').addClass('active__nav');
       }
-      
     }
   }
 }

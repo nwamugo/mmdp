@@ -361,11 +361,10 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
   margin-left: 2px;
 }
 
-.hide, #stakeholder {
+.hide,
+#stakeholder {
   display: none;
 }
-
-
 
 @media only screen and (min-width: 993px) {
   .row .col.l7 {
@@ -499,7 +498,6 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     border-bottom: 2px solid rgba(63, 170, 202, 0.6);
   }
 
-
   .banner {
     margin-left: 25px;
     background: none;
@@ -527,7 +525,7 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     margin-left: -700px;
   }
 
-  .banner .tap {
+  .banner tap {
     margin-left: 95px;
     margin-top: -30px;
   }
@@ -547,7 +545,7 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     font-size: 14px;
   }
 
-   .section.section__pillars {
+  .section.section__pillars {
     margin-top: -12%;
     background-image: linear-gradient(to bottom, #ebf2f4, #ffffff);
   }
@@ -555,7 +553,6 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
   .report {
     margin: 20px 0 0 -20px;
     width: 110px;
-
   }
 
   .search__activities__section button {
@@ -594,7 +591,7 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     padding-top: 10px;
   }
 
-  .d-flex-div{
+  .d-flex-div {
     margin-right: 30px;
   }
 
@@ -611,22 +608,22 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
   }
 
   #reportBtn {
-  margin-top: 26px;
-  margin-left: 3px !important; 
-  width: 100px;
-  height: 40px;
-  background-color: #3faaca;
-  border-radius: 3px;
-  color: #ffffff;
-  font-stretch: normal;
-  letter-spacing: -0.3px;
-  margin-left: -20px;
-  cursor: pointer;
-}
+    margin-top: 26px;
+    margin-left: 3px !important;
+    width: 100px;
+    height: 40px;
+    background-color: #3faaca;
+    border-radius: 3px;
+    color: #ffffff;
+    font-stretch: normal;
+    letter-spacing: -0.3px;
+    margin-left: -20px;
+    cursor: pointer;
+  }
 
   .active,
   .btn-accordion-table:hover,
-  .btn-single-table-card:hover{
+  .btn-single-table-card:hover {
     background-color: #fff;
   }
 
@@ -637,7 +634,7 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     overflow: hidden;
   }
 
- .dropbtn {
+  .dropbtn {
     background-color: #3faaca;
     height: 28px;
     border-radius: 3px;
@@ -653,7 +650,7 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     flex: 1 0 0;
     -webkit-box-flex: 1 0 0;
     -webkit-flex: 1 0 0;
-}
+  }
 
   .dropdown {
     position: relative;
@@ -669,6 +666,10 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     z-index: 1;
   }
 
+  /* .checkedBox{
+    width: 20px;
+  } */
+
   .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -678,26 +679,26 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
 
   .dropdown a:hover {
     background-color: #ddd;
-    }
-
-.show {
-  display: grid;
-  margin-left: 30px;
   }
 
-label{
-  font-size: 12px;
-  line-height: 1.43;
-  color: #000000;
-  margin-left: -15px;
-}
+  .show {
+    display: grid;
+    margin-left: 30px;
+  }
 
-.footer__right_content {
-  width: 200px;
-  font-size: 12px;
-  margin-top: 26px;
-  margin-left: 50px;
-}
+  label {
+    font-size: 12px;
+    line-height: 1.43;
+    color: #000000;
+    margin-left: -15px;
+  }
+
+  .footer__right_content {
+    width: 200px;
+    font-size: 12px;
+    margin-top: 26px;
+    margin-left: 50px;
+  }
 
   .e-flex {
     flex: 2 0 0;
@@ -711,62 +712,65 @@ label{
     border-bottom: 1px solid rgba(195, 194, 194, 0.27);
   }
 
-  .fa-chevron-down{
-   font-size: 30px;
-   color: #3faaca;
- }
-   .chevron-filter{
-   font-size: 20px;
-   color: #fff;
- }
+  .fa-chevron-down,
+  .fa-times {
+    font-size: 30px;
+    color: #3faaca;
+  }
+  .chevron-filter {
+    font-size: 20px;
+    color: #fff;
+  }
 
- .icon{
-   position: absolute;
-   right: 40px;
- }
+  .icon {
+    position: absolute;
+    right: 40px;
+  }
 
- .icon-filter{
-  position: absolute;
-  right: 5px;
-  bottom: 8px;
- }
+  .icon-filter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 8px;
+  }
 
- .search__activities__section input {
-  width: 60%;
-  height: 40px;
-  margin-right: 0.5em;
-  padding: 3px;
-}
+  .search__activities__section input {
+    width: 60%;
+    height: 40px;
+    margin-right: 0.5em;
+    padding: 3px;
+  }
 
-.features {
-  color: #3faaca;
-  font-weight: bold;
-}
+  .features {
+    color: #3faaca;
+    font-weight: bold;
+  }
 
-.filter_buttons{
-  display: flex;
-  justify-content: flex-end;
-  width: 97vw;
-}
+  .filter_buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 97vw;
+  }
 
-.filter_btn:focus{
-  background-color: #3faaca;
-}
+  .filter_btn:focus {
+    background-color: #3faaca;
+  }
 
-.applyFilter_btn, .clearFilter_btn{
-  width: 75px;
-  height: 25px;
-  font-family: Muli;
-  font-size: 10px;
-  border: none;
-  border-radius: 3px;
-  font-weight: bold;
-  margin: 5px;
-  text-align: center;  
-  background-color: #3faaca;
-  color: #fff;
-  cursor: pointer;
-}
+  .applyFilter_btn,
+  .clearFilter_btn {
+    width: 75px;
+    height: 25px;
+    font-family: Muli;
+    font-size: 10px;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    margin: 5px;
+    text-align: center;
+    background-color: #3faaca;
+    color: #fff;
+    cursor: pointer;
+  }
 }
 
 

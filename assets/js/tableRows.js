@@ -1,4 +1,4 @@
-getTableRows = (data, keys) => {    
+getTableRows = (data, keys) => {
   tableRows = {
     potentialPartnershipsTableRows: `
     <main id="table" class="table-row body">
@@ -98,15 +98,20 @@ getTableRows = (data, keys) => {
     stakeholderDirMobileTable: `
     <div>
     <button class="btn-single-table-card dummy" id="${data['id']}">
-       <span class="title">${data[keys[0]]}</span>
+       <span class="title">${
+         data[keys[0]]
+       } <span class="icon"><i class="fas fa-chevron-down"></i></span></span>
        <span class="d-flex">
-         <div class="d-flex-div">Thematic Pillar(s)<br>${data[keys[1]]}</div>
-         <div>Beneficiary Count<br>${data[keys[5]]}</div>
-          <span class="icon"><i class="fas fa-chevron-down"></i></span>
+         <div class="d-flex-div"><b>Thematic Pillar(s)</b><br>${
+           data[keys[1]]
+         }</div>
+         <div><b>Beneficiary Count</b><br>${data[keys[5]]}</div>
        </span>
     </button>
     <div class="panel" id="${data['id']}">
-      <p><span class='features'>Thematic Pillar(s)</span><br>${data[keys[1]]}</p>
+      <p><span class='features'>Thematic Pillar(s)</span><br>${
+        data[keys[1]]
+      }</p>
       <p><span class='features'>Sub-Themes</span><br>${data[keys[2]]}</p>
       <p><span class='features'>Partnership</span><br>${data[keys[3]]}</p>
       <p><span class='features'>Location</span><br>${data[keys[4]]}</p>

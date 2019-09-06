@@ -5,9 +5,7 @@ createButtons = () => {
     '.btn-single-table-card',
     function(event) {
       const panel = $(this).next();
-      panel.slideToggle();
+      // panel.slideToggle();
     }
   );
 };
-
-
