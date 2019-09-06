@@ -12,6 +12,10 @@ window.fetch = function() {
         const errorMessage =
           'There is currently no connection to the application. Please check your internet connection or try again later';
         try {
+          toastr.options = {
+            preventDuplicates: true,
+            timeOut: "7000",
+          };
           toastr.error(errorMessage);
         } catch (error) {
           alert(errorMessage);
