@@ -22,7 +22,7 @@ function appendEnlargedLGAMapWrapper() {
     height: $('.state__map .banner__desc').height() + 72,
     width: $('.state__map .banner__desc').width() + 72,
     background: '#f8f8f8',
-    top: $('#header-section').height()
+    top: $('#header-section').height(),
   });
 
   $('#enlarged-lga-map-close-btn').css({
@@ -30,7 +30,7 @@ function appendEnlargedLGAMapWrapper() {
     backgroundColor: '#3faaca',
     top: 15,
     right: 0,
-    display: isPathClicked ? 'initial' : 'none'
+    display: isPathClicked ? 'initial' : 'none',
   });
 
   d3.select('#enlarged-lga-map-wrapper')
@@ -73,7 +73,7 @@ function appendEnlargedLGAMapPath(path) {
   return {
     svg,
     bboxRect,
-    clientRect: $('#enlarged-lga-map-path')[0].getBoundingClientRect()
+    clientRect: $('#enlarged-lga-map-path')[0].getBoundingClientRect(),
   };
 }
 
@@ -161,7 +161,7 @@ function showEnlargedLgaMapPopup(e, lgaName, numberOfPartnerships) {
     textAlign: 'left',
     backgroundColor: '#fff',
     left: `${e.clientX - e.offsetX}px`,
-    top: `${e.clientY - 56}px`
+    top: `${e.clientY - 56}px`,
   });
   $('#enlarged-lga-map-popup').html(
     `${lgaName}
@@ -203,7 +203,7 @@ function appendEnlargedLGAMapIcons(x, y, path) {
     top: y,
     left: x - CELL_SIZE,
     height: 72,
-    width: 72
+    width: 72,
   });
 
   const iconsSvg = d3
@@ -237,7 +237,7 @@ function showEnlargedLGAMap(path) {
       cellSize: CELL_SIZE,
       maxNumberOfNeighbors: 8,
       minNumberOfNeighbors: 4,
-      showGrid: false
+      showGrid: false,
     });
 
     appendEnlargedLGAMapIcons(x, y, path);
