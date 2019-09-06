@@ -41,16 +41,8 @@ class ResponsiveTableFilterHeader extends TableFilterHeader {
         let currentColumnEntriesSet = new Set();
         for (let tableRowIndex = 0; tableRowIndex < tableData.length; tableRowIndex++) {
           const currentFilterOption = tableData[tableRowIndex][columnKey];
-          if ((typeof currentFilterOption === 'string') && currentFilterOption.includes(',')) {
-            const currentFilterOptionsArray = currentFilterOption.split(',');
-            currentFilterOptionsArray.forEach((singleDataItem) => {
-              currentColumnEntriesSet.add(singleDataItem.trim());
-            })
-          }
-          else {
             currentColumnEntriesSet.add(currentFilterOption);
           }
-        }
         allTableFilters.set(columnKey, currentColumnEntriesSet);
       }
     );
