@@ -203,6 +203,19 @@ $(document).ready(async function() {
    * @description - Every other operation that is to be done on the stakeholder table and rows
    */
   function loadStakeholderDetails(paginator) {
+    if (window.location.pathname === "/index-cordination-matrix.html") {
+      $("#location-header").html("State");
+      $("#responsive-table-location").html("State")
+      $("#location-name").text("State Filters");
+    } else if (window.location.pathname === "/state.html") {
+      $("#location-header").html("LGA");
+      $("#responsive-table-location").html("LGA")
+      $("#location-name").text("LGA Filters");
+    } else if (window.location.pathname === "/active-communities.html") {
+      $("#location-header").html("Communities");
+      $("#responsive-table-location").html("Communities")
+      $("#location-name").text("Community Filters");
+    }
     paginator.initialPage();
     let n = 5;
     let options = '';
