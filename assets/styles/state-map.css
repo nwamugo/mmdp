@@ -50,6 +50,7 @@
   justify-content: space-between;
   justify-items: center;
   margin-top: 40px;
+  text-align: left;
 }
 
 .state__map .map__legend__sm,
@@ -467,6 +468,45 @@
   left: 50%;
 }
 
+@media screen and (min-width: 600px) {
+  .report-button-sm #state-report-btn-sm {
+    display: none;
+  }
+  .report-button-lg, #state-report-btn {
+    display: block
+  }
+}
+
+/* medium screen */
+@media screen and (min-width: 768px) and (max-width: 1000px) {
+  #state-report-btn {
+    margin: 30px auto;
+  }
+  .state__map .banner__images svg {
+    width: 80%!important;
+    height: 80%!important;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+/* small screen */
+@media screen and (max-width: 600px) {
+  .report-button-lg, #state-report-btn {
+    display: none
+  }
+  .report-button-sm #state-report-btn-sm {
+    margin: 15px 0;
+    width: 100px;
+    height: 40px;
+    background-color: #3faaca;
+    border-radius: 3px;
+    color: #ffffff;
+    font-stretch: normal;
+    letter-spacing: -0.3px;
+    cursor: pointer;
+  }
+}
 /* medium screen */
 @media screen and (max-width: 999px) {
   .banner {
@@ -489,23 +529,11 @@
     color: #000;
     padding-bottom: 15px;
   }
-  .state__map .map__legend__lg,
-  .state__map .report-button-lg {
+  .state__map .map__legend__lg {
     display: none;
   }
   .report-button-sm {
     display: block;
-  }
-  .report-button-sm #state-report-btn-sm {
-    margin: 15px 0;
-    width: 100px;
-    height: 40px;
-    background-color: #3faaca;
-    border-radius: 3px;
-    color: #ffffff;
-    font-stretch: normal;
-    letter-spacing: -0.3px;
-    cursor: pointer;
   }
   .state__map .map__legend__sm {
     text-align: left;
