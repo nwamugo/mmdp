@@ -1,17 +1,6 @@
 (function() {
-  let MMDP_BASE_URL;
-  if (
-    window.location.host.includes('127.0.0.1') ||
-    window.location.host.includes('localhost')
-  ) {
-    MMDP_BASE_URL = 'http://localhost:3000';
-  } else {
-    MMDP_BASE_URL = 'http://cms-staging.mmdp.ng:3000';
-  }
-
   let lgaName;
   let stateName;
-  const baseURL = window.location.host;
   const SVG_NS = 'http://www.w3.org/2000/svg';
 
   const backToState = document.getElementById('back-state');
@@ -22,7 +11,7 @@
   backToState.addEventListener(
     'click',
     () =>
-      (window.location.href = `http://${baseURL}/state.html?state=${stateName.replace(
+      (window.location.href = `http://${locationUrl}/state.html?state=${stateName.replace(
         '%20',
         ' '
       )}`)
@@ -326,7 +315,7 @@
       const response = await responsePromise.json();
       const { name, path } = response.data[0];
       if (!name) {
-        window.location.href = `http://${baseURL}/state.html`;
+        window.location.href = `http://${locationUrl}/state.html`;
       }
 
       appendMap(path);
@@ -398,7 +387,7 @@
         const response = await responsePromise.json();
         const { name, path } = response.data[0];
         if (!name) {
-          window.location.href = `http://${baseURL}/state.html`;
+          window.location.href = `http://${locationUrl}/state.html`;
         }
 
         appendMap(path);

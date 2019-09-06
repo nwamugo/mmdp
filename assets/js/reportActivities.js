@@ -50,7 +50,7 @@ function getTrimmedStateNameFromUrl(type) {
     stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
 
   switch (type) {
-    case "baseURL":
+    case "locationUrl":
       return stateName;
     case "pdf":
     case "png":
@@ -452,18 +452,10 @@ function toggleModal() {
 }
 
 (function() {
-  const baseURL = window.location.host;
-  let MMDP_BASE_URL;
-  if (baseURL.includes('127.0.0.1') || baseURL.includes('localhost')) {
-    MMDP_BASE_URL = 'http://localhost:3000';
-  } else {
-    MMDP_BASE_URL = 'http://cms-staging.mmdp.ng:3000';
-  }
-  
   async function loaded() {
-    const stateName = getTrimmedStateNameFromUrl('baseURL');
+    const stateName = getTrimmedStateNameFromUrl('locationUrl');
     if (!stateName) {
-      window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
+      window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
     }
   
     try {
@@ -480,7 +472,7 @@ function toggleModal() {
       const { thematicPillarCountPerLGA, potentialPartnershipPerLGA } = window.stakeholderData;
       const { stateUrl, lgaServices } = response.data;
       if (!stateUrl) {
-        window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
+        window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
       }
       const potentialPartnerships = getPotentialPartnershipsForLGAs(
         window.stakeholderData,
@@ -594,12 +586,12 @@ function toggleModal() {
       backToStateBtn.addEventListener(
         'click',
         () =>
-          (window.location.href = `http://${baseURL}/state.html?state=${stateName}`)
+          (window.location.href = `http://${locationUrl}/state.html?state=${stateName}`)
       );
     } catch (error) {
       window.location.href =
-        `http://${baseURL}/state.html?state=${stateName}` ||
-        `http://${baseURL}/index-cordination-matrix.html`;
+        `http://${locationUrl}/state.html?state=${stateName}` ||
+        `http://${locationUrl}/index-cordination-matrix.html`;
     }
   }
   document.addEventListener('DOMContentLoaded', loaded, false);
