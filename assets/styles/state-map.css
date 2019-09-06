@@ -163,7 +163,8 @@
   font-stretch: normal;
 }
 
-#svg-container svg path:hover {
+#svg-container svg path:hover,
+#report-map-pillars svg path:hover {
   cursor: pointer;
   stroke: black;
   stroke-width: 0.003;
