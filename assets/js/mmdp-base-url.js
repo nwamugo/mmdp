@@ -1,13 +1,15 @@
 const urls = (function () {
-
-  if (
-    window.location.host.includes('127.0.0.1') ||
-    window.location.host.includes('localhost')
-  ) {
-    return ['http://localhost:3000', 'http://localhost:3000/api/v1', window.location.host]
-  } else {
-    return ['http://cms-staging.mmdp.ng:3000', 'http://cms-staging.mmdp.ng:3000/api/v1', window.location.host]
-  } 
-})(); 
+  switch(window.location.hostname) {
+    //staging
+    case 'staging-site.mmdp.ng':
+      return ['http://cms-staging.mmdp.ng:3000', 'http://cms-staging.mmdp.ng:3000/api/v1', window.location.host]
+    //production
+    case 'mmdp.ng':
+      return ['http://cms.mmdp.ng:3000', 'http://cms.mmdp.ng:3000/api/v1', window.location.host]
+    //localhost
+    default:
+      return ['http://localhost:3000', 'http://localhost:3000/api/v1', window.location.host]
+  }
+})();
 
 const [MMDP_BASE_URL, baseUrl, locationUrl] = urls;
