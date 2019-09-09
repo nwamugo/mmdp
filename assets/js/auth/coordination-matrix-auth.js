@@ -1,9 +1,7 @@
 (function() {
-  const baseUrl = MMDP_BASE_URL;
-
   async function login(data) {
     try {
-      const rawResponse = await fetch(`${baseUrl}/api/v1/auth/login`, {
+      const rawResponse = await fetch(`${MMDP_BASE_URL}/api/v1/auth/login`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

@@ -29,7 +29,7 @@
     });
 
   // Web Sockets
-  const socket = io(SocketUrl);
+  const socket = io(MMDP_BASE_URL);
   socket.on('connect', function () {
     const current_date = new Date
     const ISO_Date = current_date.toISOString()

@@ -73,8 +73,7 @@ function loadMap(redirectUrl) {
         })
         .click(function() {
           var stateName = $(this).attr("fme:statename");
-          baseURL = window.location.host;
-          window.location.href = `http://${baseURL}/${redirectUrl}?state=${stateName}`;
+          window.location.href = `http://${locationUrl}/${redirectUrl}?state=${stateName}`;
         });
 
       if (statusTxt == "error") return xhr;

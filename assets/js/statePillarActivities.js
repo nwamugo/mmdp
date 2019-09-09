@@ -114,17 +114,7 @@ function filteredLga(target, array = []) {
 }
 
 (function() {
-  let MMDP_BASE_URL;
-  if (
-    window.location.host.includes("127.0.0.1") ||
-    window.location.host.includes("localhost")
-  ) {
-    MMDP_BASE_URL = "http://localhost:3000";
-  } else {
-    MMDP_BASE_URL = "http://cms-staging.mmdp.ng:3000";
-  }
   let stateName;
-  const baseURL = window.location.host;
 
   function getNumberOfServices(lgaServices, lgaName) {
     for (const lgaService of lgaServices) {
@@ -137,7 +127,7 @@ function filteredLga(target, array = []) {
   async function loaded() {
     const stateNameFromUrl = window.location.search.substring(1).split("=")[1];
     if (!stateNameFromUrl) {
-      window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
+      window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
     }
     stateName =
       stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
@@ -156,7 +146,7 @@ function filteredLga(target, array = []) {
       const { thematicPillarCountPerLGA } = data;
       const { stateUrl, lgaServices } = response.data;
       if (!stateUrl) {
-        window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
+        window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
       }
       $("#state-map-pillars").load(stateUrl, function(responseTxt, statusTxt) {
         if (statusTxt === "success") {
@@ -206,14 +196,14 @@ function filteredLga(target, array = []) {
           link.addEventListener(
             "click",
             () =>
-              (window.location.href = `http://${baseURL}/state.html?state=${stateName}`)
+              (window.location.href = `http://${locationUrl}/state.html?state=${stateName}`)
           );
         }
       });
     } catch (error) {
       window.location.href =
-        `http://${baseURL}/state.html?state=${stateName}` ||
-        `http://${baseURL}/index-cordination-matrix.html`;
+        `http://${locationUrl}/state.html?state=${stateName}` ||
+        `http://${locationUrl}/index-cordination-matrix.html`;
     }
   }
 

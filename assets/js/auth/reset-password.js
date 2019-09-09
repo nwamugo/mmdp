@@ -1,9 +1,7 @@
 (function() {
-  baseUrl = MMDP_BASE_URL;
-
   async function resetPassword(data) {
     try {
-      const rawResponse = await fetch(`${baseUrl}/api/v1/auth/reset-password`, {
+      const rawResponse = await fetch(`${MMDP_BASE_URL}/api/v1/auth/reset-password`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

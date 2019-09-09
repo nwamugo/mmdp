@@ -1,7 +1,7 @@
 (function() {
-  const baseURL = `${baseUrl}/events`;
+  const eventsCarouselBaseURL = `${baseUrl}/events`;
 
-  fetch(baseURL, {
+  fetch(eventsCarouselBaseURL, {
     method: 'GET',
     mode: 'cors',
     headers: {

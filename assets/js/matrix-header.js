@@ -12,7 +12,6 @@ $(document).ready(function () {
   });
   $("#footer-section").load("/partials/footer.html");
   $("#reportBtn").click(function () {
-    baseURL = window.location.host;
-    window.location.href = `http://${baseURL}/report.html`;
+    window.location.href = `http://${locationUrl}/report.html`;
   })
 });

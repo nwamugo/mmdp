@@ -1,13 +1,3 @@
-let MMDP_BASE_URL;
-if (
-  window.location.host.includes("127.0.0.1") ||
-  window.location.host.includes("localhost")
-) {
-  MMDP_BASE_URL = "http://0.0.0.0:3000";
-} else {
-  MMDP_BASE_URL = "http://cms-staging.mmdp.ng:3000";
-}
-
 (function() {
   try {
     toastr.options = {

@@ -106,17 +106,7 @@ function filteredLga(target, array = []) {
 }
 
 (function() {
-  let MMDP_BASE_URL;
-  if (
-    window.location.host.includes('127.0.0.1') ||
-    window.location.host.includes('localhost')
-  ) {
-    MMDP_BASE_URL = 'http://localhost:3000';
-  } else {
-    MMDP_BASE_URL = 'http://cms-staging.mmdp.ng:3000';
-  }
   let stateName;
-  const baseURL = window.location.host;
 
   function getNumberOfServices(lgaServices, lgaName) {
     for (const lgaService of lgaServices) {
@@ -126,12 +116,12 @@ function filteredLga(target, array = []) {
     }
   }
   function handleMapClick(lgaName, stateName) {
-    window.location.href = `http://${baseURL}/active-communities.html?lga=${lgaName}&state=${stateName}`;
+    window.location.href = `http://${locationUrl}/active-communities.html?lga=${lgaName}&state=${stateName}`;
   }
   async function loaded() {
     const stateNameFromUrl = window.location.search.substring(1).split('=')[1];
     if (!stateNameFromUrl) {
-      window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
+      window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
     }
     stateName =
       stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
@@ -144,7 +134,7 @@ function filteredLga(target, array = []) {
       const response = await responsePromise.json();
       const { stateUrl, lgaServices } = response.data;
       if (!stateUrl) {
-        window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
+        window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
       }
       $('#svg-container').load(stateUrl, function(responseTxt, statusTxt, xhr) {
         if (statusTxt == 'success') {
@@ -203,7 +193,7 @@ function filteredLga(target, array = []) {
               const { thematicPillarCountPerLGA } = data;
               const { stateUrl } = response.data;
               if (!stateUrl) {
-                window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
+                window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
               }
               $('#svg-container').load(stateUrl, function(
                 responseTxt,
@@ -275,8 +265,8 @@ function filteredLga(target, array = []) {
               });
             } catch (error) {
               window.location.href =
-                `http://${baseURL}/state.html?state=${stateName}` ||
-                `http://${baseURL}/index-cordination-matrix.html`;
+                `http://${locationUrl}/state.html?state=${stateName}` ||
+                `http://${locationUrl}/index-cordination-matrix.html`;
             }
           }
 
@@ -301,10 +291,10 @@ function filteredLga(target, array = []) {
         'click',
         '#state-report-btn, #state-report-btn-sm',
         () =>
-          (window.location.href = `http://${baseURL}/state-report.html?state=${stateName}`)
+          (window.location.href = `http://${locationUrl}/state-report.html?state=${stateName}`)
       );
     } catch (error) {
-      window.location.href = `http://${baseURL}/index-cordination-matrix.html`;
+      window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
     }
   }
   document.addEventListener('DOMContentLoaded', loaded, false);
