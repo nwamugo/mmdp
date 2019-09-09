@@ -523,12 +523,27 @@ class TableFilterHeader extends Filter {
         .append(`<p>${count}</p>`)
         .css('display', 'block')
 
-    } else if(header === 'stateLocation' || header === 'location') {
+    } else if(header === 'stateLocation') {
       $('#locationCount p').remove()
       $('#locationCount')
         .append(`<p>${count}</p>`)
         .css('display', 'block')
+        .css('margin-left', '35px')
 
+    } else if (header === 'location' && window.location.pathname === "/active-communities.html") {
+      $('#locationCount p').remove()
+      $('#locationCount')
+        .css('margin-left', '')
+        .append(`<p>${count}</p>`)
+        .css('display', 'block')
+        .css('margin-left', '84px')
+
+    } else if (header === 'location') {
+      $('#locationCount p').remove()
+      $('#locationCount')
+        .append(`<p>${count}</p>`)
+        .css('display', 'block')
+        .css('margin-left', '29px')
     } else if(header === 'beneficiaryCount') {
       $('#beneficiaryCountCount p').remove()
       $('#beneficiaryCountCount')

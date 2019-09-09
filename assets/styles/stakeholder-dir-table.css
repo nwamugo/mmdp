@@ -796,7 +796,7 @@ table.stakeholder__details__table .row__value {
 .stakeholder_table_filter_subnav,.state_stakeholder_table_filter_subnav {
   position: absolute;
   width: 87.5rem;
-  top: 76rem;
+  top: 74rem;
   background-color: white;
   left: 8rem;
   z-index: 990;
@@ -1376,4 +1376,8 @@ table.stakeholder__details__table .row__value {
 
 .org {
   top: -20px;
+}
+
+#location-name {
+  color: white;
 }
