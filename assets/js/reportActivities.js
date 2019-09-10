@@ -237,64 +237,18 @@ async function appendPotentialPartnershipsDefs(id, number, pillarType) {
         $('#display-map')
           .html(
             `${pillarType}
-<br />
-Number of potential partnership
-<br />
-${number}
-<br />
-<a href="#table" id='${pillarType}' class="partnershipLink">View potential partnership / collaboration</a>`
-          )
+            <br />
+            Number of potential partnership
+            <br />
+            ${number}
+            <br />
+            <a href="#table" id='${pillarType}' class="partnershipLink">View potential partnership / collaboration</a>`)
           .addClass('display-map')
           .css({
             display: 'block',
             top: mouseY - 180,
             left: mouseX - 160
           });
-        function getFilteredTable() {
-          $('.partnershipLink').on('click', async function(e) {
-            if ($('#partnership-report-table').is(':visible')) {
-              const dataForTable = await getPartnershipData();
-              const data = window.stakeholderData;
-
-              let stakeholderServicesArray = getStakeholderServicesArray([
-                data.filteredStakeholders
-              ]);
-
-              const lgaName = e.currentTarget.id;
-              const filter = lgaName => {
-                const filteredData = dataForTable.filter(filtered => {
-                  return filtered.lga === lgaName;
-                });
-                const data = filteredData;
-                return data;
-              };
-              const newTableData = filter(lgaName);
-              window.partnershipsCsvTableData = newTableData;
-              const tableData = newTableData.map(item => {
-                item['ppRowId'] = getPotentialPartnershipRowId(
-                  item.lga,
-                  item.subThemeId,
-                  item.focusAreaId,
-                  stakeholderServicesArray
-                );
-                return item;
-              });
-
-              // Check if we created a filter object for the Partnerships Table Data
-              // If so, use the current selected LGA based filter to to update the table data
-              if(window.partnershipsTableHeaderFilter){
-                window.partnershipsTableHeaderFilter.setFilteredTableDataResults(
-                    tableData
-                );
-                window.partnershipsTableHeaderFilter.refreshTableData();
-              }
-              // Otherwise create the potential partnerships table again
-              else{
-                createPotentialPartnershipsTable(tableData);
-              }
-            }
-          });
-        }
         getFilteredTable();
       } else {
         $('.display-map')
@@ -329,6 +283,51 @@ function addPotentialPartnershipsMarker(x, y, pillarId) {
     .attr('y', y - 0.1);
 }
 
+function getFilteredTable() {
+  $('.partnershipLink').on('click', async function(e) {
+    if ($('#partnership-report-table').is(':visible')) {
+      const dataForTable = await getPartnershipData();
+      const data = window.stakeholderData;
+
+      let stakeholderServicesArray = getStakeholderServicesArray([
+        data.filteredStakeholders
+      ]);
+
+      const lgaName = e.currentTarget.id;
+      const filter = lgaName => {
+        const filteredData = dataForTable.filter(filtered => {
+          return filtered.lga === lgaName;
+        });
+        const data = filteredData;
+        return data;
+      };
+      const newTableData = filter(lgaName);
+      window.partnershipsCsvTableData = newTableData;
+      const tableData = newTableData.map(item => {
+        item['ppRowId'] = getPotentialPartnershipRowId(
+          item.lga,
+          item.subThemeId,
+          item.focusAreaId,
+          stakeholderServicesArray
+        );
+        return item;
+      });
+
+      // Check if we created a filter object for the Partnerships Table Data
+      // If so, use the current selected LGA based filter to to update the table data
+      if(window.partnershipsTableHeaderFilter){
+        window.partnershipsTableHeaderFilter.setFilteredTableDataResults(
+            tableData
+        );
+        window.partnershipsTableHeaderFilter.refreshTableData();
+      }
+      // Otherwise create the potential partnerships table again
+      else{
+        createPotentialPartnershipsTable(tableData);
+      }
+    }
+  });
+}
 function filteredLga(target, array = []) {
   return array.find(item => {
     if (item.lgaName === 'Igueben') return 'Iguegben' === target;
