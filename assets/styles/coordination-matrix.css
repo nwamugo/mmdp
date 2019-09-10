@@ -646,7 +646,7 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     font-size: 10px;
     border: 0;
     margin: 0 20px 4px 15px;
-    width: 68vw;
+    width: 100%;
     flex: 1 0 0;
     -webkit-box-flex: 1 0 0;
     -webkit-flex: 1 0 0;
@@ -749,7 +749,7 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
   .filter_buttons {
     display: flex;
     justify-content: flex-end;
-    width: 97vw;
+    width: 100%;
   }
 
   .filter_btn:focus {
@@ -765,7 +765,7 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     border: none;
     border-radius: 3px;
     font-weight: bold;
-    margin: 5px;
+    margin: 5px -15px 5px 30px;
     text-align: center;
     background-color: #3faaca;
     color: #fff;
