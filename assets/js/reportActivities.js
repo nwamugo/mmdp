@@ -76,23 +76,22 @@ function getPoint(x, y) {
 }
 
 function getPillarsCoordinates(lgaId) {
-  let pointsData = [];
   const lgaPath = document.getElementById(lgaId);
 
   // path client rect
-  let lgaDOMRect = lgaPath.getBoundingClientRect();
+  const lgaDOMRect = lgaPath.getBoundingClientRect();
 
   //get a position in the rect
   const positionX = lgaDOMRect.x + lgaDOMRect.width * 0.26;
-  let positionY = lgaDOMRect.y + lgaDOMRect.height / 2;
+  const positionY = lgaDOMRect.y + lgaDOMRect.height / 2;
 
-  if (lgaPath && lgaDOMRect) {
-    //get the coordinates of the point on the svg
-    let svgPoint = getPoint(positionX, positionY);
-    //Put all the points and lgaId together
-    pointsData.push({ x: svgPoint.x, y: svgPoint.y, lgaId });
-  }
-  return pointsData;
+  //get the area of the bounding rectangle
+  const area = lgaDOMRect.width * lgaDOMRect.height;
+
+  //get the coordinates of the point on the svg
+  const svgPoint = getPoint(positionX, positionY);
+  //Put all the points and lgaId together
+  return { x: svgPoint.x, y: svgPoint.y, lgaId, area };
 }
 
 function getPotentialPartnershipsCountCoordinates(lgaId) {
@@ -120,64 +119,37 @@ function getPotentialPartnershipsCountCoordinates(lgaId) {
   return points;
 }
 
-function appendDefs(id, pillarType) {
+function appendSymbol(id, pillarType, area) {
+  const rectWidth = decideWidth(area);
+  const rectHeight = decideHeight(area);
+
   const svgContainer = d3.select(reportMapPillarsID).select("svg");
   // append pillarMarker to the SVG container
-  svgContainer
-    .append('defs')
+  const symbol = svgContainer
     .append('symbol')
-    .attr('id', 'def' + id)
-    .attr('viewBox', '0 0 9 9')
-    .append('g')
-    .attr('fill', 'none');
+    .attr('id', id)
+    .attr('viewBox', '0 0 9 9');
 
-  const parent = document.getElementById('def' + id);
-  const group = d3.select(parent);
+    return pillarType ? pillarType.forEach((pillar, index) => {
+      symbol
+      .append('rect')
+      .attr('width', rectWidth)
+      .attr('height', rectHeight)
+      .attr('x', 0)
+      .attr('y', 3 - rectHeight * index)
+      .attr('fill', getPillarColor(pillar));
+  })  : false;
+}
 
-  if (pillarType.length) {
-    if (pillarType.includes('Pillar 4')) {
-      group
-        .append('rect')
-        .attr('width', 2)
-        .attr('height', 1)
-        .attr('rx', 0.2)
-        .attr('ry', 0.2)
-        .attr('fill', '#ed7d31');
-    }
-    if (pillarType.includes('Pillar 3')) {
-      group
-        .append('rect')
-        .attr('width', 2)
-        .attr('height', 1)
-        .attr('x', 0)
-        .attr('y', 1)
-        .attr('rx', 0.2)
-        .attr('ry', 0.2)
-        .attr('fill', '#ffc000');
-    }
-    if (pillarType.includes('Pillar 2')) {
-      group
-        .append('rect')
-        .attr('width', 2)
-        .attr('height', 1)
-        .attr('fill', '#4472c4')
-        .attr('x', 0)
-        .attr('y', 2)
-        .attr('rx', 0.2)
-        .attr('ry', 0.2);
-    }
-    if (pillarType.includes('Pillar 1')) {
-      group
-        .append('rect')
-        .attr('width', 2)
-        .attr('height', 1)
-        .attr('rx', 0.2)
-        .attr('ry', 0.2)
-        .attr('x', 0)
-        .attr('y', 3)
-        .attr('fill', '#00b050');
-    }
-  }
+function addMarker(x, y, pillarId) {
+  const svgContainer = d3.select(reportMapPillarsID).select("svg");
+  svgContainer
+    .append('use')
+    .attr('xlink:href', '#' + pillarId)
+    .attr('width', 0.2)
+    .attr('height', 0.2)
+    .attr('x', x + 0.02)
+    .attr('y', y - 0.1);
 }
 
 async function appendPotentialPartnershipsDefs(id, number, pillarType) {
@@ -259,18 +231,6 @@ async function appendPotentialPartnershipsDefs(id, number, pillarType) {
   });
 }
 
-function addMarker(x, y, pillarId) {
-  const svgContainer = d3.select(reportMapPillarsID).select("svg");
-  svgContainer
-    .append('use')
-    .attr('xlink:href', '#def' + pillarId)
-    .attr('id', '#use' + pillarId)
-    .attr('width', 0.2)
-    .attr('height', 0.2)
-    .attr('x', x + 0.02)
-    .attr('y', y - 0.1);
-}
-
 function addPotentialPartnershipsMarker(x, y, pillarId) {
   const svgContainer = d3.select(reportMapPillarsID).select("svg");
   svgContainer
@@ -329,10 +289,7 @@ function getFilteredTable() {
   });
 }
 function filteredLga(target, array = []) {
-  return array.find(item => {
-    if (item.lgaName === 'Igueben') return 'Iguegben' === target;
-    return item.lgaName === target;
-  });
+  return array.find(item => item.lgaName === target);
 }
 
 function getNumberOfServices(lgaServices, lgaName) {
@@ -486,16 +443,17 @@ function toggleModal() {
           $("g#Nigeria_LGA_Boundary")
             .parents("svg")
             .addClass("banner__image animated fadeInLeft slow state-map__svg");
-          const lgsIds = responseTxt.match(/STL\d{6}/gm);
+          const pathFmeIds = responseTxt.match(/STL\d{6}/gm);
   
-          lgsIds.map(lgsId => {
-            const svgPath = document.querySelector(`[fme\\:id=${lgsId}]`);
+          pathFmeIds.forEach(pathFmeId => {
+            const svgPath = document.querySelector(`[fme\\:id=${pathFmeId}]`);
   
-            const lgaName = svgPath.getAttribute('fme:lga_name');
+            const lgaName = getLgaName(svgPath);
+
             const numberOfServicesReport = getNumberOfServices(
               lgaServices,
               lgaName
-            );
+              );
   
             if (numberOfServicesReport > 80) {
               svgPath.setAttribute('fill', '#e72525');
@@ -509,39 +467,31 @@ function toggleModal() {
               numberOfServicesReport <= 40
             ) {
               svgPath.setAttribute('fill', '#e89090');
-            } else if (numberOfServicesReport <= 5) {
-              svgPath.setAttribute('fill', '#e7d9d9');
             } else {
               svgPath.setAttribute('fill', '#e7d9d9');
             }
+
+            const svgPathId = `report-map__${lgaName}`;
+
+            svgPath.setAttribute('id', svgPathId);
+            svgPath.setAttribute('class', 'path');
             svgPath.innerHTML = `<title>${lgaName}</title>`;
-          });
-  
-          document.querySelectorAll('path').forEach(lgaMap => {
-            // select lga_name as the lgaId
-            let lgaId = d3.select(lgaMap).attr(':fme:lga_name');
-            lgaId = lgaId.replace(/\s+/g, ' ');
-  
-            lgaMap.innerHTML = `<title>${lgaId}</title>`;
-            const lgaData = filteredLga(lgaId, thematicPillarCountPerLGA);
-            if (lgaId && lgaData) {
-              lgaMap.setAttribute('id', lgaId);
-              lgaMap.setAttribute('class', 'path');
-  
-              const points = getPillarsCoordinates(lgaId);
+            const lgaData = filteredLga(lgaName, thematicPillarCountPerLGA);
+
+            if (lgaName && lgaData) {
               const lgaPotentialPartnershipData = filteredLga(
-                lgaId,
+                lgaName,
                 potentialPartnerships
               );
   
               if (
-                lgaId &&
+                lgaName &&
                 lgaData &&
-                lgaData.lgaName === lgaId &&
+                lgaData.lgaName === lgaName &&
                 lgaPotentialPartnershipData.potentialLGAPartnershipsCount > 0
               ) {
                 const potentialPartnershipPoints = getPotentialPartnershipsCountCoordinates(
-                  lgaId,
+                  svgPathId,
                   lgaData.potentialLGAPartnershipsCount
                 );
                 if (potentialPartnershipPoints.length > 0) {
@@ -553,26 +503,24 @@ function toggleModal() {
                     const number =
                       lgaPotentialPartnershipData.potentialLGAPartnershipsCount;
                     appendPotentialPartnershipsDefs(
-                      lgaId + CoordinateIndex,
+                      lgaName + CoordinateIndex,
                       number,
-                      lgaId
+                      lgaName
                     );
                     addPotentialPartnershipsMarker(
                       potentialPartnershipPoints[CoordinateIndex].x,
                       potentialPartnershipPoints[CoordinateIndex].y,
-                      lgaId + CoordinateIndex
+                      lgaName + CoordinateIndex
                     );
                   }
                 }
               }
-  
-              if (points.length > 0) {
-                for (let i = 0; i <= points.length - 1; i++) {
-                  const eachPillar = lgaData.pillars.map(item => item.name);
-                  appendDefs(lgaId + i, eachPillar);
-                  addMarker(points[i].x, points[i].y, lgaId + i);
-                }
-              }
+
+              const coords = getPillarsCoordinates(svgPathId);
+              const pillars = lgaData.pillars.map(item => item.name).sort((a, b) => a > b ? 1 : -1);
+              const pillarsId = `map-pillars-icon__${lgaName}`;
+              appendSymbol(pillarsId, pillars, coords.area);
+              addMarker(coords.x, coords.y, pillarsId);
             }
           });
         }
