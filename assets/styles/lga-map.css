@@ -65,7 +65,7 @@
 
 .lga__position {
   margin-top: 196px;
-  margin-left: -200px !important;
+  margin-left: -200px;
   margin-right: 100px;
 }
 
@@ -139,7 +139,6 @@
 
 .info_panel {
   height: 900px;
-  width: auto !important;
   background-color: #ffffff;
   padding: 10px;
   font-size: 2.9em;

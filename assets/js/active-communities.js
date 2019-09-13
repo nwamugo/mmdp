@@ -17,7 +17,7 @@
       )}`)
   );
 
-  async function fetchCount() {
+  async function fetchCount(lgaName) {
     let counts = [];
     let query;
     query = `lga=${lgaName}`;
@@ -210,20 +210,33 @@
   }
 
   function appendMap(path) {
-    d3.select('#svg-container')
-      .append('svg')
-      .attr('fill', 'none')
-      .attr('height', 584)
-      .attr('width', 521)
-      .attr('id', 'svg')
-      .attr('transform', 'scale(1.0)')
-      .append('path')
-      .attr('id', 'thePath')
-      .attr('class', 'path')
-      .attr('d', path)
-      .attr('fill', '#bad9e3')
-      .attr('stroke', 'none')
-      .attr('stroke-width', 1);
+      d3.select('#svg-container')
+        .append('svg')
+        .attr('fill', 'none')
+        .attr('height', 584)
+        .attr('width', 521)
+        .attr('id', 'svg')
+        .attr('transform', 'scale(1.0)')
+        .append('path')
+        .attr('id', 'thePath')
+        .attr('class', 'path')
+        .attr('d', path)
+        .attr('fill', '#bad9e3')
+        .attr('stroke', 'none')
+        .attr('stroke-width', 1);
+    
+    let bb = $('#thePath')[0].getBBox();
+    const interval = setInterval(() => {
+      if (bb.width > 0 || bb.height > 0) {
+        clearInterval(interval);
+      }
+      bb = $('#thePath')[0].getBBox();
+      svg.setAttributeNS(
+        null,
+        'viewBox',
+        `${bb.x} ${bb.y} ${bb.width} ${bb.height}`
+      );
+    }, 100);
   }
 
   function appendDefs() {
@@ -310,35 +323,22 @@
     lgaSpan.innerHTML = lgaName.replace('%20', ' ');
     try {
       const responsePromise = await fetch(
-        `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`
+        `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`, {
+          headers: {
+            authorization: `Bearer ${localStorage.userToken}`
+          }
+        }
       );
       const response = await responsePromise.json();
       const { name, path } = response.data[0];
       if (!name) {
         window.location.href = `http://${locationUrl}/state.html`;
       }
+      const counts = (await fetchCount(lgaName)) || [];
 
       appendMap(path);
       const svg = document.getElementById('svg');
       const hideMe = document.getElementById('remove');
-      $('#show-active-div').click(function() {
-        $('#show-active-div').hide();
-        $('g').hide();
-        $('#hide-active-div').toggle();
-
-        fetchCommunities(MMDP_BASE_URL, lgaName, true);
-      });
-
-      $('#hide-active-div').click(function() {
-        $('#hide-active-div').hide();
-        $('#show-active-div').toggle();
-        $('g').show();
-        $('.red-marker').hide();
-        $('#lga-report-button').hide();
-
-        fetchCommunities(MMDP_BASE_URL, lgaName, false);
-      });
-
       let bb = thePath.getBBox();
       //set the svg viewBox attribute
       svg.setAttributeNS(
@@ -349,9 +349,8 @@
       appendDefs();
       // add markers
       const points = getCoord();
-      const counts = await fetchCount();
       let fill = ['red', 'green'];
-      if (points.length > 0) {
+      if (points.length > 0 && counts.length > 0) {
         for (let i = 0; i <= points.length; i++) {
           if (typeof points[i] === 'object') {
             drawSvg(
@@ -372,6 +371,23 @@
           }
         }
       }
+      $('#show-active-div').click(function() {
+        $('#show-active-div').hide();
+        $('g').hide();
+        $('#hide-active-div').toggle();
+
+        fetchCommunities(MMDP_BASE_URL, lgaName, true);
+      });
+
+      $('#hide-active-div').click(function() {
+        $('#hide-active-div').hide();
+        $('#show-active-div').toggle();
+        $('g').show();
+        $('.red-marker').hide();
+        $('#lga-report-button').hide();
+
+        fetchCommunities(MMDP_BASE_URL, lgaName, false);
+      });
     } catch (error) {
       throw error;
     }
@@ -382,7 +398,11 @@
       lgaSpan.innerHTML = lgaName.replace('%20', ' ');
       try {
         const responsePromise = await fetch(
-          `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`
+          `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`, {
+            headers: {
+              authorization: `Bearer ${localStorage.userToken}`
+            }
+          }
         );
         const response = await responsePromise.json();
         const { name, path } = response.data[0];
@@ -390,7 +410,6 @@
           window.location.href = `http://${locationUrl}/state.html`;
         }
 
-        appendMap(path);
         const svg = document.getElementById('svg');
         const thePath = document.getElementById('thePath');
         let bb = thePath.getBBox();
@@ -403,7 +422,7 @@
         appendDefs();
 
         // add markers
-        let servicesCount = await fetchCount();
+        let servicesCount = await fetchCount(lgaName);
         if (servicesCount) {
           var myStringArray = servicesCount['uniqueNames'];
           var arrayLength = myStringArray.length;
@@ -448,22 +467,24 @@
             var stakeholders = servicesCount[1];
             var focusarea = servicesCount[2];
             var services = servicesCount[0];
-            $(
-              '<div class="info_panel">' +
-                '<div class="community">Community Name: ' +
-                community +
-                '</div><br>' +
-                '<div class="counts">Stakeholders: ' +
-                stakeholders +
-                '<br>' +
-                'Focus Area: ' +
-                focusarea +
-                '<br>' +
-                'Services: ' +
-                services +
-                '</div><br>' +
-                '</div>'
+            $(`<div class="info_panel">
+                <div class="community">
+                  <b>Community Name:</b> ${community}
+                </div><br>
+                <div class="counts">
+                  <b>Stakeholders:</b> ${stakeholders}<br>
+                  <b>Focus Area:</b> ${focusarea}<br>
+                  <b>Services:</b> ${services}<br>
+                </div>
+              </div>`
             ).appendTo('body');
+            $('.info_panel').css({
+              border: 'solid 1px #ccc',
+              display: 'block',
+              width: $(window).width() > 600 ? 'auto' : '200px!important',
+              fontSize: '14px',
+              fontWeight: 'normal',
+            })
           })
           .mouseleave(function() {
             $('.info_panel').remove();
@@ -474,7 +495,7 @@
 
             $('.info_panel').css({
               top: mouseY - 50,
-              left: mouseX - $('.info_panel').width() / 2
+              left: $(window).width() > 600 ? mouseX - $('.info_panel').width() / 2 : 10
             });
           });
       } catch (error) {

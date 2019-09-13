@@ -44,8 +44,7 @@ function logout() {
 }
 
 function activateLogoutBtn() {
-  const logoutButton = document.querySelectorAll("button#logout__btn");
-  logoutButton[0].addEventListener("click", logout, false);
+  $(document).on('click', 'button#logout__btn', logout)
 }
 
 function redirectUnAuthUser(url) {
