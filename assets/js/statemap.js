@@ -151,7 +151,7 @@ function filteredLga(target, array = []) {
           lgsIds.map(lgsId => {
             const svgPath = document.querySelector(`[fme\\:id=${lgsId}]`);
 
-            const lgaName = svgPath.getAttribute('fme:lga_name');
+            const lgaName = getLgaName(svgPath);
             const numberOfServices = getNumberOfServices(lgaServices, lgaName);
             if (numberOfServices >= 35) {
               svgPath.setAttribute('fill', '#296d81');
@@ -210,7 +210,7 @@ function filteredLga(target, array = []) {
                     .addClass('banner__image state-map__svg');
                   document.querySelectorAll('path').forEach(lgaMap => {
                     // select lga_name as the lgaId
-                    const lgaId = d3.select(lgaMap).attr(':fme:lga_name');
+                    const lgaId = getLgaName(lgaMap);
                     const numberOfServices = getNumberOfServices(
                       lgaServices,
                       lgaId

@@ -66,8 +66,11 @@ function appendEnlargedLGAMapPath(path) {
     'viewBox',
     `${bboxRect.x} ${bboxRect.y} ${bboxRect.width} ${bboxRect.height}`
   );
+
+  const lgaName = getLgaName($(path)[0]);
+
   $('#enlarged-lga-map-wrapper')
-    .prepend(`<h5>${$(path).attr('fme:lga_name')}</h5>`)
+    .prepend(`<h5>${lgaName}</h5>`)
     .css({ textAlign: 'center' });
 
   return {
@@ -183,7 +186,7 @@ function showEnlargedLgaMapPopup(e, lgaName, numberOfPartnerships) {
 function appendEnlargedLGAMapIcons(x, y, path) {
   removeCreatedElements('#enlarged-lga-map-wrapper-icons');
 
-  const lgaName = $(path).attr('fme:lga_name');
+  const lgaName = getLgaName($(path)[0])
   const numberOfPartnerships = $(`symbol[id*="${lgaName}"] tspan`).html();
   const { thematicPillarCountPerLGA } = window.stakeholderData;
   const lgaThematicPillars = thematicPillarCountPerLGA.filter(
