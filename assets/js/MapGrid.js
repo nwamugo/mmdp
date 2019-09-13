@@ -21,7 +21,7 @@ class MapGrid {
           x: this.x + this.cellSize * column,
           y: this.y + this.cellSize * row,
           row,
-          column
+          column,
         });
       }
     }

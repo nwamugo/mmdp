@@ -30,20 +30,20 @@
       const {
         beneficiaryServicesCount,
         stakeholderCount,
-        focusAreasCount
+        focusAreasCount,
       } = data;
 
       let services = [];
       const uniqueFocusAreas = new Set();
-      for (const stakeholder of data.filteredStakeholders){
-        for (const beneficiary of stakeholder.beneficiaries){
+      for (const stakeholder of data.filteredStakeholders) {
+        for (const beneficiary of stakeholder.beneficiaries) {
           let focusAreaName = beneficiary.focusArea.focusAreaName.focusAreaName;
           uniqueFocusAreas.add(focusAreaName);
           services.push(beneficiary.serviceName);
         }
       }
 
-      let servicesCount = services.length
+      let servicesCount = services.length;
 
       const communities = data.filteredStakeholders.map(community => {
         return community.beneficiaries[0].communities;
@@ -72,7 +72,7 @@
         'Focus Areas',
         'Services',
         beneficiaryServicesCount,
-        stakeholderCount,
+        stakeholderCount
       );
 
       return counts;
@@ -111,7 +111,6 @@
     }
   }
 
- 
   function createPopupList(list) {
     let unorderedList = document.createElement('ol');
     for (const item of list) {
@@ -124,6 +123,67 @@
     return unorderedList;
   }
 
+  function appendCircle(svg) {
+    const circleIconX = 5;
+    const circleIconY = 7.5;
+    const circleIconRadius = 11;
+    svg
+      .append('circle')
+      .attr('r', circleIconRadius)
+      .attr('cx', circleIconX)
+      .attr('cy', circleIconY)
+      .attr('fill', '#fff')
+      .style('cursor', 'pointer')
+      .attr('stroke', 'red')
+      .attr('stroke-width', 3)
+      .attr('class', 'focus-area-icon');
+
+    svg
+      .append('circle')
+      .attr('r', circleIconRadius)
+      .attr('cx', circleIconX + 26)
+      .attr('cy', circleIconY)
+      .attr('fill', '#fff')
+      .style('cursor', 'pointer')
+      .attr('stroke', 'green')
+      .attr('stroke-width', 3)
+      .attr('class', 'services-icon');
+  }
+
+  function appendText(svg, numberOne, numberTwo) {
+    // if the number is composed with one digit, return 0 otherwise return the number
+    // of digits and subtract it from the current x axis in order to center the text
+    const textXOne =
+      2 - (`${numberOne}`.length === 1 ? 0 : `${numberOne}`.length * 2);
+    const textYOne = 10;
+
+    const textXTwo =
+      28 - (`${numberTwo}`.length === 1 ? 0 : `${numberTwo}`.length * 2);
+    const textYTwo = 10;
+
+    svg
+      .append('text')
+      .attr('fill', 'black')
+      .attr('font-size', 10.5)
+      .attr('font-weight', 'bold')
+      .attr('x', textXOne)
+      .attr('y', textYOne)
+      .attr('class', 'focus-area-icon')
+      .style('cursor', 'pointer')
+      .html(numberOne);
+
+    svg
+      .append('text')
+      .attr('fill', 'black')
+      .attr('font-size', 10.5)
+      .attr('font-weight', 'bold')
+      .attr('x', textXTwo)
+      .attr('y', textYTwo)
+      .attr('class', 'services-icon')
+      .style('cursor', 'pointer')
+      .html(numberTwo);
+  }
+
   function showPopup(menu, icon) {
     //get the position of the placeholder element
     let rect = $(icon)[0].getBoundingClientRect();
@@ -133,25 +193,25 @@
       zIndex: 5000,
       display: 'block',
       left: `${rect.x - 50}px`,
-      top: `${rect.y - 100}px`
+      top: `${rect.y - 100}px`,
     });
     $('#popup .top-bar b').css({
       fontSize: '17px',
-      textAlign: 'left'
+      textAlign: 'left',
     });
     $('#popup .top-bar ol li').css({
       fontSize: '14px',
-      textAlign: 'left'
+      textAlign: 'left',
     });
     $(window).scroll(function(e) {
       rect = $(icon)[0].getBoundingClientRect();
-      if($(menu).css('display') === 'block') {
+      if ($(menu).css('display') === 'block') {
         $(menu).css({
           position: 'fixed',
           zIndex: 5000,
           display: 'block',
           left: `${rect.x - 50}px`,
-          top: `${rect.y - 100}px`
+          top: `${rect.y - 100}px`,
         });
       }
     });
@@ -159,84 +219,128 @@
       const { nodeName } = $(e.target)[0];
       if (nodeName !== 'circle' && nodeName !== 'text') {
         $(menu).css({
-          display: 'none'
+          display: 'none',
         });
       }
     });
   }
 
-  async function drawSvg(o, parent, number, list, title) {
-    var circle = document.createElementNS(SVG_NS, 'circle');
-    var group = document.createElementNS(SVG_NS, 'g');
-    var text = document.createElementNS(SVG_NS, 'text');
-    var popupContent = document.createElement('div');
-    var popupTitle = document.createElement('b');
+  function drawSvgIcons(counts) {
+    let title = '';
+    let list = [];
 
-    const textAttributes = {
-      'text-anchor': 'middle',
-      stroke: 'black',
-      'stroke-width': 0.001,
-      fill: '#1A1F37',
-      'font-family': 'Muli-ExtraBold, Muli',
-      'font-size': 0.03,
-      'font-weight': 200,
-      'letter-spacing': 0.001,
-      x: o.cx,
-      y: o.cy + 0.012
-    };
-    setAttributes(circle, o);
-    setAttributes(text, textAttributes);
+    let popUp = document.getElementById('popup');
+    $('#svg-container-icons circle, #svg-container-icons text').on(
+      'click',
+      function(e) {
+        $('#myPopup').html('');
+        let popupContent = document.createElement('div');
+        let popupTitle = document.createElement('b');
+        if ($(this).hasClass('focus-area-icon')) {
+          title = counts[4];
+          list = counts[2];
+        } else if ($(this).hasClass('services-icon')) {
+          title = counts[5];
+          list = counts[3];
+        }
+        popupTitle.innerHTML = title;
 
-    text.textContent = number;
+        let popupList = createPopupList(list);
 
-    group.appendChild(circle);
-    group.appendChild(text);
-    group.style.cursor = 'pointer';
+        popupContent.appendChild(popupTitle);
+        popupContent.appendChild(popupList);
 
-    popupTitle.innerHTML = title;
-    var popupList = createPopupList(list);
-
-    popupContent.appendChild(popupTitle);
-    popupContent.appendChild(popupList);
-
-    var popUp = document.getElementById('popup');
-    group.addEventListener("click", function(e){
         $('#myPopup').html(popupContent);
         showPopup(popUp, this);
+      }
+    );
+
+    const pathRectangle = $('#thePath')[0].getBoundingClientRect();
+
+    const { x, y } = createMapGrid({
+      clientRect: pathRectangle,
+      cellSize: 46,
+      maxNumberOfNeighbors: 8,
+      minNumberOfNeighbors: 4,
+      showGrid: false,
     });
-    
-    parent.appendChild(group);
-    return circle;
+
+    $('#svg-container-icons').css({
+      top: y + 20,
+      left: x,
+      display: 'block',
+    });
+
+    $(window).scroll(() => {
+      $('#svg-container-icons').css({
+        top: y + 20 - window.scrollY,
+        left: x,
+      });
+    });
   }
 
-  function appendMap(path) {
-      d3.select('#svg-container')
-        .append('svg')
-        .attr('fill', 'none')
-        .attr('height', 584)
-        .attr('width', 521)
-        .attr('id', 'svg')
-        .attr('transform', 'scale(1.0)')
-        .append('path')
-        .attr('id', 'thePath')
-        .attr('class', 'path')
-        .attr('d', path)
-        .attr('fill', '#bad9e3')
-        .attr('stroke', 'none')
-        .attr('stroke-width', 1);
-    
-    let bb = $('#thePath')[0].getBBox();
+  function appendMap(path, counts) {
+    const mainSvg = d3.select('#svg-container').append('svg');
+    mainSvg
+      .attr('transform', 'scale(1.0)')
+      .style('-ms-transform', 'scaleY(-1)')
+      .style('-webkit-transform', 'scaleY(-1)')
+      .style('transform', 'scaleY(-1)')
+      .attr('fill', 'none')
+      .attr('height', 584)
+      .attr('width', 521)
+      .attr('id', 'svg')
+      .attr('transform', 'scale(1.0)')
+      .append('path')
+      .attr('id', 'thePath')
+      .attr('class', 'path')
+      .attr('d', path)
+      .attr('fill', '#bad9e3')
+      .attr('stroke', 'none')
+      .attr('stroke-width', 1);
+
+    let bboxRect = $('#thePath')[0].getBBox();
+
+    mainSvg.attr(
+      'viewBox',
+      `${bboxRect.x} ${bboxRect.y} ${bboxRect.width} ${bboxRect.height}`
+    );
+
     const interval = setInterval(() => {
-      if (bb.width > 0 || bb.height > 0) {
+      if (bboxRect.width > 0 || bb.height > 0) {
         clearInterval(interval);
       }
-      bb = $('#thePath')[0].getBBox();
+      bboxRect = $('#thePath')[0].getBBox();
       svg.setAttributeNS(
         null,
         'viewBox',
-        `${bb.x} ${bb.y} ${bb.width} ${bb.height}`
+        `${bboxRect.x} ${bboxRect.y} ${bboxRect.width} ${bboxRect.height}`
       );
     }, 100);
+
+    if (counts.length > 0 && counts[0] && counts[1]) {
+      $('#svg-container').append(`<div id="svg-container-icons"></div>`);
+
+      $('#svg-container-icons').css({
+        width: '90px',
+        height: '46px',
+        position: 'fixed',
+        display: 'none',
+      });
+
+      const mainSvgIcons = d3.select('#svg-container-icons').append('svg');
+
+      mainSvgIcons
+        .attr('id', 'active-communities-map-icons')
+        .attr('width', 80)
+        .attr('height', 72)
+        .attr('viewBox', `${-5} ${-5} ${46} ${46}`);
+
+      appendCircle(mainSvgIcons);
+      appendText(mainSvgIcons, counts[0], counts[1]);
+
+      drawSvgIcons(counts);
+    }
   }
 
   function appendDefs() {
@@ -272,25 +376,29 @@
 
     for (let i = 0; i < 100; i++) {
       // get a random point on the svg canvas
-      let x = randomIntFromInterval(cr.x, cr.x + cr.width)
-      let y = randomIntFromInterval(cr.y, cr.y + cr.height)
+      let x = randomIntFromInterval(cr.x, cr.x + cr.width);
+      let y = randomIntFromInterval(cr.y, cr.y + cr.height);
 
       //elementFromPoint returns the topmost Element at the specified coordinates (relative to the viewport).
       let elmt = document.elementFromPoint(x, y);
       //get the coordinates of the point on the svg
       let svgPoint = getPoint(x, y);
-      let path = d3.select("path")
+      let path = d3.select('path');
       // check if point is in fill
       let isInFill = isPointInFill(svgPoint, path);
 
       // if the point is in path fill
-      if (elmt && elmt.className.baseVal === 'path' && elmt.id === 'thePath' && isInFill) {
-        
+      if (
+        elmt &&
+        elmt.className.baseVal === 'path' &&
+        elmt.id === 'thePath' &&
+        isInFill
+      ) {
         //draw a circle with the center on the svg point
 
         points.push({
           cx: svgPoint.x,
-          cy: svgPoint.y
+          cy: svgPoint.y,
         }),
           //increase the counter
           n++;
@@ -303,18 +411,9 @@
     return points;
   }
 
-  function getCoord() {
-    const lgaPath = document.getElementById('thePath');
-
-    // svg client rect
-    let cr = lgaPath.getBBox();
-
-    let x = cr.x + cr.width * 0.5;
-    let y = cr.y + cr.height * 0.5;
-
-    let x1 = cr.x + cr.width * 0.5 + 0.052;
-
-    return [{ x, y }, { x: x1, y }];
+  // a function to get a random integer from an interval
+  function randomIntFromInterval(mn, mx) {
+    return ~~(Math.random() * (mx - mn + 1) + mn);
   }
 
   async function loaded() {
@@ -323,10 +422,11 @@
     lgaSpan.innerHTML = lgaName.replace('%20', ' ');
     try {
       const responsePromise = await fetch(
-        `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`, {
+        `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`,
+        {
           headers: {
-            authorization: `Bearer ${localStorage.userToken}`
-          }
+            authorization: `Bearer ${localStorage.userToken}`,
+          },
         }
       );
       const response = await responsePromise.json();
@@ -336,44 +436,12 @@
       }
       const counts = (await fetchCount(lgaName)) || [];
 
-      appendMap(path);
+      appendMap(path, counts);
       const svg = document.getElementById('svg');
       const hideMe = document.getElementById('remove');
-      let bb = thePath.getBBox();
-      //set the svg viewBox attribute
-      svg.setAttributeNS(
-        null,
-        'viewBox',
-        `${bb.x} ${bb.y} ${bb.width} ${bb.height}`
-      );
-      appendDefs();
-      // add markers
-      const points = getCoord();
-      let fill = ['red', 'green'];
-      if (points.length > 0 && counts.length > 0) {
-        for (let i = 0; i <= points.length; i++) {
-          if (typeof points[i] === 'object') {
-            drawSvg(
-              {
-                fill: '#FFF',
-                class: 'marker',
-                stroke: fill[i],
-                'stroke-width': 0.005,
-                cx: points[i].x - 0.034,
-                cy: points[i].y,
-                r: 0.02
-              },
-              svg,
-              counts[i],
-              counts[i + 2],
-              counts[i + 4],
-            );
-          }
-        }
-      }
       $('#show-active-div').click(function() {
         $('#show-active-div').hide();
-        $('g').hide();
+        $('#svg-container-icons').hide();
         $('#hide-active-div').toggle();
 
         fetchCommunities(MMDP_BASE_URL, lgaName, true);
@@ -382,12 +450,20 @@
       $('#hide-active-div').click(function() {
         $('#hide-active-div').hide();
         $('#show-active-div').toggle();
-        $('g').show();
+        $('#svg-container-icons').show();
         $('.red-marker').hide();
         $('#lga-report-button').hide();
 
         fetchCommunities(MMDP_BASE_URL, lgaName, false);
       });
+
+      let bb = thePath.getBBox();
+      //set the svg viewBox attribute
+      svg.setAttributeNS(
+        null,
+        'viewBox',
+        `${bb.x} ${bb.y} ${bb.width} ${bb.height}`
+      );
     } catch (error) {
       throw error;
     }
@@ -398,10 +474,11 @@
       lgaSpan.innerHTML = lgaName.replace('%20', ' ');
       try {
         const responsePromise = await fetch(
-          `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`, {
+          `${MMDP_BASE_URL}/api/v1/matrix/lga?name=${lgaName}`,
+          {
             headers: {
-              authorization: `Bearer ${localStorage.userToken}`
-            }
+              authorization: `Bearer ${localStorage.userToken}`,
+            },
           }
         );
         const response = await responsePromise.json();
@@ -454,7 +531,7 @@
                 class: 'red-marker',
                 cx: points[i].cx,
                 cy: points[i].cy,
-                r: 0.003,
+                r: 0.004,
               },
               svg
             );
@@ -476,15 +553,14 @@
                   <b>Focus Area:</b> ${focusarea}<br>
                   <b>Services:</b> ${services}<br>
                 </div>
-              </div>`
-            ).appendTo('body');
+              </div>`).appendTo('body');
             $('.info_panel').css({
               border: 'solid 1px #ccc',
               display: 'block',
               width: $(window).width() > 600 ? 'auto' : '200px!important',
               fontSize: '14px',
               fontWeight: 'normal',
-            })
+            });
           })
           .mouseleave(function() {
             $('.info_panel').remove();
@@ -495,7 +571,10 @@
 
             $('.info_panel').css({
               top: mouseY - 50,
-              left: $(window).width() > 600 ? mouseX - $('.info_panel').width() / 2 : 10
+              left:
+                $(window).width() > 600
+                  ? mouseX - $('.info_panel').width() / 2
+                  : 10,
             });
           });
       } catch (error) {

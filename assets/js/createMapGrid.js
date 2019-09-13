@@ -6,14 +6,14 @@ function createMapGrid({
   cellSize,
   maxNumberOfNeighbors = 8,
   minNumberOfNeighbors = 4,
-  showGrid = false
+  showGrid = false,
 }) {
   const mapGrid = new MapGrid({
     cellSize,
     x: clientRect.x,
     y: clientRect.y,
     width: clientRect.width,
-    height: clientRect.height
+    height: clientRect.height,
   });
 
   if (showGrid) {
@@ -48,7 +48,7 @@ const findBetterPosition = (mapGrid, randomCell) => {
   ) {
     cell = {
       ...cell,
-      x: randomCell.x + randomCell.size / 3
+      x: randomCell.x + randomCell.size / 3,
     };
   }
 
@@ -59,7 +59,7 @@ const findBetterPosition = (mapGrid, randomCell) => {
   ) {
     cell = {
       ...cell,
-      x: randomCell.x + randomCell.size
+      x: randomCell.x + randomCell.size,
     };
   }
 
@@ -67,7 +67,7 @@ const findBetterPosition = (mapGrid, randomCell) => {
   if (mapGrid.cells[row + 1] && mapGrid.cells[row + 1][column].isInPath) {
     cell = {
       ...cell,
-      y: randomCell.y - randomCell.size / 2
+      y: randomCell.y - randomCell.size / 2,
     };
   }
 
@@ -78,7 +78,7 @@ const findBetterPosition = (mapGrid, randomCell) => {
   ) {
     cell = {
       ...cell,
-      y: randomCell.y - randomCell.size
+      y: randomCell.y - randomCell.size,
     };
   }
 
@@ -89,7 +89,7 @@ const findBetterPosition = (mapGrid, randomCell) => {
   ) {
     cell = {
       ...cell,
-      y: randomCell.y + randomCell.size
+      y: randomCell.y + randomCell.size,
     };
   }
 

@@ -27,12 +27,15 @@
     <link rel="stylesheet" href="assets/styles/stakeholder-dir-table.css" />
     <link rel="stylesheet" href="assets/styles/active-communities.css" />
     <link rel="stylesheet" href="assets/styles/show-pop-up-lga-map.css" />
-    
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
     />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
     <title>MMDP | Active Communities</title>
   </head>
 
@@ -44,9 +47,7 @@
       <div class="banner valign-wrapper state__map relative__position">
         <div class="row banner__row">
           <!-- Left hand side -->
-          <div
-            class="col l5 banner__desc delay-1s lga__position"
-          >
+          <div class="col l5 banner__desc delay-1s lga__position">
             <div class="banner__lga__heading">
               Welcome to <span id="lga-name"></span>
             </div>
@@ -54,13 +55,13 @@
               This map shows the stakeholder activities in this local
               government, it’s subthemes and services.
             </div>
-           
+
             <!-- Focus area/services pop up -->
             <div id="popup">
-            <div class="top-bar" id="myPopup"></div>
-            <div class="bottom-bar"></div>
+              <div class="top-bar" id="myPopup"></div>
+              <div class="bottom-bar"></div>
             </div>
-          
+
             <!-- Legend -->
             <div class="map__legend__container">
               <span class="map__legend one">Focus areas</span>
@@ -68,7 +69,10 @@
             </div>
             <!-- Report Button-->
             <a href="#">
-              <button class="banner__button animated flashing slow delay-2s" id="lga-report-button">
+              <button
+                class="banner__button animated flashing slow delay-2s"
+                id="lga-report-button"
+              >
                 Report
               </button>
             </a>
@@ -86,7 +90,7 @@
           <span class="map__legend__sm two"><span>Services</span></span>
         </div>
         <!-- Footer links -->
-        <div class="row absolute__position links__container" >
+        <div class="row absolute__position links__container">
           <a class="nav__links left__align" href="#" id="back-state"></a>
           <a class="nav__links right__align" href="#" id="show-active-div"
             >Show Active Communities</a
@@ -168,6 +172,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://d3js.org/d3.v5.js"></script>
     <script type="text/javascript" src="assets/js/mmdp-base-url.js"></script>
+    <script type="text/javascript" src="assets/js/MapCell.js"></script>
+    <script type="text/javascript" src="assets/js/MapGrid.js"></script>
+    <script type="text/javascript" src="assets/js/createMapGrid.js"></script>
     <script type="text/javascript" src="assets/js/utils.js"></script>
     <script type="text/javascript" src="assets/js/matrix-header.js"></script>
     <script type="text/javascript" src="assets/js/cms/utils.js"></script>
@@ -176,7 +183,10 @@
     <script type="text/javascript" src="assets/js/paginator.js"></script>
     <script type="text/javascript" src="assets/js/tableRows.js"></script>
     <script type="text/javascript" src="assets/js/filter.js"></script>
-    <script type="text/javascript" src="assets/js/responsiveTableHeaderFilters.js"></script>
+    <script
+      type="text/javascript"
+      src="assets/js/responsiveTableHeaderFilters.js"
+    ></script>
     <script
       type="text/javascript"
       src="assets/js/beneficiary-handlers.js"
