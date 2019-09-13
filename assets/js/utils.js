@@ -152,3 +152,9 @@ function randomIntFromInterval(mn, mx) {
 function isPointInFill(svgPoint, path) {
   return (path.node().isPointInFill(svgPoint))
 }
+
+// a function to separate triple figures
+function formatNumber(number) {
+  number = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return number
+  }
