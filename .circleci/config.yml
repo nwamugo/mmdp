@@ -2,9 +2,13 @@ version: 2
 jobs:
   deploy:
     docker:
-      - image: debian:stretch
+      - image: buildpack-deps:trusty
+
+    working_directory: ~/repo
 
     steps:
+      - checkout
+
       - run:
           name: Deploy app
           command: chmod +x ./scripts/deploy.sh && ./scripts/deploy.sh

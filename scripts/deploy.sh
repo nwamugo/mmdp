@@ -2,21 +2,25 @@
 
 if [ "$CIRCLE_BRANCH" == master ]; then
     # set production env variables and server
-    SERVER_IP=$PROD_IP
+    #SERVER_IP=$PROD_IP
+    DEPLOY_FOLDER=production
 else
     # set staging env variables and server
-    SERVER_IP=$STAG_IP
+    #SERVER_IP=$STAG_IP
+    DEPLOY_FOLDER=staging
 fi
 
-echo "GIT_BRANCH"=$(echo $CIRCLE_BRANCH) >> .env
+echo "GIT_BRANCH"=$(echo $CIRCLE_BRANCH) >> .env_provision
 
 ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
 
+# create deploy folder if it does not exist
+ssh $DEPLOY_USER@$SERVER_IP "mkdir -p ${DEPLOY_FOLDER}"
 # copy provision.sh to server
 # provision.sh stops pm2, removes existing work, clones repo, builds app and starts pm2
-scp -v scripts/provision.sh $DEPLOY_USER@$SERVER_IP:/home/$DEPLOY_USER/provision.sh
+scp scripts/provision.sh $DEPLOY_USER@$SERVER_IP:/home/$DEPLOY_USER/$DEPLOY_FOLDER/provision.sh
 # copy .env to server
 # .env will be used when building and cloning the app
-scp -v .env $DEPLOY_USER@$SERVER_IP:/home/$DEPLOY_USER/.env
+scp .env_provision $DEPLOY_USER@$SERVER_IP:/home/$DEPLOY_USER/$DEPLOY_FOLDER/.env_provision
 # trigger provision.sh
-ssh -v $DEPLOY_USER@$SERVER_IP "chmod +x provision.sh && ./provision.sh"
+ssh $DEPLOY_USER@$SERVER_IP "cd ${DEPLOY_FOLDER} && chmod +x provision.sh && screen -dm bash -c './provision.sh > provision.log'"
