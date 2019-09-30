@@ -25,4 +25,3 @@ workflows:
                 - develop
                 - master
                 - deploy-sandbox
-                - ch-circleci-deploy-job-MMDP-788
