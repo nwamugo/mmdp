@@ -11,6 +11,7 @@ else
 fi
 
 echo "GIT_BRANCH"=$(echo $CIRCLE_BRANCH) >> .env_provision
+echo "DEPLOY_ENV"=$(echo $DEPLOY_ENV) >> .env_provision
 
 ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
 
