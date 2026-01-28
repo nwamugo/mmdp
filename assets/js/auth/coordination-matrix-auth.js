@@ -1,22 +1,28 @@
 (function() {
   async function login(data) {
     try {
-      const rawResponse = await fetch(`${MMDP_BASE_URL}/api/v1/auth/login`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-      const response = await rawResponse.json();
-      if (response.status === 'success') {
-        const { token } = response.data.user;
-        setToken(token);
-        redirectTo('/index-cordination-matrix.html');
-      } else {
-        toastr.error(response.message || 'Operation not successful!');
-      }
+      // ! faking a successful login for demo purposes
+      const { token } = 'duz';
+      setToken(token);
+      redirectTo('/index-cordination-matrix.html');
+
+      // ? commenting out the original flow below
+      // const rawResponse = await fetch(`${MMDP_BASE_URL}/api/v1/auth/login`, {
+      //   method: 'POST',
+      //   headers: {
+      //     Accept: 'application/json',
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify(data)
+      // });
+      // const response = await rawResponse.json();
+      // if (response.status === 'success') {
+      //   const { token } = response.data.user;
+      //   setToken(token);
+      //   redirectTo('/index-cordination-matrix.html');
+      // } else {
+      //   toastr.error(response.message || 'Operation not successful!');
+      // }
     } catch (error) {
       const message = error.message;
       toastr.error(message);

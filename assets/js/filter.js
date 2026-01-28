@@ -302,30 +302,32 @@ class TableFilterHeader extends Filter {
       this.allTableFilters.forEach((columnFiltersSet, columnHeader) => {
         if (columnHeader !== this.lastRecordedFilterName) {
           columnFiltersSet.forEach(filterItem => {
-            $(this.filterElementClassNames.itemSpanClass).each(function() {
-              if (this.id.substring(1).split("__")[1] === `${filterItem}`) {
-                if (
-                  this.id.substring(1).split("__")[2] === `${columnHeaderCount}`
-                ) {
-                  $(`[id^="${this.id}"]`).show();
-                }
-              }
-            });
+            $(`[id$="${filterItem}__${columnHeaderCount}"]`).show();
+            // $(this.filterElementClassNames.itemSpanClass).each(function() {
+            //   if (this.id.substring(1).split("__")[1] === `${filterItem}`) {
+            //     if (
+            //       this.id.substring(1).split("__")[2] === `${columnHeaderCount}`
+            //     ) {
+            //       $(`[id="${this.id}"]`).show();
+            //     }
+            //   }
+            // });
             if (
               !this.filteredTableDataResults.some(
                 row => row[columnHeader] === filterItem
               )
             ) {
-              $(this.filterElementClassNames.itemSpanClass).each(function() {
-                if (this.id.substring(1).split("__")[1] === `${filterItem}`) {
-                  if (
-                    this.id.substring(1).split("__")[2] ===
-                    `${columnHeaderCount}`
-                  ) {
-                    $(`[id^="${this.id}"]`).hide();
-                  }
-                }
-              });
+              $(`[id$="${filterItem}__${columnHeaderCount}"]`).hide();
+              // $(this.filterElementClassNames.itemSpanClass).each(function() {
+              //   if (this.id.substring(1).split("__")[1] === `${filterItem}`) {
+              //     if (
+              //       this.id.substring(1).split("__")[2] ===
+              //       `${columnHeaderCount}`
+              //     ) {
+              //       $(`[id="${this.id}"]`).hide();
+              //     }
+              //   }
+              // });
             }
           });
         }

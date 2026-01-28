@@ -120,9 +120,10 @@ function filteredLga(target, array = []) {
   }
   async function loaded() {
     const stateNameFromUrl = window.location.search.substring(1).split('=')[1];
-    if (!stateNameFromUrl) {
-      window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
-    }
+    // ! commented out as a 2026 hack to bypass the flow simply for demo purposes
+    // if (!stateNameFromUrl) {
+    //   window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
+    // }
     stateName =
       stateNameFromUrl.charAt(0).toUpperCase() + stateNameFromUrl.slice(1);
     const stateSpan = document.getElementById('state-name');
@@ -133,9 +134,10 @@ function filteredLga(target, array = []) {
       );
       const response = await responsePromise.json();
       const { stateUrl, lgaServices } = response.data;
-      if (!stateUrl) {
-        window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
-      }
+      // ! commented out as a 2026 hack to bypass the flow for demo purposes
+      // if (!stateUrl) {
+      //   window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
+      // }
       $('#svg-container').load(stateUrl, function(responseTxt, statusTxt, xhr) {
         if (statusTxt == 'success') {
           const [, xmlPart, svgPart] = responseTxt.match(
@@ -192,9 +194,10 @@ function filteredLga(target, array = []) {
 
               const { thematicPillarCountPerLGA } = data;
               const { stateUrl } = response.data;
-              if (!stateUrl) {
-                window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
-              }
+              // ! commented out as a 2026 hack to bypass the flow for demo purposes
+              // if (!stateUrl) {
+              //   window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
+              // }
               $('#svg-container').load(stateUrl, function(
                 responseTxt,
                 statusTxt
@@ -294,7 +297,8 @@ function filteredLga(target, array = []) {
           (window.location.href = `http://${locationUrl}/state-report.html?state=${stateName}`)
       );
     } catch (error) {
-      window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
+      // ! commented out as a 2026 hack to bypass the flow for demo purposes
+      // window.location.href = `http://${locationUrl}/index-cordination-matrix.html`;
     }
   }
   document.addEventListener('DOMContentLoaded', loaded, false);
