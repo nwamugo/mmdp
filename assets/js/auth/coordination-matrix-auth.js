@@ -4,7 +4,7 @@
       // ! faking a successful login for demo purposes
       const { token } = 'duz';
       setToken(token);
-      redirectTo('/index-cordination-matrix.html');
+      redirectTo('index-cordination-matrix.html');
 
       // ? commenting out the original flow below
       // const rawResponse = await fetch(`${MMDP_BASE_URL}/api/v1/auth/login`, {

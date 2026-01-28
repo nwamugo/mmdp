@@ -97,7 +97,7 @@
       if (photoLink === element) {
         photoLink = element;
         showImages(slideIndex = index)
-      }     
+      }
     });
   }
 
@@ -206,7 +206,7 @@
         if (media.mediaType === "video") {
           mediaRowHtml += `<div class="col s12 m4 photos-videos__media-area video-trigger"
         data-media-type="video">
-        <div class="play-button"><img src="/assets/images/common/play.svg" /></div>
+        <div class="play-button"><img src=assets/images/common/play.svg" /></div>
         <video class="photos-videos__media">
           <source src="${media.mediaFile.url}" type="${
             media.mediaFile.mimetype
