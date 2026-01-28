@@ -1,6 +1,5 @@
 $(document).ready(function () {
-  // $("#header-section").load("/partials/header.html", function () {
-  $("#header-section").load(`${locationUrl}/partials/header.html`, function () {
+  $("#header-section").load("/partials/header.html", function () {
     //once header is loaded activate sidenav
     $(".sidenav").sidenav();
     $(".collapsible").collapsible();
@@ -13,8 +12,7 @@ $(document).ready(function () {
   });
 
 
-  // $("#footer-section").load("/partials/footer.html");
-  $("#footer-section").load(`${locationUrl}/partials/footer.html`);
+  $("#footer-section").load("/partials/footer.html");
 
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
