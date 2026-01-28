@@ -28,7 +28,7 @@
           <div class="Slides_show">
             <div class="allSlides">
               <div class="prev">
-              <img src="assets/images/index/group-4-copy-2.png"
+              <img src="/assets/images/index/group-4-copy-2.png"
               srcset="assets/images/index/group-4-copy-3@2x.png 2x, assets/images/group-4-copy-3@3x.png 3x"
               alt="arrow for next event" onclick="plusSlides(-1)" class="plusSlides">
               </div>
@@ -60,7 +60,7 @@
         <div class="Slides_show">
           <div class="allSlides">
             <div class="prev">
-            <img src="assets/images/index/group-4-copy-2.png"
+            <img src="/assets/images/index/group-4-copy-2.png"
             srcset="assets/images/index/group-4-copy-3@2x.png 2x, assets/images/group-4-copy-3@3x.png 3x"
             alt="arrow for next event" onclick="plusSlides(-1)" class="plusSlides">
             </div>
@@ -111,7 +111,7 @@
               </div>
             </div>
             <div class="next">
-              <img src="assets/images/index/group-4-copy-2.png"
+              <img src="/assets/images/index/group-4-copy-2.png"
               srcset="assets/images/index/group-4-copy-2@2x.png 2x,assets/images/group-4-copy-2@3x.png 3x" class=""
               alt="arrow for next event" onclick="plusSlides(1)" class="plusSlides">
             </div>
