@@ -89,7 +89,7 @@ const bindPotentialPartnershipModalJQuery = potentialPartnershipsByFocusArea => 
                   <div class="pillar-potential-partnerships">
                     <div class="text-container-potential-partnerships">
                       <div class="pillar-image-container-potential-partnerships">
-                        <img class="pillar-image-potential-partnerships" src=assets/images/pillar.svg">
+                        <img class="pillar-image-potential-partnerships" src="assets/images/pillar.svg">
                       </div>
                       <p class="">
                         <b>${currentTableRowModalData.thematicPillar}</b>:
@@ -103,7 +103,7 @@ const bindPotentialPartnershipModalJQuery = potentialPartnershipsByFocusArea => 
                   <div class="sub-theme-potential-partnerships">
                     <div class="text-container-potential-partnerships">
                       <div class="pillar-image-container-potential-partnerships">
-                        <img class="pillar-image-potential-partnerships" src=assets/images/subtheme.svg">
+                        <img class="pillar-image-potential-partnerships" src="assets/images/subtheme.svg">
                       </div>
                       <p class="">
                         <b>Sub theme: </b>
@@ -116,7 +116,7 @@ const bindPotentialPartnershipModalJQuery = potentialPartnershipsByFocusArea => 
                   <div class="focus-area-potential-partnerships">
                     <div class="text-container-potential-partnerships">
                       <div class="pillar-image-container-potential-partnerships">
-                        <img class="pillar-image-potential-partnerships" src=assets/images/focusArea.svg">
+                        <img class="pillar-image-potential-partnerships" src="assets/images/focusArea.svg">
                       </div>
                       <p class="">
                         <b>Focus Area:</b>

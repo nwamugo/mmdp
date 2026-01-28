@@ -63,7 +63,7 @@ const bindGapAnalysisModalJQuery = focusAreaGaps => {
 
                 <div class="top-1">
                   <div class="top-1-image">
-                    <img src=assets/images/pillar.svg"/>
+                    <img src="assets/images/pillar.svg"/>
                   </div>
                   <div class="top-1-text">
                     <span>${pillar}</span>: ${pillarDescription}
@@ -72,7 +72,7 @@ const bindGapAnalysisModalJQuery = focusAreaGaps => {
 
                 <div class="top-2">
                   <div class="top-2-image">
-                    <img src=assets/images/subtheme.svg"/>
+                    <img src="assets/images/subtheme.svg"/>
                   </div>
                   <div class="top-2-text">
                     ${subtheme}
@@ -81,7 +81,7 @@ const bindGapAnalysisModalJQuery = focusAreaGaps => {
 
                 <div class="top-3">
                   <div class="top-3-image">
-                    <img src=assets/images/focusArea.svg"/>
+                    <img src="assets/images/focusArea.svg"/>
                   </div>
                   <div class="top-3-text">
                     <span>${focusAreasWithGapsCount} out of ${focusAreaCount} <br /></span> Focus Areas <span><i>unavailable</i></span>
@@ -118,7 +118,7 @@ const bindGapAnalysisModalJQuery = focusAreaGaps => {
 
                 <div class="top-1">
                   <div class="top-1-image">
-                    <img src=assets/images/pillar.svg"/>
+                    <img src="assets/images/pillar.svg"/>
                   </div>
                   <div class="top-1-text">
                     <span>${lga.pillar}</span>: ${lga.pillarDescription}
@@ -127,7 +127,7 @@ const bindGapAnalysisModalJQuery = focusAreaGaps => {
 
                 <div class="top-2">
                   <div class="top-2-image">
-                    <img src=assets/images/subtheme.svg"/>
+                    <img src="assets/images/subtheme.svg"/>
                   </div>
                   <div class="top-2-text">
                     ${lga.subtheme}
@@ -136,7 +136,7 @@ const bindGapAnalysisModalJQuery = focusAreaGaps => {
 
                 <div class="top-3">
                   <div class="top-3-image">
-                    <img src=assets/images/focusArea.svg"/>
+                    <img src="assets/images/focusArea.svg"/>
                   </div>
                   <div class="top-3-text">
                     <span>${lga.focusAreasWithGapsCount} out of ${lga.focusAreaCount} <br /></span> Focus Areas <span><i>unavailable</i></span>
