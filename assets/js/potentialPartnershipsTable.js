@@ -253,20 +253,20 @@ function createPotentialPartnershipsTable(
     );
   }
 }
-  
 
 
-async function makingThePotentialPartnershipTable() {  
+
+async function makingThePotentialPartnershipTable() {
   const dataForTable = await getPartnershipData();
 
   $('#potential-partnerships-table').load(
-    '/partials/potential-partnerships-table.html',
+    'partials/potential-partnerships-table.html',
     function() {
       const arr = getLgas(window.stakeholderData);
       stakeholderServicesArray = getStakeholderServicesArray([
         window.stakeholderData.filteredStakeholders
       ]);
-    
+
       window.partnershipsCsvTableData = dataForTable;
       // add id for row to each item in this map of potential partnerships
       let potentialPartners = potentialPartnershipsByLga(arr);
@@ -280,7 +280,7 @@ async function makingThePotentialPartnershipTable() {
         return item;
       });
       partnershipTableData.sort((a, b) => (a.thematicPillar > b.thematicPillar) ? 1 : (a.thematicPillar === b.thematicPillar) ? ((a.lga > b.lga) ? 1 : -1) : -1 )
-      
+
       createPotentialPartnershipsTable(partnershipTableData);
     }
   );

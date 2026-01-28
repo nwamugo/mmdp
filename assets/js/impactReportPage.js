@@ -1,4 +1,4 @@
-const impactFactorTableUrl = "/partials/impact-report-table.html";
+const impactFactorTableUrl = "partials/impact-report-table.html";
 const impactFactorTableName = "impactFactor";
 
 let impactFactorTableSelectedItems = [];

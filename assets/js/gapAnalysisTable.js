@@ -1,4 +1,4 @@
-let url = '/partials/gap-analysis-table.html';
+let url = 'partials/gap-analysis-table.html';
 let gapReport = [];
 const focusAreaGaps = [];
 

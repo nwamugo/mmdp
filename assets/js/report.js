@@ -1,6 +1,6 @@
 $(document).ready(function () {
-  redirectUnAuthUser('/coordination-matrix.html');
-  $("#header-section").load("/partials/matrix-header.html", function () {
+  redirectUnAuthUser('coordination-matrix.html');
+  $("#header-section").load("partials/matrix-header.html", function () {
     //once header is loaded activate sidenav
     activateLogoutBtn()
     enableMenuItemContentLoad();
@@ -10,7 +10,7 @@ $(document).ready(function () {
     $("#dropdown__icon").toggleClass("fas fa-angle-right");
     $("#dropdown__icon").toggleClass("fas fa-angle-down");
   });
-  $("#footer-section").load("/partials/footer.html");
+  $("#footer-section").load("partials/footer.html");
 });
 
 function loaded() {

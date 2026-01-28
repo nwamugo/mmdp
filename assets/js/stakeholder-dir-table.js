@@ -153,7 +153,7 @@ $(document).ready(async function() {
    */
   function loadSearchStakeholderTable() {
     $('#stakeholder-directory-table').load(
-      '/partials/stakeholder-directory-table.html',
+      'partials/stakeholder-directory-table.html',
       function() {
         const search = $('#search__activities').val();
         const filteredData = tableData.filter(organization =>
@@ -184,7 +184,7 @@ $(document).ready(async function() {
    */
   function loadStakeholderTable() {
     $('#stakeholder-directory-table').load(
-      '/partials/stakeholder-directory-table.html',
+      'partials/stakeholder-directory-table.html',
       function() {
         const paginator = new Paginator(
           tableData,
