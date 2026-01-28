@@ -8,7 +8,7 @@ const urls = (function () {
       return ['http://cms.mmdp.ng:3000', 'http://cms.mmdp.ng:3000/api/v1', window.location.host];
     // github page
     case 'nwamugo.github.io':
-      return ['https://nwamugo.github.io', 'https://nwamugo.github.io/mmdp', window.location.host];
+      return ['https://nwamugo.github.io/mmdp', 'https://nwamugo.github.io/mmdp', window.location.host];
     //localhost
     default:
       return ['http://localhost:3000', 'http://localhost:3000/api/v1', window.location.host];
