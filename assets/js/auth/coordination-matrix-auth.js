@@ -44,7 +44,7 @@
     const forms = document.querySelectorAll('form.coordination-login__form');
     forms[0].addEventListener('submit', handleSubmit, false);
     if (localStorage.getItem('userToken')) {
-      redirectTo('/index-cordination-matrix.html');
+      redirectTo('index-cordination-matrix.html');
     }
   }
   document.addEventListener('DOMContentLoaded', loaded, false);
